@@ -1,0 +1,11 @@
+{
+  "name": "weltwerk-exploration",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Weltwerk v0.1 – mobile GPS resource collection prototype",
+  "scripts": {
+    "test": "node tests/logic.test.mjs",
+    "start": "python3 -m http.server 8080"
+  }
+}
