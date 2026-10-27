@@ -1,8 +1,7 @@
-# WELTWERK v0.2.6 – Sky Fix
+# WELTWERK v0.2.7 – Horizon Fix
 
-- mehr Himmel und Horizont
-- stärkere Perspektive in der Ferne
-- größere Bodenfläche ohne sichtige Rechteckkante
-- stabilere Fundstellen beim Drehen
+- sichtbarer Horizont / mehr Himmel
+- stärkere Fern-Perspektive
+- konstante Markergröße in 3D, weniger Flackern beim Drehen
 
-Installation: `index.html` im bestehenden GitHub-Repository ersetzen und die Seite mit `?v=026` neu laden.
+Installiere durch Ersetzen der `index.html` und lade die Seite mit `?v=027` neu.
