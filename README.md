@@ -1,22 +1,31 @@
-# WELTWERK v0.2.10 — Fundstellenfix
+# WELTWERK v0.2.11 — Low Poly World
 
-**Behoben:** Bäume, Steine, Schrott und Spielfigur werden jetzt direkt auf dieselbe hochauflösende Canvas-Fläche wie die Straßenkarte gezeichnet. Sie liegen nicht länger als separate HTML-Marker darüber. Die Berührungserkennung verwendet die gezeichneten Koordinaten.
+Diese Version baut **auf der funktionierenden v0.2.10 auf** und verändert vorrangig die Weltansicht.
 
-**Schärfer:** Die Karte nutzt bis zu 2× Bildschirmauflösung (je nach Gerät). Die entfernte Kartenebene nutzt höher aufgelöste Kartendaten als zuvor. Weiterhin sind die Quellen Rasterbilder, keine vektorbasierte 3D-Szene.
+## Neu
 
-## Installation
+- Aufrechte Low-Poly-Häuser mit farbigen Dächern, Seitenwänden und Fenstern.
+- Die Gebäude folgen, sofern die Daten verfügbar sind, echten OpenStreetMap-Gebäudeumrissen. Die Kartenregion wird dazu über die **Overpass API** abgefragt. Gebäudehöhen aus OSM werden genutzt, ansonsten verwendet das Spiel plausible vereinfachte Standardhöhen.
+- Parks, Grünflächen und Gewässer erhalten stellenweise eine leichte farbige Spielflächen-Überlagerung, wenn die entsprechenden Umrisse geladen werden.
+- Neue Taste **🏠** rechts auf der Karte: Gebäude ein-/ausblenden, z. B. für schwächere Handys.
+- Bäume, Steine, Schrott und Figur bleiben weiterhin mit denselben GPS-Koordinaten wie die Straßen im **gleichen Canvas** verankert. Sie sind über den Häusern sichtbar und weiter anklickbar.
+- Im Demo-Modus werden bei einem Ausfall der Gebäudedaten *ausdrücklich nur beispielhafte* Low-Poly-Häuser angezeigt. Im GPS-Modus gibt es keine erfundenen Häuser als echte OSM-Gebäude.
+- Ohne Gebäudedaten bleibt die Karte weiter spielbar. Inventar, Dropchancen, GPS, Speichern, Regeneration und Demo-Modus sind erhalten.
 
-1. ZIP entpacken.
-2. In deinem GitHub-Repository die `index.html` im Hauptverzeichnis ersetzen.
-3. GitHub Pages abwarten und die Website mit `?v=0210` öffnen.
-4. Oben sollte `v0.2.10` stehen.
+## Auf GitHub Pages aktualisieren
 
-Lokale Speicherstände behalten die bisherige Speicherkennung. Bitte bei Bedarf vorher über **Mehr → Export** sichern.
+1. Ein Backup deines Spielstands über **Mehr → Export** machen.
+2. Die ZIP-Datei entpacken und auf GitHub im **Hauptverzeichnis** nur die neue `index.html` hochladen und die alte ersetzen.
+3. Änderungen committen, danach deine Seite mit `?v=0211` neu aufrufen.
+4. Oben die Versionsnummer **v0.2.11** prüfen.
 
-**Test:** Im Demo-Modus drehen, Bäume antippen, sammeln und Inventar prüfen. Im GPS-Modus wird der Standort übernommen; ein GPS-Test auf Android ist weiterhin erforderlich.
+Für die App wird weiterhin nur die `index.html` benötigt; die `README.md` ist reine Dokumentation. Es gibt **keine Unterordner** und keine Build-Schritte.
 
-Virtuelle Rohstoffpositionen sind nicht auf öffentliche Zugänglichkeit geprüft. Nur von sicheren, öffentlich zugänglichen Standorten spielen und niemals beim Fahren.
+## Hinweise und Grenzen
 
-**GPS-Beruhigung:** Kleine Messschwankungen bei Stillstand werden ignoriert, bei echter Bewegung folgt die Kamera weiterhin dem Standort.
-
-**Kartenqualität:** Höhere Canvas-Auflösung, schmalere Zeichenstreifen und besser aufgelöste Fernkacheln. Die öffentlich bereitgestellten Rasterkacheln haben weiterhin eine natürliche Schärfegrenze.
+- Es handelt sich um eine performante **2.5D-Kartendarstellung mit perspektivischen 3D-Häusern**, nicht um eine vollständige 3D-Engine mit beliebig begehbaren Modellen.
+- Echte Gebäude setzen Internetzugriff sowie erreichbare OSM-/Overpass-Dienste voraus. Dort können Daten fehlen, abweichend sein oder Abfragen verzögert werden. Das Spiel gibt für eine Stadt also keine Vollständigkeitsgarantie.
+- Gebäudedaten und Kartenkacheln kommen von öffentlichen externen Servern. Diese erhalten die angefragte ungefähre Kartenregion; GPS-Verläufe speichert WELTWERK nicht.
+- Öffentliche OSM-/Overpass-Server sind keine dauerhaft unbegrenzte Produktionsinfrastruktur. Für einen größeren Release sind geeignete Hosting-/Kartendienste und ein eigener Cache nötig.
+- Rohstoffvorkommen sind weiterhin prototypisch generiert und **nicht** auf öffentliche Zugänglichkeit geprüft. Bitte nicht auf Privatgrundstücke, Fahrbahnen oder in gefährliche Bereiche gehen.
+- Die mobilen Tests wurden in Chromium mit **simulierten** Gebäudedaten und Kartenkacheln durchgeführt. Das tatsächliche Live-Laden auf deinem Android-Gerät muss noch überprüft werden.
