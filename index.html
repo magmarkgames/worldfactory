@@ -4,14 +4,74 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.1 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
-  <title>Weltwerk · Exploration 3D v0.2.1</title>
-  <link rel="icon" type="image/svg+xml" href="logo.svg?v=021">
-  <link rel="manifest" href="manifest.webmanifest?v=021">
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css">
-  <link rel="stylesheet" href="styles.css?v=021">
-  <script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" defer></script>
-  <script type="module" src="app.js?v=021"></script>
+  <meta name="description" content="Weltwerk v0.2.2 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
+  <title>Weltwerk · Exploration 3D v0.2.2</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
+<style>
+:root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-size:14px}button,input{font:inherit}button{cursor:pointer;color:inherit}button:disabled{opacity:.48;cursor:not-allowed}button:focus-visible{outline:3px solid var(--mint)}.hidden{display:none!important}#app{width:100%;height:100%;height:100dvh;position:relative;overflow:hidden;background:var(--bg)}
+.screen{position:absolute;inset:0 0 calc(var(--nav-h) + env(safe-area-inset-bottom,0px));display:none;overflow:hidden}.screen.active{display:block}.screen-map{background:#c9d7cd}#map{position:absolute;inset:0;z-index:0;background:#dce9df}
+.map-soft-top{pointer-events:none;position:absolute;inset:0 0 auto;height:185px;background:linear-gradient(180deg,rgba(7,24,29,.68),transparent);z-index:401}.topbar{z-index:600;pointer-events:none;display:flex;justify-content:space-between;align-items:center;gap:12px;position:absolute;top:0;left:0;right:0;padding:calc(14px + env(safe-area-inset-top,0px)) 17px 8px}.topbar>*{pointer-events:auto}.brand{display:flex;align-items:center;gap:10px;color:white;text-shadow:0 1px 8px #15272770}.brand-icon{width:46px;height:46px;border-radius:15px;overflow:hidden;box-shadow:0 4px 17px #09191a58}.brand-icon img{width:100%;height:100%;display:block}.brand-name{font-size:19px;font-weight:850;letter-spacing:.7px;line-height:1.12}.brand-period,.dot{color:var(--mint)}.brand-sub{font-size:9px;letter-spacing:2.3px;font-weight:800;color:#c4dfdb;margin-top:4px}.brand-sub span{color:var(--mint)}.location-pill{display:flex;align-items:center;gap:8px;background:#11252de8;border:1px solid #82dec166;border-radius:100px;padding:10px 12px;font-size:10px;font-weight:900;letter-spacing:1.2px;box-shadow:0 5px 20px #0b182c3a}.live-dot{background:#f2c675;width:7px;height:7px;border-radius:50%;box-shadow:0 0 0 3px #f2c67522}.location-pill.is-gps .live-dot{background:#71e5b4;box-shadow:0 0 0 3px #71e5b422}.top-metrics{position:absolute;left:17px;top:calc(79px + env(safe-area-inset-top,0px));display:flex;gap:8px;z-index:600;pointer-events:none}.metric{display:flex;gap:5px;align-items:center;padding:8px 10px;border-radius:12px;background:#10252ddd;color:#d5e5e7;font-size:10px;box-shadow:0 3px 12px #17251a16;backdrop-filter:blur(12px)}.metric strong{color:white;font-size:13px}.metric-icon{font-size:13px}
+.map-tools{position:absolute;right:15px;top:calc(145px + env(safe-area-inset-top,0px));z-index:600;display:flex;flex-direction:column;gap:8px}.map-tool{width:44px;height:44px;border:1px solid #d3e5de9a;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#142e36e8;color:#eaf8f4;font-size:26px;box-shadow:0 4px 15px #1b333531;backdrop-filter:blur(15px)}.map-tool:active{transform:scale(.95)}.map-bottom-group{position:absolute;bottom:37px;left:15px;right:15px;z-index:600;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:flex-start}.nearby-card{pointer-events:none;display:flex;align-items:center;background:#12242ceF;border:1px solid #ffffff1a;border-radius:17px;padding:10px 11px;gap:10px;max-width:min(365px,100%);width:100%;box-shadow:0 8px 28px #101f2990;backdrop-filter:blur(15px)}.nearby-symbol{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#264b48,#1a353c);display:grid;place-items:center;flex-shrink:0;color:var(--mint);font-size:20px;position:relative}.nearby-glow{position:absolute;inset:4px;border-radius:9px;background:#57dfa015;box-shadow:inset 0 0 12px #67f4b038}.nearby-copy{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.nearby-copy strong{font-size:13px}.nearby-copy span{font-size:11px;color:var(--muted)}.nearby-count{display:grid;place-items:center;border-radius:11px;background:#2b5048;color:var(--mint);min-width:34px;height:34px;font-weight:900;font-size:13px}.map-safety{margin:0 2px;color:#25454b;font-size:9px;font-weight:750;text-shadow:0 1px 3px #fff;background:#ffffffc9;border-radius:8px;padding:3px 6px;max-width:calc(100% - 15px)}
+.demo-controller{pointer-events:auto;background:#122831eb;border:1px solid #ffffff33;border-radius:13px;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;max-width:365px;box-shadow:0 4px 24px #12232455}.controller-label{color:var(--mint);font-size:10px;font-weight:900;letter-spacing:.9px}.controller-label span{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:0;display:block;margin-top:4px}.controller-actions{display:flex;gap:5px}.controller-actions button{width:31px;height:32px;border:1px solid #496168;background:#243f49;border-radius:9px;font-weight:bold;font-size:17px}.controller-actions button:active{background:#3a7869}
+.bottom-nav{position:absolute;bottom:0;left:0;right:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(4,1fr);background:#0c1c26;border-top:1px solid #24424c;z-index:850;padding:7px 7px calc(9px + env(safe-area-inset-bottom,0px));box-shadow:0 -5px 26px #0b17264a}.nav-item{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:13px;color:#8299a4;font-size:10px;font-weight:750;min-width:0}.nav-item svg{width:23px;height:23px}.nav-item.selected{background:#1a343b;color:var(--mint)}
+.inner-screen{overflow-y:auto;overscroll-behavior:contain;background:radial-gradient(circle at 100% 0%,#1a343c 0%,transparent 38%),#0c1721;padding:calc(31px + env(safe-area-inset-top,0px)) 18px 35px}.page-head{margin-bottom:23px}.eyebrow{font-size:10px;color:var(--mint);font-weight:850;letter-spacing:2.2px}.page-head h1{font-size:clamp(28px,8vw,39px);letter-spacing:-1.25px;margin:6px 0 6px;line-height:1.12;font-weight:850}.page-head p{color:var(--muted);margin:0;line-height:1.55;font-size:13px}.section-title{display:flex;justify-content:space-between;align-items:center;margin:23px 0 13px}.section-title h2{font-size:16px;margin:0;letter-spacing:-.25px}.section-title span{font-size:11px;color:var(--muted)}.info-stripe{display:flex;align-items:center;gap:12px;padding:15px;background:linear-gradient(100deg,#1c403f,#17313b);border:1px solid #3470606a;border-radius:18px}.info-circle{font-size:29px;display:grid;place-items:center;width:50px;height:50px;background:#ffffff0b;border-radius:14px}.info-stripe div:nth-child(2){display:flex;flex-direction:column;gap:2px}.info-stripe div:nth-child(2) span{font-size:9px;font-weight:800;color:#a3bfc1;letter-spacing:.8px}.info-stripe div:nth-child(2) strong{font-size:25px}.info-extra{margin-left:auto;align-self:flex-end;color:#a0bcb9;font-size:10px}
+.resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.resource-card{background:#152934;border:1px solid #28414b;border-radius:17px;padding:17px;min-height:144px;display:flex;flex-direction:column;align-items:flex-start;position:relative;overflow:hidden}.resource-card::after{content:"";position:absolute;right:-20px;top:-35px;width:95px;height:95px;background:#8decb30b;border-radius:50%}.resource-card .res-icon{width:47px;height:47px;display:grid;place-items:center;border-radius:13px;background:#ffffff0b;font-size:27px;margin-bottom:12px}.resource-card strong{font-size:13px}.resource-card .res-bottom{display:flex;justify-content:space-between;align-items:flex-end;width:100%;margin-top:auto;padding-top:12px}.resource-card .res-bottom b{font-size:20px}.resource-card .res-bottom small{font-size:9px;color:#a1b3bb;font-weight:750;text-transform:uppercase}.resource-card.rare{border-color:#756e52}.resource-card.rare .res-icon{background:#80662d29}.soft-note{display:flex;align-items:flex-start;gap:10px;background:#192c32;padding:14px;border:1px dashed #34575a;border-radius:14px;margin-top:19px;color:#b6c9ca;font-size:12px;line-height:1.55}.soft-note span{font-size:20px}.soft-note p{margin:0}
+.stat-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.stat-tile{min-height:96px;background:#152934;border:1px solid #29434a;border-radius:16px;padding:15px;display:flex;flex-direction:column;justify-content:space-between}.stat-tile>span{font-size:9px;font-weight:850;letter-spacing:1px;color:#94b1b7}.stat-tile strong{font-size:27px;line-height:1}.stat-tile small{font-size:12px;color:#81949f}.lexicon-list{display:flex;flex-direction:column;gap:9px}.lexicon-entry{display:flex;align-items:center;gap:13px;padding:12px;background:#152934;border:1px solid #29434a;border-radius:15px}.lexicon-entry .lexicon-icon{background:#233b41;width:50px;height:50px;border-radius:13px;display:grid;place-items:center;font-size:25px;flex-shrink:0}.lexicon-entry strong{display:block;font-size:13px}.lexicon-entry p{font-size:11px;color:var(--muted);line-height:1.35;margin:5px 0 0}.lexicon-entry.locked{opacity:.58}.lexicon-entry.locked .lexicon-icon{filter:grayscale(1)}.lexicon-entry .lexicon-tag{margin-left:auto;color:var(--mint);font-size:10px;font-weight:800;flex-shrink:0}.lexicon-entry.locked .lexicon-tag{color:var(--muted)}
+.setting-panel{border:1px solid #29434a;background:#142731;border-radius:18px;padding:18px;margin-bottom:12px}.panel-heading{font-size:15px;font-weight:800;margin-bottom:10px}.setting-panel p{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 13px}.setting-panel p:last-child{margin-bottom:0}.setting-panel strong{color:var(--text)}.two-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.solid-btn,.outline-btn{border-radius:12px;min-height:43px;padding:11px 10px;font-size:12px;font-weight:800;border:1px solid #38515a}.solid-btn{background:var(--mint);color:#11382e;border-color:var(--mint)}.solid-btn:active{background:#9bf7d0}.outline-btn{background:#213b44;color:#ecf5f3}.outline-btn:active{background:#2c5559}.setting-hint{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5}.danger-link{color:#f4a8a3;background:transparent;border:0;font-size:12px;font-weight:700;padding:13px 0 2px}.muted{color:#8d9fa9!important;font-size:11px!important}
+
+.modal-backdrop,.welcome-backdrop{position:fixed;inset:0;background:#071119b5;z-index:1050;display:flex;justify-content:center;align-items:flex-end;backdrop-filter:blur(5px)}.sheet{width:100%;max-width:490px;max-height:88dvh;overflow-y:auto;background:#11232d;border:1px solid #3b5c5f;border-bottom:0;border-radius:26px 26px 0 0;padding:12px 22px calc(24px + env(safe-area-inset-bottom,0px));box-shadow:0 -15px 42px #030d14a1;position:relative}.sheet-handle{height:4px;width:40px;margin:0 auto 17px;border-radius:4px;background:#44636b}.sheet-close{position:absolute;right:16px;top:14px;border:0;background:#2b434c;color:#deeced;font-size:25px;line-height:1;width:30px;height:30px;border-radius:50%}.sheet-header{display:flex;align-items:center;gap:13px;margin-bottom:17px}.sheet-icon{width:63px;height:63px;border-radius:19px;background:#224342;display:grid;place-items:center;font-size:35px}.sheet-badge{font-size:9px;font-weight:850;letter-spacing:1.4px;color:var(--mint)}.sheet-header h2{font-size:23px;margin:5px 0 0;line-height:1.1}.sheet-desc{font-size:13px;color:#adc2c3;line-height:1.55;margin:0 0 14px}.sheet-block{border:1px solid #34515a;border-radius:15px;background:#1a333c;padding:14px;margin:10px 0}.sheet-block-heading{font-size:10px;font-weight:800;color:#afc9ca;letter-spacing:1px;margin-bottom:11px}.possible-drop{display:flex;gap:9px;align-items:center;margin:9px 0;color:#d4e6e4;font-size:12px}.possible-drop .drop-name{flex:1}.possible-drop strong{font-size:12px}.sheet-action{display:block;border:0;background:var(--mint);color:#092c23;padding:15px;border-radius:14px;width:100%;font-size:14px;font-weight:900;margin-top:12px}.sheet-action:disabled{background:#395a57;color:#9fbbb8}.sheet-secondary{font-size:11px;color:#9cb6bc;text-align:center;line-height:1.5;margin-top:12px}.distance-pill{display:inline-flex;align-items:center;font-size:11px;font-weight:750;padding:6px 9px;border-radius:9px;background:#274b42;color:#a9efd4;margin-bottom:8px}.distance-pill.outside{background:#493e2b;color:#ead19b}.reward-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.reward-chip{background:#284744;border:1px solid #5c9a7d;border-radius:12px;padding:14px;font-weight:800;display:flex;gap:8px;align-items:center}.reward-chip.bonus{background:#4a3d29;border-color:#ad8b4a;color:#ffe4a7}.reward-icon{font-size:21px}.toast-area{position:fixed;left:15px;right:15px;top:calc(14px + env(safe-area-inset-top,0px));z-index:1600;pointer-events:none;display:flex;align-items:center;flex-direction:column;gap:7px}.toast{max-width:400px;width:max-content;min-width:210px;background:#10332e;border:1px solid #65dca8bb;color:#f1fcf6;border-radius:13px;box-shadow:0 7px 28px #031410a8;padding:12px 16px;text-align:center;font-weight:750;font-size:12px;animation:toast-in .2s ease-out}.toast.error{background:#442c30;border-color:#b87079}@keyframes toast-in{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.welcome-backdrop{align-items:center;padding:22px;z-index:1400;background:radial-gradient(circle at 50% 10%,#255b51bb,#091824f2 55%);backdrop-filter:blur(14px)}.welcome-card{width:100%;max-width:420px;text-align:center;padding:34px 20px 22px;border-radius:25px;background:#142730;border:1px solid #50736566;box-shadow:0 18px 70px #010b1580}.welcome-mark img{width:74px;height:74px;margin-bottom:20px;box-shadow:0 6px 35px #70dab13c;border-radius:22px}.welcome-card h1{font-size:32px;line-height:1.16;letter-spacing:-1.2px;margin:13px 0}.welcome-card h1 em{font-style:normal;color:var(--mint)}.welcome-card p{color:#b6ced0;line-height:1.6;font-size:13px;margin:0 0 25px}.full-btn{width:100%;margin:8px 0;font-size:13px;min-height:49px}.full-btn span{float:right}.welcome-caption{margin-top:17px;color:#91acb2;font-size:10px;line-height:1.55}.no-map{position:fixed;inset:0;background:#0d1721;z-index:1300;display:grid;place-items:center;padding:24px;text-align:center;color:#ffcaaa}
+@media(min-width:800px){#app{max-width:540px;height:95vh;height:95dvh;margin:2.5vh auto;border:1px solid #3b5561;border-radius:26px;overflow:hidden;box-shadow:0 26px 100px #0006}.bottom-nav{border-radius:0 0 25px 25px}.screen{inset:0 0 var(--nav-h)}.inner-screen{padding:36px 24px}.resource-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-height:680px){.topbar{padding-top:7px}.top-metrics{top:64px}.map-tools{top:121px}.map-bottom-group{bottom:27px}.brand-icon{width:39px;height:39px}.brand-name{font-size:16px}.demo-controller{padding:6px}.nearby-card{padding:7px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;scroll-behavior:auto!important}}
+
+/* ======================== v0.2 — 3D WORLD =========================== */
+/* All image paths are intentionally relative to index.html, not /assets/. */
+#map{background:#d5e9d8}
+.maplibregl-map{font-family:inherit!important}
+.maplibregl-control-container .maplibregl-ctrl-bottom-right{right:0;bottom:0}
+.maplibregl-ctrl-attrib{font-size:9px!important;background:#f5f8f2e8!important;border-radius:8px 0 0 0!important;color:#355561!important}
+.maplibregl-ctrl-attrib a{color:#266270!important}
+.maplibregl-ctrl-logo{display:none!important}
+.map-soft-top{z-index:3;height:210px; background:linear-gradient(180deg,rgba(7,24,29,.73),rgba(7,24,29,.24) 65%,transparent)}
+.map-tools{z-index:9;top:calc(155px + env(safe-area-inset-top,0px));gap:7px}
+.map-tool{backdrop-filter:blur(8px);border:1px solid #d3ecdc91}
+.map-tool-labeled{font-weight:1000;font-size:12px!important;letter-spacing:.7px}
+.camera-hint{position:absolute;top:calc(133px + env(safe-area-inset-top,0px));left:16px;z-index:8;border:1px solid #d0e7d599;background:#193d3bc9;color:#c9f5df;border-radius:15px;padding:8px 10px;font-size:9px;letter-spacing:1.2px;font-weight:900;pointer-events:none}
+.camera-hint span{font-weight:500;letter-spacing:0;color:#e2f6ee}
+.world-resource{position:relative;width:80px;height:99px;border:0;padding:0;margin:0;background:transparent;cursor:pointer;filter:drop-shadow(0 5px 3px #183b3266);transition:filter .18s,opacity .18s;touch-action:manipulation}
+.world-resource-art{width:80px;height:89px;position:absolute;left:0;bottom:6px;object-fit:contain;transform-origin:bottom center;transition:transform .15s,filter .18s;pointer-events:none;user-select:none}
+.world-resource:active .world-resource-art{transform:scale(.93)}
+.world-resource-shadow{position:absolute;left:14px;bottom:3px;width:52px;height:13px;background:#244b4194;filter:blur(8px);border-radius:50%}
+.world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 5px #e2fff9)}
+.world-resource.in-range .world-resource-dot{position:absolute;bottom:-4px;left:33px;border-radius:50%;background:#73e7ad;border:2px solid white;width:14px;height:14px;box-shadow:0 0 0 5px #8cdbac7d}
+.world-resource.depleted{opacity:.5;filter:grayscale(.72)}
+.world-resource.depleted .world-resource-art{filter:grayscale(1)}
+.world-resource.rich .world-resource-star{display:grid}
+.world-resource-star{position:absolute;right:6px;top:2px;display:none;place-items:center;width:24px;height:24px;border-radius:50%;background:#e7b85c;color:#5b3a0d;border:2px solid #fff4be;box-shadow:0 4px 8px #382b1b88;font-size:16px}
+.world-player{position:relative;width:84px;height:112px;pointer-events:none;filter:drop-shadow(0 5px 6px #14252580)}
+.world-player img{position:absolute;left:8px;bottom:3px;height:106px;width:68px;object-fit:contain;filter:drop-shadow(0 1px 1px #11272c33)}
+.world-player .player-aura{position:absolute;left:15px;bottom:0;width:54px;height:18px;background:#38c79c88;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 8px #33d5a22e;transform:scaleY(.55)}
+.world-player .player-you{position:absolute;left:50%;top:0;transform:translateX(-50%);background:#0f3d44e8;border:1px solid #8debc9;border-radius:7px;color:#effff6;font-size:9px;font-weight:900;padding:3px 8px;letter-spacing:.8px}
+@media(max-height:700px){.camera-hint{top:111px}.map-tools{top:137px}}
+@media(max-width:390px){.camera-hint span{display:none}.world-resource{width:70px;height:90px}.world-resource-art{width:70px;height:82px}.world-player{width:74px;height:102px}.world-player img{width:62px;height:94px}}
+
+/* v0.2.1 - rendered map fallback if MapLibre/WebGL or external vector styles fail */
+.backup-map{position:absolute;inset:0;overflow:hidden;background:#cde3d5;touch-action:none;user-select:none}
+.backup-map-ground{position:absolute;inset:0;background-color:#d5e8d4;background-image:linear-gradient(29deg,transparent 48%,#f7f5d9 49%,#f7f5d9 51%,transparent 52%),linear-gradient(117deg,transparent 48%,#f5f4dd 49%,#f5f4dd 51%,transparent 52%),radial-gradient(circle at 25% 35%,#a8d6b0 0%,transparent 42%);transition:transform .28s ease;overflow:hidden}
+.backup-map.backup-pitched .backup-map-ground{transform:perspective(1250px) rotateX(14deg) scale(1.16);transform-origin:center center}
+.backup-map-tiles{position:absolute;inset:0}
+.backup-tile{position:absolute;max-width:none;pointer-events:none;object-fit:fill}
+.backup-map-markers{position:absolute;inset:0;pointer-events:none}
+.backup-marker{position:absolute;pointer-events:auto;transform:translate(-50%,-100%);z-index:2}
+.backup-map-caption{position:absolute;left:16px;bottom:114px;z-index:5;font-size:9px;letter-spacing:.6px;color:#294746;background:#edfff1d7;padding:5px 8px;border-radius:9px;font-weight:900}
+.backup-map-attribution{position:absolute;bottom:3px;right:4px;padding:2px 4px;z-index:5;color:#304e45;background:#ffffffd4;font-size:9px;border-radius:4px}
+.backup-map-attribution a{color:inherit}
+/* Demo buttons should always be reachable in the map view. */
+.demo-controller:not(.hidden){display:flex!important}
+
+</style>
 </head>
 <body>
 <div id="app">
@@ -19,7 +79,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="logo.svg?v=021" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.1 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.2 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
@@ -34,7 +94,7 @@
     <div class="map-bottom-group">
       <div class="nearby-card"><div class="nearby-symbol"><span class="nearby-glow"></span>✦</div><div class="nearby-copy"><strong id="nearby-title">Entdecke die Umgebung</strong><span id="nearby-subtitle">Fundstellen in deiner Nähe</span></div><span id="nearby-counter" class="nearby-count">—</span></div>
       <div id="demo-controller" class="demo-controller hidden"><span class="controller-label">TESTMODUS <span>· Tippe die Karte zum Versetzen</span></span><div class="controller-actions"><button data-move="north" aria-label="Nach Norden bewegen">↑</button><button data-move="west" aria-label="Nach Westen bewegen">←</button><button data-move="south" aria-label="Nach Süden bewegen">↓</button><button data-move="east" aria-label="Nach Osten bewegen">→</button></div></div>
-      <p class="map-safety">3D-Karte · Virtuelle Fundstellen nur von sicheren Orten sammeln</p>
+      <p class="map-safety">Spielkarte · Virtuelle Fundstellen nur von sicheren Orten sammeln</p>
     </div>
   </main>
 
@@ -57,7 +117,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Die Karte benötigt eine Internetverbindung. Gebäude sind echte 3D-Kartenobjekte (sofern Kartendaten vorhanden); Rohstofffiguren sind stilisierte 2.5D-Grafiken. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Karte: © OpenStreetMap-Mitwirkende · OpenFreeMap · MapLibre</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.2 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Die Karte benötigt eine Internetverbindung. Gebäude sind echte 3D-Kartenobjekte (sofern Kartendaten vorhanden); Rohstofffiguren sind stilisierte 2.5D-Grafiken. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Karte: © OpenStreetMap-Mitwirkende · OpenFreeMap · MapLibre</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -69,8 +129,692 @@
 </div>
 
 <div id="modal-backdrop" class="modal-backdrop hidden" aria-hidden="true"><section id="resource-sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"><div class="sheet-handle"></div><button class="sheet-close" id="btn-sheet-close" aria-label="Schließen">×</button><div id="sheet-content"></div></section></div>
-<div id="welcome" class="welcome-backdrop hidden"><section class="welcome-card"><div class="welcome-mark"><img src="logo.svg?v=021" alt=""></div><div class="eyebrow">DEIN ABENTEUER BEGINNT</div><h1>Deine Welt.<br><em>Deine Entdeckungen.</em></h1><p>Erkunde eine echte Karte, finde Rohstoffe und baue deine Sammlung auf. Die Fabrik folgt in einer späteren Version.</p><button id="welcome-demo" class="solid-btn full-btn">Im Demo-Modus testen <span>→</span></button><button id="welcome-gps" class="outline-btn full-btn">Mit echtem GPS starten</button><div class="welcome-caption">Im Demo-Modus kannst du dich auch vom Sofa aus bewegen. Keine Registrierung erforderlich.</div></section></div>
+<div id="welcome" class="welcome-backdrop hidden"><section class="welcome-card"><div class="welcome-mark"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div class="eyebrow">DEIN ABENTEUER BEGINNT</div><h1>Deine Welt.<br><em>Deine Entdeckungen.</em></h1><p>Erkunde eine echte Karte, finde Rohstoffe und baue deine Sammlung auf. Die Fabrik folgt in einer späteren Version.</p><button id="welcome-demo" class="solid-btn full-btn">Im Demo-Modus testen <span>→</span></button><button id="welcome-gps" class="outline-btn full-btn">Mit echtem GPS starten</button><div class="welcome-caption">Im Demo-Modus kannst du dich auch vom Sofa aus bewegen. Keine Registrierung erforderlich.</div></section></div>
 <div id="toast-area" class="toast-area" aria-live="polite"></div>
 <div id="no-map" class="no-map hidden">Die Karte konnte nicht gestartet werden. Prüfe deine Internetverbindung und lade die Seite erneut.</div>
+<script>
+"use strict";
+// Weltwerk — deterministic prototype world and loot logic.
+// This file deliberately has no browser dependencies so it can be tested with Node.
+const VERSION = '0.2.2';
+const REGEN_MS = 60 * 60 * 1000;
+const REACH_METERS = 60;
+const GRID_METERS = 195;
+const RESOURCE_RADIUS = 720;
+const MATERIALS = Object.freeze({
+  wood:   { name: 'Holz', icon: '🪵', rarity: 'common', note: 'Das Grundmaterial für Bretter und einfache Bauteile.' },
+  stone:  { name: 'Stein', icon: '🪨', rarity: 'common', note: 'Robustes Material für spätere Bauprojekte.' },
+  scrap:  { name: 'Altmetall', icon: '🔩', rarity: 'common', note: 'Alte Metallteile, die später verarbeitet werden können.' },
+  resin:  { name: 'Harz', icon: '🍯', rarity: 'uncommon', note: 'Seltener Fund von Bäumen – später für spezielle Teile.' },
+  iron:   { name: 'Eisenerz', icon: '⛏️', rarity: 'uncommon', note: 'Wichtig für die künftige Metallverarbeitung.' },
+  copper: { name: 'Kupferdraht', icon: '🔌', rarity: 'uncommon', note: 'Später für Elektronik und Erkundungstechnik.' },
+});
+const TYPES = Object.freeze({
+  tree: { name: 'Baum', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.20, color: '#63c58f', desc: 'Ein gewöhnlicher Baum. Liefert Holz und manchmal etwas Harz.' },
+  rock: { name: 'Steinvorkommen', icon: '🪨', material: 'stone', bonus: 'iron', bonusProbability: 0.15, color: '#94adca', desc: 'Ein Steinvorkommen mit einer kleinen Chance auf Eisenerz.' },
+  scrap: { name: 'Schrottfundstelle', icon: '🔩', material: 'scrap', bonus: 'copper', bonusProbability: 0.15, color: '#e7b375', desc: 'Zurückgelassene Metallteile. Manchmal findet sich Kupferdraht.' },
+});
+function hash32(x, y, salt = 0) {
+  let n = (Math.imul(x, 374761393) + Math.imul(y, 668265263) + Math.imul(salt, 1442695041)) | 0;
+  n = Math.imul(n ^ (n >>> 13), 1274126177);
+  return (n ^ (n >>> 16)) >>> 0;
+}
+function randomCell(x, y, salt = 0) { return hash32(x, y, salt) / 4294967296; }
+const R = 6378137;
+function latLngToMeters(lat, lng) {
+  const safeLat = Math.max(-85, Math.min(85, lat));
+  return { x: R * lng * Math.PI / 180, y: R * Math.log(Math.tan(Math.PI / 4 + safeLat * Math.PI / 360)) };
+}
+function metersToLatLng(x, y) {
+  return { lat: (2 * Math.atan(Math.exp(y / R)) - Math.PI / 2) * 180 / Math.PI, lng: x / R * 180 / Math.PI };
+}
+function distanceMeters(lat1, lon1, lat2, lon2) {
+  const rad = Math.PI / 180;
+  const a = Math.sin((lat2-lat1)*rad/2)**2 + Math.cos(lat1*rad)*Math.cos(lat2*rad)*Math.sin((lon2-lon1)*rad/2)**2;
+  return 6371000 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(Math.max(0,1-a)));
+}
+// Coordinates depend only on the cell's world coordinates — same resource after refresh.
+// These are prototype GAME locations, not verified public/access-safe real-world sites.
+function generateResources(lat, lng, radius = RESOURCE_RADIUS) {
+  const center = latLngToMeters(lat, lng);
+  const pad = 1;
+  const minX = Math.floor((center.x - radius) / GRID_METERS) - pad;
+  const maxX = Math.floor((center.x + radius) / GRID_METERS) + pad;
+  const minY = Math.floor((center.y - radius) / GRID_METERS) - pad;
+  const maxY = Math.floor((center.y + radius) / GRID_METERS) + pad;
+  const result = [];
+  for (let ix=minX; ix<=maxX; ix++) for (let iy=minY; iy<=maxY; iy++) {
+    if (randomCell(ix, iy, 1) > 0.80) continue;
+    const offsetX = 0.20 + randomCell(ix,iy,2)*0.60;
+    const offsetY = 0.20 + randomCell(ix,iy,3)*0.60;
+    const coord = metersToLatLng((ix+offsetX)*GRID_METERS, (iy+offsetY)*GRID_METERS);
+    if (distanceMeters(lat,lng,coord.lat,coord.lng) > radius) continue;
+    const roll = randomCell(ix, iy, 4);
+    const type = roll < 0.43 ? 'tree' : roll < 0.77 ? 'rock' : 'scrap';
+    result.push({id: `${ix}:${iy}`, ...coord, type, rich: randomCell(ix,iy,5) < 0.10});
+  }
+  return result;
+}
+// Independent bonus chance. One harvest always gives guaranteed material.
+function rollHarvest(node, rand = Math.random) {
+  const type = TYPES[node.type];
+  if (!type) throw new Error('Unknown resource type');
+  const qty = (2 + Math.floor(Math.min(.999999, Math.max(0, rand())) * 3)) * (node.rich ? 2 : 1);
+  const result = [{id:type.material, count:qty}];
+  if (rand() < type.bonusProbability) result.push({id:type.bonus, count:1});
+  return result;
+}
+function isReady(lastHarvest, now = Date.now()) { return !lastHarvest || now-lastHarvest >= REGEN_MS; }
+function timeRemaining(lastHarvest, now = Date.now()) { return Math.max(0, REGEN_MS - (now-lastHarvest)); }
+function formatRemaining(ms) {
+  const minutes = Math.ceil(ms / 60000);
+  return minutes >= 60 ? `${Math.floor(minutes/60)}h ${String(minutes%60).padStart(2,'0')}m` : `${minutes} Min.`;
+}
+const DEMO_START = Object.freeze({lat:51.9625, lng:7.6270});
+const SAVE_KEY = 'weltwerk-exploration-save-v1';
+function freshProfile() {
+  return {inventory:Object.fromEntries(Object.keys(MATERIALS).map(k=>[k,0])), discovered:[], harvested:{}, stats:{harvests:0, collected:0, rare:0}};
+}
+function cleanProfile(candidate) {
+  const p=freshProfile();
+  if (!candidate || typeof candidate !== 'object') return p;
+  for (const key of Object.keys(MATERIALS)) {
+    const val=Number(candidate.inventory?.[key]);
+    p.inventory[key] = Number.isSafeInteger(val) && val>=0 && val<=1e9 ? val : 0;
+  }
+  p.discovered = Array.isArray(candidate.discovered) ? [...new Set(candidate.discovered.filter(v=>typeof v==='string' && v in MATERIALS))] : [];
+  if(candidate.harvested && typeof candidate.harvested==='object') {
+    for (const [key,value] of Object.entries(candidate.harvested)) {
+      const t=Number(value);
+      if (/^-?\d+:-?\d+$/.test(key) && Number.isFinite(t) && t>0 && t<=Date.now()+60000 && Date.now()-t<REGEN_MS) p.harvested[key]=t;
+    }
+  }
+  for (const key of Object.keys(p.stats)) {
+    const val=Number(candidate.stats?.[key]);
+    if (Number.isSafeInteger(val) && val>=0 && val<=1e9) p.stats[key]=val;
+  }
+  return p;
+}
+
+// WELTWERK lightweight backup map: no MapLibre / WebGL / third-party JS required.
+// Map data is fetched only as standard OSM raster tiles when online.
+const TILE = 256;
+const bound = (v,min,max)=>Math.min(max,Math.max(min,v));
+function world(lat,lng,z){
+  const sin= Math.sin(bound(lat,-85,85)*Math.PI/180);
+  const n=2**z*TILE;
+  return { x: (lng+180)/360*n, y:(0.5-Math.log((1+sin)/(1-sin))/(4*Math.PI))*n};
+}
+function geo(x,y,z){
+  const n=2**z*TILE;
+  return {lng:x/n*360-180,lat:Math.atan(Math.sinh(Math.PI*(1-2*y/n)))*180/Math.PI};
+}
+function mapPoint(lngLat){
+  if(Array.isArray(lngLat)) return {lng:lngLat[0],lat:lngLat[1]};
+  if(lngLat&&Number.isFinite(lngLat.lng)&&Number.isFinite(lngLat.lat))return lngLat;
+  return {lng:7.627,lat:51.9625};
+}
+class BackupMap {
+  constructor({container,center,zoom=16.6,pitch=55,bearing=0}){
+    this.el=typeof container==='string'?document.getElementById(container):container;
+    this.zoom=zoom;this.pitch=pitch;this.bearing=bearing;
+    this.center=mapPoint(center);this.handlers={};this.markers=new Set();this.tiles=new Map();
+    this.el.innerHTML='';this.el.classList.add('backup-map');
+    this.base=document.createElement('div');this.base.className='backup-map-ground';
+    this.tileLayer=document.createElement('div');this.tileLayer.className='backup-map-tiles';
+    this.markerLayer=document.createElement('div');this.markerLayer.className='backup-map-markers';
+    this.help=document.createElement('div');this.help.className='backup-map-caption';
+    this.help.textContent='ERSATZKARTE · 2.5D';
+    this.attribution=document.createElement('div');this.attribution.className='backup-map-attribution';
+    this.attribution.innerHTML='Karte © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>';
+    this.base.appendChild(this.tileLayer);this.el.append(this.base,this.markerLayer,this.help,this.attribution);
+    this._pointer=null;
+    this.el.addEventListener('pointerdown',e=>{if(e.target.closest('button,a'))return;this._pointer={x:e.clientX,y:e.clientY,center:{...this.center},moved:false};});
+    this.el.addEventListener('pointermove',e=>{
+      if(!this._pointer || !(e.buttons&1))return;
+      const dx=e.clientX-this._pointer.x,dy=e.clientY-this._pointer.y;
+      if(Math.hypot(dx,dy)<6 && !this._pointer.moved)return;
+      this._pointer.moved=true;
+      const z=Math.floor(this.zoom),scale=2**(this.zoom-z);
+      const orig=world(this._pointer.center.lat,this._pointer.center.lng,z);
+      this.center=geo(orig.x-dx/scale,orig.y-dy/scale,z);
+      this._emit('dragstart');this.redraw();
+    });
+    this.el.addEventListener('pointerup',e=>{
+      if(!this._pointer)return;
+      const p=this._pointer;this._pointer=null;
+      if(p.moved||e.target.closest('button,a'))return;
+      const rect=this.el.getBoundingClientRect();
+      const z=Math.floor(this.zoom),scale=2**(this.zoom-z);
+      const c=world(this.center.lat,this.center.lng,z);
+      const dest=geo(c.x+(e.clientX-rect.left-rect.width/2)/scale,c.y+(e.clientY-rect.top-rect.height/2)/scale,z);
+      this._emit('click',{lngLat:dest});
+    });
+    this.el.addEventListener('wheel',e=>{e.preventDefault();this.zoom=bound(this.zoom+(e.deltaY<0?.5:-.5),12,19.2);this.redraw();},{passive:false});
+    this.updatePitch();this.redraw();setTimeout(()=>this._emit('load'),10);
+  }
+  on(name,fn){(this.handlers[name]??=[]).push(fn);return this;}
+  _emit(name,value){for(const fn of this.handlers[name]||[])fn(value);}
+  getZoom(){return this.zoom;}
+  getPitch(){return this.pitch;}
+  getBearing(){return this.bearing;}
+  getStyle(){return {layers:[]};}
+  getSource(){return null;}
+  getLayer(){return null;}
+  addSource(){}
+  addLayer(){}
+  resize(){this.redraw();}
+  zoomIn(){this.easeTo({zoom:this.zoom+.65});}
+  zoomOut(){this.easeTo({zoom:this.zoom-.65});}
+  easeTo(options){
+    if(options.center)this.center=mapPoint(options.center);
+    if(Number.isFinite(options.zoom))this.zoom=bound(options.zoom,12,19.2);
+    if(Number.isFinite(options.bearing))this.bearing=options.bearing;
+    if(Number.isFinite(options.pitch)){this.pitch=options.pitch;this.updatePitch();this._emit('pitchend');}
+    this.redraw();
+  }
+  updatePitch(){this.el.classList.toggle('backup-pitched',this.pitch>=25);}
+  redraw(){
+    if(!this.el.isConnected)return;
+    const rect=this.el.getBoundingClientRect(),w=rect.width,h=rect.height;
+    if(!w||!h)return;
+    const z=Math.floor(this.zoom),s=2**(this.zoom-z),c=world(this.center.lat,this.center.lng,z);
+    const tx=Math.floor(c.x/TILE),ty=Math.floor(c.y/TILE);
+    const aroundX=Math.ceil(w/(TILE*s)/2)+1,aroundY=Math.ceil(h/(TILE*s)/2)+1;
+    const needed=new Set();
+    for(let x=tx-aroundX;x<=tx+aroundX;x++)for(let y=ty-aroundY;y<=ty+aroundY;y++){
+      const n=2**z;if(y<0||y>=n)continue;
+      const safeX=((x%n)+n)%n,key=`${z}/${safeX}/${y}`;needed.add(key);
+      let img=this.tiles.get(key);
+      if(!img){
+        img=document.createElement('img');img.alt='';img.draggable=false;img.decoding='async';
+        img.className='backup-tile';img.src=`https://tile.openstreetmap.org/${key}.png`;
+        img.onerror=()=>{img.style.opacity='0';};
+        this.tileLayer.appendChild(img);this.tiles.set(key,img);
+      }
+      const px=w/2+((x*TILE)-c.x)*s, py=h/2+((y*TILE)-c.y)*s;
+      img.style.left=`${px}px`;img.style.top=`${py}px`;
+      img.style.width=`${TILE*s+1}px`;img.style.height=`${TILE*s+1}px`;
+    }
+    for(const [key,img]of this.tiles){if(!needed.has(key)){img.remove();this.tiles.delete(key);}}
+    for(const marker of this.markers){
+      const p=world(marker.pos.lat,marker.pos.lng,z);
+      marker.element.style.left=`${w/2+(p.x-c.x)*s}px`;
+      marker.element.style.top=`${h/2+(p.y-c.y)*s}px`;
+    }
+  }
+  remove(){this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
+}
+class BackupMarker {
+  constructor({element}){this.element=element;this.pos={lat:0,lng:0};this.map=null;}
+  setLngLat(value){this.pos=mapPoint(value);if(this.map)this.map.redraw();return this;}
+  addTo(map){this.map=map;this.element.classList.add('backup-marker');map.markerLayer.appendChild(this.element);map.markers.add(this);map.redraw();return this;}
+  getElement(){return this.element;}
+  remove(){this.element.remove();this.map?.markers.delete(this);this.map=null;}
+}
+
+
+const $ = id => document.getElementById(id);
+const START = { ...DEMO_START };
+const state = {
+  mode:null, demo: freshProfile(), gps:freshProfile(),
+  demoPosition:{...START}, position:null, accuracy:null, timestamp:0, speed:0,
+  map:null, mapKind:null, markers:new Map(), playerMarker:null, accuracySource:false, followPlayer:true, mapLoadingError:false, mapErrors:0, mapTimer:null,
+  resources:[], activeTab:'map', selectedNode:null, sheetMode:null, lastGps:null,
+  watchId:null, mapReady:false,
+};
+
+function activeProfile() {return state.mode==='gps'?state.gps:state.demo;}
+function save() {
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify({format:'weltwerk-save-1',version:VERSION,mode:state.mode,
+      profiles:{demo:state.demo,gps:state.gps},demoPosition:state.demoPosition}));
+  } catch(e) { toast('Speichern fehlgeschlagen: Gerätespeicher prüfen.',true); console.error(e); }
+}
+function restore() {
+  try {
+    const saved=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+    if(!saved || saved.format!=='weltwerk-save-1') return;
+    state.demo=cleanProfile(saved.profiles?.demo);
+    state.gps=cleanProfile(saved.profiles?.gps);
+    // Always start in demo after reload; GPS must be explicitly enabled to request location.
+    state.mode='demo';
+    if(Number.isFinite(saved.demoPosition?.lat) && Number.isFinite(saved.demoPosition?.lng)
+       && Math.abs(saved.demoPosition.lat)<=85 && Math.abs(saved.demoPosition.lng)<=180)
+      state.demoPosition={lat:saved.demoPosition.lat,lng:saved.demoPosition.lng};
+  } catch(e) { console.warn('Ungültiger lokaler Spielstand, starte neu.',e); }
+}
+function showWelcome() { $('welcome').classList.remove('hidden'); }
+function hideWelcome() { $('welcome').classList.add('hidden'); }
+let lastToastText='',lastToastAt=0;
+function toast(message,error=false) {
+  if(message===lastToastText && Date.now()-lastToastAt<2500)return;
+  lastToastText=message;lastToastAt=Date.now();
+  const node=document.createElement('div'); node.className=`toast${error?' error':''}`; node.textContent=message;
+  $('toast-area').appendChild(node); setTimeout(()=>node.remove(),3300);
+}
+function getPosition() {return state.mode==='gps'?state.position:state.demoPosition;}
+function getAccuracy() {return state.mode==='gps'?state.accuracy:0;}
+function getRange(node) {
+  if(state.mode==='gps' && (!state.position || Date.now()-state.timestamp>60000)) return {ok:false,reason:'Warte auf ein aktuelles GPS-Signal.'};
+  const pos=getPosition(); if(!pos) return {ok:false,reason:'Kein Standort vorhanden.'};
+  if(state.mode==='gps' && getAccuracy()>140) return {ok:false,reason:'GPS ist zu ungenau. Gehe möglichst ins Freie.'};
+  if(state.mode==='gps' && state.speed>8.3) return {ok:false,reason:'Sammeln bei schneller Fortbewegung gesperrt.'};
+  const distance=distanceMeters(pos.lat,pos.lng,node.lat,node.lng);
+  const reach=REACH_METERS+(state.mode==='gps'?Math.min(15,Math.max(0,(getAccuracy()||0)/3)):0);
+  return {ok:distance<=reach,distance,reach,reason:`Noch ${Math.max(1,Math.ceil(distance-reach))} m bis zur Reichweite.`};
+}
+// MapLibre vector tiles + extruded OSM buildings. The virtual resource positions
+// are unchanged from v0.1; only their presentation becomes a 2.5D game world.
+const MAP_STYLE='https://tiles.openfreemap.org/styles/bright';
+const MAP_TILES='https://tiles.openfreemap.org/planet';
+const ICONS=Object.freeze({tree:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTYgMTI4Ij4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InRydW5rIiB4Mj0iMSIgeTI9IjAiPjxzdG9wIHN0b3AtY29sb3I9IiM4ODVmMzciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjODk4NTYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8ZWxsaXBzZSBjeD0iNTgiIGN5PSIxMTIiIHJ4PSIzMiIgcnk9IjkiIGZpbGw9IiMxNzJmMmEiIG9wYWNpdHk9Ii4yNiIvPgogIDxwYXRoIGQ9Ik01MSA4MCA2NiA3OSA2OSAxMDcgNTYgMTEyIDQ5IDEwNloiIGZpbGw9InVybCgjdHJ1bmspIiBzdHJva2U9IiM3NTU0MzgiIHN0cm9rZS13aWR0aD0iMS40Ii8+CiAgPHBhdGggZD0iTTU2IDkyIDY5IDg1IDY5IDEwNyA1NiAxMTJaIiBmaWxsPSIjOGY2OTNmIi8+CiAgPHBhdGggZD0iTTU0IDkxIDQyIDc4IDQ0IDcyIDU5IDg2IiBmaWxsPSIjYWM4MjQ4Ii8+CiAgPHBhdGggZD0iTTU2IDExIDcyIDIxIDgxIDM3IDk0IDUyIDg4IDczIDczIDg3IDUxIDkxIDI3IDgwIDE4IDYyIDI3IDQwIDM1IDIyWiIgZmlsbD0iIzJkODc1NCIgc3Ryb2tlPSIjMWI2MzQ0IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNNTYgMTEgNzAgMjAgNTggNDMgMzUgMjJaIiBmaWxsPSIjYTBkZjkxIi8+CiAgPHBhdGggZD0iTTM1IDIyIDU4IDQzIDMwIDU2IDE4IDYyIDI3IDQwWiIgZmlsbD0iIzY1YmQ2ZSIvPgogIDxwYXRoIGQ9Ik03MCAyMCA4MSAzNyA5NCA1MiA3MyA1MyA1OCA0M1oiIGZpbGw9IiM0NjliNWYiLz4KICA8cGF0aCBkPSJNNTggNDMgNzMgNTMgNzEgNzggNTEgOTEgNDkgNjJaIiBmaWxsPSIjMzU4NjUzIi8+CiAgPHBhdGggZD0iTTE4IDYyIDMwIDU2IDQ5IDYyIDUxIDkxIDI3IDgwWiIgZmlsbD0iIzRhYTU2MiIvPgogIDxwYXRoIGQ9Ik03MyA1MyA5NCA1MiA4OCA3MyA3MyA4NyA1MSA5MSA3MSA3OFoiIGZpbGw9IiMyNDY5NDciLz4KICA8cGF0aCBkPSJNMzUgMjIgNTggNDMgNDkgNjIgMzAgNTYiIGZpbGw9IiM3N2M4NzYiIG9wYWNpdHk9Ii4zNiIvPgogIDxwYXRoIGQ9Ik0zNiAyOCA0MSAyOSAzNCAzOCIgZmlsbD0iI2QwZTlhNyIgb3BhY2l0eT0iLjU1Ii8+Cjwvc3ZnPgo=',rock:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTYgMTI4Ij4KICA8ZWxsaXBzZSBjeD0iNTgiIGN5PSIxMTEiIHJ4PSIzNiIgcnk9IjkiIGZpbGw9IiMyNjNhNDMiIG9wYWNpdHk9Ii4yNSIvPgogIDxwYXRoIGQ9Ik0yMCA4MCAzMiA1MiA1MiAzNiA3OCA0MiA5NiA2OCA4OSAxMDIgNjcgMTExIDM4IDEwN1oiIGZpbGw9IiM3NThlYWEiIHN0cm9rZT0iIzUyNjY3ZCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTUyIDM2IDc4IDQyIDYzIDY5IDMyIDUyWiIgZmlsbD0iI2QwZGNlNSIvPgogIDxwYXRoIGQ9Ik0zMiA1MiA2MyA2OSA1NCA5NSAyMCA4MFoiIGZpbGw9IiNhMmI3YzkiLz4KICA8cGF0aCBkPSJNNzggNDIgOTYgNjggNzMgNzkgNjMgNjlaIiBmaWxsPSIjODA5N2FkIi8+CiAgPHBhdGggZD0iTTYzIDY5IDczIDc5IDY3IDExMSA1NCA5NVoiIGZpbGw9IiM2MjdkOTgiLz4KICA8cGF0aCBkPSJNMjAgODAgNTQgOTUgNjcgMTExIDM4IDEwN1oiIGZpbGw9IiM3ZjlkYjIiLz4KICA8cGF0aCBkPSJNNzMgNzkgOTYgNjggODkgMTAyIDY3IDExMVoiIGZpbGw9IiM1NjcxOGEiLz4KICA8cGF0aCBkPSJNMzkgNjcgNDcgNjMgNTMgNzIgNDggODIgNDAgODBaIiBmaWxsPSIjZTFiNjZkIi8+CiAgPHBhdGggZD0iTTUzIDcyIDYxIDc0IDU5IDg5IDQ4IDgyWiIgZmlsbD0iI2JlODU0YiIvPgogIDxwYXRoIGQ9Ik00MCA4MCA0OCA4MiA1OSA4OSA1NCA5NVoiIGZpbGw9IiNmZmNmODciLz4KICA8cGF0aCBkPSJNNzAgNTQgNzggNTYgNzMgNjVaIiBmaWxsPSIjZTZmMGYwIiBvcGFjaXR5PSIuNTUiLz4KPC9zdmc+Cg==',scrap:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTYgMTI4Ij4KICA8ZWxsaXBzZSBjeD0iNTgiIGN5PSIxMTEiIHJ4PSIzOSIgcnk9IjEwIiBmaWxsPSIjM2EyYzIwIiBvcGFjaXR5PSIuMjciLz4KICA8cGF0aCBkPSJNMTkgODAgMzUgNjUgNTMgNzYgNTQgMTAyIDMzIDExMSAxOSA5OVoiIGZpbGw9IiNhMTZlNTIiIHN0cm9rZT0iIzcwNDgzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHBhdGggZD0iTTE5IDgwIDMzIDg4IDUzIDc2IDM1IDY1WiIgZmlsbD0iI2RiYTc3MiIvPgogIDxwYXRoIGQ9Ik0zMyA4OCA1NCAxMDIgMzMgMTExIDE5IDk5WiIgZmlsbD0iIzg1NTQzZiIvPgogIDxwYXRoIGQ9Ik01NCA1OSA3NCA0OSA5MCA2MyA4NyA5NyA2OSAxMDggNTQgMTAxWiIgZmlsbD0iIzcyOGY5NiIgc3Ryb2tlPSIjNTI2YjcwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNNTQgNTkgNzMgNzAgOTAgNjMgNzQgNDlaIiBmaWxsPSIjYmFkMmNlIi8+CiAgPHBhdGggZD0iTTczIDcwIDkwIDYzIDg3IDk3IDY5IDEwOFoiIGZpbGw9IiM1MzcyNzgiLz4KICA8cGF0aCBkPSJNMzkgNDYgNjYgNDIgNzYgNTkgNTUgNzQgMzUgNjNaIiBmaWxsPSIjZDU5YTY1IiBzdHJva2U9IiM4NzVhM2EiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0zOSA0NiA1NSA1MyA2NiA0MloiIGZpbGw9IiNmNGM0OGIiLz4KICA8cGF0aCBkPSJNNTUgNTMgNzYgNTkgNTUgNzQgMzUgNjNaIiBmaWxsPSIjYWI2ZjRhIi8+CiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI4MyIgcj0iMTAiIGZpbGw9IiNjM2Q0Y2YiIHN0cm9rZT0iIzQ1NjM2YyIgc3Ryb2tlLXdpZHRoPSI1Ii8+CiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI4MyIgcj0iMi42IiBmaWxsPSIjNTk3ODgwIi8+CiAgPHBhdGggZD0iTTc4IDM1IDg0IDMzIDg4IDUwIDgzIDYxIDczIDUzWiIgZmlsbD0iI2Q2YTE2YSIgc3Ryb2tlPSIjODc1ODM5IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNODggNTAgODMgNjEgNzMgNTMiIGZpbGw9IiM5NzYxM2QiLz4KICA8cGF0aCBkPSJNNjEgOTMgNzAgODcgNzggOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2VmYmU3MyIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg=='});
+function initMap() {
+  // No external dependency required to display the player or resources.
+  startBackupMap('Die spielbare Karte ist gestartet.');
+  // Optional WebGL layer is loaded separately and never blocks the game.
+  queue3DUpgrade();
+}
+function queue3DUpgrade(){
+  if (!('WebGLRenderingContext' in window)) { setMapStatus('2.5D');return; }
+  const style=document.createElement('link');
+  style.rel='stylesheet';style.href='https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css';
+  document.head.appendChild(style);
+  const loader=document.createElement('script');
+  loader.src='https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js';
+  loader.async=true;
+  loader.onload=()=>{
+    try { if(window.maplibregl?.supported()) stage3DMap();else setMapStatus('2.5D'); }
+    catch(err){ console.warn('3D unavailable',err);setMapStatus('2.5D'); }
+  };
+  loader.onerror=()=>setMapStatus('2.5D');
+  document.head.appendChild(loader);
+}
+function setMapStatus(label){
+  const el=document.querySelector('.camera-hint');
+  if(el)el.firstChild.textContent=label+'-WELT ';
+  $('btn-tilt').textContent=state.mapKind==='backup'?'2.5D':state.map?.getPitch()>=25?'3D':'2D';
+}
+function stage3DMap(){
+  if(state.mapKind!=='backup' || !state.mapReady) return;
+  const el=document.createElement('div');el.id='map-3d';
+  el.style.cssText='position:absolute;inset:0;z-index:1;visibility:hidden;';
+  $('screen-map').insertBefore(el,$('map').nextSibling);
+  let next=null,done=false;
+  const fail=()=>{ if(done)return;done=true;try{next?.remove();}catch{}el.remove();setMapStatus('2.5D'); };
+  try {
+    const pos=getPosition()||state.demoPosition;
+    next=new maplibregl.Map({container:el,style:MAP_STYLE,
+      center:[pos.lng,pos.lat],zoom:16.6,pitch:55,bearing:-22,
+      minZoom:12,maxZoom:19.2,maxPitch:60,antialias:true,renderWorldCopies:false});
+    next.touchZoomRotate.enableRotation();
+    const timer=setTimeout(fail,8500);
+    next.on('error',e=>{console.warn('3D renderer error:',e?.error||e);clearTimeout(timer);fail();});
+    next.on('load',()=>{
+      clearTimeout(timer);
+      if(done)return;
+      done=true;
+      const backup=state.map;
+      for(const m of state.markers.values())m.remove();state.markers.clear();
+      state.playerMarker?.remove();state.playerMarker=null;
+      state.map=next;state.mapKind='maplibre';state.mapReady=true;
+      try{backup?.remove();}catch{}
+      $('map').style.display='none';el.style.visibility='visible';
+      attachMapEvents(next);
+      addWorldBuildings();addAccuracyLayer();
+      updatePositionOnMap(true);renderWorld();setMapStatus('3D');
+      setTimeout(()=>next.resize(),150);
+    });
+  }catch(err){console.warn('3D stage error',err);fail();}
+}
+function attachMapEvents(map){
+  map.on('dragstart',()=>{state.followPlayer=false;});
+  map.on('pitchend',()=>{
+    if(state.map!==map)return;
+    const is3d=map.getPitch()>=25;
+    $('btn-tilt').textContent=is3d?'3D':'2D';
+    $('btn-tilt').setAttribute('aria-pressed',String(is3d));
+  });
+  map.on('click',event=>{
+    if(state.map!==map || state.mode!=='demo')return;
+    state.demoPosition={lat:event.lngLat.lat,lng:event.lngLat.lng};
+    save();updatePositionOnMap();renderWorld();toast('Testposition verschoben');
+  });
+}
+function finalizeMap(map,kind){
+  if(state.map!==map)return;
+  state.mapReady=true;state.mapKind=kind;
+  $('no-map').classList.add('hidden');
+  if(kind==='maplibre'){addWorldBuildings();addAccuracyLayer();}
+  updatePositionOnMap(true);renderWorld();updateModeUI();
+  setTimeout(()=>state.map?.resize(),80);
+}
+function startBackupMap(reason){
+  if(state.mapKind==='backup')return;
+  clearTimeout(state.mapTimer);state.mapTimer=null;
+  console.warn('Starte Ersatzkarte:',reason);
+  const old=state.map;
+  for(const marker of state.markers.values())marker.remove();
+  state.markers.clear();state.playerMarker?.remove();state.playerMarker=null;
+  state.map=null;state.mapReady=false;
+  try{old?.remove();}catch(e){console.warn(e);}
+  $('map').innerHTML='';
+  try{
+    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:16.6,pitch:55});
+    state.map=map;state.mapKind='backup';
+    attachMapEvents(map);
+    map.on('load',()=>finalizeMap(map,'backup'));
+    setMapStatus('2.5D');
+  }catch(e){console.error('Auch Ersatzkarte fehlgeschlagen',e);$('no-map').classList.remove('hidden');}
+}
+function makeMarker(args){
+  return state.mapKind==='backup' ? new BackupMarker(args) : new maplibregl.Marker(args);
+}
+function addWorldBuildings(){
+  if(!state.map || state.map.getLayer('weltwerk-buildings'))return;
+  try{
+    const style=state.map.getStyle();
+    const labelLayer=style.layers?.find(l=>l.type==='symbol' && l.layout?.['text-field']);
+    if(!state.map.getSource('weltwerk-vector'))state.map.addSource('weltwerk-vector',{type:'vector',url:MAP_TILES});
+    state.map.addLayer({
+      id:'weltwerk-buildings',type:'fill-extrusion',source:'weltwerk-vector',
+      'source-layer':'building',minzoom:15,filter:['!=',['get','hide_3d'],true],
+      paint:{
+        'fill-extrusion-color':['interpolate',['linear'],['coalesce',['to-number',['get','render_height']],8],0,'#dfdfd3',18,'#d3d7cc',60,'#b8cecc'],
+        'fill-extrusion-height':['interpolate',['linear'],['zoom'],15,0,16,['coalesce',['to-number',['get','render_height']],8]],
+        'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],0],
+        'fill-extrusion-opacity':0.83
+      }
+    },labelLayer?.id);
+  } catch(e){console.warn('3D buildings unavailable for this map region/style',e);}
+}
+function accuracyPolygon(pos,meters){
+  if(!pos || !Number.isFinite(meters) || meters<=0)return {type:'FeatureCollection',features:[]};
+  const r=Math.min(200,Math.max(3,meters)),coords=[];
+  for(let i=0;i<=48;i++){
+    const angle=2*Math.PI*i/48;
+    const lat=pos.lat+Math.cos(angle)*r/111320;
+    const lng=pos.lng+Math.sin(angle)*r/(111320*Math.max(0.15,Math.cos(pos.lat*Math.PI/180)));
+    coords.push([lng,lat]);
+  }
+  return {type:'FeatureCollection',features:[{type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[coords]}}]};
+}
+function addAccuracyLayer(){
+  if(!state.map || state.map.getSource('gps-accuracy'))return;
+  state.map.addSource('gps-accuracy',{type:'geojson',data:accuracyPolygon(null,0)});
+  state.map.addLayer({id:'gps-accuracy-fill',type:'fill',source:'gps-accuracy',paint:{'fill-color':'#49bfae','fill-opacity':.13}});
+  state.map.addLayer({id:'gps-accuracy-line',type:'line',source:'gps-accuracy',paint:{'line-color':'#2ea998','line-width':1.5,'line-opacity':.55}});
+}
+function makePlayerElement(){
+  const elem=document.createElement('div');elem.className='world-player';
+  elem.innerHTML='<span class="player-aura"></span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTMyIj4KICA8ZWxsaXBzZSBjeD0iNTAiIGN5PSIxMjEiIHJ4PSIyOSIgcnk9IjgiIGZpbGw9IiMxNDJiMjgiIG9wYWNpdHk9Ii4yMiIvPgogIDxwYXRoIGQ9Ik0zMiA5NSA0NyA5NSA0NSAxMTQgMjggMTE3WiIgZmlsbD0iIzI3Mzc0ZSIvPgogIDxwYXRoIGQ9Ik01MyA5NSA2NyA5MyA3MyAxMTQgNTYgMTE3WiIgZmlsbD0iIzMzNDQ1YiIvPgogIDxwYXRoIGQ9Ik0yNyAxMTEgNDUgMTA4IDQ1IDEyMCAyNSAxMjBaIiBmaWxsPSIjZWRlM2JlIi8+CiAgPHBhdGggZD0iTTU3IDEwOCA3MyAxMTAgNzYgMTIwIDU2IDEyMFoiIGZpbGw9IiNlZGUzYmUiLz4KICA8cGF0aCBkPSJNMzAgNjMgNjkgNjMgNzYgOTggNTUgMTA2IDMzIDk5WiIgZmlsbD0iIzJjOWQ5YSIgc3Ryb2tlPSIjMTk2ZDczIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNNTAgNjUgNjkgNjMgNzYgOTggNTUgMTA2WiIgZmlsbD0iIzFiNzI3ZSIvPgogIDxwYXRoIGQ9Ik0zMCA2MyAxOCA4MyAyNiA5MCAzOCA3OFoiIGZpbGw9IiMyNjhiOGMiLz4KICA8cGF0aCBkPSJNNjkgNjMgODIgODMgNzUgOTEgNjIgNzhaIiBmaWxsPSIjMjQ2ZTdhIi8+CiAgPHBhdGggZD0iTTE4IDgzIDI2IDkwIDIzIDk4IDE2IDk1WiIgZmlsbD0iI2Q2YTY3ZiIvPgogIDxwYXRoIGQ9Ik04MiA4MyA3NSA5MSA3OCA5NyA4NiA5NFoiIGZpbGw9IiNkNmE2N2YiLz4KICA8cGF0aCBkPSJNMzIgMzIgMzYgMjIgNjMgMjIgNjkgMzQgNjYgNTQgNTcgNjQgNDEgNjMgMzMgNTNaIiBmaWxsPSIjZWZiYzkwIiBzdHJva2U9IiNiOTg3NmIiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHBhdGggZD0iTTMyIDMyIDM2IDIyIDYzIDIyIDY5IDM0IDYwIDMxIDM5IDMxWiIgZmlsbD0iIzI5M2I0OCIvPgogIDxwYXRoIGQ9Ik0zMCAyNSA0MyAxMiA2MyAxMiA3NCAyNCA3MSAzMiAyNiAzMloiIGZpbGw9IiM1NmMzYjIiIHN0cm9rZT0iIzFlODE3ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHBhdGggZD0iTTMwIDI1IDQzIDEyIDQ5IDEyIDQ5IDMyIDI2IDMyWiIgZmlsbD0iIzgwZDhjMSIvPgogIDxwYXRoIGQ9Ik0zMCAzMCA3MiAzMCA2NSAzNiAzMyAzNloiIGZpbGw9IiMyMDhiODciLz4KICA8Y2lyY2xlIGN4PSI0MiIgY3k9IjQ0IiByPSIyLjIiIGZpbGw9IiM0MzNjM2IiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjIiIGZpbGw9IiM0MzNjM2IiLz4KICA8cGF0aCBkPSJNNDUgNTUgUTUxIDYwIDU4IDU1IiBzdHJva2U9IiNiNjdjNjQiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQwIDY2IDUwIDc3IDYxIDY1IiBzdHJva2U9IiM4YWQzYzAiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K" alt="" draggable="false"><span class="player-you">DU</span>';
+  return elem;
+}
+function makeResourceElement(node){
+  const element=document.createElement('button');element.type='button';
+  element.setAttribute('aria-label',`${TYPES[node.type].name} auf der Karte öffnen`);
+  element.innerHTML=`<span class="world-resource-shadow"></span><img class="world-resource-art" src="${ICONS[node.type]}" alt="" draggable="false"><span class="world-resource-star" aria-hidden="true">✦</span><span class="world-resource-dot" aria-hidden="true"></span>`;
+  element.addEventListener('click',e=>{e.stopPropagation();openResource(node);});
+  element.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
+  return element;
+}
+function updateNodeElement(element,node){
+  const ready=isReady(activeProfile().harvested[node.id]);
+  const range=getRange(node);
+  element.className=['world-resource',`type-${node.type}`,node.rich?'rich':'',range.ok?'in-range':'',ready?'':'depleted'].filter(Boolean).join(' ');
+}
+function updatePositionOnMap(follow=false){
+  if(!state.mapReady)return;
+  const pos=getPosition();
+  if(!pos){state.playerMarker?.remove();state.playerMarker=null;state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(null,0));return;}
+  if(!state.playerMarker){
+    state.playerMarker=makeMarker({element:makePlayerElement(),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
+      .setLngLat([pos.lng,pos.lat]).addTo(state.map);
+  }else state.playerMarker.setLngLat([pos.lng,pos.lat]);
+  const gpsAccuracy=state.mode==='gps'?state.accuracy:null;
+  state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(pos,gpsAccuracy));
+  if(follow || (state.mode==='gps' && state.followPlayer)){
+    state.map.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(16.6,state.map.getZoom()),duration:follow?500:700,essential:true});
+  }
+}
+function renderWorld(){
+  if(!state.mapReady)return;
+  const pos=getPosition();
+  if(!pos){for(const marker of state.markers.values())marker.remove();state.markers.clear();state.resources=[];updateNearby();return;}
+  state.resources=generateResources(pos.lat,pos.lng,RESOURCE_RADIUS);
+  const visible=new Set(state.resources.map(n=>n.id));
+  for(const [id,marker] of state.markers){
+    if(!visible.has(id)){marker.remove();state.markers.delete(id);}
+  }
+  for(const node of state.resources){
+    let marker=state.markers.get(node.id);
+    if(!marker){
+      marker=makeMarker({element:makeResourceElement(node),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
+        .setLngLat([node.lng,node.lat]).addTo(state.map);
+      state.markers.set(node.id,marker);
+    }
+    updateNodeElement(marker.getElement(),node);
+  }
+  updateNearby();
+}
+function updateNearby() {
+  const pos=getPosition();
+  const nodes=pos?state.resources.filter(node=>distanceMeters(pos.lat,pos.lng,node.lat,node.lng)<310):[];
+  const available=nodes.filter(node=>isReady(activeProfile().harvested[node.id])).length;
+  $('nearby-counter').textContent=state.mode==='gps'&&!pos?'—':String(available);
+  $('nearby-title').textContent=state.mode==='gps'&&!pos?'GPS wird gesucht …':`${available} Fundstellen in der Nähe`;
+  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'Im Umkreis von 310 m · verfügbare Vorkommen';
+}
+function updateModeUI() {
+  const gps=state.mode==='gps';
+  $('mode-label').textContent=gps?'GPS':'DEMO';
+  $('status-badge').classList.toggle('is-gps',gps);
+  $('demo-controller').classList.toggle('hidden',gps);
+  $('gps-message').textContent=gps
+    ? (state.position?`GPS aktiv · Genauigkeit ungefähr ${Math.round(state.accuracy||0)} m`:'GPS-Standort wird gesucht. Bitte Standortfreigabe prüfen.')
+    : 'Demo aktiv · Karte antippen oder Pfeiltasten verwenden. Eigener Testspielstand.';
+}
+function stopGPS() {
+  if(state.watchId!==null && navigator.geolocation){navigator.geolocation.clearWatch(state.watchId);state.watchId=null;}
+}
+function setMode(mode,announce=true) {
+  if(!['demo','gps'].includes(mode)) return;
+  stopGPS(); state.mode=mode;state.position=null;state.accuracy=null;state.timestamp=0;state.speed=0;
+  closeSheet();hideWelcome();updateModeUI();save();updatePositionOnMap();renderWorld();renderPanels();
+  if(mode==='gps') {
+    if(!navigator.geolocation){toast('GPS wird von diesem Browser nicht unterstützt.',true);return;}
+    if(!window.isSecureContext){toast('Echtes GPS benötigt HTTPS (GitHub Pages).',true);return;}
+    try {
+      state.watchId=navigator.geolocation.watchPosition(onGeoSuccess,onGeoFailure,{enableHighAccuracy:true,maximumAge:5000,timeout:18000});
+      if(announce) toast('GPS wird aktiviert …');
+    } catch(e){toast('GPS konnte nicht aktiviert werden.',true);console.warn(e);}
+  } else {
+    if(announce) toast('Demo-Modus aktiviert');
+    if(state.mapReady){state.followPlayer=true;state.map.easeTo({center:[state.demoPosition.lng,state.demoPosition.lat],zoom:16.6,duration:500});}
+  }
+}
+function onGeoSuccess(pos) {
+  const {latitude:lat,longitude:lng,accuracy,speed}=pos.coords;
+  if(!Number.isFinite(lat)||!Number.isFinite(lng)) return;
+  const first=!state.position;
+  state.position={lat,lng};state.accuracy=Number.isFinite(accuracy)?accuracy:999;
+  state.timestamp=Date.now();state.speed=Number.isFinite(speed)?speed:0;
+  if(first)state.followPlayer=true;
+  updatePositionOnMap(first);
+  renderWorld();updateModeUI();
+  if(first) toast('GPS-Position gefunden');
+}
+function onGeoFailure(error) {
+  const messages={1:'Standortfreigabe verweigert. Erlaube GPS im Browser oder nutze Demo.',2:'Standort nicht verfügbar. Bitte GPS aktivieren.',3:'Standortsuche dauert zu lange. Bitte erneut versuchen.'};
+  const message=messages[error.code]||'GPS konnte nicht geladen werden.';
+  $('gps-message').textContent=message;
+  toast(message,true);
+}
+function moveDemo(direction) {
+  if(state.mode!=='demo') return;
+  const rad=Math.PI/180, step=45;
+  const lat=state.demoPosition.lat,lng=state.demoPosition.lng;
+  const latDelta=step/111320, lngDelta=step/(111320*Math.max(.25,Math.cos(lat*rad)));
+  if(direction==='north')state.demoPosition.lat+=latDelta;
+  if(direction==='south')state.demoPosition.lat-=latDelta;
+  if(direction==='east')state.demoPosition.lng+=lngDelta;
+  if(direction==='west')state.demoPosition.lng-=lngDelta;
+  save();updatePositionOnMap(true);renderWorld();
+}
+function openResource(node) {
+  state.selectedNode=node;state.sheetMode='resource';renderResourceSheet();
+  $('modal-backdrop').classList.remove('hidden');$('modal-backdrop').setAttribute('aria-hidden','false');
+}
+function closeSheet() {
+  $('modal-backdrop').classList.add('hidden');$('modal-backdrop').setAttribute('aria-hidden','true');
+  state.selectedNode=null;state.sheetMode=null;
+}
+function renderResourceSheet() {
+  const node=state.selectedNode; if(!node)return;
+  const type=TYPES[node.type]; const profile=activeProfile();const last=profile.harvested[node.id];
+  const ready=isReady(last);const range=getRange(node);
+  const dist=Number.isFinite(range.distance)?`${Math.round(range.distance)} m entfernt`:'Standort nicht verfügbar';
+  $('sheet-content').innerHTML=`
+    <div class="sheet-header"><div class="sheet-icon">${type.icon}</div><div><div class="sheet-badge">${node.rich?'✦ REICHHALTIGE FUNDSTELLE':'ROHSTOFFVORKOMMEN'}</div><h2 id="sheet-title">${type.name}</h2></div></div>
+    <p class="sheet-desc">${type.desc}${node.rich?' Dieses Vorkommen enthält doppelt so viel Grundmaterial.':''}</p>
+    <span class="distance-pill ${range.ok?'':'outside'}">◎ ${dist}</span>
+    <div class="sheet-block"><div class="sheet-block-heading">MÖGLICHE FUNDE</div>
+      <div class="possible-drop"><span>${MATERIALS[type.material].icon}</span><span class="drop-name">${MATERIALS[type.material].name} (${node.rich?'4–8':'2–4'}×)</span><strong>100 %</strong></div>
+      <div class="possible-drop"><span>${MATERIALS[type.bonus].icon}</span><span class="drop-name">${MATERIALS[type.bonus].name} (+1×)</span><strong>${Math.round(type.bonusProbability*100)} %</strong></div>
+    </div>
+    <button id="btn-harvest" class="sheet-action" ${ready&&range.ok?'':'disabled'}>${!ready?'Regeneration · '+formatRemaining(timeRemaining(last)):range.ok?'Ressourcen sammeln':'Nicht in Reichweite'}</button>
+    <div class="sheet-secondary">${!ready?'Diese Fundstelle regeneriert sich nach einer Stunde.':range.ok?'Tippe, um garantiert Grundmaterial und eventuell einen Bonusfund zu erhalten.':range.reason}<br>Fundort ist virtuell: Bitte nicht an unsichere Orte gehen.</div>`;
+  $('btn-harvest').addEventListener('click',()=>harvest(node));
+}
+function harvest(node) {
+  if(!state.selectedNode || state.selectedNode.id!==node.id)return;
+  const profile=activeProfile();
+  if(!isReady(profile.harvested[node.id])){renderResourceSheet();return;}
+  const reach=getRange(node);if(!reach.ok){toast(reach.reason,true);renderResourceSheet();return;}
+  const rewards=rollHarvest(node);
+  for (const item of rewards) {
+    profile.inventory[item.id]=(profile.inventory[item.id]||0)+item.count;
+    profile.stats.collected+=item.count;
+    if(item.id===TYPES[node.type].bonus) profile.stats.rare+=item.count;
+    if(!profile.discovered.includes(item.id))profile.discovered.push(item.id);
+  }
+  profile.stats.harvests++;
+  profile.harvested[node.id]=Date.now();save();renderPanels();renderWorld();
+  state.sheetMode='reward';
+  $('sheet-content').innerHTML=`<div class="sheet-header"><div class="sheet-icon">🎉</div><div><div class="sheet-badge">ERFOLGREICH GESAMMELT</div><h2 id="sheet-title">Dein Fund!</h2></div></div>
+    <p class="sheet-desc">Die Materialien wurden deinem ${state.mode==='demo'?'Demo-':'GPS-'}Rucksack hinzugefügt.</p>
+    <div class="reward-list">${rewards.map(item=>`<div class="reward-chip ${item.id===TYPES[node.type].bonus?'bonus':''}"><span class="reward-icon">${MATERIALS[item.id].icon}</span><span>+${item.count} ${MATERIALS[item.id].name}</span></div>`).join('')}</div>
+    <button class="sheet-action" id="btn-continue">Weiter erkunden</button>
+    <div class="sheet-secondary">Das Vorkommen ist jetzt für 60 Minuten erschöpft.</div>`;
+  $('btn-continue').addEventListener('click',closeSheet);
+  try{navigator.vibrate?.(40);}catch{}
+  toast(rewards.length>1?'Seltener Bonusfund entdeckt! ✦':'Ressourcen eingesammelt!');
+}
+function renderPanels() {
+  const profile=activeProfile();const total=Object.values(profile.inventory).reduce((x,y)=>x+y,0);
+  $('top-items').textContent=total.toLocaleString('de-DE');
+  $('top-discoveries').textContent=profile.discovered.length;
+  $('inventory-total').textContent=total.toLocaleString('de-DE');
+  $('inventory-grid').innerHTML=Object.entries(MATERIALS).map(([id,item])=>`
+    <article class="resource-card ${item.rarity!=='common'?'rare':''}"><div class="res-icon">${item.icon}</div><strong>${item.name}</strong><div class="res-bottom"><b>${(profile.inventory[id]||0).toLocaleString('de-DE')}</b><small>${item.rarity==='common'?'Basis':'Bonus'}</small></div></article>`).join('');
+  $('stat-discovered').innerHTML=`${profile.discovered.length} <small>/ 6</small>`;
+  $('stat-harvests').textContent=profile.stats.harvests.toLocaleString('de-DE');
+  $('stat-collected').textContent=profile.stats.collected.toLocaleString('de-DE');
+  $('stat-rare').textContent=profile.stats.rare.toLocaleString('de-DE');
+  $('lexicon-progress').textContent=`${profile.discovered.length} / 6`;
+  $('lexicon-grid').innerHTML=Object.entries(MATERIALS).map(([id,item])=>{
+    const known=profile.discovered.includes(id);
+    return `<article class="lexicon-entry ${known?'':'locked'}"><div class="lexicon-icon">${known?item.icon:'❔'}</div><div><strong>${known?item.name:'Unbekanntes Material'}</strong><p>${known?item.note:'Noch nicht entdeckt. Sammle weitere Rohstoffe!'}</p></div><div class="lexicon-tag">${known?'✓':'🔒'}</div></article>`;
+  }).join('');
+}
+function setTab(tab) {
+  state.activeTab=tab;
+  for (const name of ['map','inventory','collection','settings']) $('screen-'+name).classList.toggle('active',name===tab);
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('selected',el.dataset.tab===tab));
+  if(tab==='map' && state.mapReady)setTimeout(()=>state.map.resize(),60);
+  renderPanels();
+}
+function exportSave() {
+  const data=localStorage.getItem(SAVE_KEY);if(!data){toast('Noch kein Spielstand vorhanden.',true);return;}
+  const url=URL.createObjectURL(new Blob([JSON.stringify(JSON.parse(data),null,2)],{type:'application/json'}));
+  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.2-spielstand.json';
+  document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+  toast('Spielstand exportiert');
+}
+async function importSave(file) {
+  if(!file)return;
+  if(file.size>1000000){toast('Die Datei ist zu groß.',true);return;}
+  try {
+    const parsed=JSON.parse(await file.text());
+    if(parsed.format!=='weltwerk-save-1' || !parsed.profiles) throw new Error('wrong format');
+    if(!confirm('Spielstände von GPS und Demo durch den Import ersetzen?'))return;
+    state.demo=cleanProfile(parsed.profiles.demo);state.gps=cleanProfile(parsed.profiles.gps);
+    if(Number.isFinite(parsed.demoPosition?.lat)&&Number.isFinite(parsed.demoPosition?.lng)&&Math.abs(parsed.demoPosition.lat)<=85&&Math.abs(parsed.demoPosition.lng)<=180)
+      state.demoPosition={lat:parsed.demoPosition.lat,lng:parsed.demoPosition.lng};
+    save();renderPanels();renderWorld();updatePositionOnMap(true);toast('Spielstand importiert');
+  }catch(e){toast('Ungültige Weltwerk-Spielstanddatei.',true);console.warn(e);}
+}
+function resetProfile() {
+  if(!confirm(`Wirklich den ${state.mode==='gps'?'GPS-':'Demo-'}Spielstand unwiderruflich zurücksetzen?`))return;
+  if(state.mode==='gps')state.gps=freshProfile();else state.demo=freshProfile();
+  save();renderWorld();renderPanels();closeSheet();toast('Spielstand zurückgesetzt');
+}
+function recenter() {
+  const pos=getPosition();
+  if(!pos){toast('GPS-Position noch nicht verfügbar. Wechsle für einen Test zu DEMO unter Mehr.',true);return;}
+  state.followPlayer=true;
+  state.map?.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(state.map.getZoom(),16.6),duration:650,essential:true});
+}
+function bind() {
+  document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
+  $('status-badge').addEventListener('click',()=>setTab('settings'));
+  $('btn-recenter').addEventListener('click',recenter);
+  $('btn-rotate').addEventListener('click',()=>{
+    if(!state.mapReady)return;
+    state.map.easeTo({bearing:state.map.getBearing()+45,duration:450});
+  });
+  $('btn-tilt').addEventListener('click',()=>{
+    if(!state.mapReady)return;
+    const is3d=state.map.getPitch()<25;
+    state.map.easeTo({pitch:is3d?55:0,duration:520});
+    $('btn-tilt').textContent=is3d?'3D':'2D';
+    $('btn-tilt').setAttribute('aria-pressed',String(is3d));
+  });
+  $('btn-zoom-in').addEventListener('click',()=>state.map?.zoomIn());
+  $('btn-zoom-out').addEventListener('click',()=>state.map?.zoomOut());
+  $('btn-sheet-close').addEventListener('click',closeSheet);
+  $('modal-backdrop').addEventListener('click',e=>{if(e.target===$('modal-backdrop'))closeSheet();});
+  $('welcome-demo').addEventListener('click',()=>setMode('demo'));
+  $('welcome-gps').addEventListener('click',()=>setMode('gps'));
+  $('btn-set-gps').addEventListener('click',()=>{setMode('gps');setTab('map');});
+  $('btn-set-demo').addEventListener('click',()=>{setMode('demo');setTab('map');});
+  $('btn-export').addEventListener('click',exportSave);
+  $('btn-import').addEventListener('click',()=>$('file-import').click());
+  $('file-import').addEventListener('change',async e=>{await importSave(e.target.files?.[0]);e.target.value='';});
+  $('btn-reset').addEventListener('click',resetProfile);
+  document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>moveDemo(b.dataset.move)));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape')closeSheet();
+    if(state.mode==='demo' && state.activeTab==='map' && $('modal-backdrop').classList.contains('hidden')) {
+      const directions={ArrowUp:'north',ArrowDown:'south',ArrowLeft:'west',ArrowRight:'east'};
+      if(directions[e.key]){e.preventDefault();moveDemo(directions[e.key]);}
+    }
+  });
+}
+function boot(){
+  restore();bind();renderPanels();initMap();
+  if(!state.mode)showWelcome();
+  else setMode(state.mode,false);
+  setInterval(()=>{
+    if(state.activeTab==='map'&&state.mode && state.mapReady) {
+      renderWorld();
+      if(state.sheetMode==='resource')renderResourceSheet();
+    }
+  },30000);
+  console.info(`Weltwerk v${VERSION} · self-contained exploration`);
+}
+boot();
+
+</script>
 </body>
 </html>
