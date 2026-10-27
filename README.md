@@ -1,27 +1,22 @@
-# WELTWERK v0.2.9 – stabilere Karte und Collectibles
+# WELTWERK v0.2.10 — Fundstellenfix
 
-## Was wurde repariert?
+**Behoben:** Bäume, Steine, Schrott und Spielfigur werden jetzt direkt auf dieselbe hochauflösende Canvas-Fläche wie die Straßenkarte gezeichnet. Sie liegen nicht länger als separate HTML-Marker darüber. Die Berührungserkennung verwendet die gezeichneten Koordinaten.
 
-- **Keine abgeschnittene Kartenfläche:** Statt eines festen 7×7-Kachelrechtecks werden die Kartenkacheln passend zur sichtbaren Perspektive gezeichnet. In der Ferne nutzt das Spiel gröbere Kartendaten, in der Nähe detailliertere.
-- **Weniger Karten-Sprünge:** Bereits geladene Straßenkacheln werden beim Drehen wiederverwendet. Fehlende Kacheln verursachen keine harte rechteckige Kante mehr.
-- **Stabilere Collectibles:** Die Ressourcen behalten ihre GPS-Koordinaten und dieselbe Größe beim Drehen. Sehr weit entfernte Vorkommen werden nicht mehr am Himmel dargestellt.
-- **Sammeln:** Tippen auf eine nahe Fundstelle öffnet die Sammelansicht. Fundchance, Inventar und Regenerationszeit bleiben erhalten.
-- **Kartenstatus:** Unten an der Karte siehst du „STRASSENKARTE“, „KARTE LÄDT“ oder „ERSATZLANDSCHAFT“. So ist erkennbar, ob echte Kartenkacheln angekommen sind.
+**Schärfer:** Die Karte nutzt bis zu 2× Bildschirmauflösung (je nach Gerät). Die entfernte Kartenebene nutzt höher aufgelöste Kartendaten als zuvor. Weiterhin sind die Quellen Rasterbilder, keine vektorbasierte 3D-Szene.
 
-## Installation auf GitHub Pages
+## Installation
 
 1. ZIP entpacken.
-2. In deinem bisherigen WELTWERK-Repository `Add file` → `Upload files` öffnen.
-3. Die beiliegende `index.html` im **Hauptverzeichnis** hochladen und die alte Datei ersetzen.
-4. Auf `Commit changes` tippen.
-5. Nach dem GitHub-Pages-Update die Website mit `?v=029` neu öffnen und prüfen, ob oben **v0.2.9** steht.
+2. In deinem GitHub-Repository die `index.html` im Hauptverzeichnis ersetzen.
+3. GitHub Pages abwarten und die Website mit `?v=0210` öffnen.
+4. Oben sollte `v0.2.10` stehen.
 
-**Wichtig:** Der Spielstand bleibt bei Verwendung derselben Website und desselben Browsers normalerweise erhalten. Sichere ihn vorher über „Mehr → Export“.
+Lokale Speicherstände behalten die bisherige Speicherkennung. Bitte bei Bedarf vorher über **Mehr → Export** sichern.
 
-## Grenzen dieser Version
+**Test:** Im Demo-Modus drehen, Bäume antippen, sammeln und Inventar prüfen. Im GPS-Modus wird der Standort übernommen; ein GPS-Test auf Android ist weiterhin erforderlich.
 
-- Die Straßendaten benötigen eine Internetverbindung. Ohne erfolgreich geladene Kartenkacheln erscheint eine vereinfachte Ersatzlandschaft – das ist keine echte Straßenkarte.
-- Wir zeigen eine perspektivische **2.5D**-Welt mit Himmel; echte dreidimensionale Gebäude sind noch nicht Teil dieser Version.
-- Die virtuellen Fundstellen sind nicht auf sichere öffentliche Zugänglichkeit geprüft. Bitte keine Privatgrundstücke, Fahrbahnen oder gefährlichen Orte betreten und nicht während des Fahrens spielen.
-- Die lokale Projektversion wurde im simulierten mobilen Browser geprüft; echte GPS- und Netzwerktests auf deinem Android-Gerät stehen noch aus.
-- Die Nutzung öffentlicher OpenStreetMap-Kartenkacheln ist nur für Entwicklung und kleinere Tests gedacht. Eine größere Veröffentlichung braucht einen dafür geeigneten Kartenanbieter oder eigene Kachelinfrastruktur.
+Virtuelle Rohstoffpositionen sind nicht auf öffentliche Zugänglichkeit geprüft. Nur von sicheren, öffentlich zugänglichen Standorten spielen und niemals beim Fahren.
+
+**GPS-Beruhigung:** Kleine Messschwankungen bei Stillstand werden ignoriert, bei echter Bewegung folgt die Kamera weiterhin dem Standort.
+
+**Kartenqualität:** Höhere Canvas-Auflösung, schmalere Zeichenstreifen und besser aufgelöste Fernkacheln. Die öffentlich bereitgestellten Rasterkacheln haben weiterhin eine natürliche Schärfegrenze.

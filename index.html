@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.9 — sichtbarer Horizont und stabilere Fundstellen.">
-  <title>Weltwerk · Exploration 3D v0.2.9</title>
+  <meta name="description" content="Weltwerk v0.2.10 — sichtbarer Horizont und stabilere Fundstellen.">
+  <title>Weltwerk · Exploration 3D v0.2.10</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -115,7 +115,7 @@
 .ww-tile{will-change:auto}
 .ww-object-layer .backup-marker{transform-origin:50% 100%}
 
-/* v0.2.9 — stable Canvas world. No giant rotating 3D DOM surface. */
+/* v0.2.10 — stable Canvas world. No giant rotating 3D DOM surface. */
 .ww-canvas-map{background:linear-gradient(180deg,#4e9bdd 0%,#91d0ed 35%,#dbefde 100%)}
 .ww-canvas-map .ww-sky{z-index:0;inset:0;background:linear-gradient(180deg,#4798dc,#8ecdf2 24%,#ceeef5 43%,#e4f2e4 64%)}
 .ww-canvas-map .ww-world-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block}
@@ -130,6 +130,10 @@
 .ww-canvas-map .world-resource-art{transition:none!important}
 .ww-canvas-map .backup-map-caption{z-index:7}
 .ww-canvas-map .backup-map-attribution{z-index:7}
+/* v0.2.10: collectibles and player are composited into the SAME canvas as the roads.
+   Their DOM nodes remain solely as accessible event/storage objects. */
+.ww-canvas-map .ww-object-layer{display:none!important;pointer-events:none!important}
+.ww-canvas-map .ww-world-canvas{image-rendering:auto}
 </style>
 </head>
 <body>
@@ -138,11 +142,11 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.9 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.10 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
-    <div class="camera-hint">SKY VIEW <span>· sichtbarer Horizont · Wischen: nur Drehen</span></div>
+    <div class="camera-hint">SKY VIEW <span>· feste Fundstellen · Wischen: Drehen</span></div>
     <div class="map-tools">
       <button id="btn-tilt" class="map-tool map-tool-labeled" title="2D/3D-Ansicht wechseln" aria-label="2D/3D-Ansicht wechseln" aria-pressed="true">3D</button>
       <button id="btn-rotate" class="map-tool" title="Kamera drehen" aria-label="Kamera um 45 Grad drehen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 8.5a8 8 0 1 1 0 7"/><path d="M4 3v6h6"/></svg></button>
@@ -176,7 +180,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.5 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäude erscheinen als geneigte echte OpenStreetMap-Kartentextur; Himmel und Objekte sind stilisiert. Die Karte liegt sichtbar als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Sky View</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.5 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäudegrundrisse werden gemeinsam mit den Rohstoffen auf dieselbe Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Karte liegt sichtbar als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Sky View</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -195,7 +199,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.9';
+const VERSION = '0.2.10';
 const START_ZOOM = 18.1; // nah genug für die Straßenansicht
 const MIN_ZOOM = 16.4, MAX_ZOOM = 19.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -359,6 +363,10 @@ class BackupMap {
       const start=this._pointer;this._pointer=null;
       try{this.el.releasePointerCapture(e.pointerId);}catch(_){}
       if(start.moved)return;
+      // Sprite hit testing happens against the positions from THIS SAME frame.
+      // Therefore it cannot drift independently from the street canvas.
+      const sprite=this.hitSprite(e.clientX,e.clientY);
+      if(sprite){sprite.element.click();return;}
       const loc=this.screenToLngLat(e.clientX,e.clientY);
       if(loc)this._emit('click',{lngLat:loc});
     };
@@ -460,7 +468,7 @@ class BackupMap {
   // Unlike a finite atlas, both levels can cover a rotated view without seams.
   drawTileLevel(ctx,p,z,fromY,toY,alphaAt){
     const W=p.w, H=p.h, dpr=this._renderDpr;
-    const scaleToLevel=2**(z-p.z), band=4;
+    const scaleToLevel=2**(z-p.z), band=(z===p.z?2:3);
     for(let y=fromY;y<toY;y+=band){
       const bh=Math.min(band,toY-y);
       const alpha=alphaAt(y+bh*.5);
@@ -498,11 +506,13 @@ class BackupMap {
   paintGround(p){
     const w=p.w,h=p.h;
     if(!w||!h)return;
-    const dpr=Math.min(1.35,window.devicePixelRatio||1);
+    const dpr=Math.min(2,Math.max(1,window.devicePixelRatio||1));
     this._renderDpr=dpr;
     const pw=Math.round(w*dpr),ph=Math.round(h*dpr);
     if(this.canvas.width!==pw||this.canvas.height!==ph){this.canvas.width=pw;this.canvas.height=ph;}
     const ctx=this.ctx;
+    ctx.imageSmoothingEnabled=true;
+    ctx.imageSmoothingQuality="high";
     ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.clearRect(0,0,w,h);
     const y0=p.topDown?0:Math.round(p.horizon+1);
@@ -511,13 +521,13 @@ class BackupMap {
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
     // Animated camera redraws must not restart the network tile downloads.
     this._requestedThisFrame=0;
-    const farZ=Math.max(12,p.z-4);
+    const farZ=Math.max(12,p.z-2);
     const nearZ=p.z;
     // Far terrain uses a lower detail level, just like a 3D game's LOD.
     this.drawTileLevel(ctx,p,farZ,y0,h,()=>1);
     // Sharp streets fade in gradually, without a hard rectangular atlas edge.
-    const start=p.topDown?0:p.horizon+(p.playerY-p.horizon)*.22;
-    const end=p.topDown?0:p.horizon+(p.playerY-p.horizon)*.78;
+    const start=p.topDown?0:p.horizon+(p.playerY-p.horizon)*.20;
+    const end=p.topDown?0:p.horizon+(p.playerY-p.horizon)*.57;
     this.drawTileLevel(ctx,p,nearZ,p.topDown?0:Math.max(y0,Math.round(start)),h,
       y=>p.topDown?1:Math.max(0,Math.min(1,(y-start)/Math.max(1,end-start))));
     if(!p.topDown){
@@ -534,6 +544,74 @@ class BackupMap {
     }
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
+  // Readable billboard illustrations are kept at a fixed pixel size.
+  // Both scenery and sprites are painted into the *same* high-DPI canvas, using
+  // identical geographical coordinates and the exact same camera parameters.
+  drawSprites(p){
+    const ctx=this.ctx,dpr=this._renderDpr;
+    const sprites=[];
+    this._hitTargets=[];
+    for(const marker of this.markers){
+      const coord=world(marker.pos.lat,marker.pos.lng,p.z);
+      const projected=this.projectOffset((coord.x-p.center.x)*p.scale,(coord.y-p.center.y)*p.scale,p);
+      const meters=distanceMeters(this.center.lat,this.center.lng,marker.pos.lat,marker.pos.lng);
+      const isPlayer=marker.element.classList.contains('world-player');
+      if((!p.topDown && meters>235 && !isPlayer)||!projected||!Number.isFinite(projected.x)||!Number.isFinite(projected.y))continue;
+      if(projected.x < -95 || projected.x>p.w+95 || projected.y<(p.topDown?-90:p.horizon+24) || projected.y>p.h+100)continue;
+      sprites.push({marker,x:projected.x,y:projected.y,isPlayer});
+    }
+    // Depth order: farther sprites are behind nearer ones; the avatar wins ties.
+    sprites.sort((a,b)=>a.y-b.y || Number(a.isPlayer)-Number(b.isPlayer));
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    for(const s of sprites){
+      const {marker,x,y,isPlayer}=s, elem=marker.element;
+      const asset=elem.querySelector('img');
+      const inRange=elem.classList.contains('in-range');
+      const depleted=elem.classList.contains('depleted');
+      const rich=elem.classList.contains('rich');
+      const w=isPlayer?72:76,h=isPlayer?98:83;
+      // The shadow/ring is the world contact point, exactly at the geo coordinate.
+      ctx.save();
+      ctx.globalAlpha=depleted?.53:1;
+      ctx.fillStyle='rgba(25,65,53,.22)';
+      ctx.beginPath();ctx.ellipse(x,y-3,isPlayer?27:24,6,0,0,Math.PI*2);ctx.fill();
+      if(isPlayer||inRange){
+        ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
+        ctx.fillStyle='rgba(70,205,162,.35)';ctx.fill();
+        ctx.lineWidth=2.5;ctx.strokeStyle='#dcfff2';ctx.stroke();
+      }
+      if(asset && asset.complete && asset.naturalWidth){
+        // Canvas drawImage uses the very same screen foot x/y as the map.
+        ctx.drawImage(asset,x-w/2,y-h-4,w,h);
+      }else{
+        ctx.font='34px system-ui';ctx.textAlign='center';
+        ctx.fillText(isPlayer?'🧍':'🌳',x,y-15);
+      }
+      if(isPlayer){
+        ctx.font='800 10px system-ui';ctx.textAlign='center';
+        ctx.fillStyle='#12434b';ctx.beginPath();ctx.roundRect(x-21,y-h-26,42,20,7);ctx.fill();
+        ctx.fillStyle='#f2fff9';ctx.fillText('DU',x,y-h-12);
+      }else{
+        if(rich){
+          ctx.beginPath();ctx.arc(x+w/2-6,y-h+1,11,0,Math.PI*2);ctx.fillStyle='#eab85f';ctx.fill();
+          ctx.font='17px system-ui';ctx.textAlign='center';ctx.fillStyle='#543916';ctx.fillText('✦',x+w/2-6,y-h+6);
+        }
+        // Generous hit area around the sprite, independent of the hidden DOM.
+        this._hitTargets.push({element:elem,x,y,left:x-w*.5-6,right:x+w*.5+6,top:y-h-13,bottom:y+10});
+      }
+      ctx.restore();
+    }
+  }
+  hitSprite(clientX,clientY){
+    const r=this.el.getBoundingClientRect();
+    const x=clientX-r.left,y=clientY-r.top;
+    const targets=this._hitTargets||[];
+    // Topmost image is checked first; this also supports overlapping trees.
+    for(let i=targets.length-1;i>=0;i--){
+      const t=targets[i];if(x>=t.left&&x<=t.right&&y>=t.top&&y<=t.bottom)return t;
+    }
+    return null;
+  }
   redraw(){
     if(!this.el.isConnected)return;
     const p=this.params();if(!p.w||!p.h)return;
@@ -542,28 +620,21 @@ class BackupMap {
     const pending=[...this.tiles.values()].filter(tile=>tile.status==='loading').length;
     const tileState=loaded?'STRASSENKARTE':pending?'KARTE LÄDT':'ERSATZLANDSCHAFT';
     this.caption.textContent=`RICHTUNG ${Math.round(this.bearing)}° · ZOOM ${this.zoom.toFixed(1)} · ${tileState}`;
-    for(const marker of this.markers){
-      const coord=world(marker.pos.lat,marker.pos.lng,p.z);
-      const result=this.projectOffset((coord.x-p.center.x)*p.scale,(coord.y-p.center.y)*p.scale,p);
-      const el=marker.element;
-      const meters=distanceMeters(this.center.lat,this.center.lng,marker.pos.lat,marker.pos.lng);
-      const tooFar=!p.topDown && meters>235;
-      // Distant points do not float over the skyline. Rotation does not change
-      // the culling radius or marker size; visibility depends on geography.
-      if(tooFar||!result||result.x< -90||result.x>p.w+90||result.y<(p.topDown?-100:p.horizon+28)||result.y>p.h+115){
-        el.style.display='none';continue;
-      }
-      el.style.display='';el.style.left=`${Math.round(result.x*2)/2}px`;el.style.top=`${Math.round(result.y*2)/2}px`;
-      el.style.transform='translate(-50%,-95%)';
-      el.style.zIndex=String(Math.round(result.y));
-    }
+    this.drawSprites(p);
   }
   remove(){if(this._raf)cancelAnimationFrame(this._raf);clearTimeout(this._tileRefresh);this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
 }
 class BackupMarker {
   constructor({element}){this.element=element;this.pos={lat:0,lng:0};this.map=null;}
   setLngLat(value){this.pos=mapPoint(value);if(this.map)this.map.scheduleRedraw();return this;}
-  addTo(map){this.map=map;this.element.classList.add('backup-marker');map.markerLayer.appendChild(this.element);map.markers.add(this);map.scheduleRedraw();return this;}
+  addTo(map){
+    this.map=map;this.element.classList.add('backup-marker');
+    map.markerLayer.appendChild(this.element);map.markers.add(this);
+    for(const img of this.element.querySelectorAll('img')){
+      if(!img.complete)img.addEventListener('load',()=>map.scheduleRedraw(),{once:true});
+    }
+    map.scheduleRedraw();return this;
+  }
   getElement(){return this.element;}
   remove(){this.element.remove();this.map?.markers.delete(this);this.map=null;}
 }
@@ -856,8 +927,20 @@ function onGeoSuccess(pos) {
   const {latitude:lat,longitude:lng,accuracy,speed}=pos.coords;
   if(!Number.isFinite(lat)||!Number.isFinite(lng)) return;
   const first=!state.position;
-  state.position={lat,lng};state.accuracy=Number.isFinite(accuracy)?accuracy:999;
+  const safeAccuracy=Number.isFinite(accuracy)?accuracy:999;
+  const walking=Number.isFinite(speed)&&speed>=1.5;
+  const distance=first?Infinity:distanceMeters(state.position.lat,state.position.lng,lat,lng);
+  // GPS reports may wander several metres while the phone is stationary.
+  // Do not recenter the entire world on every noisy position fix.
+  const deadZone=Math.min(18,Math.max(7,safeAccuracy*.30));
+  state.accuracy=safeAccuracy;
   state.timestamp=Date.now();state.speed=Number.isFinite(speed)?speed:0;
+  if(!first && (safeAccuracy>120 || distance<(walking?3:deadZone))){
+    updateModeUI();return;
+  }
+  const smoothing=first||distance>80?1:(walking?.80:.65);
+  state.position=first?{lat,lng}:{lat:state.position.lat+(lat-state.position.lat)*smoothing,
+      lng:state.position.lng+(lng-state.position.lng)*smoothing};
   if(first)state.followPlayer=true;
   updatePositionOnMap(first);
   renderWorld();updateModeUI();
