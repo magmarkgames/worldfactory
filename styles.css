@@ -46,3 +46,17 @@
 .world-player .player-you{position:absolute;left:50%;top:0;transform:translateX(-50%);background:#0f3d44e8;border:1px solid #8debc9;border-radius:7px;color:#effff6;font-size:9px;font-weight:900;padding:3px 8px;letter-spacing:.8px}
 @media(max-height:700px){.camera-hint{top:111px}.map-tools{top:137px}}
 @media(max-width:390px){.camera-hint span{display:none}.world-resource{width:70px;height:90px}.world-resource-art{width:70px;height:82px}.world-player{width:74px;height:102px}.world-player img{width:62px;height:94px}}
+
+/* v0.2.1 - rendered map fallback if MapLibre/WebGL or external vector styles fail */
+.backup-map{position:absolute;inset:0;overflow:hidden;background:#cde3d5;touch-action:none;user-select:none}
+.backup-map-ground{position:absolute;inset:0;background-color:#d5e8d4;background-image:linear-gradient(29deg,transparent 48%,#f7f5d9 49%,#f7f5d9 51%,transparent 52%),linear-gradient(117deg,transparent 48%,#f5f4dd 49%,#f5f4dd 51%,transparent 52%),radial-gradient(circle at 25% 35%,#a8d6b0 0%,transparent 42%);transition:transform .28s ease;overflow:hidden}
+.backup-map.backup-pitched .backup-map-ground{transform:perspective(1250px) rotateX(14deg) scale(1.16);transform-origin:center center}
+.backup-map-tiles{position:absolute;inset:0}
+.backup-tile{position:absolute;max-width:none;pointer-events:none;object-fit:fill}
+.backup-map-markers{position:absolute;inset:0;pointer-events:none}
+.backup-marker{position:absolute;pointer-events:auto;transform:translate(-50%,-100%);z-index:2}
+.backup-map-caption{position:absolute;left:16px;bottom:114px;z-index:5;font-size:9px;letter-spacing:.6px;color:#294746;background:#edfff1d7;padding:5px 8px;border-radius:9px;font-weight:900}
+.backup-map-attribution{position:absolute;bottom:3px;right:4px;padding:2px 4px;z-index:5;color:#304e45;background:#ffffffd4;font-size:9px;border-radius:4px}
+.backup-map-attribution a{color:inherit}
+/* Demo buttons should always be reachable in the map view. */
+.demo-controller:not(.hidden){display:flex!important}

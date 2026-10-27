@@ -1,15 +1,16 @@
+import { BackupMap, BackupMarker } from "./fallback-map.js?v=021";
 import {
   VERSION, MATERIALS, TYPES, REGEN_MS, REACH_METERS, RESOURCE_RADIUS,
   generateResources, rollHarvest, isReady, timeRemaining, formatRemaining,
   distanceMeters, freshProfile, cleanProfile, DEMO_START, SAVE_KEY
-} from './game-logic.js';
+} from './game-logic.js?v=021';
 
 const $ = id => document.getElementById(id);
 const START = { ...DEMO_START };
 const state = {
   mode:null, demo: freshProfile(), gps:freshProfile(),
   demoPosition:{...START}, position:null, accuracy:null, timestamp:0, speed:0,
-  map:null, markers:new Map(), playerMarker:null, accuracySource:false, followPlayer:true, mapLoadingError:false,
+  map:null, mapKind:null, markers:new Map(), playerMarker:null, accuracySource:false, followPlayer:true, mapLoadingError:false, mapErrors:0, mapTimer:null,
   resources:[], activeTab:'map', selectedNode:null, sheetMode:null, lastGps:null,
   watchId:null, mapReady:false,
 };
@@ -27,7 +28,8 @@ function restore() {
     if(!saved || saved.format!=='weltwerk-save-1') return;
     state.demo=cleanProfile(saved.profiles?.demo);
     state.gps=cleanProfile(saved.profiles?.gps);
-    if(['demo','gps'].includes(saved.mode)) state.mode=saved.mode;
+    // Always start in demo after reload; GPS must be explicitly enabled to request location.
+    state.mode='demo';
     if(Number.isFinite(saved.demoPosition?.lat) && Number.isFinite(saved.demoPosition?.lng)
        && Math.abs(saved.demoPosition.lat)<=85 && Math.abs(saved.demoPosition.lng)<=180)
       state.demoPosition={lat:saved.demoPosition.lat,lng:saved.demoPosition.lng};
@@ -35,7 +37,10 @@ function restore() {
 }
 function showWelcome() { $('welcome').classList.remove('hidden'); }
 function hideWelcome() { $('welcome').classList.add('hidden'); }
+let lastToastText='',lastToastAt=0;
 function toast(message,error=false) {
+  if(message===lastToastText && Date.now()-lastToastAt<2500)return;
+  lastToastText=message;lastToastAt=Date.now();
   const node=document.createElement('div'); node.className=`toast${error?' error':''}`; node.textContent=message;
   $('toast-area').appendChild(node); setTimeout(()=>node.remove(),3300);
 }
@@ -54,52 +59,80 @@ function getRange(node) {
 // are unchanged from v0.1; only their presentation becomes a 2.5D game world.
 const MAP_STYLE='https://tiles.openfreemap.org/styles/bright';
 const MAP_TILES='https://tiles.openfreemap.org/planet';
-const ICONS=Object.freeze({tree:'tree.svg',rock:'rock.svg',scrap:'scrap.svg'});
+const ICONS=Object.freeze({tree:'tree.svg?v=021',rock:'rock.svg?v=021',scrap:'scrap.svg?v=021'});
 function initMap() {
+  // A non-WebGL backup uses ordinary OSM raster tiles (or a visible game grid
+  // if tiles are also unavailable). This prevents a completely empty game screen.
   if(!window.maplibregl || !maplibregl.supported()) {
-    $('no-map').classList.remove('hidden');state.mapLoadingError=true;return;
+    startBackupMap('Die 3D-Kartenbibliothek konnte nicht gestartet werden.');return;
   }
   try {
-    state.map=new maplibregl.Map({
+    const map=new maplibregl.Map({
       container:'map',style:MAP_STYLE,center:[state.demoPosition.lng,state.demoPosition.lat],
       zoom:16.6,pitch:55,bearing:-22,minZoom:12,maxZoom:19.2,maxPitch:60,
       attributionControl:true,antialias:true,dragRotate:true,pitchWithRotate:true,
       canvasContextAttributes:{antialias:true},renderWorldCopies:false
     });
-    state.map.touchZoomRotate.enableRotation();
-    state.map.on('dragstart',()=>{state.followPlayer=false;});
-    state.map.on('pitchend',()=>{
-      const is3d=state.map.getPitch()>=25;
-      $('btn-tilt').textContent=is3d?'3D':'2D';
-      $('btn-tilt').setAttribute('aria-pressed',String(is3d));
+    state.map=map;state.mapKind='maplibre';
+    map.touchZoomRotate.enableRotation();
+    attachMapEvents(map);
+    map.on('load',()=>{
+      if(state.map!==map)return;
+      clearTimeout(state.mapTimer);state.mapTimer=null;
+      finalizeMap(map,'maplibre');
     });
-    state.map.on('click',event=>{
-      if(state.mode!=='demo')return;
-      state.demoPosition={lat:event.lngLat.lat,lng:event.lngLat.lng};
-      save();updatePositionOnMap();renderWorld();toast('Testposition verschoben');
-    });
-    state.map.on('load',()=>{
-      state.mapReady=true;
-      $('no-map').classList.add('hidden');
-      addWorldBuildings();
-      addAccuracyLayer();
-      updatePositionOnMap();renderWorld();
-      setTimeout(()=>state.map?.resize(),60);
-    });
-    state.map.on('error',e=>{
+    map.on('error',e=>{
+      if(state.map!==map)return;
       console.warn('Kartenfehler',e.error||e);
-      // Network tile errors are temporary; show an overlay only when loading failed altogether.
+      if(++state.mapErrors>=4)startBackupMap('Die 3D-Kartenkacheln konnten nicht geladen werden.');
     });
-    setTimeout(()=>{
-      if(!state.mapReady && state.mapLoadingError===false){
-        $('no-map').classList.remove('hidden');
-        state.mapLoadingError=true;
-      }
-    },18000);
-  } catch(e) {
-    console.error('MapLibre initialization failed',e);
-    $('no-map').classList.remove('hidden');state.mapLoadingError=true;
-  }
+    state.mapTimer=setTimeout(()=>{
+      if(state.map===map && !state.mapReady)startBackupMap('Die 3D-Karte hat nicht rechtzeitig geladen.');
+    },11000);
+  }catch(e){console.warn('3D-Karte nicht verfügbar',e);startBackupMap('3D-Karte auf diesem Gerät nicht verfügbar.');}
+}
+function attachMapEvents(map){
+  map.on('dragstart',()=>{state.followPlayer=false;});
+  map.on('pitchend',()=>{
+    if(state.map!==map)return;
+    const is3d=map.getPitch()>=25;
+    $('btn-tilt').textContent=is3d?'3D':'2D';
+    $('btn-tilt').setAttribute('aria-pressed',String(is3d));
+  });
+  map.on('click',event=>{
+    if(state.map!==map || state.mode!=='demo')return;
+    state.demoPosition={lat:event.lngLat.lat,lng:event.lngLat.lng};
+    save();updatePositionOnMap();renderWorld();toast('Testposition verschoben');
+  });
+}
+function finalizeMap(map,kind){
+  if(state.map!==map)return;
+  state.mapReady=true;state.mapKind=kind;
+  $('no-map').classList.add('hidden');
+  if(kind==='maplibre'){addWorldBuildings();addAccuracyLayer();}
+  updatePositionOnMap(true);renderWorld();updateModeUI();
+  setTimeout(()=>state.map?.resize(),80);
+}
+function startBackupMap(reason){
+  if(state.mapKind==='backup')return;
+  clearTimeout(state.mapTimer);state.mapTimer=null;
+  console.warn('Starte Ersatzkarte:',reason);
+  const old=state.map;
+  for(const marker of state.markers.values())marker.remove();
+  state.markers.clear();state.playerMarker?.remove();state.playerMarker=null;
+  state.map=null;state.mapReady=false;
+  try{old?.remove();}catch(e){console.warn(e);}
+  $('map').innerHTML='';
+  try{
+    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:16.6,pitch:55});
+    state.map=map;state.mapKind='backup';
+    attachMapEvents(map);
+    map.on('load',()=>finalizeMap(map,'backup'));
+    toast('Ersatzkarte aktiviert – Sammeln und Demo funktionieren weiterhin.');
+  }catch(e){console.error('Auch Ersatzkarte fehlgeschlagen',e);$('no-map').classList.remove('hidden');}
+}
+function makeMarker(args){
+  return state.mapKind==='backup' ? new BackupMarker(args) : new maplibregl.Marker(args);
 }
 function addWorldBuildings(){
   if(!state.map || state.map.getLayer('weltwerk-buildings'))return;
@@ -138,7 +171,7 @@ function addAccuracyLayer(){
 }
 function makePlayerElement(){
   const elem=document.createElement('div');elem.className='world-player';
-  elem.innerHTML='<span class="player-aura"></span><img src="avatar.svg" alt="" draggable="false"><span class="player-you">DU</span>';
+  elem.innerHTML='<span class="player-aura"></span><img src="avatar.svg?v=021" alt="" draggable="false"><span class="player-you">DU</span>';
   return elem;
 }
 function makeResourceElement(node){
@@ -159,7 +192,7 @@ function updatePositionOnMap(follow=false){
   const pos=getPosition();
   if(!pos){state.playerMarker?.remove();state.playerMarker=null;state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(null,0));return;}
   if(!state.playerMarker){
-    state.playerMarker=new maplibregl.Marker({element:makePlayerElement(),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
+    state.playerMarker=makeMarker({element:makePlayerElement(),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
       .setLngLat([pos.lng,pos.lat]).addTo(state.map);
   }else state.playerMarker.setLngLat([pos.lng,pos.lat]);
   const gpsAccuracy=state.mode==='gps'?state.accuracy:null;
@@ -180,7 +213,7 @@ function renderWorld(){
   for(const node of state.resources){
     let marker=state.markers.get(node.id);
     if(!marker){
-      marker=new maplibregl.Marker({element:makeResourceElement(node),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
+      marker=makeMarker({element:makeResourceElement(node),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
         .setLngLat([node.lng,node.lat]).addTo(state.map);
       state.markers.set(node.id,marker);
     }
@@ -352,7 +385,7 @@ function resetProfile() {
 }
 function recenter() {
   const pos=getPosition();
-  if(!pos){toast('Noch keine GPS-Position vorhanden.',true);return;}
+  if(!pos){toast('GPS-Position noch nicht verfügbar. Wechsle für einen Test zu DEMO unter Mehr.',true);return;}
   state.followPlayer=true;
   state.map?.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(state.map.getZoom(),16.6),duration:650,essential:true});
 }
@@ -393,7 +426,7 @@ function bind() {
   });
 }
 function boot(){
-  restore();bind();initMap();renderPanels();
+  restore();bind();renderPanels();initMap();
   if(!state.mode)showWelcome();
   else setMode(state.mode,false);
   setInterval(()=>{
@@ -402,6 +435,6 @@ function boot(){
       if(state.sheetMode==='resource')renderResourceSheet();
     }
   },30000);
-  console.info(`Weltwerk v${VERSION} · tilted 3D exploration ready`);
+  console.info(`Weltwerk v${VERSION} · 3D with resilient backup map ready`);
 }
 boot();
