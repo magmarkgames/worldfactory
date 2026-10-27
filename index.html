@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.3 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
-  <title>Weltwerk · Exploration 3D v0.2.3</title>
+  <meta name="description" content="Weltwerk v0.2.4 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
+  <title>Weltwerk · Exploration 3D v0.2.4</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -58,33 +58,43 @@
 @media(max-width:390px){.camera-hint span{display:none}.world-resource{width:70px;height:90px}.world-resource-art{width:70px;height:82px}.world-player{width:74px;height:102px}.world-player img{width:62px;height:94px}}
 
 /* v0.2.1 - rendered map fallback if MapLibre/WebGL or external vector styles fail */
-.backup-map{position:absolute;inset:0;overflow:hidden;background:#cde3d5;touch-action:none;user-select:none}
-.backup-map-ground{position:absolute;inset:0;background-color:#d5e8d4;background-image:linear-gradient(29deg,transparent 48%,#f7f5d9 49%,#f7f5d9 51%,transparent 52%),linear-gradient(117deg,transparent 48%,#f5f4dd 49%,#f5f4dd 51%,transparent 52%),radial-gradient(circle at 25% 35%,#a8d6b0 0%,transparent 42%);transition:transform .28s ease;overflow:hidden}
-.backup-map.backup-pitched .backup-map-ground{transform:perspective(1250px) rotateX(14deg) scale(1.16);transform-origin:center center}
-.backup-map-tiles{position:absolute;inset:0}
-.backup-tile{position:absolute;max-width:none;pointer-events:none;object-fit:fill}
-.backup-map-markers{position:absolute;inset:0;pointer-events:none}
-.backup-marker{position:absolute;pointer-events:auto;transform:translate(-50%,-100%);z-index:2}
-.backup-map-caption{position:absolute;left:16px;bottom:114px;z-index:5;font-size:9px;letter-spacing:.6px;color:#294746;background:#edfff1d7;padding:5px 8px;border-radius:9px;font-weight:900}
-.backup-map-attribution{position:absolute;bottom:3px;right:4px;padding:2px 4px;z-index:5;color:#304e45;background:#ffffffd4;font-size:9px;border-radius:4px}
+
+/* WELTWERK 0.2.4 — real vanishing-point ground plane / blue sky */
+.backup-map {position:absolute;inset:0;overflow:hidden;touch-action:none;user-select:none;background:linear-gradient(180deg,#79c7f2 0%,#b3e1f9 24%,#e2f7ee 34%,#a8d9ac 100%)}
+.ww-sky{position:absolute;inset:0 0 0;pointer-events:none;z-index:0;background:linear-gradient(180deg,#73bfef 0%,#9ad4f5 13%,#bde8f5 25%,#e6f3df 38%,#d4ebce 100%)}
+.ww-sun{position:absolute;top:11%;right:18%;width:51px;height:51px;border-radius:50%;background:#fffde7;box-shadow:0 0 28px 13px #fffbd66b,0 0 95px 38px #fafbc733}
+.ww-cloud{position:absolute;width:128px;height:25px;border-radius:100px;background:#fff9;box-shadow:27px -10px 0 -5px #fffb,58px -1px 0 -7px #fff9;filter:blur(3px)}
+.ww-cloud-a{top:12%;left:10%;transform:scale(.83)} .ww-cloud-b{top:20%;right:3%;transform:scale(.55)}
+.ww-distant{position:absolute;top:var(--ww-horizon,28%);left:0;right:0;height:54px;transform:translateY(-82%);opacity:.4;background:linear-gradient(180deg,transparent 60%,#8fbaaa 100%);clip-path:polygon(0 75%,8% 56%,17% 65%,25% 40%,33% 66%,43% 55%,50% 68%,59% 41%,68% 66%,77% 49%,85% 70%,92% 53%,100% 74%,100% 100%,0 100%)}
+.ww-perspective{position:absolute;inset:0;perspective:var(--ww-perspective,1400px);perspective-origin:50% var(--ww-horizon,28%);overflow:hidden;z-index:2;pointer-events:none}
+.ww-ground{position:absolute;top:var(--ww-horizon,28%);left:50%;width:2800px;height:var(--ww-ground-height,900px);transform-origin:50% 0%;transform:translateX(-50%) rotateX(64deg);background-color:#b5d8ab;background-image:linear-gradient(110deg,transparent 0%,#bddfbb 35%,transparent 60%),repeating-linear-gradient(0deg,#accfa500 0px,#e2ddaa33 2px,#accfa500 5px,#accfa500 190px),repeating-linear-gradient(90deg,transparent 0px,transparent 195px,#f5f0d36b 202px,#f5f0d36b 216px,transparent 223px,transparent 390px);box-shadow:0 -3px 20px #d5e7cd9e;will-change:transform}
+.ww-map-tiles{position:absolute;inset:0;overflow:visible;pointer-events:none;transform-origin:center center;filter:saturate(.88) contrast(1.07) brightness(1.05);z-index:1}
+.ww-fallback-roads{position:absolute;inset:0;pointer-events:none;opacity:.9;z-index:0;transition:opacity .35s}
+.ww-fallback-roads svg{width:100%;height:100%;display:block}
+.ww-tiles-loaded .ww-fallback-roads{opacity:0}
+.ww-tile{position:absolute;display:block;max-width:none;pointer-events:none;user-select:none;mix-blend-mode:normal}
+.ww-horizon-mist{position:absolute;top:calc(var(--ww-horizon,28%) - 13px);height:58px;left:0;right:0;background:linear-gradient(180deg,#e2f5e198,transparent);pointer-events:none;z-index:3}
+.ww-object-layer{position:absolute;inset:0;pointer-events:none;z-index:4}
+.ww-object-layer .backup-marker{position:absolute;pointer-events:auto;transform-origin:50% 100%;will-change:left,top,transform;filter:drop-shadow(0 6px 4px #214b3b33)}
+.ww-object-layer .world-player{z-index:90}
+.ww-object-layer .world-resource{z-index:30}
+.backup-map-caption{position:absolute;left:14px;bottom:116px;z-index:5;font-size:9px;letter-spacing:.5px;color:#214b42;background:#effbf3cf;padding:5px 8px;border-radius:9px;font-weight:800;pointer-events:none}
+.backup-map-attribution{position:absolute;bottom:4px;right:4px;padding:3px 5px;z-index:5;color:#315851;background:#ffffffd9;font-size:9px;border-radius:5px}
 .backup-map-attribution a{color:inherit}
-/* Demo buttons should always be reachable in the map view. */
-.demo-controller:not(.hidden){display:flex!important}
+.backup-map.ww-topdown .ww-sky,.backup-map.ww-topdown .ww-horizon-mist{display:none}
+.backup-map.ww-topdown .ww-perspective{perspective:none}
+.backup-map.ww-topdown .ww-ground{transform:translateX(-50%)!important;box-shadow:none}
+.backup-map.ww-topdown .ww-distant{display:none}
+@media (prefers-reduced-motion:reduce){.ww-sun,.ww-cloud{animation:none!important}}
 
-
-/* v0.2.3: Horizon + world surface projected into perspective. */
-.sky-world{background:linear-gradient(to bottom,#72c6f4 0%,#b8e8ff 32%,#e4f7ee 51%,#d4e8c8 100%);perspective:760px;perspective-origin:50% 34%;}
-.sky-world-sky{position:absolute;inset:0;background:linear-gradient(to bottom,#62b9ef 0%,#a4dfff 30%,#e4f5eb 53%,transparent 62%);pointer-events:none;}
-.sky-world-sky:after{content:'';position:absolute;top:24%;left:13%;width:94px;height:24px;border-radius:60px;background:#fff9;filter:blur(12px);box-shadow:180px 38px 28px 8px #fff8,-40px 70px 23px #fff6;}
-.sky-world-plane{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:50% 60%;transition:transform .3s;}
-.sky-world-tilted .sky-world-plane{transform:rotateX(62deg) translateY(12%) scale(1.9);}
-.sky-world-topdown .sky-world-plane{transform:none;}
-.sky-world .backup-map-ground{transform:none!important;inset:0;background:#a8cfa3;}
-.sky-world .backup-map-markers{transform-style:preserve-3d;}
-.sky-world-tilted .backup-marker{transform:translate(-50%,-100%) rotateX(-62deg) scale(.75);transform-origin:center bottom;}
-.sky-world-topdown .backup-marker{transform:translate(-50%,-100%);}
-.sky-world .backup-map-caption{bottom:112px;}
-.sky-world .backup-map-attribution{bottom:0;}
+/* WELTWERK 0.2.4 — larger street-level avatar + reliable touch gestures */
+.backup-map{touch-action:none;overscroll-behavior:contain}
+.ww-object-layer .world-player{filter:drop-shadow(0 5px 4px #193d3570)}
+.ww-object-layer .world-player.is-walking img{animation:ww-step .42s ease-in-out 2}
+@keyframes ww-step{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.backup-map-caption{bottom:118px;font-size:10px;z-index:8;pointer-events:none}
+/* In the close camera roads are more important than decorations. */
+.ww-map-tiles{filter:saturate(.91) contrast(1.09) brightness(1.04)}
 </style>
 </head>
 <body>
@@ -93,11 +103,11 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.3 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.4 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
-    <div class="camera-hint">3D-WELT <span>· ziehen zum Drehen</span></div>
+    <div class="camera-hint">NAHKAMERA <span>· Wischen: Drehen · + / −: Zoom</span></div>
     <div class="map-tools">
       <button id="btn-tilt" class="map-tool map-tool-labeled" title="2D/3D-Ansicht wechseln" aria-label="2D/3D-Ansicht wechseln" aria-pressed="true">3D</button>
       <button id="btn-rotate" class="map-tool" title="Kamera drehen" aria-label="Kamera um 45 Grad drehen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 8.5a8 8 0 1 1 0 7"/><path d="M4 3v6h6"/></svg></button>
@@ -131,7 +141,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.3 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Die Karte benötigt eine Internetverbindung. Gebäude sind echte 3D-Kartenobjekte (sofern Kartendaten vorhanden); Rohstofffiguren sind stilisierte 2.5D-Grafiken. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Karte: © OpenStreetMap-Mitwirkende · OpenFreeMap · MapLibre</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.4 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäude erscheinen als geneigte echte OpenStreetMap-Kartentextur; Himmel und Objekte sind stilisiert. Die Karte liegt sichtbar als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Sky View</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -150,7 +160,9 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.2';
+const VERSION = '0.2.4';
+const START_ZOOM = 18.1; // nah genug für die Straßenansicht
+const MIN_ZOOM = 16.4, MAX_ZOOM = 19.5;
 const REGEN_MS = 60 * 60 * 1000;
 const REACH_METERS = 60;
 const GRID_METERS = 195;
@@ -269,92 +281,176 @@ function mapPoint(lngLat){
   return {lng:7.627,lat:51.9625};
 }
 class BackupMap {
-  constructor({container,center,zoom=16.6,pitch=55,bearing=0}){
+  // The ground is a true CSS perspective plane; markers are projected into the same view.
+  // GPS/drops/saves from 0.2.2 continue unchanged.
+  constructor({container,center,zoom=START_ZOOM,pitch=63,bearing=0}) {
     this.el=typeof container==='string'?document.getElementById(container):container;
-    this.zoom=zoom;this.pitch=pitch;this.bearing=bearing;
-    this.center=mapPoint(center);this.handlers={};this.markers=new Set();this.tiles=new Map();
-    this.el.innerHTML='';this.el.classList.add('backup-map','sky-world');
-    this.base=document.createElement('div');this.base.className='backup-map-ground';
-    this.tileLayer=document.createElement('div');this.tileLayer.className='backup-map-tiles';
-    this.markerLayer=document.createElement('div');this.markerLayer.className='backup-map-markers';
-    this.help=document.createElement('div');this.help.className='backup-map-caption';
-    this.help.textContent='SKY WORLD · GPS-ERKUNDUNG';
+    this.center=mapPoint(center);this.zoom=zoom;this.pitch=pitch;this.bearing=bearing;
+    this.handlers={};this.markers=new Set();this.tiles=new Map();this._pointer=null;
+    this.el.innerHTML='';this.el.classList.add('backup-map');
+    this.el.innerHTML='<div class="ww-sky"><div class="ww-sun"></div><div class="ww-cloud ww-cloud-a"></div><div class="ww-cloud ww-cloud-b"></div><div class="ww-distant"></div></div>';
+    this.shell=document.createElement('div');this.shell.className='ww-perspective';
+    this.ground=document.createElement('div');this.ground.className='ww-ground';
+    this.tileLayer=document.createElement('div');this.tileLayer.className='ww-map-tiles';
+    this.fallback=document.createElement('div');this.fallback.className='ww-fallback-roads';
+    this.fallback.innerHTML=`<svg viewBox="0 0 2800 1000" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="grass-tile" width="175" height="155" patternUnits="userSpaceOnUse"><circle cx="32" cy="51" r="3" fill="#92bf8b" opacity=".35"/><path d="M90 81l6 -7m-2 11l9 -8" stroke="#83b87d" stroke-width="2" opacity=".3"/></pattern></defs>
+      <rect width="2800" height="1000" fill="url(#grass-tile)"/>
+      <path d="M1320 0L1380 0L1460 360L1570 1000L1480 1000L1395 360Z" fill="#e8ddba" opacity=".78"/>
+      <path d="M1340 0L1362 0L1435 360L1540 1000L1505 1000L1418 360Z" fill="#aeb9ad"/>
+      <path d="M0 360C650 405 990 450 1400 445S2320 375 2800 435" fill="none" stroke="#e8ddba" stroke-width="105"/>
+      <path d="M0 360C650 405 990 450 1400 445S2320 375 2800 435" fill="none" stroke="#a7b7ae" stroke-width="78"/>
+      <path d="M0 360C650 405 990 450 1400 445S2320 375 2800 435" fill="none" stroke="#f7f3dc" stroke-width="2.5" stroke-dasharray="16 22" opacity=".55"/>
+      <rect x="1035" y="515" width="140" height="109" rx="9" fill="#e2dbcc" stroke="#9bafa0" stroke-width="7"/>
+      <rect x="1053" y="531" width="103" height="70" rx="3" fill="#cda58b"/>
+      <rect x="1635" y="520" width="172" height="125" rx="8" fill="#e2ddcc" stroke="#a3bba8" stroke-width="8"/>
+      <rect x="1654" y="541" width="132" height="81" rx="3" fill="#e8caa0"/>
+      <rect x="1465" y="160" width="133" height="110" rx="6" fill="#dfd8c2" stroke="#a6baa8" stroke-width="7"/>
+      <rect x="1484" y="177" width="94" height="74" rx="3" fill="#d7aa89"/>
+      <path d="M1885 540C1970 518 2043 534 2132 573" stroke="#a7c59e" stroke-width="210" fill="none" opacity=".44"/>
+      </svg>`;
+    this.tileLayer.appendChild(this.fallback);this.ground.appendChild(this.tileLayer);this.shell.appendChild(this.ground);
+    this.fog=document.createElement('div');this.fog.className='ww-horizon-mist';
+    this.markerLayer=document.createElement('div');this.markerLayer.className='ww-object-layer';
+    this.caption=document.createElement('div');this.caption.className='backup-map-caption';
+    this.caption.textContent='NAHKAMERA · Straßen im Boden';
     this.attribution=document.createElement('div');this.attribution.className='backup-map-attribution';
     this.attribution.innerHTML='Karte © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>';
-    this.base.appendChild(this.tileLayer);this.plane=document.createElement('div');this.plane.className='sky-world-plane';this.plane.append(this.base,this.markerLayer);this.sky=document.createElement('div');this.sky.className='sky-world-sky';this.el.append(this.sky,this.plane,this.help,this.attribution);
-    this._pointer=null;
-    this.el.addEventListener('pointerdown',e=>{if(e.target.closest('button,a'))return;this._pointer={x:e.clientX,y:e.clientY,center:{...this.center},moved:false};});
+    this.el.append(this.shell,this.fog,this.markerLayer,this.caption,this.attribution);
+    this.planeCenterX=1400;this.planeDepth=500;this.el.style.setProperty('--ww-horizon','28%');
+    // Robust touch rotation: pointer capture keeps swipe events arriving even if
+    // the finger leaves the map. Touch pointermove does not always set e.buttons.
+    this.el.addEventListener('pointerdown',e=>{
+      if(e.target.closest('button,a'))return;
+      if(this._pointer)return;
+      this._pointer={id:e.pointerId,x:e.clientX,y:e.clientY,
+        bearing:this.bearing,pitch:this.pitch,moved:false};
+      try{this.el.setPointerCapture(e.pointerId);}catch(_){}
+    });
     this.el.addEventListener('pointermove',e=>{
-      if(!this._pointer || !(e.buttons&1))return;
-      const dx=e.clientX-this._pointer.x,dy=e.clientY-this._pointer.y;
-      if(Math.hypot(dx,dy)<6 && !this._pointer.moved)return;
-      this._pointer.moved=true;
-      const z=Math.floor(this.zoom),scale=2**(this.zoom-z);
-      const orig=world(this._pointer.center.lat,this._pointer.center.lng,z);
-      this.center=geo(orig.x-dx/scale,orig.y-dy/scale,z);
+      const start=this._pointer;
+      if(!start || e.pointerId!==start.id)return;
+      const dx=e.clientX-start.x,dy=e.clientY-start.y;
+      if(Math.hypot(dx,dy)<7 && !start.moved)return;
+      start.moved=true;
+      // Dragging the world to the right rotates the map to the right.
+      this.bearing=((start.bearing+dx*0.36)%360+360)%360;
+      if(this.pitch>=20)this.pitch=bound(start.pitch+dy*0.045,52,69);
       this._emit('dragstart');this.redraw();
-    });
+      if(e.cancelable)e.preventDefault();
+    },{passive:false});
     this.el.addEventListener('pointerup',e=>{
-      if(!this._pointer)return;
-      const p=this._pointer;this._pointer=null;
-      if(p.moved||e.target.closest('button,a'))return;
-      const rect=this.el.getBoundingClientRect();
-      const z=Math.floor(this.zoom),scale=2**(this.zoom-z);
-      const c=world(this.center.lat,this.center.lng,z);
-      const dest=geo(c.x+(e.clientX-rect.left-rect.width/2)/scale,c.y+(e.clientY-rect.top-rect.height/2)/scale,z);
-      this._emit('click',{lngLat:dest});
+      if(!this._pointer || this._pointer.id!==e.pointerId)return;
+      const start=this._pointer;this._pointer=null;
+      try{this.el.releasePointerCapture(e.pointerId);}catch(_){}
+      if(start.moved || e.target.closest('button,a'))return;
+      const loc=this.screenToLngLat(e.clientX,e.clientY);
+      if(loc)this._emit('click',{lngLat:loc});
     });
-    this.el.addEventListener('wheel',e=>{e.preventDefault();this.zoom=bound(this.zoom+(e.deltaY<0?.5:-.5),12,19.2);this.redraw();},{passive:false});
+    this.el.addEventListener('pointercancel',e=>{
+      if(this._pointer?.id===e.pointerId)this._pointer=null;
+    });
+    this.el.addEventListener('wheel',e=>{
+      e.preventDefault();this.zoom=bound(this.zoom+(e.deltaY<0?.25:-.25),MIN_ZOOM,MAX_ZOOM);this.redraw();
+    },{passive:false});
     this.updatePitch();this.redraw();setTimeout(()=>this._emit('load'),10);
   }
   on(name,fn){(this.handlers[name]??=[]).push(fn);return this;}
-  _emit(name,value){for(const fn of this.handlers[name]||[])fn(value);}
+  _emit(name,arg){for(const cb of this.handlers[name]||[])cb(arg);}
   getZoom(){return this.zoom;}
   getPitch(){return this.pitch;}
   getBearing(){return this.bearing;}
-  getStyle(){return {layers:[]};}
   getSource(){return null;}
   getLayer(){return null;}
-  addSource(){}
-  addLayer(){}
   resize(){this.redraw();}
-  zoomIn(){this.easeTo({zoom:this.zoom+.65});}
-  zoomOut(){this.easeTo({zoom:this.zoom-.65});}
-  easeTo(options){
+  zoomIn(){this.easeTo({zoom:this.zoom+.35});}
+  zoomOut(){this.easeTo({zoom:this.zoom-.35});}
+  easeTo(options={}){
     if(options.center)this.center=mapPoint(options.center);
-    if(Number.isFinite(options.zoom))this.zoom=bound(options.zoom,12,19.2);
+    if(Number.isFinite(options.zoom))this.zoom=bound(options.zoom,MIN_ZOOM,MAX_ZOOM);
     if(Number.isFinite(options.bearing))this.bearing=options.bearing;
-    if(Number.isFinite(options.pitch)){this.pitch=options.pitch;this.updatePitch();this._emit('pitchend');}
+    if(Number.isFinite(options.pitch)){
+      this.pitch=options.pitch;this.updatePitch();this._emit('pitchend');
+    }
     this.redraw();
   }
-  updatePitch(){this.el.classList.toggle('sky-world-tilted',this.pitch>=25);this.el.classList.toggle('sky-world-topdown',this.pitch<25);}
+  updatePitch(){this.el.classList.toggle('ww-topdown',this.pitch<20);}
+  params(){
+    const rect=this.el.getBoundingClientRect(),w=rect.width,h=rect.height;
+    const z=Math.floor(this.zoom),scale=2**(this.zoom-z);
+    return {w,h,z,scale,center:world(this.center.lat,this.center.lng,z),horizon:.28*h,
+      depth:.64*h,perspective:1.85*h,angle:this.pitch*Math.PI/180};
+  }
+  projectOffset(dx,dy,p){
+    const a=this.bearing*Math.PI/180,cs=Math.cos(a),sn=Math.sin(a);
+    const xx=dx*cs-dy*sn, yy=dx*sn+dy*cs;
+    if(this.pitch<20)return {x:p.w/2+xx,y:p.h/2+yy,scale:1};
+    const g=p.depth+yy;
+    if(g<=5)return null;
+    const divisor=1-(g*Math.sin(p.angle))/p.perspective;
+    if(divisor<.24)return null;
+    const groundY=p.horizon+(g*Math.cos(p.angle))/divisor;
+    return {x:p.w/2+xx/divisor,y:groundY,scale:Math.max(.31,Math.min(1.55,(groundY-p.horizon)/(p.h*.43)))};
+  }
+  screenToLngLat(clientX,clientY){
+    const rect=this.el.getBoundingClientRect(),p=this.params();
+    const x=clientX-rect.left,y=clientY-rect.top;
+    let xx,yy;
+    if(this.pitch<20){xx=x-p.w/2;yy=y-p.h/2;}
+    else{
+      const v=y-p.horizon;
+      if(v<5)return null; // Sky isn't a place where you can teleport.
+      const groundY=v*p.perspective/(p.perspective*Math.cos(p.angle)+v*Math.sin(p.angle));
+      if(!Number.isFinite(groundY)||groundY<5)return null;
+      xx=(x-p.w/2)*(1-(groundY*Math.sin(p.angle))/p.perspective);
+      yy=groundY-p.depth;
+    }
+    const a=this.bearing*Math.PI/180,cs=Math.cos(a),sn=Math.sin(a);
+    const dx=xx*cs+yy*sn,dy=-xx*sn+yy*cs;
+    return geo(p.center.x+dx/p.scale,p.center.y+dy/p.scale,p.z);
+  }
   redraw(){
     if(!this.el.isConnected)return;
-    const rect=this.el.getBoundingClientRect(),w=rect.width,h=rect.height;
-    if(!w||!h)return;
-    const z=Math.floor(this.zoom),s=2**(this.zoom-z),c=world(this.center.lat,this.center.lng,z);
-    const tx=Math.floor(c.x/TILE),ty=Math.floor(c.y/TILE);
-    const aroundX=Math.ceil(w/(TILE*s)/2)+1,aroundY=Math.ceil(h/(TILE*s)/2)+1;
+    const p=this.params();if(!p.w||!p.h)return;
+    this.caption.textContent=`KAMERA ${Math.round(this.bearing)}° · ZOOM ${this.zoom.toFixed(1)} · drehen: wischen`;
+    this.planeDepth=p.depth;this.el.style.setProperty('--ww-perspective',`${p.perspective}px`);this.el.style.setProperty('--ww-ground-height',`${Math.round(p.h*1.14)}px`);
+    this.ground.style.transform=this.pitch<20?'translateX(-50%)':`translateX(-50%) rotateX(${this.pitch}deg)`;
+    this.ground.style.top=this.pitch<20?`${p.h/2-p.depth}px`:'28%';
+    const a=this.bearing*Math.PI/180,cs=Math.cos(a),sn=Math.sin(a);
+    // Rotate the real street map in the ground plane around the player's position.
+    this.tileLayer.style.transform=`rotate(${this.bearing}deg)`;
+    this.tileLayer.style.transformOrigin=`${this.planeCenterX}px ${p.depth}px`;
+    const baseX=Math.floor(p.center.x/TILE),baseY=Math.floor(p.center.y/TILE);
+    // Only nearby raster tiles: no 3D library or external JS is required.
     const needed=new Set();
-    for(let x=tx-aroundX;x<=tx+aroundX;x++)for(let y=ty-aroundY;y<=ty+aroundY;y++){
-      const n=2**z;if(y<0||y>=n)continue;
-      const safeX=((x%n)+n)%n,key=`${z}/${safeX}/${y}`;needed.add(key);
+    const xR=3,yR=3;
+    for(let ix=baseX-xR;ix<=baseX+xR;ix++)for(let iy=baseY-yR;iy<=baseY+yR;iy++){
+      const n=2**p.z;if(iy<0||iy>=n)continue;
+      const safeX=((ix%n)+n)%n,key=`${p.z}/${safeX}/${iy}`;needed.add(key);
       let img=this.tiles.get(key);
       if(!img){
-        img=document.createElement('img');img.alt='';img.draggable=false;img.decoding='async';
-        img.className='backup-tile';img.src=`https://tile.openstreetmap.org/${key}.png`;
-        img.onerror=()=>{img.style.opacity='0';};
-        this.tileLayer.appendChild(img);this.tiles.set(key,img);
+        img=document.createElement('img');img.className='ww-tile';img.alt='';img.decoding='async';img.draggable=false;
+        img.loading='lazy';img.src=`https://tile.openstreetmap.org/${key}.png`;
+        img.onload=()=>{
+          if(this.el.isConnected && img.naturalWidth>0)this.el.classList.add('ww-tiles-loaded');
+        };
+        img.onerror=()=>{img.style.visibility='hidden';};
+        this.tiles.set(key,img);this.tileLayer.appendChild(img);
+        if(img.complete && img.naturalWidth>0)this.el.classList.add('ww-tiles-loaded');
       }
-      const px=w/2+((x*TILE)-c.x)*s, py=h/2+((y*TILE)-c.y)*s;
-      img.style.left=`${px}px`;img.style.top=`${py}px`;
-      img.style.width=`${TILE*s+1}px`;img.style.height=`${TILE*s+1}px`;
+      img.style.left=`${this.planeCenterX+(ix*TILE-p.center.x)*p.scale}px`;
+      img.style.top=`${p.depth+(iy*TILE-p.center.y)*p.scale}px`;
+      img.style.width=`${TILE*p.scale+1}px`;img.style.height=`${TILE*p.scale+1}px`;
     }
-    for(const [key,img]of this.tiles){if(!needed.has(key)){img.remove();this.tiles.delete(key);}}
+    for(const [key,img] of this.tiles){if(!needed.has(key)){img.remove();this.tiles.delete(key);}}
     for(const marker of this.markers){
-      const p=world(marker.pos.lat,marker.pos.lng,z);
-      marker.element.style.left=`${w/2+(p.x-c.x)*s}px`;
-      marker.element.style.top=`${h/2+(p.y-c.y)*s}px`;
+      const coord=world(marker.pos.lat,marker.pos.lng,p.z);
+      const result=this.projectOffset((coord.x-p.center.x)*p.scale,(coord.y-p.center.y)*p.scale,p);
+      const el=marker.element;
+      if(!result || result.x< -120 || result.x>p.w+120 || result.y< -110 || result.y>p.h+130){el.style.display='none';continue;}
+      el.style.display='';el.style.left=`${result.x}px`;el.style.top=`${result.y}px`;
+      el.style.transform=`translate(-50%,-95%) scale(${result.scale})`;
+      el.style.zIndex=String(Math.round(result.y));
     }
   }
   remove(){this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
@@ -366,7 +462,6 @@ class BackupMarker {
   getElement(){return this.element;}
   remove(){this.element.remove();this.map?.markers.delete(this);this.map=null;}
 }
-
 
 const $ = id => document.getElementById(id);
 const START = { ...DEMO_START };
@@ -427,11 +522,10 @@ function initMap() {
   // No external dependency required to display the player or resources.
   startBackupMap('Die spielbare Karte ist gestartet.');
   // Optional WebGL layer is loaded separately and never blocks the game.
-  // Stable perspective world: no external 3D runtime required.
-  setMapStatus("SKY");
+  // Sky World View uses our own perspective renderer (no external WebGL required).
 }
 function queue3DUpgrade(){
-  if (!('WebGLRenderingContext' in window)) { setMapStatus('SKY');return; }
+  if (!('WebGLRenderingContext' in window)) { setMapStatus('2.5D');return; }
   const style=document.createElement('link');
   style.rel='stylesheet';style.href='https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css';
   document.head.appendChild(style);
@@ -439,16 +533,16 @@ function queue3DUpgrade(){
   loader.src='https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js';
   loader.async=true;
   loader.onload=()=>{
-    try { if(window.maplibregl?.supported()) stage3DMap();else setMapStatus('SKY'); }
-    catch(err){ console.warn('3D unavailable',err);setMapStatus('SKY'); }
+    try { if(window.maplibregl?.supported()) stage3DMap();else setMapStatus('2.5D'); }
+    catch(err){ console.warn('3D unavailable',err);setMapStatus('2.5D'); }
   };
-  loader.onerror=()=>setMapStatus('SKY');
+  loader.onerror=()=>setMapStatus('2.5D');
   document.head.appendChild(loader);
 }
 function setMapStatus(label){
   const el=document.querySelector('.camera-hint');
-  if(el)el.firstChild.textContent=label+'-WELT ';
-  $('btn-tilt').textContent=state.mapKind==='backup'?'3D':state.map?.getPitch()>=25?'3D':'2D';
+  if(el)el.firstChild.textContent='NAHKAMERA · ';
+  $('btn-tilt').textContent=state.map?.getPitch()>=25?'3D':'2D';
 }
 function stage3DMap(){
   if(state.mapKind!=='backup' || !state.mapReady) return;
@@ -456,12 +550,12 @@ function stage3DMap(){
   el.style.cssText='position:absolute;inset:0;z-index:1;visibility:hidden;';
   $('screen-map').insertBefore(el,$('map').nextSibling);
   let next=null,done=false;
-  const fail=()=>{ if(done)return;done=true;try{next?.remove();}catch{}el.remove();setMapStatus('SKY'); };
+  const fail=()=>{ if(done)return;done=true;try{next?.remove();}catch{}el.remove();setMapStatus('2.5D'); };
   try {
     const pos=getPosition()||state.demoPosition;
     next=new maplibregl.Map({container:el,style:MAP_STYLE,
-      center:[pos.lng,pos.lat],zoom:16.6,pitch:55,bearing:-22,
-      minZoom:12,maxZoom:19.2,maxPitch:60,antialias:true,renderWorldCopies:false});
+      center:[pos.lng,pos.lat],zoom:START_ZOOM,pitch:58,bearing:0,
+      minZoom:MIN_ZOOM,maxZoom:MAX_ZOOM,maxPitch:60,antialias:true,renderWorldCopies:false});
     next.touchZoomRotate.enableRotation();
     const timer=setTimeout(fail,8500);
     next.on('error',e=>{console.warn('3D renderer error:',e?.error||e);clearTimeout(timer);fail();});
@@ -483,7 +577,8 @@ function stage3DMap(){
   }catch(err){console.warn('3D stage error',err);fail();}
 }
 function attachMapEvents(map){
-  map.on('dragstart',()=>{state.followPlayer=false;});
+  // Turning the camera does not disable GPS follow-mode.
+  map.on('dragstart',()=>{if(state.mapKind==='maplibre')state.followPlayer=false;});
   map.on('pitchend',()=>{
     if(state.map!==map)return;
     const is3d=map.getPitch()>=25;
@@ -515,11 +610,11 @@ function startBackupMap(reason){
   try{old?.remove();}catch(e){console.warn(e);}
   $('map').innerHTML='';
   try{
-    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:16.6,pitch:55});
+    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:START_ZOOM,pitch:63,bearing:0});
     state.map=map;state.mapKind='backup';
     attachMapEvents(map);
     map.on('load',()=>finalizeMap(map,'backup'));
-    setMapStatus('SKY');
+    setMapStatus('3D');
   }catch(e){console.error('Auch Ersatzkarte fehlgeschlagen',e);$('no-map').classList.remove('hidden');}
 }
 function makeMarker(args){
@@ -588,8 +683,12 @@ function updatePositionOnMap(follow=false){
   }else state.playerMarker.setLngLat([pos.lng,pos.lat]);
   const gpsAccuracy=state.mode==='gps'?state.accuracy:null;
   state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(pos,gpsAccuracy));
+  if(state.playerMarker && state.playerMarker.getElement){
+    const avatar=state.playerMarker.getElement();
+    avatar.classList.remove('is-walking');void avatar.offsetWidth;avatar.classList.add('is-walking');
+  }
   if(follow || (state.mode==='gps' && state.followPlayer)){
-    state.map.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(16.6,state.map.getZoom()),duration:follow?500:700,essential:true});
+    state.map.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(START_ZOOM,state.map.getZoom()),duration:follow?500:700,essential:true});
   }
 }
 function renderWorld(){
@@ -645,7 +744,7 @@ function setMode(mode,announce=true) {
     } catch(e){toast('GPS konnte nicht aktiviert werden.',true);console.warn(e);}
   } else {
     if(announce) toast('Demo-Modus aktiviert');
-    if(state.mapReady){state.followPlayer=true;state.map.easeTo({center:[state.demoPosition.lng,state.demoPosition.lat],zoom:16.6,duration:500});}
+    if(state.mapReady){state.followPlayer=true;state.map.easeTo({center:[state.demoPosition.lng,state.demoPosition.lat],zoom:START_ZOOM,duration:500});}
   }
 }
 function onGeoSuccess(pos) {
@@ -667,7 +766,7 @@ function onGeoFailure(error) {
 }
 function moveDemo(direction) {
   if(state.mode!=='demo') return;
-  const rad=Math.PI/180, step=45;
+  const rad=Math.PI/180, step=15; // 15 m pro Demo-Schritt, statt 45 m
   const lat=state.demoPosition.lat,lng=state.demoPosition.lng;
   const latDelta=step/111320, lngDelta=step/(111320*Math.max(.25,Math.cos(lat*rad)));
   if(direction==='north')state.demoPosition.lat+=latDelta;
@@ -778,7 +877,7 @@ function recenter() {
   const pos=getPosition();
   if(!pos){toast('GPS-Position noch nicht verfügbar. Wechsle für einen Test zu DEMO unter Mehr.',true);return;}
   state.followPlayer=true;
-  state.map?.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(state.map.getZoom(),16.6),duration:650,essential:true});
+  state.map?.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(state.map.getZoom(),START_ZOOM),duration:650,essential:true});
 }
 function bind() {
   document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
@@ -791,7 +890,7 @@ function bind() {
   $('btn-tilt').addEventListener('click',()=>{
     if(!state.mapReady)return;
     const is3d=state.map.getPitch()<25;
-    state.map.easeTo({pitch:is3d?55:0,duration:520});
+    state.map.easeTo({pitch:is3d?64:0,duration:520});
     $('btn-tilt').textContent=is3d?'3D':'2D';
     $('btn-tilt').setAttribute('aria-pressed',String(is3d));
   });
