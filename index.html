@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.2 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
-  <title>Weltwerk · Exploration 3D v0.2.2</title>
+  <meta name="description" content="Weltwerk v0.2.3 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
+  <title>Weltwerk · Exploration 3D v0.2.3</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -71,6 +71,20 @@
 /* Demo buttons should always be reachable in the map view. */
 .demo-controller:not(.hidden){display:flex!important}
 
+
+/* v0.2.3: Horizon + world surface projected into perspective. */
+.sky-world{background:linear-gradient(to bottom,#72c6f4 0%,#b8e8ff 32%,#e4f7ee 51%,#d4e8c8 100%);perspective:760px;perspective-origin:50% 34%;}
+.sky-world-sky{position:absolute;inset:0;background:linear-gradient(to bottom,#62b9ef 0%,#a4dfff 30%,#e4f5eb 53%,transparent 62%);pointer-events:none;}
+.sky-world-sky:after{content:'';position:absolute;top:24%;left:13%;width:94px;height:24px;border-radius:60px;background:#fff9;filter:blur(12px);box-shadow:180px 38px 28px 8px #fff8,-40px 70px 23px #fff6;}
+.sky-world-plane{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:50% 60%;transition:transform .3s;}
+.sky-world-tilted .sky-world-plane{transform:rotateX(62deg) translateY(12%) scale(1.9);}
+.sky-world-topdown .sky-world-plane{transform:none;}
+.sky-world .backup-map-ground{transform:none!important;inset:0;background:#a8cfa3;}
+.sky-world .backup-map-markers{transform-style:preserve-3d;}
+.sky-world-tilted .backup-marker{transform:translate(-50%,-100%) rotateX(-62deg) scale(.75);transform-origin:center bottom;}
+.sky-world-topdown .backup-marker{transform:translate(-50%,-100%);}
+.sky-world .backup-map-caption{bottom:112px;}
+.sky-world .backup-map-attribution{bottom:0;}
 </style>
 </head>
 <body>
@@ -79,7 +93,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.2 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.3 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
@@ -117,7 +131,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.2 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Die Karte benötigt eine Internetverbindung. Gebäude sind echte 3D-Kartenobjekte (sofern Kartendaten vorhanden); Rohstofffiguren sind stilisierte 2.5D-Grafiken. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Karte: © OpenStreetMap-Mitwirkende · OpenFreeMap · MapLibre</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.3 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Die Karte benötigt eine Internetverbindung. Gebäude sind echte 3D-Kartenobjekte (sofern Kartendaten vorhanden); Rohstofffiguren sind stilisierte 2.5D-Grafiken. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Karte: © OpenStreetMap-Mitwirkende · OpenFreeMap · MapLibre</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -259,15 +273,15 @@ class BackupMap {
     this.el=typeof container==='string'?document.getElementById(container):container;
     this.zoom=zoom;this.pitch=pitch;this.bearing=bearing;
     this.center=mapPoint(center);this.handlers={};this.markers=new Set();this.tiles=new Map();
-    this.el.innerHTML='';this.el.classList.add('backup-map');
+    this.el.innerHTML='';this.el.classList.add('backup-map','sky-world');
     this.base=document.createElement('div');this.base.className='backup-map-ground';
     this.tileLayer=document.createElement('div');this.tileLayer.className='backup-map-tiles';
     this.markerLayer=document.createElement('div');this.markerLayer.className='backup-map-markers';
     this.help=document.createElement('div');this.help.className='backup-map-caption';
-    this.help.textContent='ERSATZKARTE · 2.5D';
+    this.help.textContent='SKY WORLD · GPS-ERKUNDUNG';
     this.attribution=document.createElement('div');this.attribution.className='backup-map-attribution';
     this.attribution.innerHTML='Karte © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>';
-    this.base.appendChild(this.tileLayer);this.el.append(this.base,this.markerLayer,this.help,this.attribution);
+    this.base.appendChild(this.tileLayer);this.plane=document.createElement('div');this.plane.className='sky-world-plane';this.plane.append(this.base,this.markerLayer);this.sky=document.createElement('div');this.sky.className='sky-world-sky';this.el.append(this.sky,this.plane,this.help,this.attribution);
     this._pointer=null;
     this.el.addEventListener('pointerdown',e=>{if(e.target.closest('button,a'))return;this._pointer={x:e.clientX,y:e.clientY,center:{...this.center},moved:false};});
     this.el.addEventListener('pointermove',e=>{
@@ -313,7 +327,7 @@ class BackupMap {
     if(Number.isFinite(options.pitch)){this.pitch=options.pitch;this.updatePitch();this._emit('pitchend');}
     this.redraw();
   }
-  updatePitch(){this.el.classList.toggle('backup-pitched',this.pitch>=25);}
+  updatePitch(){this.el.classList.toggle('sky-world-tilted',this.pitch>=25);this.el.classList.toggle('sky-world-topdown',this.pitch<25);}
   redraw(){
     if(!this.el.isConnected)return;
     const rect=this.el.getBoundingClientRect(),w=rect.width,h=rect.height;
@@ -413,10 +427,11 @@ function initMap() {
   // No external dependency required to display the player or resources.
   startBackupMap('Die spielbare Karte ist gestartet.');
   // Optional WebGL layer is loaded separately and never blocks the game.
-  queue3DUpgrade();
+  // Stable perspective world: no external 3D runtime required.
+  setMapStatus("SKY");
 }
 function queue3DUpgrade(){
-  if (!('WebGLRenderingContext' in window)) { setMapStatus('2.5D');return; }
+  if (!('WebGLRenderingContext' in window)) { setMapStatus('SKY');return; }
   const style=document.createElement('link');
   style.rel='stylesheet';style.href='https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css';
   document.head.appendChild(style);
@@ -424,16 +439,16 @@ function queue3DUpgrade(){
   loader.src='https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js';
   loader.async=true;
   loader.onload=()=>{
-    try { if(window.maplibregl?.supported()) stage3DMap();else setMapStatus('2.5D'); }
-    catch(err){ console.warn('3D unavailable',err);setMapStatus('2.5D'); }
+    try { if(window.maplibregl?.supported()) stage3DMap();else setMapStatus('SKY'); }
+    catch(err){ console.warn('3D unavailable',err);setMapStatus('SKY'); }
   };
-  loader.onerror=()=>setMapStatus('2.5D');
+  loader.onerror=()=>setMapStatus('SKY');
   document.head.appendChild(loader);
 }
 function setMapStatus(label){
   const el=document.querySelector('.camera-hint');
   if(el)el.firstChild.textContent=label+'-WELT ';
-  $('btn-tilt').textContent=state.mapKind==='backup'?'2.5D':state.map?.getPitch()>=25?'3D':'2D';
+  $('btn-tilt').textContent=state.mapKind==='backup'?'3D':state.map?.getPitch()>=25?'3D':'2D';
 }
 function stage3DMap(){
   if(state.mapKind!=='backup' || !state.mapReady) return;
@@ -441,7 +456,7 @@ function stage3DMap(){
   el.style.cssText='position:absolute;inset:0;z-index:1;visibility:hidden;';
   $('screen-map').insertBefore(el,$('map').nextSibling);
   let next=null,done=false;
-  const fail=()=>{ if(done)return;done=true;try{next?.remove();}catch{}el.remove();setMapStatus('2.5D'); };
+  const fail=()=>{ if(done)return;done=true;try{next?.remove();}catch{}el.remove();setMapStatus('SKY'); };
   try {
     const pos=getPosition()||state.demoPosition;
     next=new maplibregl.Map({container:el,style:MAP_STYLE,
@@ -504,7 +519,7 @@ function startBackupMap(reason){
     state.map=map;state.mapKind='backup';
     attachMapEvents(map);
     map.on('load',()=>finalizeMap(map,'backup'));
-    setMapStatus('2.5D');
+    setMapStatus('SKY');
   }catch(e){console.error('Auch Ersatzkarte fehlgeschlagen',e);$('no-map').classList.remove('hidden');}
 }
 function makeMarker(args){
