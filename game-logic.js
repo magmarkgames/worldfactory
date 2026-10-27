@@ -1,6 +1,6 @@
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-export const VERSION = '0.1.0';
+export const VERSION = '0.2.0';
 export const REGEN_MS = 60 * 60 * 1000;
 export const REACH_METERS = 60;
 export const GRID_METERS = 195;

@@ -1,84 +1,75 @@
-# WELTWERK · Exploration v0.1
+# WELTWERK v0.2 — 3D-Exploration
 
-Ein **spielbarer mobiler GPS-Sammelprototyp** als statische Website (HTML, CSS und JavaScript). Keine Build-Tools, kein Backend und keine Datenbank erforderlich.
+**Spielbarer mobiler GPS-Rohstoffsammel-Prototyp.** Echte geneigte Karte mit 3D-Gebäuden, kleine Low-Poly-Bäume, Steine, Schrottfundstellen und eine eigene Spielfigur. Alles in einem einzigen flachen Verzeichnis — **keine Ordner**.
 
-> **WELTWERK** ist ein vorläufiger Projektname. Fabrik, Crafting, Credits, Handel und Multiplayer sind absichtlich **noch nicht** enthalten.
+> Die Fabrik, Crafting, Echtgeld, Accounts und Multiplayer kommen absichtlich **noch nicht**. Zuerst testen wir, ob das Erkunden funktioniert und Spaß macht.
 
-## Was ist enthalten?
+## Was ist neu in v0.2?
 
-- Eine echte zoombare Karte mit OpenStreetMap und Leaflet.
-- Echte GPS-Ortung nach Freigabe (GPS-Modus) und frei steuerbarer Demo-Modus (Karte antippen oder vier Pfeiltasten).
-- An festen geografischen Koordinaten reproduzierbar generierte Bäume, Steine und Schrottfundstellen.
-- Interaktion innerhalb von ca. **60 Metern** plus kleiner GPS-Toleranz.
-- Baum: 2–4 Holz, 20 % Bonus auf Harz.
-- Stein: 2–4 Stein, 15 % Bonus auf Eisenerz.
-- Schrott: 2–4 Altmetall, 15 % Bonus auf Kupferdraht.
-- 10 % aller Fundstellen sind **reichhaltig** und liefern die doppelte Grundmenge.
-- Erschöpfte Fundstellen regenerieren **60 Minuten nach Ernte**.
-- Inventar, Statistik, Materiallexikon; Demo und GPS haben getrennte Speicherstände.
-- Speicherung **nur lokal im Browser** mit `localStorage`, dazu JSON-Export, Import und Reset.
-- Responsive Mobil-Design und einfache Installation als Website zum Startbildschirm.
+- **MapLibre GL JS** statt Leaflet: interaktive Karte mit Perspektive (**55° Neigung**), Drehung, Zoom, echten **3D-Gebäuden** aus OpenStreetMap-Daten, sofern vorhanden.
+- **Helle 2.5D-Spieloptik:** Eigene kleine grafische Bäume, Steine, Schrott und Spielfigur (SVG-Illustrationen). Sie wirken räumlich, sind aber noch **keine frei begehbaren 3D-Modelle**.
+- Neue Kameraschaltflächen: `3D / 2D` wechseln, ↻ drehen, Standort zentrieren, + / − zoomen. Auf dem Handy kannst du die Karte auch mit Gesten drehen/neigen.
+- Bewährte Sammellogik aus v0.1 erhalten: reproduzierbare Ressourcenpositionen, Dropchancen, 60 Minuten Regeneration, Inventar, Lexikon, Demo- und GPS-Modus mit separaten Speicherständen.
+- **Flache Struktur:** Keine `assets/`- oder `tests/`-Ordner. Auch die Bildpfade im HTML/JavaScript sind darauf angepasst.
+- Gespeicherte v0.1-Daten werden weiter erkannt, wenn du die neue Version auf derselben Web-Adresse veröffentlichst (gleicher lokaler Browser-Speicherschlüssel). Zur Sicherheit vorher unter **Mehr → Export** sichern!
 
-## In 6 Schritten auf GitHub Pages veröffentlichen
+## Diese Dateien stehen alle auf derselben Ebene
 
-1. Melde dich bei [github.com](https://github.com/) an. Oben rechts **+ → New repository**.
-2. Repositoryname, z. B. `weltwerk`. Als **Public** anlegen; README/.gitignore **nicht zusätzlich erstellen**, da diese Dateien in diesem ZIP sind.
-3. Öffne das neue Repository. Gehe zu **Add file → Upload files**.
-4. **Entpacke das ZIP vorher**. Lade **den INHALT des Ordners `weltwerk-v0.1`** hoch (vor allem `index.html`, `app.js`, `game-logic.js`, `styles.css`, `assets/` und `manifest.webmanifest`). Die `index.html` muss direkt im Hauptverzeichnis liegen, **nicht in einem zusätzlichen Unterordner**. Unten auf **Commit changes** klicken.
-5. Gehe zu **Settings → Pages**. Unter **Build and deployment** bei **Source** „Deploy from a branch“ auswählen, dann **Branch `main`**, Ordner **`/(root)`**, und **Save**.
-6. Öffne deine Website unter `https://DEIN-NAME.github.io/weltwerk/`. Auf Android im Chrome-Menü kannst du **Zum Startbildschirm hinzufügen** wählen. GitHub Pages wird über HTTPS ausgeliefert; das wird für die Browser-GPS-Freigabe benötigt.
-
-> GitHub Pages ist eine öffentlich erreichbare Website. Das Projekt enthält keine privaten Schlüssel oder Zugangsdaten. Der Spielstand liegt nur in deinem jeweiligen Browser, nicht im GitHub-Repository.
-
-### Lokal am Computer starten
-
-Der Browser sollte die Dateien über einen Webserver laden, nicht direkt per `file://`, da JavaScript-Module sonst blockiert werden können.
-
-```bash
-cd weltwerk-v0.1
-python3 -m http.server 8080
+```text
+index.html              ← STARTSEITE
+app.js                  ← Karte, GPS, UI, Inventar
+styles.css              ← Design
+game-logic.js          ← Fundstellen, Loot, Speicherung
+logo.svg                ← Logo
+avatar.svg              ← Spielfigur
+tree.svg                ← Baum
+rock.svg                ← Steinvorkommen
+scrap.svg               ← Schrott
+manifest.webmanifest    ← Handy-Startbildschirm
+README.md               ← Diese Anleitung
+logic.test.mjs          ← Optionale Logiktests
+package.json            ← Optionale Node-Testbefehle
 ```
 
-Dann `http://localhost:8080` öffnen. Demo funktioniert sofort. Echtes Handy-GPS auf einer fremden HTTP-Adresse dagegen meist nicht: Dafür HTTPS (z. B. GitHub Pages) nutzen.
+Alle Namen ohne Leerzeichen/Einrückung: `game-logic.js` und `rock.svg`. Du musst **keinen Ordner hochladen**.
 
-### Testen
+## Auf GitHub hochladen — am Handy oder PC
 
-```bash
-node tests/logic.test.mjs
-```
+1. ZIP-Datei herunterladen und **entpacken**.
+2. GitHub öffnen: https://github.com/new
+3. Repositoryname `weltwerk` oder `weltwerk-3d`, Sichtbarkeit **Public**, dann **Create repository**.
+4. **Add file → Upload files** auswählen. **Alle einzelnen Dateien** aus dem ZIP markieren und hochladen. Keinen zusätzlichen Ordner erstellen. Insbesondere muss `index.html` direkt im Hauptverzeichnis sein.
+5. Ganz unten **Commit changes** drücken.
+6. Unter **Settings → Pages** die Option **Deploy from a branch**, Branch **main**, Verzeichnis **/(root)**, dann **Save**.
+7. Die veröffentlichte Website ist typischerweise `https://DEIN-NAME.github.io/weltwerk/` (falls das Repo `weltwerk` heißt). Du findest die echte Adresse auch unter **Settings → Pages**.
+8. In Chrome auf Android öffnen und bei Bedarf **Zum Startbildschirm hinzufügen**.
 
-oder `npm test` (Node.js erforderlich, nur für die Tests). Das eigentliche Spiel braucht kein Node.js.
+Du kannst auch dein **bestehendes Weltwerk-Repository** weiterverwenden: einfach die neuen Dateien mit denselben Namen hochladen und überschreiben. Frühere Dateien im Unterordner `assets/` sind danach nicht mehr erforderlich. Alle Verweise zeigen direkt auf die Dateien im Root.
 
-## Spielbedienung
+### So testest du
 
-1. **Demo-Modus** wählen, um ohne GPS zu spielen. Starte in einer Beispielregion; tippe einen anderen Ort auf der Karte an, um deinen Teststandort dorthin zu setzen. Nutze die Pfeiltasten oder am PC die Cursortasten für kleinere Schritte.
-2. Auf einen Baum, Stein oder Schrottmarker tippen; die Fundliste und Entfernung sehen.
-3. Innerhalb der Reichweite **Ressourcen sammeln** wählen.
-4. Unter **Rucksack** Bestände sehen, unter **Sammlung** das Materiallexikon und Statistiken.
-5. Für echtes GPS unter **Mehr → Echtes GPS** wechseln und Standortzugriff erlauben. Während du dich bewegst, ändert sich die Ressourcenregion.
+- Starte im **Demo-Modus**. Tippe auf die Karte, um deinen Teststandort zu versetzen, oder nutze die Pfeiltasten im Spiel.
+- Tippe auf einen grafischen Baum/Stein/Schrotthaufen, sieh die möglichen Drops und sammle innerhalb der Reichweite.
+- Unter **Rucksack** und **Sammlung** werden neue Materialien und Statistiken angezeigt.
+- Teste **3D / 2D**, ↻ und Standort-Zentrierung.
+- Unter **Mehr → Echtes GPS** Standortfreigabe erlauben und bei einem Spaziergang testen (nur auf sicher zugänglichen Orten!).
+- Lokal: `python3 -m http.server 8080` im Projektverzeichnis starten und `http://localhost:8080` aufrufen. **GPS auf dem Handy benötigt HTTPS**, also z. B. GitHub Pages.
+- Technische Logiktests: `npm test` (Node.js erforderlich, nicht zum Spielen).
 
-## Wichtige Einschränkungen dieses frühen Prototyps
+## Wichtige Einschränkungen
 
-- **Die virtuellen Fundstellen sind nicht auf öffentliche Zugänglichkeit geprüft.** Sie sind bewusst nur reproduzierbar generiert; sie hängen in v0.1 noch nicht von Wälder-/Straßendaten, Wegerechten oder POIs ab. **Betritt niemals private oder gefährliche Bereiche**, um einen Spielpunkt zu erreichen. Ein Punkt kann oft aus sicherer Entfernung geerntet werden. Automatische sichere Positionierung (z. B. entlang tatsächlich begehbarer Wege mit Zugangskontrollen) wäre eine wichtige nächste Ausbaustufe.
-- **Keine serverseitige Betrugsprävention.** GPS und lokale Speicherstände können manipuliert werden; v0.1 ist ausdrücklich nur ein Einzelspieler-Test. Für öffentliche Ranglisten wäre ein Backend notwendig.
-- **Keine automatische Synchronisation zwischen Geräten.** Für Gerätewechsel JSON-Export und -Import verwenden.
-- **Keine Offline-Karte**: Internetverbindung für Kartendaten und Leaflet von CDN erforderlich. Gespeicherte Inventare sind lokal vorhanden.
-- Bei Standortfehlern oder schlechter Genauigkeit kann Sammeln im GPS-Modus eingeschränkt werden. Für erste Tests den Demo-Modus verwenden.
-- Auf kleinen Spaziergängen können Ressourcen verschiedener Art unterschiedlich häufig erscheinen. Die Verteilung ist vorläufig und ohne biombasierte Regeln.
+- **3D** bezieht sich auf Kameraperspektive und extrudierte Gebäude; die Ressourcen/der Avatar sind absichtlich leichte **2.5D-SVG-Grafiken**. Das ist performant und für v0.2 ausreichend. Kein vollständiges Minecraft-Earth-3D-Modellsystem.
+- **MapLibre benötigt WebGL.** Auf manchen älteren Geräten oder mit deaktivierter Grafikbeschleunigung kann die Karte nicht angezeigt werden.
+- Ressourcenstandorte sind deterministisch, aber **nicht aus sicheren Wegen oder echten Bäumen abgeleitet**. Sie können sich auf Privatgrundstücken, Fahrbahnen oder anderen unzugänglichen Flächen befinden. **Niemals einen unsicheren Ort betreten, um zu sammeln!** Das Platzieren auf überprüft zugänglichen öffentlichen Orten ist ein wichtiges nächstes Entwicklungsziel.
+- Grundrohstoffe werden nach Spielregeln zufällig vergeben, die Fundstellen sind noch unabhängig von realen Biomen, ebenso wenig gibt es POIs oder Fabrik.
+- Für die Karte wird eine Internetverbindung benötigt: MapLibre wird von unpkg geladen, Kartenstile/Kacheln von [OpenFreeMap](https://openfreemap.org/). Dabei erfahren diese Drittanbieter technisch bedingt angefragte Kartenausschnitte und deine IP. Eigene Server zum Speichern der GPS-Position gibt es nicht; es wird kein Standortverlauf gespeichert.
+- Spielstände liegen **lokal im selben Browser**, keine Accounts/Gerätesynchronisierung. JSON-Export/Import unter **Mehr** nutzen. Für spätere Ranglisten brauchen wir ein Backend.
+- In GPS-Modus wird bei sehr ungenauem Signal oder schneller Fortbewegung das Sammeln vorübergehend verhindert.
 
-## Datenschutz und externe Dienste
+## Technik und Datenquellen
 
-Die Seite schickt deine GPS-Position **nicht an einen eigenen Server** und speichert keinen GPS-Verlauf. Sie lädt Kartenkacheln von OpenStreetMap; dabei sieht deren Dienst naturgemäß den angefragten **Kartenausschnitt und deine IP-Adresse**. Für den Code von Leaflet lädt der Browser einmalig eine externe Bibliothek. Demo-Position und Spielstände werden im lokalen Browser gespeichert. Exportierte JSON-Dateien gehören dir.
-
-## Weitere Entwicklungsziele (noch nicht implementiert)
-
-Biomabhängige Rohstoffe, öffentlich zugängliche POIs, bessere Ausrüstung, sichere Platzierung, weitere Materialtypen, Maschinenbau, Fabrik-Layouts, Crafting, Wirtschaft und Multiplayer.
-
-## Technik und Lizenzen
-
-- HTML5, CSS3, JavaScript Modules, `localStorage`, Geolocation API.
-- Leaflet **1.9.4** von Unpkg.
-- OpenStreetMap Standard-Kartenkacheln mit eingeblendeter Copyright-Angabe und Links.
-- OpenStreetMap-Tile-Nutzungsbedingungen: https://operations.osmfoundation.org/policies/tiles/ . Nur für kleine Prototypentests gedacht; bei öffentlicher Nutzung mit vielen Besuchern einen geeigneten Kartenanbieter verwenden. Kein Vorab- oder Bulk-Download von Kacheln.
-
-Keine externen Nutzeraccounts erforderlich.
+- HTML, CSS, JavaScript ES Modules — **kein Build-Vorgang und keine Installation** nötig.
+- MapLibre GL JS 5.12.0: https://maplibre.org/maplibre-gl-js/docs/
+- OpenFreeMap Bright-Stil und Vektorkacheln: https://openfreemap.org/quick_start/
+- Kartendaten © OpenStreetMap-Mitwirkende (Attribution erscheint auch unten in der Karte).
+- SVG-Grafiken im ZIP eigens für diesen Prototyp erstellt.

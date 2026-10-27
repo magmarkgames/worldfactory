@@ -9,7 +9,7 @@ const START = { ...DEMO_START };
 const state = {
   mode:null, demo: freshProfile(), gps:freshProfile(),
   demoPosition:{...START}, position:null, accuracy:null, timestamp:0, speed:0,
-  map:null, mapLayer:null, playerMarker:null, accuracyCircle:null,
+  map:null, markers:new Map(), playerMarker:null, accuracySource:false, followPlayer:true, mapLoadingError:false,
   resources:[], activeTab:'map', selectedNode:null, sheetMode:null, lastGps:null,
   watchId:null, mapReady:false,
 };
@@ -50,54 +50,141 @@ function getRange(node) {
   const reach=REACH_METERS+(state.mode==='gps'?Math.min(15,Math.max(0,(getAccuracy()||0)/3)):0);
   return {ok:distance<=reach,distance,reach,reason:`Noch ${Math.max(1,Math.ceil(distance-reach))} m bis zur Reichweite.`};
 }
+// MapLibre vector tiles + extruded OSM buildings. The virtual resource positions
+// are unchanged from v0.1; only their presentation becomes a 2.5D game world.
+const MAP_STYLE='https://tiles.openfreemap.org/styles/bright';
+const MAP_TILES='https://tiles.openfreemap.org/planet';
+const ICONS=Object.freeze({tree:'tree.svg',rock:'rock.svg',scrap:'scrap.svg'});
 function initMap() {
-  if(!window.L) { $('no-map').classList.remove('hidden');return; }
-  state.map=L.map('map',{zoomControl:false,preferCanvas:true,attributionControl:true,zoomSnap:.5, minZoom:12, maxZoom:19})
-    .setView([state.demoPosition.lat,state.demoPosition.lng],16);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-Mitwirkende',maxZoom:19,updateWhenIdle:true,keepBuffer:2
-  }).addTo(state.map);
-  state.mapLayer=L.layerGroup().addTo(state.map);
-  state.map.on('click', event=>{
-    if(state.mode!=='demo') return;
-    state.demoPosition={lat:event.latlng.lat,lng:event.latlng.lng};
-    // Test teleportation is strictly segregated from real GPS progress.
-    save();updatePositionOnMap();renderWorld();toast('Testposition verschoben');
-  });
-  state.mapReady=true;
-  setTimeout(()=>state.map.invalidateSize(),50);
+  if(!window.maplibregl || !maplibregl.supported()) {
+    $('no-map').classList.remove('hidden');state.mapLoadingError=true;return;
+  }
+  try {
+    state.map=new maplibregl.Map({
+      container:'map',style:MAP_STYLE,center:[state.demoPosition.lng,state.demoPosition.lat],
+      zoom:16.6,pitch:55,bearing:-22,minZoom:12,maxZoom:19.2,maxPitch:60,
+      attributionControl:true,antialias:true,dragRotate:true,pitchWithRotate:true,
+      canvasContextAttributes:{antialias:true},renderWorldCopies:false
+    });
+    state.map.touchZoomRotate.enableRotation();
+    state.map.on('dragstart',()=>{state.followPlayer=false;});
+    state.map.on('pitchend',()=>{
+      const is3d=state.map.getPitch()>=25;
+      $('btn-tilt').textContent=is3d?'3D':'2D';
+      $('btn-tilt').setAttribute('aria-pressed',String(is3d));
+    });
+    state.map.on('click',event=>{
+      if(state.mode!=='demo')return;
+      state.demoPosition={lat:event.lngLat.lat,lng:event.lngLat.lng};
+      save();updatePositionOnMap();renderWorld();toast('Testposition verschoben');
+    });
+    state.map.on('load',()=>{
+      state.mapReady=true;
+      $('no-map').classList.add('hidden');
+      addWorldBuildings();
+      addAccuracyLayer();
+      updatePositionOnMap();renderWorld();
+      setTimeout(()=>state.map?.resize(),60);
+    });
+    state.map.on('error',e=>{
+      console.warn('Kartenfehler',e.error||e);
+      // Network tile errors are temporary; show an overlay only when loading failed altogether.
+    });
+    setTimeout(()=>{
+      if(!state.mapReady && state.mapLoadingError===false){
+        $('no-map').classList.remove('hidden');
+        state.mapLoadingError=true;
+      }
+    },18000);
+  } catch(e) {
+    console.error('MapLibre initialization failed',e);
+    $('no-map').classList.remove('hidden');state.mapLoadingError=true;
+  }
 }
-function playerIcon() {
-  return L.divIcon({className:'',html:'<div class="player-pin"><div class="player-ring"><div class="player-center"></div></div></div>',iconSize:[42,42],iconAnchor:[21,21]});
+function addWorldBuildings(){
+  if(!state.map || state.map.getLayer('weltwerk-buildings'))return;
+  try{
+    const style=state.map.getStyle();
+    const labelLayer=style.layers?.find(l=>l.type==='symbol' && l.layout?.['text-field']);
+    if(!state.map.getSource('weltwerk-vector'))state.map.addSource('weltwerk-vector',{type:'vector',url:MAP_TILES});
+    state.map.addLayer({
+      id:'weltwerk-buildings',type:'fill-extrusion',source:'weltwerk-vector',
+      'source-layer':'building',minzoom:15,filter:['!=',['get','hide_3d'],true],
+      paint:{
+        'fill-extrusion-color':['interpolate',['linear'],['coalesce',['to-number',['get','render_height']],8],0,'#dfdfd3',18,'#d3d7cc',60,'#b8cecc'],
+        'fill-extrusion-height':['interpolate',['linear'],['zoom'],15,0,16,['coalesce',['to-number',['get','render_height']],8]],
+        'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],0],
+        'fill-extrusion-opacity':0.83
+      }
+    },labelLayer?.id);
+  } catch(e){console.warn('3D buildings unavailable for this map region/style',e);}
 }
-function resourceIcon(node,inRange,depleted) {
-  const cls=['resource-pin',node.rich?'rich':'',inRange?'in-range':'',depleted?'depleted':''].join(' ');
-  return L.divIcon({className:'',html:`<div class="${cls}"><div class="pin-back">${TYPES[node.type].icon}</div>${node.rich?'<div class="rich-star">✦</div>':''}</div>`,iconSize:[45,45],iconAnchor:[22,23]});
+function accuracyPolygon(pos,meters){
+  if(!pos || !Number.isFinite(meters) || meters<=0)return {type:'FeatureCollection',features:[]};
+  const r=Math.min(200,Math.max(3,meters)),coords=[];
+  for(let i=0;i<=48;i++){
+    const angle=2*Math.PI*i/48;
+    const lat=pos.lat+Math.cos(angle)*r/111320;
+    const lng=pos.lng+Math.sin(angle)*r/(111320*Math.max(0.15,Math.cos(pos.lat*Math.PI/180)));
+    coords.push([lng,lat]);
+  }
+  return {type:'FeatureCollection',features:[{type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[coords]}}]};
 }
-function updatePositionOnMap(follow=false) {
-  if(!state.mapReady) return;
+function addAccuracyLayer(){
+  if(!state.map || state.map.getSource('gps-accuracy'))return;
+  state.map.addSource('gps-accuracy',{type:'geojson',data:accuracyPolygon(null,0)});
+  state.map.addLayer({id:'gps-accuracy-fill',type:'fill',source:'gps-accuracy',paint:{'fill-color':'#49bfae','fill-opacity':.13}});
+  state.map.addLayer({id:'gps-accuracy-line',type:'line',source:'gps-accuracy',paint:{'line-color':'#2ea998','line-width':1.5,'line-opacity':.55}});
+}
+function makePlayerElement(){
+  const elem=document.createElement('div');elem.className='world-player';
+  elem.innerHTML='<span class="player-aura"></span><img src="avatar.svg" alt="" draggable="false"><span class="player-you">DU</span>';
+  return elem;
+}
+function makeResourceElement(node){
+  const element=document.createElement('button');element.type='button';
+  element.setAttribute('aria-label',`${TYPES[node.type].name} auf der Karte öffnen`);
+  element.innerHTML=`<span class="world-resource-shadow"></span><img class="world-resource-art" src="${ICONS[node.type]}" alt="" draggable="false"><span class="world-resource-star" aria-hidden="true">✦</span><span class="world-resource-dot" aria-hidden="true"></span>`;
+  element.addEventListener('click',e=>{e.stopPropagation();openResource(node);});
+  element.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
+  return element;
+}
+function updateNodeElement(element,node){
+  const ready=isReady(activeProfile().harvested[node.id]);
+  const range=getRange(node);
+  element.className=['world-resource',`type-${node.type}`,node.rich?'rich':'',range.ok?'in-range':'',ready?'':'depleted'].filter(Boolean).join(' ');
+}
+function updatePositionOnMap(follow=false){
+  if(!state.mapReady)return;
   const pos=getPosition();
-  if(!pos) { if(state.playerMarker) {state.map.removeLayer(state.playerMarker);state.playerMarker=null;} if(state.accuracyCircle){state.map.removeLayer(state.accuracyCircle);state.accuracyCircle=null;} return; }
-  if(!state.playerMarker) state.playerMarker=L.marker([pos.lat,pos.lng],{icon:playerIcon(),zIndexOffset:999,interactive:false}).addTo(state.map);
-  else state.playerMarker.setLatLng([pos.lat,pos.lng]);
-  if(state.mode==='gps' && state.accuracy!=null && Number.isFinite(state.accuracy)) {
-    if(!state.accuracyCircle) state.accuracyCircle=L.circle([pos.lat,pos.lng],{radius:state.accuracy,color:'#2c95ad',weight:1,fillColor:'#6ee4c6',fillOpacity:.08,interactive:false}).addTo(state.map);
-    else state.accuracyCircle.setLatLng([pos.lat,pos.lng]).setRadius(state.accuracy);
-  } else if(state.accuracyCircle) {state.map.removeLayer(state.accuracyCircle);state.accuracyCircle=null;}
-  if(follow) state.map.setView([pos.lat,pos.lng],Math.max(state.map.getZoom(),16),{animate:true});
+  if(!pos){state.playerMarker?.remove();state.playerMarker=null;state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(null,0));return;}
+  if(!state.playerMarker){
+    state.playerMarker=new maplibregl.Marker({element:makePlayerElement(),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
+      .setLngLat([pos.lng,pos.lat]).addTo(state.map);
+  }else state.playerMarker.setLngLat([pos.lng,pos.lat]);
+  const gpsAccuracy=state.mode==='gps'?state.accuracy:null;
+  state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(pos,gpsAccuracy));
+  if(follow || (state.mode==='gps' && state.followPlayer)){
+    state.map.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(16.6,state.map.getZoom()),duration:follow?500:700,essential:true});
+  }
 }
-function renderWorld() {
-  if(!state.mapReady) return;
+function renderWorld(){
+  if(!state.mapReady)return;
   const pos=getPosition();
-  state.mapLayer.clearLayers();state.resources=[];
-  if(!pos){updateNearby();return;}
+  if(!pos){for(const marker of state.markers.values())marker.remove();state.markers.clear();state.resources=[];updateNearby();return;}
   state.resources=generateResources(pos.lat,pos.lng,RESOURCE_RADIUS);
-  const profile=activeProfile();
-  for(const node of state.resources) {
-    const ready=isReady(profile.harvested[node.id]);
-    const reach=getRange(node);
-    const marker=L.marker([node.lat,node.lng],{icon:resourceIcon(node,reach.ok,!ready),title:TYPES[node.type].name,keyboard:true});
-    marker.on('click',()=>openResource(node)); marker.addTo(state.mapLayer);
+  const visible=new Set(state.resources.map(n=>n.id));
+  for(const [id,marker] of state.markers){
+    if(!visible.has(id)){marker.remove();state.markers.delete(id);}
+  }
+  for(const node of state.resources){
+    let marker=state.markers.get(node.id);
+    if(!marker){
+      marker=new maplibregl.Marker({element:makeResourceElement(node),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
+        .setLngLat([node.lng,node.lat]).addTo(state.map);
+      state.markers.set(node.id,marker);
+    }
+    updateNodeElement(marker.getElement(),node);
   }
   updateNearby();
 }
@@ -134,7 +221,7 @@ function setMode(mode,announce=true) {
     } catch(e){toast('GPS konnte nicht aktiviert werden.',true);console.warn(e);}
   } else {
     if(announce) toast('Demo-Modus aktiviert');
-    if(state.mapReady) state.map.setView([state.demoPosition.lat,state.demoPosition.lng],16);
+    if(state.mapReady){state.followPlayer=true;state.map.easeTo({center:[state.demoPosition.lng,state.demoPosition.lat],zoom:16.6,duration:500});}
   }
 }
 function onGeoSuccess(pos) {
@@ -143,6 +230,7 @@ function onGeoSuccess(pos) {
   const first=!state.position;
   state.position={lat,lng};state.accuracy=Number.isFinite(accuracy)?accuracy:999;
   state.timestamp=Date.now();state.speed=Number.isFinite(speed)?speed:0;
+  if(first)state.followPlayer=true;
   updatePositionOnMap(first);
   renderWorld();updateModeUI();
   if(first) toast('GPS-Position gefunden');
@@ -234,13 +322,13 @@ function setTab(tab) {
   state.activeTab=tab;
   for (const name of ['map','inventory','collection','settings']) $('screen-'+name).classList.toggle('active',name===tab);
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('selected',el.dataset.tab===tab));
-  if(tab==='map' && state.mapReady)setTimeout(()=>state.map.invalidateSize(),60);
+  if(tab==='map' && state.mapReady)setTimeout(()=>state.map.resize(),60);
   renderPanels();
 }
 function exportSave() {
   const data=localStorage.getItem(SAVE_KEY);if(!data){toast('Noch kein Spielstand vorhanden.',true);return;}
   const url=URL.createObjectURL(new Blob([JSON.stringify(JSON.parse(data),null,2)],{type:'application/json'}));
-  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.1-spielstand.json';
+  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.2-spielstand.json';
   document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
   toast('Spielstand exportiert');
 }
@@ -265,12 +353,24 @@ function resetProfile() {
 function recenter() {
   const pos=getPosition();
   if(!pos){toast('Noch keine GPS-Position vorhanden.',true);return;}
-  state.map?.setView([pos.lat,pos.lng],Math.max(state.map.getZoom(),16),{animate:true});
+  state.followPlayer=true;
+  state.map?.easeTo({center:[pos.lng,pos.lat],zoom:Math.max(state.map.getZoom(),16.6),duration:650,essential:true});
 }
 function bind() {
   document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
   $('status-badge').addEventListener('click',()=>setTab('settings'));
   $('btn-recenter').addEventListener('click',recenter);
+  $('btn-rotate').addEventListener('click',()=>{
+    if(!state.mapReady)return;
+    state.map.easeTo({bearing:state.map.getBearing()+45,duration:450});
+  });
+  $('btn-tilt').addEventListener('click',()=>{
+    if(!state.mapReady)return;
+    const is3d=state.map.getPitch()<25;
+    state.map.easeTo({pitch:is3d?55:0,duration:520});
+    $('btn-tilt').textContent=is3d?'3D':'2D';
+    $('btn-tilt').setAttribute('aria-pressed',String(is3d));
+  });
   $('btn-zoom-in').addEventListener('click',()=>state.map?.zoomIn());
   $('btn-zoom-out').addEventListener('click',()=>state.map?.zoomOut());
   $('btn-sheet-close').addEventListener('click',closeSheet);
@@ -302,6 +402,6 @@ function boot(){
       if(state.sheetMode==='resource')renderResourceSheet();
     }
   },30000);
-  console.info(`Weltwerk v${VERSION} · local prototype initialized`);
+  console.info(`Weltwerk v${VERSION} · tilted 3D exploration ready`);
 }
 boot();

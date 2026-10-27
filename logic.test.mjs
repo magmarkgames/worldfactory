@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {generateResources, rollHarvest, distanceMeters, cleanProfile, REGEN_MS, isReady, freshProfile, MATERIALS} from '../game-logic.js';
+import {generateResources, rollHarvest, distanceMeters, cleanProfile, REGEN_MS, isReady, freshProfile, MATERIALS} from './game-logic.js';
 const center={lat:51.9625,lng:7.627};
 const a=generateResources(center.lat,center.lng); const b=generateResources(center.lat,center.lng);
 assert.deepEqual(a,b,'World generation must be reproducible');

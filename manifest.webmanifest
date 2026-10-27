@@ -1,10 +1,10 @@
 {
-  "name": "Weltwerk – Exploration Prototype",
-  "short_name": "Weltwerk",
+  "name": "WELTWERK – Exploration 3D",
+  "short_name": "WELTWERK",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0c1721",
   "theme_color": "#0c1721",
-  "icons": [{"src":"assets/logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "icons": [{"src":"logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }

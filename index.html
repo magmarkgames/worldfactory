@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.1 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
-  <title>Weltwerk · Exploration v0.1</title>
-  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <meta name="description" content="Weltwerk v0.2 — entdecke Ressourcen auf einer echten Karte und sammle Materialien.">
+  <title>Weltwerk · Exploration 3D v0.2</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" defer></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>
@@ -19,11 +19,14 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="assets/logo.svg" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.1</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="logo.svg" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
+    <div class="camera-hint">3D-WELT <span>· ziehen zum Drehen</span></div>
     <div class="map-tools">
+      <button id="btn-tilt" class="map-tool map-tool-labeled" title="2D/3D-Ansicht wechseln" aria-label="2D/3D-Ansicht wechseln" aria-pressed="true">3D</button>
+      <button id="btn-rotate" class="map-tool" title="Kamera drehen" aria-label="Kamera um 45 Grad drehen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 8.5a8 8 0 1 1 0 7"/><path d="M4 3v6h6"/></svg></button>
       <button id="btn-recenter" class="map-tool" title="Zum Standort springen" aria-label="Zu meinem Standort springen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg></button>
       <button id="btn-zoom-in" class="map-tool" title="Vergrößern" aria-label="Karte vergrößern">+</button>
       <button id="btn-zoom-out" class="map-tool" title="Verkleinern" aria-label="Karte verkleinern">−</button>
@@ -31,13 +34,13 @@
     <div class="map-bottom-group">
       <div class="nearby-card"><div class="nearby-symbol"><span class="nearby-glow"></span>✦</div><div class="nearby-copy"><strong id="nearby-title">Entdecke die Umgebung</strong><span id="nearby-subtitle">Fundstellen in deiner Nähe</span></div><span id="nearby-counter" class="nearby-count">—</span></div>
       <div id="demo-controller" class="demo-controller hidden"><span class="controller-label">TESTMODUS <span>· Tippe die Karte zum Versetzen</span></span><div class="controller-actions"><button data-move="north" aria-label="Nach Norden bewegen">↑</button><button data-move="west" aria-label="Nach Westen bewegen">←</button><button data-move="south" aria-label="Nach Süden bewegen">↓</button><button data-move="east" aria-label="Nach Osten bewegen">→</button></div></div>
-      <p class="map-safety">Virtuelle Fundstellen · Nur von sicher zugänglichen Orten sammeln</p>
+      <p class="map-safety">3D-Karte · Virtuelle Fundstellen nur von sicheren Orten sammeln</p>
     </div>
   </main>
 
   <main id="screen-inventory" class="screen inner-screen" aria-label="Inventar">
     <div class="page-head"><div class="eyebrow">DEINE SAMMLUNG</div><h1>Rucksack<span class="dot">.</span></h1><p>Alles, was du bisher draußen gefunden hast.</p></div>
-    <div class="info-stripe"><div class="info-circle">📦</div><div><span>GESAMMELTE MATERIALIEN</span><strong id="inventory-total">0</strong></div><span class="info-extra">Kein Limit in v0.1</span></div>
+    <div class="info-stripe"><div class="info-circle">📦</div><div><span>GESAMMELTE MATERIALIEN</span><strong id="inventory-total">0</strong></div><span class="info-extra">Kein Limit in v0.2</span></div>
     <div class="section-title"><h2>Materialien</h2><span>6 Typen</span></div>
     <div id="inventory-grid" class="resource-grid"></div>
     <div class="soft-note"><span>💡</span><p>Die Ressourcen bleiben gespeichert. In einer späteren Version kannst du daraus Maschinen, Werkzeuge und mehr herstellen.</p></div>
@@ -54,7 +57,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.1 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Die Karte benötigt eine Internetverbindung. Keine Fabrik, Accounts, Echtgeld oder Ranglisten in dieser Version.</p><p class="muted">Karte: © OpenStreetMap-Mitwirkende · Darstellung: Leaflet</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Die Karte benötigt eine Internetverbindung. Gebäude sind echte 3D-Kartenobjekte (sofern Kartendaten vorhanden); Rohstofffiguren sind stilisierte 2.5D-Grafiken. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Karte: © OpenStreetMap-Mitwirkende · OpenFreeMap · MapLibre</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -66,8 +69,8 @@
 </div>
 
 <div id="modal-backdrop" class="modal-backdrop hidden" aria-hidden="true"><section id="resource-sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"><div class="sheet-handle"></div><button class="sheet-close" id="btn-sheet-close" aria-label="Schließen">×</button><div id="sheet-content"></div></section></div>
-<div id="welcome" class="welcome-backdrop hidden"><section class="welcome-card"><div class="welcome-mark"><img src="assets/logo.svg" alt=""></div><div class="eyebrow">DEIN ABENTEUER BEGINNT</div><h1>Deine Welt.<br><em>Deine Entdeckungen.</em></h1><p>Erkunde eine echte Karte, finde Rohstoffe und baue deine Sammlung auf. Die Fabrik folgt in einer späteren Version.</p><button id="welcome-demo" class="solid-btn full-btn">Im Demo-Modus testen <span>→</span></button><button id="welcome-gps" class="outline-btn full-btn">Mit echtem GPS starten</button><div class="welcome-caption">Im Demo-Modus kannst du dich auch vom Sofa aus bewegen. Keine Registrierung erforderlich.</div></section></div>
+<div id="welcome" class="welcome-backdrop hidden"><section class="welcome-card"><div class="welcome-mark"><img src="logo.svg" alt=""></div><div class="eyebrow">DEIN ABENTEUER BEGINNT</div><h1>Deine Welt.<br><em>Deine Entdeckungen.</em></h1><p>Erkunde eine echte Karte, finde Rohstoffe und baue deine Sammlung auf. Die Fabrik folgt in einer späteren Version.</p><button id="welcome-demo" class="solid-btn full-btn">Im Demo-Modus testen <span>→</span></button><button id="welcome-gps" class="outline-btn full-btn">Mit echtem GPS starten</button><div class="welcome-caption">Im Demo-Modus kannst du dich auch vom Sofa aus bewegen. Keine Registrierung erforderlich.</div></section></div>
 <div id="toast-area" class="toast-area" aria-live="polite"></div>
-<div id="no-map" class="no-map hidden">Die Karte konnte nicht geladen werden. Prüfe bitte deine Internetverbindung und lade die Seite neu.</div>
+<div id="no-map" class="no-map hidden">Die 3D-Karte konnte nicht geladen werden. Prüfe bitte deine Internetverbindung und ob dein Browser WebGL unterstützt. Lade anschließend die Seite neu.</div>
 </body>
 </html>
