@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.7 — sichtbarer Horizont und stabilere Fundstellen.">
-  <title>Weltwerk · Exploration 3D v0.2.7</title>
+  <meta name="description" content="Weltwerk v0.2.8 — sichtbarer Horizont und stabilere Fundstellen.">
+  <title>Weltwerk · Exploration 3D v0.2.8</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -114,6 +114,22 @@
 .ww-map-tiles{transform-origin:2300px center;filter:none!important}
 .ww-tile{will-change:auto}
 .ww-object-layer .backup-marker{transform-origin:50% 100%}
+
+/* v0.2.8 — stable Canvas world. No giant rotating 3D DOM surface. */
+.ww-canvas-map{background:linear-gradient(180deg,#4e9bdd 0%,#91d0ed 35%,#dbefde 100%)}
+.ww-canvas-map .ww-sky{z-index:0;inset:0;background:linear-gradient(180deg,#4798dc,#8ecdf2 24%,#ceeef5 43%,#e4f2e4 64%)}
+.ww-canvas-map .ww-world-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block}
+.ww-canvas-map .ww-distant{top:32%;z-index:1;opacity:.6}
+.ww-canvas-map .ww-horizon-mist{top:calc(32% - 12px);height:68px;z-index:3;pointer-events:none;background:linear-gradient(180deg,#e6f3e4e6,transparent)}
+.ww-canvas-map.ww-topdown .ww-horizon-mist,.ww-canvas-map.ww-topdown .ww-sky{display:none}
+.ww-canvas-map .ww-object-layer{z-index:6;pointer-events:none;position:absolute;inset:0}
+.ww-canvas-map .ww-object-layer .backup-marker{pointer-events:auto;position:absolute;transform-origin:50% 100%;transition:none!important;will-change:transform,left,top}
+.ww-canvas-map .ww-object-layer .world-resource{touch-action:manipulation;pointer-events:auto}
+.ww-canvas-map .ww-object-layer .world-player{pointer-events:none}
+.ww-canvas-map .ww-world-canvas,.ww-canvas-map .ww-object-layer{backface-visibility:visible}
+.ww-canvas-map .world-resource-art{transition:none!important}
+.ww-canvas-map .backup-map-caption{z-index:7}
+.ww-canvas-map .backup-map-attribution{z-index:7}
 </style>
 </head>
 <body>
@@ -122,7 +138,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.7 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.8 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
@@ -179,7 +195,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.7';
+const VERSION = '0.2.8';
 const START_ZOOM = 18.1; // nah genug für die Straßenansicht
 const MIN_ZOOM = 16.4, MAX_ZOOM = 19.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -300,64 +316,57 @@ function mapPoint(lngLat){
   return {lng:7.627,lat:51.9625};
 }
 class BackupMap {
-  // The ground is a true CSS perspective plane; markers are projected into the same view.
-  // GPS/drops/saves from 0.2.2 continue unchanged.
-  constructor({container,center,zoom=START_ZOOM,pitch=74,bearing=0}) {
+  // Canvas sky-ground renderer: a single inverse camera projection is used for
+  // both actual road tiles and interactive resource/player locations.
+  // No giant CSS 3D plane, no clipped surfaces, no separate marker transform.
+  constructor({container,center,zoom=START_ZOOM,pitch=62,bearing=0}) {
     this.el=typeof container==='string'?document.getElementById(container):container;
     this.center=mapPoint(center);this.zoom=zoom;this.pitch=pitch;this.bearing=bearing;
     this.handlers={};this.markers=new Set();this.tiles=new Map();this._pointer=null;
-    this.el.innerHTML='';this.el.classList.add('backup-map');
+    this._raf=0;this._atlasDirty=true;this._needRender=true;this._tileEpoch=0;
+    this.el.innerHTML='';this.el.classList.add('backup-map','ww-canvas-map');
+    this.el.style.setProperty('--ww-horizon','32%');
     this.el.innerHTML='<div class="ww-sky"><div class="ww-sun"></div><div class="ww-cloud ww-cloud-a"></div><div class="ww-cloud ww-cloud-b"></div><div class="ww-distant"></div></div>';
-    this.shell=document.createElement('div');this.shell.className='ww-perspective';
-    this.ground=document.createElement('div');this.ground.className='ww-ground';
-    this.tileLayer=document.createElement('div');this.tileLayer.className='ww-map-tiles';
-    this.fallback=document.createElement('div');this.fallback.className='ww-fallback-roads';
-    // Seamless fallback underneath the raster layer; no finite rectangular SVG.
-    this.fallback.innerHTML='';
-    this.raster=document.createElement('div');this.raster.className='ww-raster';
-    this.tileLayer.append(this.fallback,this.raster);this.ground.appendChild(this.tileLayer);this.shell.appendChild(this.ground);
-    this.fog=document.createElement('div');this.fog.className='ww-horizon-mist';
+    this.canvas=document.createElement('canvas');this.canvas.className='ww-world-canvas';
+    this.ctx=this.canvas.getContext('2d',{alpha:true,desynchronized:false});
+    this.ctx.imageSmoothingEnabled=true;
+    this.atlas=document.createElement('canvas');this.atlas.width=256*7;this.atlas.height=256*7;
+    this.actx=this.atlas.getContext('2d');
     this.markerLayer=document.createElement('div');this.markerLayer.className='ww-object-layer';
+    this.fog=document.createElement('div');this.fog.className='ww-horizon-mist';
     this.caption=document.createElement('div');this.caption.className='backup-map-caption';
-    this.caption.textContent='SKY VIEW · FOKUS AUF HORIZONT';
     this.attribution=document.createElement('div');this.attribution.className='backup-map-attribution';
     this.attribution.innerHTML='Karte © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>';
-    this.el.append(this.shell,this.fog,this.markerLayer,this.caption,this.attribution);
-    this.planeCenterX=3800;this.planeDepth=500;this.el.style.setProperty('--ww-horizon','46%');
-    // Robust touch rotation: pointer capture keeps swipe events arriving even if
-    // the finger leaves the map. Touch pointermove does not always set e.buttons.
+    this.el.append(this.canvas,this.fog,this.markerLayer,this.caption,this.attribution);
     this.el.addEventListener('pointerdown',e=>{
-      if(e.target.closest('button,a'))return;
+      // Buttons and collectible markers must receive their native click events.
+      if(e.target.closest('button,a,.backup-marker,.world-resource'))return;
       if(this._pointer)return;
-      this._pointer={id:e.pointerId,x:e.clientX,y:e.clientY,
-        bearing:this.bearing,moved:false};
+      this._pointer={id:e.pointerId,x:e.clientX,y:e.clientY,bearing:this.bearing,moved:false};
       try{this.el.setPointerCapture(e.pointerId);}catch(_){}
     });
     this.el.addEventListener('pointermove',e=>{
       const start=this._pointer;
       if(!start || e.pointerId!==start.id)return;
       const dx=e.clientX-start.x,dy=e.clientY-start.y;
-      if(Math.hypot(dx,dy)<7 && !start.moved)return;
+      if(Math.hypot(dx,dy)<6 && !start.moved)return;
       start.moved=true;
-      // Dragging the world to the right rotates the map to the right.
-      this.bearing=((start.bearing+dx*0.36)%360+360)%360;
-      // Keep pitch AND zoom fixed while turning. Vertical swipes never dolly the camera.
-      this._emit('dragstart');this.scheduleRedraw();
+      this.bearing=((start.bearing+dx*.36)%360+360)%360;
+      this.scheduleRedraw();
       if(e.cancelable)e.preventDefault();
     },{passive:false});
-    this.el.addEventListener('pointerup',e=>{
-      if(!this._pointer || this._pointer.id!==e.pointerId)return;
+    const finish=e=>{
+      if(!this._pointer || e.pointerId!==this._pointer.id)return;
       const start=this._pointer;this._pointer=null;
       try{this.el.releasePointerCapture(e.pointerId);}catch(_){}
-      if(start.moved || e.target.closest('button,a'))return;
+      if(start.moved)return;
       const loc=this.screenToLngLat(e.clientX,e.clientY);
       if(loc)this._emit('click',{lngLat:loc});
-    });
-    this.el.addEventListener('pointercancel',e=>{
-      if(this._pointer?.id===e.pointerId)this._pointer=null;
-    });
+    };
+    this.el.addEventListener('pointerup',finish);
+    this.el.addEventListener('pointercancel',e=>{if(this._pointer?.id===e.pointerId)this._pointer=null;});
     this.el.addEventListener('wheel',e=>{
-      e.preventDefault();this.zoom=bound(this.zoom+(e.deltaY<0?.25:-.25),MIN_ZOOM,MAX_ZOOM);this.redraw();
+      e.preventDefault();this.zoom=bound(this.zoom+(e.deltaY<0?.25:-.25),MIN_ZOOM,MAX_ZOOM);this.scheduleRedraw();
     },{passive:false});
     this.updatePitch();this.redraw();setTimeout(()=>this._emit('load'),10);
   }
@@ -378,97 +387,137 @@ class BackupMap {
   easeTo(options={}){
     if(options.center)this.center=mapPoint(options.center);
     if(Number.isFinite(options.zoom))this.zoom=bound(options.zoom,MIN_ZOOM,MAX_ZOOM);
-    if(Number.isFinite(options.bearing))this.bearing=options.bearing;
+    if(Number.isFinite(options.bearing))this.bearing=((options.bearing%360)+360)%360;
     if(Number.isFinite(options.pitch)){
       this.pitch=options.pitch;this.updatePitch();this._emit('pitchend');
     }
-    this.redraw();
+    this.scheduleRedraw();
   }
   updatePitch(){this.el.classList.toggle('ww-topdown',this.pitch<20);}
   params(){
-    const rect=this.el.getBoundingClientRect(),w=rect.width,h=rect.height;
+    const r=this.el.getBoundingClientRect(),w=r.width,h=r.height;
     const z=Math.floor(this.zoom),scale=2**(this.zoom-z);
-    return {w,h,z,scale,center:world(this.center.lat,this.center.lng,z),horizon:.46*h,
-      depth:.42*h,perspective:1.28*h,angle:this.pitch*Math.PI/180};
+    const topDown=this.pitch<20;
+    const horizon=topDown?0:.32*h;
+    const playerY=topDown?h/2:.73*h;
+    return {w,h,z,scale,center:world(this.center.lat,this.center.lng,z),horizon,
+      playerY,focal:Math.max(340,h*.73),topDown};
   }
+  // Forward projection, matching the ground canvas inverse exactly.
   projectOffset(dx,dy,p){
     const a=this.bearing*Math.PI/180,cs=Math.cos(a),sn=Math.sin(a);
-    const xx=dx*cs-dy*sn, yy=dx*sn+dy*cs;
-    if(this.pitch<20)return {x:p.w/2+xx,y:p.h/2+yy,scale:1};
-    const g=p.depth+yy;
-    if(g<=5)return null;
-    const divisor=1-(g*Math.sin(p.angle))/p.perspective;
-    if(divisor<.14)return null;
-    const groundY=p.horizon+(g*Math.cos(p.angle))/divisor;
-    return {x:p.w/2+xx/divisor,y:groundY,scale:0.92};
+    const xx=dx*cs-dy*sn,yy=dx*sn+dy*cs;
+    if(p.topDown)return {x:p.w/2+xx,y:p.h/2+yy,scale:1};
+    const denom=p.focal-yy;
+    if(denom<2)return null; // behind camera/too close to project
+    const s=p.focal/denom;
+    return {x:p.w/2+xx*s,y:p.horizon+(p.playerY-p.horizon)*s,scale:1};
+  }
+  inverseOffset(x,y,p){
+    let xx,yy;
+    if(p.topDown){xx=x-p.w/2;yy=y-p.h/2;}
+    else {
+      if(y<=p.horizon+1)return null;
+      const s=(y-p.horizon)/(p.playerY-p.horizon);
+      yy=p.focal*(1-1/s);xx=(x-p.w/2)/s;
+    }
+    const a=this.bearing*Math.PI/180,cs=Math.cos(a),sn=Math.sin(a);
+    return {dx:xx*cs+yy*sn,dy:-xx*sn+yy*cs};
   }
   screenToLngLat(clientX,clientY){
     const rect=this.el.getBoundingClientRect(),p=this.params();
-    const x=clientX-rect.left,y=clientY-rect.top;
-    let xx,yy;
-    if(this.pitch<20){xx=x-p.w/2;yy=y-p.h/2;}
-    else{
-      const v=y-p.horizon;
-      if(v<5)return null; // Sky isn't a place where you can teleport.
-      const groundY=v*p.perspective/(p.perspective*Math.cos(p.angle)+v*Math.sin(p.angle));
-      if(!Number.isFinite(groundY)||groundY<5)return null;
-      xx=(x-p.w/2)*(1-(groundY*Math.sin(p.angle))/p.perspective);
-      yy=groundY-p.depth;
+    const delta=this.inverseOffset(clientX-rect.left,clientY-rect.top,p);
+    return delta?geo(p.center.x+delta.dx/p.scale,p.center.y+delta.dy/p.scale,p.z):null;
+  }
+  // Load a small, stable atlas around the player; redraw on tile arrivals only.
+  prepareAtlas(p){
+    const baseX=Math.floor(p.center.x/TILE),baseY=Math.floor(p.center.y/TILE);
+    const originX=baseX-3,originY=baseY-3;
+    const key=`${p.z}/${originX}/${originY}`;
+    if(key===this.atlasKey && !this._atlasDirty)return;
+    this.atlasKey=key;this._atlasDirty=false;this.atlasOrigin={x:originX*TILE,y:originY*TILE};
+    const c=this.actx;
+    // Opaque stylized map beneath any missing network tiles.
+    c.fillStyle='#b9d7b0';c.fillRect(0,0,this.atlas.width,this.atlas.height);
+    c.strokeStyle='#f6ebd7';c.lineWidth=30;
+    for(let i=-7;i<=11;i++){c.beginPath();c.moveTo(i*250,0);c.lineTo(i*250+720,this.atlas.height);c.stroke();}
+    c.strokeStyle='#f3eedc';c.lineWidth=20;
+    for(let j=0;j<10;j++){c.beginPath();c.moveTo(0,j*260+100);c.lineTo(this.atlas.width,j*260+100);c.stroke();}
+    const next=new Set();
+    for(let j=0;j<7;j++)for(let i=0;i<7;i++){
+      const x=originX+i,y=originY+j,lim=2**p.z;
+      if(y<0||y>=lim)continue;
+      const safeX=((x%lim)+lim)%lim;
+      const tkey=`${p.z}/${safeX}/${y}`;next.add(tkey);
+      let img=this.tiles.get(tkey);
+      if(!img){
+        img=new Image();img.decoding='async';
+        img.onload=()=>{if(!this.el.isConnected)return;this._atlasDirty=true;clearTimeout(this._tileRefresh);this._tileRefresh=setTimeout(()=>this.scheduleRedraw(),90);};
+        img.onerror=()=>{ /* fallback remains readable and usable */ };
+        img.src=`https://tile.openstreetmap.org/${tkey}.png`;
+        this.tiles.set(tkey,img);
+      }
+      if(img.complete&&img.naturalWidth>0){
+        try{c.drawImage(img,i*TILE,j*TILE,TILE+1,TILE+1);}catch(_){}
+      }
     }
-    const a=this.bearing*Math.PI/180,cs=Math.cos(a),sn=Math.sin(a);
-    const dx=xx*cs+yy*sn,dy=-xx*sn+yy*cs;
-    return geo(p.center.x+dx/p.scale,p.center.y+dy/p.scale,p.z);
+    // limit memory: keep only atlas region and one neighboring region for panning
+    if(this.tiles.size>180)for(const [tkey] of this.tiles){if(!next.has(tkey))this.tiles.delete(tkey);}
+  }
+  paintGround(p){
+    const w=p.w,h=p.h;
+    if(!w||!h)return;
+    const dpr=Math.min(1.5,window.devicePixelRatio||1);
+    const pw=Math.round(w*dpr),ph=Math.round(h*dpr);
+    if(this.canvas.width!==pw ||this.canvas.height!==ph){this.canvas.width=pw;this.canvas.height=ph;}
+    const ctx=this.ctx;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+    if(!p.topDown){
+      ctx.fillStyle='#bbd8b4';ctx.fillRect(0,p.horizon,w,h-p.horizon);
+    }else{ctx.fillStyle='#b7d8ae';ctx.fillRect(0,0,w,h);}
+    this.prepareAtlas(p);
+    // Use scanline textured ground. No browser CSS 3D; the inverse matches markers.
+    // The atlas itself is drawn as affine 2-pixel strips, approximating perspective.
+    const stripe=3,begin=p.topDown?0:Math.round(p.horizon+2);
+    const ox=this.atlasOrigin.x,oy=this.atlasOrigin.y;
+    for(let y=begin;y<h;y+=stripe){
+      const bh=Math.min(stripe,h-y);
+      const bl=this.inverseOffset(0,y+0.4,p);
+      const br=this.inverseOffset(w,y+0.4,p);
+      const dl=this.inverseOffset(0,y+bh+0.4,p);
+      if(!bl||!br||!dl)continue;
+      const u0=p.center.x+bl.dx/p.scale-ox,v0=p.center.y+bl.dy/p.scale-oy;
+      const u1=p.center.x+br.dx/p.scale-ox,v1=p.center.y+br.dy/p.scale-oy;
+      const u2=p.center.x+dl.dx/p.scale-ox,v2=p.center.y+dl.dy/p.scale-oy;
+      const U=u1-u0,V=v1-v0,P=u2-u0,Q=v2-v0;
+      const det=U*Q-P*V;
+      if(Math.abs(det)<.000001)continue;
+      const a=w*Q/det,c=-w*P/det,b=-bh*V/det,d=bh*U/det;
+      const e=-a*u0-c*v0,f=y-b*u0-d*v0;
+      ctx.save();ctx.beginPath();ctx.rect(0,y,w,bh+0.8);ctx.clip();
+      ctx.setTransform(a*dpr,b*dpr,c*dpr,d*dpr,e*dpr,f*dpr);
+      ctx.drawImage(this.atlas,0,0);
+      ctx.restore();
+    }
+    ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   redraw(){
     if(!this.el.isConnected)return;
     const p=this.params();if(!p.w||!p.h)return;
-    this.caption.textContent=`RICHTUNG ${Math.round(this.bearing)}° · ZOOM ${this.zoom.toFixed(1)} · Neigung fest`;
-    this.planeDepth=p.depth;this.el.style.setProperty('--ww-perspective',`${p.perspective}px`);this.el.style.setProperty('--ww-ground-height','6400px');
-    this.ground.style.transform=this.pitch<20?'translateX(-50%)':`translateX(-50%) rotateX(${this.pitch}deg)`;
-    this.ground.style.top=this.pitch<20?`${p.h/2-p.depth}px`:'46%';
-    const a=this.bearing*Math.PI/180,cs=Math.cos(a),sn=Math.sin(a);
-    // Rotate the real street map in the ground plane around the player's position.
-    this.tileLayer.style.transform=`rotate(${this.bearing}deg)`;
-    this.tileLayer.style.transformOrigin=`${this.planeCenterX}px ${p.depth}px`;
-    // A feathered, larger raster surface prevents a visible square edge during turns.
-    // All tiles and all markers use the SAME unrotated Mercator coordinates.
-    const baseX=Math.floor(p.center.x/TILE),baseY=Math.floor(p.center.y/TILE);
-    const xR=5,yR=5,leftX=baseX-xR,topY=baseY-yR;
-    const tileSize=TILE*p.scale;
-    this.raster.style.left=`${this.planeCenterX+(leftX*TILE-p.center.x)*p.scale}px`;
-    this.raster.style.top=`${p.depth+(topY*TILE-p.center.y)*p.scale}px`;
-    this.raster.style.width=`${(xR*2+1)*tileSize}px`;
-    this.raster.style.height=`${(yR*2+1)*tileSize}px`;
-    this.raster.style.borderRadius='999px';
-    const needed=new Set();
-    for(let ix=leftX;ix<=baseX+xR;ix++)for(let iy=topY;iy<=baseY+yR;iy++){
-      const n=2**p.z;if(iy<0||iy>=n)continue;
-      const safeX=((ix%n)+n)%n,key=`${p.z}/${safeX}/${iy}`;needed.add(key);
-      let img=this.tiles.get(key);
-      if(!img){
-        img=document.createElement('img');img.className='ww-tile';img.alt='';img.decoding='async';img.draggable=false;
-        img.loading='eager';img.src=`https://tile.openstreetmap.org/${key}.png`;
-        img.onload=()=>{if(this.el.isConnected && img.naturalWidth>0)this.el.classList.add('ww-tiles-loaded');};
-        img.onerror=()=>{img.style.visibility='hidden';};
-        this.tiles.set(key,img);this.raster.appendChild(img);
-        if(img.complete && img.naturalWidth>0)this.el.classList.add('ww-tiles-loaded');
-      }
-      img.style.left=`${(ix-leftX)*tileSize}px`;
-      img.style.top=`${(iy-topY)*tileSize}px`;
-      img.style.width=`${tileSize+1}px`;img.style.height=`${tileSize+1}px`;
-    }
-    for(const [key,img] of this.tiles){if(!needed.has(key)){img.remove();this.tiles.delete(key);}}
+    this.caption.textContent=`RICHTUNG ${Math.round(this.bearing)}° · ZOOM ${this.zoom.toFixed(1)} · ${p.topDown?'DRAUFSICHT':'HORIZONT'}`;
+    this.paintGround(p);
     for(const marker of this.markers){
       const coord=world(marker.pos.lat,marker.pos.lng,p.z);
       const result=this.projectOffset((coord.x-p.center.x)*p.scale,(coord.y-p.center.y)*p.scale,p);
       const el=marker.element;
-      if(!result || result.x< -180 || result.x>p.w+180 || result.y< -160 || result.y>p.h+180){el.style.display='none';continue;}
+      if(!result || result.x< -90 ||result.x>p.w+90 ||result.y< -100||result.y>p.h+110){el.style.display='none';continue;}
       el.style.display='';el.style.left=`${result.x}px`;el.style.top=`${result.y}px`;
-      el.style.transform=`translate(-50%,-95%) scale(${result.scale})`;
+      el.style.transform='translate(-50%,-95%)'; // stable size, clickable hitbox
       el.style.zIndex=String(Math.round(result.y));
     }
   }
-  remove(){if(this._raf)cancelAnimationFrame(this._raf);this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
+  remove(){if(this._raf)cancelAnimationFrame(this._raf);clearTimeout(this._tileRefresh);this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
 }
 class BackupMarker {
   constructor({element}){this.element=element;this.pos={lat:0,lng:0};this.map=null;}
@@ -556,7 +605,7 @@ function queue3DUpgrade(){
 }
 function setMapStatus(label){
   const el=document.querySelector('.camera-hint');
-  if(el)el.firstChild.textContent='NAHKAMERA · ';
+  if(el)el.firstChild.textContent='SKY-KAMERA · ';
   $('btn-tilt').textContent=state.map?.getPitch()>=25?'3D':'2D';
 }
 function stage3DMap(){
@@ -625,7 +674,7 @@ function startBackupMap(reason){
   try{old?.remove();}catch(e){console.warn(e);}
   $('map').innerHTML='';
   try{
-    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:START_ZOOM,pitch:74,bearing:0});
+    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:START_ZOOM,pitch:62,bearing:0});
     state.map=map;state.mapKind='backup';
     attachMapEvents(map);
     map.on('load',()=>finalizeMap(map,'backup'));
@@ -905,7 +954,7 @@ function bind() {
   $('btn-tilt').addEventListener('click',()=>{
     if(!state.mapReady)return;
     const is3d=state.map.getPitch()<25;
-    state.map.easeTo({pitch:is3d?74:0,duration:520});
+    state.map.easeTo({pitch:is3d?62:0,duration:520});
     $('btn-tilt').textContent=is3d?'3D':'2D';
     $('btn-tilt').setAttribute('aria-pressed',String(is3d));
   });
