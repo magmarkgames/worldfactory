@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.20 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
-  <title>Weltwerk · Exploration 3D v0.2.20</title>
+  <meta name="description" content="Weltwerk v0.2.21 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
+  <title>Weltwerk · Exploration 3D v0.2.21</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -152,7 +152,7 @@
 #map-3d.ww-vector-stage{position:absolute;inset:0;z-index:1;visibility:hidden;background:#8bc576}
 #map-3d.ww-vector-stage.ww-vector-active{visibility:visible}
 
-/* World Tappables v1: independent full-screen tree collector. */
+/* World Tappables v1.1: independent full-screen tree collector. */
 .tree-scene{position:fixed;inset:0;z-index:1250;display:flex;justify-content:center;background:#0c1a1d;color:#f3fff9;overflow:hidden}
 .tree-scene-inner{width:100%;max-width:540px;height:100%;height:100dvh;display:flex;flex-direction:column;position:relative;background:linear-gradient(180deg,#183d47 0%,#193f41 46%,#13352e 100%)}
 .tree-top{display:flex;align-items:center;gap:11px;padding:calc(13px + env(safe-area-inset-top,0px)) 17px 11px;z-index:5;flex-shrink:0;border-bottom:1px solid #b6ffe41f}
@@ -198,7 +198,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.20 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.21 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -237,7 +237,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.20 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.21 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -257,7 +257,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.20';
+const VERSION = '0.2.21';
 const START_ZOOM = 19.5; // maximal erlaubter Startzoom; manuell weiterhin verkleinerbar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 19.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -278,6 +278,7 @@ const MATERIALS = Object.freeze({
   apple: {name:'Apfel',icon:'🍎',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
   pear: {name:'Birne',icon:'🍐',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
   cherry: {name:'Kirsche',icon:'🍒',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
+  seed: {name:'Besonderer Samen',icon:'🌱',rarity:'rare',note:'Ein seltener Fund in einer Baumkrone, später für besondere Rezepte.'},
   honey: {name:'Honig',icon:'🍯',rarity:'uncommon',note:'Ein virtueller Fund aus einem Bienennest.'},
   wax: {name:'Wachs',icon:'🕯️',rarity:'uncommon',note:'Ein seltener virtueller Fund aus einem Bienennest.'},
   egg: {name:'Ei',icon:'🥚',rarity:'uncommon',note:'Ein virtuelles Fundstück aus einer Vogelnest-Szene.'},
@@ -289,7 +290,7 @@ const ANIMALS = Object.freeze({
   bird:{name:'Vogel',icon:'🐦',note:'Virtuelle Sichtung am Vogelnest.'}
 });
 const TYPES = Object.freeze({
-  tree: { name: 'Baum', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.20, color: '#63c58f', desc: 'Untersuche drei Stammstellen, Zweige und mit Glück versteckte Sonderfunde.' },
+  tree: { name: 'Baum', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.03, color: '#63c58f', desc: 'Untersuche drei Stammstellen, Zweige und mit Glück versteckte Sonderfunde.' },
   rock: { name: 'Steinvorkommen', icon: '🪨', material: 'stone', bonus: 'iron', bonusProbability: 0.15, color: '#94adca', desc: 'Ein Steinvorkommen mit einer kleinen Chance auf Eisenerz.' },
   scrap: { name: 'Schrottfundstelle', icon: '🔩', material: 'scrap', bonus: 'copper', bonusProbability: 0.15, color: '#e7b375', desc: 'Zurückgelassene Metallteile. Manchmal findet sich Kupferdraht.' },
 });
@@ -362,26 +363,31 @@ function createTreeSession(node,random=Math.random,now=Date.now()){
   for(let i=0;i<3;i++){
     const [x,y]=TRUNK_POINTS[i],id='trunk-'+i;
     add(id,'trunk','wood',mult,x,y);
-    const bonus=weightedPick([[null,.825],['mushroom',.10],['resin',.05],['squirrel',.025]],random);
+    // Balancing v1.1: mushroom 7%, resin 3%; animals are NOT per-trunk drops.
+    const bonus=weightedPick([[null,.90],['mushroom',.07],['resin',.03]],random);
     if(bonus)add('trunkbonus-'+i,'bonus',bonus,1,x,y,id);
   }
   const branchCount=random()<.5?6:3;
   for(let i=0;i<branchCount;i++){
     const [x,y]=BRANCH_POINTS[i],id='branch-'+i;
     add(id,'branch','twig',mult,x,y);
-    const bonus=weightedPick([[null,.325],['leaf',.50],['cone',.10],['apple',.025],['pear',.025],['cherry',.025]],random);
+    const bonus=weightedPick([[null,.35],['leaf',.50],['cone',.08],['apple',.02],['pear',.02],['cherry',.02],['seed',.01]],random);
     if(bonus)add('branchbonus-'+i,'bonus',bonus,1,x,y,id);
   }
-  const nestRoll=random();const nestType=nestRoll<.025?'bee':nestRoll<.04?'bird':null;
+  // Only one squirrel encounter roll per tree, independent of wood slots.
+  if(random()<.015)add('squirrel','event','squirrel',1,65,58);
+  // Mutually exclusive nests: 1% beehive, 1% bird nest, 98% neither.
+  const nestRoll=random();const nestType=nestRoll<.01?'bee':nestRoll<.02?'bird':null;
   if(nestType){
     add('nest','nest',null,0,nestType==='bee'?64:29,nestType==='bee'?34:39,null,nestType);
     const table=nestType==='bee'?[[null,.10],['honey',.80],['wax',.05],['bee',.05]]
       :[[null,.25],['egg',.60],['feather',.10],['bird',.05]];
-    for(let i=0;i<2;i++){
-      const item=weightedPick(table,random);
-      // Empty nest compartments are examined, but cannot be harvested repeatedly.
-      add('nestitem-'+i,'nestItem',item,item?1:0,0,0,'nest',nestType);
-    }
+    // Every rare nest contains at least one useful find. The second slot
+    // retains the original odds (including the chance for an empty slot).
+    const guaranteed=nestType==='bee'?'honey':'feather';
+    add('nestitem-0','nestItem',guaranteed,1,0,0,'nest',nestType);
+    const second=weightedPick(table,random);
+    add('nestitem-1','nestItem',second,second?1:0,0,0,'nest',nestType);
   }
   return {startedAt:now,slots,nestOpen:false,completeAt:0,earned:{}};
 }
@@ -396,11 +402,12 @@ function treeSlotIcon(slot){
   if(slot.zone==='trunk')return '🪵';
   if(slot.zone==='branch')return '🌿';
   if(slot.zone==='nest')return slot.nestType==='bee'?'🐝':'🪺';
+  if(slot.zone==='event')return '🐿️';
   return MATERIALS[slot.item]?.icon || ANIMALS[slot.item]?.icon || '🔎';
 }
 const TREE_ACTIONS=Object.freeze({
   wood:'Holz lösen',twig:'Zweig abbrechen',mushroom:'Pilz herausziehen',resin:'Harz abkratzen',
-  leaf:'Blatt pflücken',cone:'Zapfen aufheben',apple:'Apfel pflücken',pear:'Birne pflücken',cherry:'Kirsche pflücken',
+  leaf:'Blatt pflücken',cone:'Zapfen aufheben',apple:'Apfel pflücken',pear:'Birne pflücken',cherry:'Kirsche pflücken',seed:'Samen entdecken',
   honey:'Honig entnehmen',wax:'Wachs lösen',egg:'Nest behutsam untersuchen',feather:'Feder entdecken',
   squirrel:'Eichhörnchen beobachten',bee:'Biene beobachten',bird:'Vogel beobachten'
 });
@@ -435,7 +442,7 @@ function cleanProfile(candidate) {
       const slots=[];
       for(const r of raw.slots){
         if(!r||typeof r!=='object'||typeof r.id!=='string'||!/^[a-zA-Z0-9-]{1,40}$/.test(r.id))continue;
-        if(!['trunk','branch','bonus','nest','nestItem'].includes(r.zone))continue;
+        if(!['trunk','branch','bonus','event','nest','nestItem'].includes(r.zone))continue;
         if(r.item!==null && typeof r.item!=='string')continue;
         if(r.item!==null && !(r.item in MATERIALS) && !(r.item in ANIMALS))continue;
         if(!Number.isInteger(r.count)||r.count<0||r.count>8)continue;
@@ -1980,7 +1987,7 @@ function renderTreeScene(){
   const nestItems=session.slots.filter(s=>s.zone==='nestItem'&&!s.collected);
   const showNest=session.nestOpen&&!session.completeAt;
   const hotspots=displaySlots.map(slot=>{
-    const kind=slot.zone==='bonus'?'bonus':slot.zone==='nest'?'nest':'';
+    const kind=(slot.zone==='bonus'||slot.zone==='event')?'bonus':slot.zone==='nest'?'nest':'';
     const label=treeAction(slot);
     return `<button class="tree-hotspot ${kind}" style="left:${slot.x}%;top:${slot.y}%" data-tree-slot="${slot.id}" aria-label="${label}" title="${label}" ${canCollect?'':'disabled'}>${treeSlotIcon(slot)}</button>`;
   }).join('');
