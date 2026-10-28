@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.13 — Low-Poly-Welt mit aufstehenden Häusern, GPS, Rohstoffen und Sammeln.">
-  <title>Weltwerk · Exploration 3D v0.2.13</title>
+  <meta name="description" content="Weltwerk v0.2.14 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
+  <title>Weltwerk · Exploration 3D v0.2.14</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -115,7 +115,7 @@
 .ww-tile{will-change:auto}
 .ww-object-layer .backup-marker{transform-origin:50% 100%}
 
-/* v0.2.13 — stable Canvas world. No giant rotating 3D DOM surface. */
+/* v0.2.14 — stable Canvas world. No giant rotating 3D DOM surface. */
 .ww-canvas-map{background:linear-gradient(180deg,#4e9bdd 0%,#91d0ed 35%,#dbefde 100%)}
 .ww-canvas-map .ww-sky{z-index:0;inset:0;background:linear-gradient(180deg,#4798dc,#8ecdf2 24%,#ceeef5 43%,#e4f2e4 64%)}
 .ww-canvas-map .ww-world-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block}
@@ -130,7 +130,7 @@
 .ww-canvas-map .world-resource-art{transition:none!important}
 .ww-canvas-map .backup-map-caption{z-index:7}
 .ww-canvas-map .backup-map-attribution{z-index:7}
-/* v0.2.13: collectibles and player are composited into the SAME canvas as the roads.
+/* v0.2.14: collectibles and player are composited into the SAME canvas as the roads.
    Their DOM nodes remain solely as accessible event/storage objects. */
 .ww-canvas-map .ww-object-layer{display:none!important;pointer-events:none!important}
 .ww-canvas-map .ww-world-canvas{image-rendering:auto}
@@ -142,7 +142,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.13 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.14 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
@@ -181,7 +181,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.13 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäudegrundrisse werden gemeinsam mit den Rohstoffen auf dieselbe Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. 3D-Gebäude verwenden, sofern verfügbar, echte öffentliche OpenStreetMap-Umrisse über die Overpass API. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Verbindungsproblemen die 🏠-Taste erneut drücken. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.14 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen werden als dunkle Linien und Wasser blau auf einer grünen Spielkarte dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. 3D-Gebäude verwenden, sofern verfügbar, echte öffentliche OpenStreetMap-Umrisse über die Overpass API. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Verbindungsproblemen die 🏠-Taste erneut drücken. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -200,7 +200,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.13';
+const VERSION = '0.2.14';
 const START_ZOOM = 18.1; // nah genug für die Straßenansicht
 const MIN_ZOOM = 16.4, MAX_ZOOM = 19.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -333,6 +333,7 @@ const BUILDING_SESSION_CACHE = new Map();
 const BUILDING_CACHE_TTL = 15 * 60 * 1000;
 const BUILDING_GRID_METERS = 260;
 const COLLECT_RING_METERS = 50;
+const WORLD_PALETTE={grass:[142,198,129],park:[118,181,111],water:[93,175,223],road:[38,48,53],path:[76,91,88]};
 function buildingRegion(pos){
   const m=latLngToMeters(pos.lat,pos.lng);
   const ix=Math.floor(m.x/BUILDING_GRID_METERS),iy=Math.floor(m.y/BUILDING_GRID_METERS);
@@ -683,6 +684,37 @@ class BackupMap {
   }
   // Tile images are cached individually instead of being copied into a small
   // seven-by-seven texture. This eliminates the rectangular cut-off seen in 0.2.8.
+  stylizeTile(img){
+    // Convert standard OSM imagery into a clean, Minecraft-Earth-like palette.
+    // This is cached per tile, never processed again during camera rotation.
+    const tile=document.createElement('canvas');tile.width=TILE;tile.height=TILE;
+    const cx=tile.getContext('2d',{willReadFrequently:true});
+    cx.drawImage(img,0,0,TILE,TILE);
+    const frame=cx.getImageData(0,0,TILE,TILE),pixels=frame.data;
+    for(let i=0;i<pixels.length;i+=4){
+      const r=pixels[i],g=pixels[i+1],b=pixels[i+2];
+      const brightness=(r+g+b)/3;
+      const water=b>r*1.065 && b>g*1.045 && b>145 && (b-r)>13;
+      const vegetation=g>r*1.045 && g>b*.95 && g>95;
+      // Roads in the OSM raster are usually white or pale gray; classify them
+      // separately from green land and blue water.
+      const neutral=Math.max(r,g,b)-Math.min(r,g,b)<27;
+      const paleRoad=neutral && brightness>211;
+      const tanRoad=r>169 && g>139 && b<g*.94 && (r-b)>35;
+      const grayRoad=neutral && brightness>=145 && brightness<=211;
+      const darkLine=brightness<105;
+      let color;
+      if(water)color=WORLD_PALETTE.water;
+      else if(paleRoad||tanRoad)color=WORLD_PALETTE.road;
+      else if(grayRoad)color=WORLD_PALETTE.path;
+      else if(vegetation)color=WORLD_PALETTE.park;
+      else if(darkLine)color=WORLD_PALETTE.grass;
+      else color=WORLD_PALETTE.grass;
+      pixels[i]=color[0];pixels[i+1]=color[1];pixels[i+2]=color[2];pixels[i+3]=255;
+    }
+    cx.putImageData(frame,0,0);
+    return tile;
+  }
   getTile(z,x,y){
     const n=2**z;
     if(y<0||y>=n)return null;
@@ -700,8 +732,10 @@ class BackupMap {
       this._requestedThisFrame++;this._tileLoading++;
       item={status:'loading',img:new Image(),seen:performance.now()};
       item.img.decoding='async';
+      item.img.crossOrigin='anonymous';
       const finish=(ok)=>{
         this._tileLoading=Math.max(0,this._tileLoading-1);
+        if(ok){try{item.styled=this.stylizeTile(item.img);}catch(e){item.styled=null;console.warn('Kartenfarbe nicht verfügbar:',e?.message||e);}}
         item.status=ok?'ready':'error';
         if(!ok)item.failedAt=Date.now();
         if(!this.el.isConnected)return;
@@ -714,7 +748,7 @@ class BackupMap {
       this.tiles.set(key,item);
     }
     item.seen=performance.now();
-    return item.status==='ready'?item.img:null;
+    return item.status==='ready'?(item.styled||item.img):null;
   }
   // Real GPS roads are rendered continuously across the visible ground.
   // Two zoom levels are used: small distant tiles and detailed nearby tiles.
@@ -770,7 +804,7 @@ class BackupMap {
     ctx.clearRect(0,0,w,h);
     const y0=p.topDown?0:Math.round(p.horizon+1);
     const bg=ctx.createLinearGradient(0,y0,0,h);
-    bg.addColorStop(0,'#b6d7b4');bg.addColorStop(.45,'#c6dfbd');bg.addColorStop(1,'#c6dcbb');
+    bg.addColorStop(0,'#a6d89a');bg.addColorStop(.45,'#91c783');bg.addColorStop(1,'#8ec681');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
     // Animated camera redraws must not restart the network tile downloads.
     this._requestedThisFrame=0;
@@ -787,7 +821,7 @@ class BackupMap {
     if(!p.topDown){
       // Thin distant haze blurs the transition into the horizon naturally.
       const mist=ctx.createLinearGradient(0,p.horizon,0,p.horizon+110);
-      mist.addColorStop(0,'rgba(226,244,224,.72)');
+      mist.addColorStop(0,'rgba(179,219,166,.48)');
       mist.addColorStop(1,'rgba(226,244,224,0)');
       ctx.setTransform(dpr,0,0,dpr,0,0);
       ctx.fillStyle=mist;ctx.fillRect(0,p.horizon,w,110);
@@ -1053,7 +1087,7 @@ function stage3DMap(){
       try{backup?.remove();}catch{}
       $('map').style.display='none';el.style.visibility='visible';
       attachMapEvents(next);
-      addWorldBuildings();addAccuracyLayer();addCollectionRangeLayer();
+      applyGameMapPalette();addWorldBuildings();addAccuracyLayer();addCollectionRangeLayer();
       updatePositionOnMap(true);renderWorld();setMapStatus('3D');
       setTimeout(()=>next.resize(),150);
     });
@@ -1078,7 +1112,7 @@ function finalizeMap(map,kind){
   if(state.map!==map)return;
   state.mapReady=true;state.mapKind=kind;
   $('no-map').classList.add('hidden');
-  if(kind==='maplibre'){addWorldBuildings();addAccuracyLayer();addCollectionRangeLayer();}
+  if(kind==='maplibre'){applyGameMapPalette();addWorldBuildings();addAccuracyLayer();addCollectionRangeLayer();}
   updatePositionOnMap(true);renderWorld();updateModeUI();
   setTimeout(()=>state.map?.resize(),80);
 }
@@ -1102,6 +1136,27 @@ function startBackupMap(reason){
 }
 function makeMarker(args){
   return state.mapKind==='backup' ? new BackupMarker(args) : new maplibregl.Marker(args);
+}
+function applyGameMapPalette(){
+  if(!state.map || state.mapKind!=='maplibre')return;
+  try{
+    for(const layer of state.map.getStyle().layers||[]){
+      if(layer.type==='background')state.map.setPaintProperty(layer.id,'background-color','#8ec681');
+      if(layer.type==='fill'){
+        const id=layer.id.toLowerCase();
+        const color=/water|ocean|river|lake/.test(id)?'#5dafdf':/park|forest|wood|grass|green/.test(id)?'#76b56f':'#8ec681';
+        state.map.setPaintProperty(layer.id,'fill-color',color);
+        state.map.setPaintProperty(layer.id,'fill-opacity',1);
+      }
+      if(layer.type==='line'){
+        const id=layer.id.toLowerCase();
+        if(/road|street|highway|motorway|path|transport|bridge|tunnel/.test(id))state.map.setPaintProperty(layer.id,'line-color','#263136');
+        else if(/water|river|stream/.test(id))state.map.setPaintProperty(layer.id,'line-color','#5dafdf');
+      }
+      // No map labels: keep the map as a clean game board.
+      if(layer.type==='symbol')state.map.setLayoutProperty(layer.id,'visibility','none');
+    }
+  }catch(e){console.warn('Kartendesign konnte nicht vollständig angewendet werden',e);}
 }
 function addWorldBuildings(){
   if(!state.map || state.map.getLayer('weltwerk-buildings'))return;
