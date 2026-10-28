@@ -1,45 +1,14 @@
-# WELTWERK v0.2.21 – Baum-Balancing
+# WELTWERK v0.2.22 — Tropical World & Grounded Collectibles
 
-Diese Version übernimmt alle Funktionen aus v0.2.20 und ändert gezielt die Dropchancen der Baum-Sammelszene.
+## Änderungen
+- Neue Tropical-World-Farbpalette mit frischem Grün, sattgrünem Wald, türkisblauem Wasser, hellen Häusern und sanfteren graugrünen Straßen.
+- Gleiche Palette für Canvas-Vektorkarte, WebGL-Option und Raster-Notkarte.
+- Collectibles werden über einen echten Fußpunkt an der Weltkoordinate verankert (transparenten Bildrand bei der Bodenverankerung berücksichtigt).
+- Entfernungsabhängige Größenanpassung: entfernte Objekte kleiner, nahe größer – ohne Größenänderung allein durchs Drehen. Fußpunkt und Hitbox bleiben zusammen.
+- Sammel- und GPS-Mechanik, 50-m-Kreis, Baum-Tappables und Speicherschlüssel bleiben erhalten.
 
-## Neue Dropchancen
+## Installation
+`index.html` im Hauptverzeichnis des bisherigen GitHub-Repositories ersetzen. GitHub Pages dann mit `?v=0222` neu laden.
 
-### Stamm (je drei Punkte; pro Punkt 1 Holz garantiert)
-- Kein Bonus 90 %
-- Pilz 7 %
-- Harz 3 %
-
-### Zweige (3 Punkte + weitere 3 mit 50 %; je 1 Zweig garantiert)
-- Kein Bonus 35 %
-- Blatt 50 %
-- Tannenzapfen 8 %
-- Apfel 2 %
-- Birne 2 %
-- Kirsche 2 %
-- Besonderer Samen 1 % (neues Material im Rucksack/Lexikon)
-
-### Seltene Ereignisse (je Baum)
-- Eichhörnchen 1,5 %, separat von den Stammwürfen
-- Bienennest 1 %
-- Vogelnest 1 %
-- Kein Nest 98 %
-
-Nester sind gegenseitig ausgeschlossen und haben je zwei Fundplätze: der erste garantiert Honig bzw. eine Feder; der zweite hat die bisherigen zufälligen Nest-Dropchancen.
-
-### Unverändert
-- Reichhaltige Fundstellen 10 %, doppelte Menge an Grundmaterialien.
-- Regeneration 60 Minuten.
-- Stein- und Schrott-Dropchancen unverändert.
-- Bereits erzeugte, noch nicht abgeschlossene Baumszenen werden nicht neu ausgewürfelt.
-- GPS, Demo, Karte, Sammelradius, Inventar, Export/Import und Speicherstand-Schlüssel unverändert.
-
-## GitHub Pages aktualisieren
-
-1. ZIP herunterladen und entpacken.
-2. Nur `index.html` in das Hauptverzeichnis des bisherigen GitHub-Repositories hochladen und die bestehende Datei ersetzen.
-3. Änderungen committen.
-4. Website mit `?v=0221` am Ende öffnen; oben sollte `V0.2.21` stehen.
-
-## Prüfung
-
-JavaScript-Syntax geprüft; 150.000 generierte Bäume statistisch getestet; mobile Browserinteraktion für Teilsammeln, Wiederöffnung, Komplett-Ernte und Sonderfunde geprüft. Ein Live-Test mit echtem GPS auf Android steht noch aus.
+## Testhinweis
+Vektorkarten benötigen eine aktive Internetverbindung und erreichbare Kartenanbieter. Im Demo-Modus lassen sich Collectibles ohne GPS testen. Vor dem Update nach Möglichkeit unter Mehr > Export ein Backup erstellen.
