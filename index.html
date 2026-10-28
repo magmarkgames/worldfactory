@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.11 — Low-Poly-Welt mit aufstehenden Häusern, GPS, Rohstoffen und Sammeln.">
-  <title>Weltwerk · Exploration 3D v0.2.11</title>
+  <meta name="description" content="Weltwerk v0.2.12 — Low-Poly-Welt mit aufstehenden Häusern, GPS, Rohstoffen und Sammeln.">
+  <title>Weltwerk · Exploration 3D v0.2.12</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -115,7 +115,7 @@
 .ww-tile{will-change:auto}
 .ww-object-layer .backup-marker{transform-origin:50% 100%}
 
-/* v0.2.11 — stable Canvas world. No giant rotating 3D DOM surface. */
+/* v0.2.12 — stable Canvas world. No giant rotating 3D DOM surface. */
 .ww-canvas-map{background:linear-gradient(180deg,#4e9bdd 0%,#91d0ed 35%,#dbefde 100%)}
 .ww-canvas-map .ww-sky{z-index:0;inset:0;background:linear-gradient(180deg,#4798dc,#8ecdf2 24%,#ceeef5 43%,#e4f2e4 64%)}
 .ww-canvas-map .ww-world-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block}
@@ -130,7 +130,7 @@
 .ww-canvas-map .world-resource-art{transition:none!important}
 .ww-canvas-map .backup-map-caption{z-index:7}
 .ww-canvas-map .backup-map-attribution{z-index:7}
-/* v0.2.11: collectibles and player are composited into the SAME canvas as the roads.
+/* v0.2.12: collectibles and player are composited into the SAME canvas as the roads.
    Their DOM nodes remain solely as accessible event/storage objects. */
 .ww-canvas-map .ww-object-layer{display:none!important;pointer-events:none!important}
 .ww-canvas-map .ww-world-canvas{image-rendering:auto}
@@ -142,7 +142,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.11 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.12 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
@@ -181,7 +181,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.11 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäudegrundrisse werden gemeinsam mit den Rohstoffen auf dieselbe Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. 3D-Gebäude verwenden, sofern verfügbar, echte öffentliche OpenStreetMap-Umrisse über die Overpass API. Dafür wird die ungefähre Kartenregion an Overpass übertragen. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.12 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäudegrundrisse werden gemeinsam mit den Rohstoffen auf dieselbe Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. 3D-Gebäude verwenden, sofern verfügbar, echte öffentliche OpenStreetMap-Umrisse über die Overpass API. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Verbindungsproblemen die 🏠-Taste erneut drücken. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -200,7 +200,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.11';
+const VERSION = '0.2.12';
 const START_ZOOM = 18.1; // nah genug für die Straßenansicht
 const MIN_ZOOM = 16.4, MAX_ZOOM = 19.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -323,9 +323,24 @@ function mapPoint(lngLat){
 // A small, optional OSM footprint layer. The game is still fully playable when
 // Overpass is offline; real GPS data never leaves the page for other game services.
 const OSM_BUILDING_ENDPOINTS = [
-  'https://overpass-api.de/api/interpreter',
-  'https://overpass.kumi.systems/api/interpreter'
+  'https://overpass.private.coffee/api/interpreter',
+  'https://overpass-api.de/api/interpreter'
 ];
+// Session-only: visiting the same place again does not request the same buildings.
+// Deliberately NOT written to the saved profile or localStorage (GPS privacy).
+const BUILDING_SESSION_CACHE = new Map();
+const BUILDING_CACHE_TTL = 15 * 60 * 1000;
+const BUILDING_GRID_METERS = 260;
+function buildingRegion(pos){
+  const m=latLngToMeters(pos.lat,pos.lng);
+  const ix=Math.floor(m.x/BUILDING_GRID_METERS),iy=Math.floor(m.y/BUILDING_GRID_METERS);
+  return {key:`${ix}:${iy}`,center:metersToLatLng((ix+.5)*BUILDING_GRID_METERS,(iy+.5)*BUILDING_GRID_METERS)};
+}
+function buildingBBox(center,radiusMeters=300){
+  const latDelta=radiusMeters/111320;
+  const lngDelta=radiusMeters/(111320*Math.max(.2,Math.cos(center.lat*Math.PI/180)));
+  return `${(center.lat-latDelta).toFixed(6)},${(center.lng-lngDelta).toFixed(6)},${(center.lat+latDelta).toFixed(6)},${(center.lng+lngDelta).toFixed(6)}`;
+}
 function footprintHash(id){
   let h=2166136261;
   for(const c of String(id)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}
@@ -378,8 +393,9 @@ class BackupMap {
     this.handlers={};this.markers=new Set();this.tiles=new Map();this._pointer=null;
     this._raf=0;this._needRender=true;
     this.buildings=[];this.landuse=[];this.showBuildings=true;
-    this.buildingStatus='idle';this._lastBuildingCenter=null;this._lastBuildingAttempt=0;
+    this.buildingStatus='idle';this._lastBuildingKey=null;this._lastBuildingAttempt=0;
     this._buildingAbort=null;this._buildingRequest=0;
+    this._tileLoading=0;this._tileMaxConcurrent=5;
     this.el.innerHTML='';this.el.classList.add('backup-map','ww-canvas-map');
     this.el.style.setProperty('--ww-horizon','32%');
     this.el.innerHTML='<div class="ww-sky"><div class="ww-sun"></div><div class="ww-cloud ww-cloud-a"></div><div class="ww-cloud ww-cloud-b"></div><div class="ww-distant"></div></div>';
@@ -444,7 +460,21 @@ class BackupMap {
   zoomIn(){this.easeTo({zoom:this.zoom+.35});}
   zoomOut(){this.easeTo({zoom:this.zoom-.35});}
   easeTo(options={}){
-    if(options.center)this.center=mapPoint(options.center);
+    if(options.center){
+      const nextCenter=mapPoint(options.center);
+      // On the first real GPS fix the map may jump hundreds of kilometres from
+      // the demo town. Cancel the old town's tile downloads immediately.
+      if(distanceMeters(this.center.lat,this.center.lng,nextCenter.lat,nextCenter.lng)>1200){
+        for(const tile of this.tiles.values()){
+          if(tile.status==='loading'){
+            tile.img.onload=null;tile.img.onerror=null;
+            tile.img.src='';
+          }
+        }
+        this.tiles.clear();this._tileLoading=0;
+      }
+      this.center=nextCenter;
+    }
     if(Number.isFinite(options.zoom))this.zoom=bound(options.zoom,MIN_ZOOM,MAX_ZOOM);
     if(Number.isFinite(options.bearing))this.bearing=((options.bearing%360)+360)%360;
     if(Number.isFinite(options.pitch)){
@@ -488,54 +518,86 @@ class BackupMap {
     const delta=this.inverseOffset(clientX-rect.left,clientY-rect.top,p);
     return delta?geo(p.center.x+delta.dx/p.scale,p.center.y+delta.dy/p.scale,p.z):null;
   }
-  // Request a bounded neighborhood only when entering a new area. The response
-  // contains public building footprints, not game-user data or inventory.
+  // Clear any pending DEMO request before switching into GPS; old responses
+  // must never replace the actual GPS neighborhood.
+  invalidateBuildings(){
+    this._buildingAbort?.abort();
+    this._buildingRequest++;
+    this._buildingAbort=null;
+    this._lastBuildingKey=null;
+    this._lastBuildingAttempt=0;
+    this.buildings=[];this.landuse=[];
+    this.buildingStatus='idle';
+    this.scheduleRedraw();
+  }
+  retryBuildings(){
+    this._lastBuildingAttempt=0;
+    this.buildingStatus='idle';
+    this.scheduleRedraw();
+  }
   maybeLoadBuildings(){
     if(!this.showBuildings || !state.mode || (state.mode==='gps' && !state.position))return;
-    if(this.buildingStatus==='unavailable' && state.mode==='demo'){
-      this.buildings=makeDemoFootprints(this.center);
-      this.buildingStatus='demo';
+    // Always use the LIVE GPS fix in GPS mode, not the previous demo map center.
+    const position=state.mode==='gps'?state.position:this.center;
+    const region=buildingRegion(position);
+    const key=region.key,now=Date.now();
+    if(this.buildingStatus==='loading'){
+      if(this._lastBuildingKey===key)return;
+      // The player entered a new region before the old request finished.
+      this._buildingAbort?.abort();this._buildingRequest++;
+      this.buildingStatus='idle';
     }
-    const now=Date.now();
-    const pos=this.center;
-    const moved=!this._lastBuildingCenter||distanceMeters(pos.lat,pos.lng,this._lastBuildingCenter.lat,this._lastBuildingCenter.lng)>175;
-    if(this.buildingStatus==='loading')return;
-    if(!moved && now-this._lastBuildingAttempt<150000)return;
-    this._lastBuildingCenter={...pos};this._lastBuildingAttempt=now;
-    this._buildingAbort?.abort();
+    if(this._lastBuildingKey===key){
+      if(this.buildingStatus==='ready'||this.buildingStatus==='demo')return;
+      if(now-this._lastBuildingAttempt<45000)return;
+    }
+    this._lastBuildingKey=key;
+    this._lastBuildingAttempt=now;
+    const cached=BUILDING_SESSION_CACHE.get(key);
+    if(cached&&now-cached.time<BUILDING_CACHE_TTL){
+      this.buildings=cached.buildings;this.landuse=cached.land;
+      this.buildingStatus='ready';this.scheduleRedraw();return;
+    }
     const controller=new AbortController();this._buildingAbort=controller;
     const request=++this._buildingRequest;
-    const radius=0.0029,lon=radius/Math.max(.27,Math.cos(pos.lat*Math.PI/180));
-    const bbox=`${(pos.lat-radius).toFixed(6)},${(pos.lng-lon).toFixed(6)},${(pos.lat+radius).toFixed(6)},${(pos.lng+lon).toFixed(6)}`;
-    const query=`[out:json][timeout:18];(way["building"](${bbox});way["leisure"="park"](${bbox});way["landuse"="grass"](${bbox});way["natural"="wood"](${bbox});way["natural"="water"](${bbox}););out geom;`;
+    const bbox=buildingBBox(region.center);
+    // Smaller query: houses first. Mixed park/water/forest requests were often
+    // timing out on public Overpass instances, especially on mobile networks.
+    const query=`[out:json][timeout:13];way["building"](${bbox});out geom;`;
     this.buildingStatus='loading';
-    const deadline=setTimeout(()=>controller.abort(),19000);
     (async()=>{
       for(const endpoint of OSM_BUILDING_ENDPOINTS){
         if(controller.signal.aborted)break;
         const attempt=new AbortController();
         const stop=()=>attempt.abort();controller.signal.addEventListener('abort',stop,{once:true});
-        const timeout=setTimeout(()=>attempt.abort(),8200);
+        const timeout=setTimeout(()=>attempt.abort(),endpoint===OSM_BUILDING_ENDPOINTS[0]?7500:8500);
         try{
           const url=endpoint+'?data='+encodeURIComponent(query);
-          const response=await fetch(url,{mode:'cors',signal:attempt.signal,cache:'no-store'});
-          if(!response.ok)throw new Error('HTTP '+response.status);
+          const response=await fetch(url,{mode:'cors',signal:attempt.signal});
+          if(!response.ok)throw new Error('Gebäudeserver HTTP '+response.status);
           const json=await response.json();
-          if(request!==this._buildingRequest||!this.el.isConnected)return;
-          const parsed=normalizeOSMFeatures(json,pos);
+          if(request!==this._buildingRequest||!this.el.isConnected||controller.signal.aborted)return;
+          const parsed=normalizeOSMFeatures(json,region.center);
           this.buildings=parsed.buildings;this.landuse=parsed.land;
+          BUILDING_SESSION_CACHE.set(key,{time:Date.now(),...parsed});
+          if(BUILDING_SESSION_CACHE.size>8){
+            const oldest=BUILDING_SESSION_CACHE.keys().next().value;
+            BUILDING_SESSION_CACHE.delete(oldest);
+          }
           this.buildingStatus='ready';this.scheduleRedraw();return;
-        }catch(e){if(controller.signal.aborted)break;}
-        finally{clearTimeout(timeout);controller.signal.removeEventListener('abort',stop);}
+        }catch(error){
+          if(!controller.signal.aborted)console.info('Gebäudequelle antwortet nicht:',endpoint,error?.message||error);
+        }finally{
+          clearTimeout(timeout);controller.signal.removeEventListener('abort',stop);
+        }
       }
-      if(request===this._buildingRequest&&this.el.isConnected){
-        const demo=state.mode==='demo';
-        this.buildings=demo?makeDemoFootprints(pos):[];
-        this.landuse=[];
-        this.buildingStatus=demo?'demo':'unavailable';
-        this.scheduleRedraw();
-      }
-    })().finally(()=>clearTimeout(deadline));
+      if(request!==this._buildingRequest||!this.el.isConnected||controller.signal.aborted)return;
+      const demo=state.mode==='demo';
+      this.buildings=demo?makeDemoFootprints(region.center):[];
+      this.landuse=[];
+      this.buildingStatus=demo?'demo':'unavailable';
+      this.scheduleRedraw();
+    })().finally(()=>{if(this._buildingRequest===request)this._buildingAbort=null;});
   }
   // Project ground coordinates once. Buildings, trees and roads use exactly
   // the same camera math, which keeps them anchored while rotating.
@@ -623,22 +685,30 @@ class BackupMap {
   getTile(z,x,y){
     const n=2**z;
     if(y<0||y>=n)return null;
-    const safeX=((x%n)+n)%n, key=`${z}/${safeX}/${y}`;
+    // Only fetch tiles actively needed near the visible player. Do not prefetch
+    // a large grid / several zoom levels from community OSM tile servers.
+    const centerTile=world(this.center.lat,this.center.lng,z);
+    const dx=x-Math.floor(centerTile.x/TILE),dy=y-Math.floor(centerTile.y/TILE);
+    const maxRadius=(z>=Math.floor(this.zoom)?3:2);
+    if(Math.abs(dx)>maxRadius||Math.abs(dy)>maxRadius)return null;
+    const safeX=((x%n)+n)%n,key=`${z}/${safeX}/${y}`;
     let item=this.tiles.get(key);
-    if(item?.status==='error' && Date.now()-item.failedAt>30000){this.tiles.delete(key);item=null;}
+    if(item?.status==='error'&&Date.now()-item.failedAt>45000){this.tiles.delete(key);item=null;}
     if(!item){
-      // Avoid a burst of hundreds of tile downloads while turning quickly.
-      if(this._requestedThisFrame>=10)return null;
-      this._requestedThisFrame++;
+      if(this._requestedThisFrame>=6||this._tileLoading>=this._tileMaxConcurrent)return null;
+      this._requestedThisFrame++;this._tileLoading++;
       item={status:'loading',img:new Image(),seen:performance.now()};
       item.img.decoding='async';
-      item.img.onload=()=>{
-        item.status='ready';
+      const finish=(ok)=>{
+        this._tileLoading=Math.max(0,this._tileLoading-1);
+        item.status=ok?'ready':'error';
+        if(!ok)item.failedAt=Date.now();
         if(!this.el.isConnected)return;
         clearTimeout(this._tileRefresh);
-        this._tileRefresh=setTimeout(()=>this.scheduleRedraw(),70);
+        this._tileRefresh=setTimeout(()=>this.scheduleRedraw(),ok?35:180);
       };
-      item.img.onerror=()=>{item.status='error';item.failedAt=Date.now();this.scheduleRedraw();};
+      item.img.onload=()=>finish(true);
+      item.img.onerror=()=>finish(false);
       item.img.src=`https://tile.openstreetmap.org/${key}.png`;
       this.tiles.set(key,item);
     }
@@ -703,6 +773,7 @@ class BackupMap {
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
     // Animated camera redraws must not restart the network tile downloads.
     this._requestedThisFrame=0;
+    this.getTile(p.z,Math.floor(p.center.x/TILE),Math.floor(p.center.y/TILE));
     const farZ=Math.max(12,p.z-2);
     const nearZ=p.z;
     // Far terrain uses a lower detail level, just like a 3D game's LOD.
@@ -813,7 +884,7 @@ class BackupMap {
     const loaded=[...this.tiles.values()].filter(tile=>tile.status==='ready').length;
     const pending=[...this.tiles.values()].filter(tile=>tile.status==='loading').length;
     const tileState=loaded?'STRASSENKARTE':pending?'KARTE LÄDT':'ERSATZLANDSCHAFT';
-    const buildingsLabel=!this.showBuildings?'HÄUSER AUS':this.buildingStatus==='loading'?'HÄUSER LADEN':this.buildingStatus==='ready'?`${this.buildings.length} OSM-HÄUSER`:this.buildingStatus==='demo'?'DEMO-HÄUSER':'HÄUSER OFFLINE';
+    const buildingsLabel=!this.showBuildings?'HÄUSER AUS':this.buildingStatus==='loading'?'HÄUSER LADEN':this.buildingStatus==='ready'?`${this.buildings.length} OSM-HÄUSER`:this.buildingStatus==='demo'?'DEMO-HÄUSER':this.buildingStatus==='unavailable'?'HÄUSER OFFLINE · 🏠 NEU LADEN':'HÄUSER BEREIT';
     this.caption.textContent=`RICHTUNG ${Math.round(this.bearing)}° · ZOOM ${this.zoom.toFixed(1)} · ${tileState} · ${buildingsLabel}`;
     this.drawSprites(p);
   }
@@ -1105,6 +1176,7 @@ function stopGPS() {
 function setMode(mode,announce=true) {
   if(!['demo','gps'].includes(mode)) return;
   stopGPS(); state.mode=mode;state.position=null;state.accuracy=null;state.timestamp=0;state.speed=0;
+  if(state.mapKind==='backup')state.map?.invalidateBuildings();
   closeSheet();hideWelcome();updateModeUI();save();updatePositionOnMap();renderWorld();renderPanels();
   if(mode==='gps') {
     if(!navigator.geolocation){toast('GPS wird von diesem Browser nicht unterstützt.',true);return;}
@@ -1272,6 +1344,9 @@ function bind() {
   });
   $('btn-buildings').addEventListener('click',()=>{
     if(!state.map||state.mapKind!=='backup')return;
+    if(state.map.showBuildings && ['unavailable','idle'].includes(state.map.buildingStatus)){
+      state.map.retryBuildings();toast('Gebäudedaten werden erneut angefragt …');return;
+    }
     state.map.showBuildings=!state.map.showBuildings;
     $('btn-buildings').setAttribute('aria-pressed',String(state.map.showBuildings));
     $('btn-buildings').classList.toggle('is-off',!state.map.showBuildings);
