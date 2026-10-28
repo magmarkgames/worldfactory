@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.12 — Low-Poly-Welt mit aufstehenden Häusern, GPS, Rohstoffen und Sammeln.">
-  <title>Weltwerk · Exploration 3D v0.2.12</title>
+  <meta name="description" content="Weltwerk v0.2.13 — Low-Poly-Welt mit aufstehenden Häusern, GPS, Rohstoffen und Sammeln.">
+  <title>Weltwerk · Exploration 3D v0.2.13</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -44,7 +44,7 @@
 .world-resource-art{width:80px;height:89px;position:absolute;left:0;bottom:6px;object-fit:contain;transform-origin:bottom center;transition:none;pointer-events:none;user-select:none;backface-visibility:hidden}
 .world-resource:active .world-resource-art{transform:none}
 .world-resource-shadow{position:absolute;left:14px;bottom:3px;width:52px;height:13px;background:#244b4194;filter:blur(8px);border-radius:50%}
-.world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 5px #e2fff9)}
+.world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 5px #e2fff9) drop-shadow(0 0 14px #7ef0be)}
 .world-resource.in-range .world-resource-dot{position:absolute;bottom:-4px;left:33px;border-radius:50%;background:#73e7ad;border:2px solid white;width:14px;height:14px;box-shadow:0 0 0 5px #8cdbac7d}
 .world-resource.depleted{opacity:.5;filter:grayscale(.72)}
 .world-resource.depleted .world-resource-art{filter:grayscale(1)}
@@ -115,7 +115,7 @@
 .ww-tile{will-change:auto}
 .ww-object-layer .backup-marker{transform-origin:50% 100%}
 
-/* v0.2.12 — stable Canvas world. No giant rotating 3D DOM surface. */
+/* v0.2.13 — stable Canvas world. No giant rotating 3D DOM surface. */
 .ww-canvas-map{background:linear-gradient(180deg,#4e9bdd 0%,#91d0ed 35%,#dbefde 100%)}
 .ww-canvas-map .ww-sky{z-index:0;inset:0;background:linear-gradient(180deg,#4798dc,#8ecdf2 24%,#ceeef5 43%,#e4f2e4 64%)}
 .ww-canvas-map .ww-world-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block}
@@ -130,7 +130,7 @@
 .ww-canvas-map .world-resource-art{transition:none!important}
 .ww-canvas-map .backup-map-caption{z-index:7}
 .ww-canvas-map .backup-map-attribution{z-index:7}
-/* v0.2.12: collectibles and player are composited into the SAME canvas as the roads.
+/* v0.2.13: collectibles and player are composited into the SAME canvas as the roads.
    Their DOM nodes remain solely as accessible event/storage objects. */
 .ww-canvas-map .ww-object-layer{display:none!important;pointer-events:none!important}
 .ww-canvas-map .ww-world-canvas{image-rendering:auto}
@@ -142,7 +142,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.12 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.13 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
@@ -181,7 +181,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.12 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäudegrundrisse werden gemeinsam mit den Rohstoffen auf dieselbe Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. 3D-Gebäude verwenden, sofern verfügbar, echte öffentliche OpenStreetMap-Umrisse über die Overpass API. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Verbindungsproblemen die 🏠-Taste erneut drücken. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.13 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen und Gebäudegrundrisse werden gemeinsam mit den Rohstoffen auf dieselbe Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. 3D-Gebäude verwenden, sofern verfügbar, echte öffentliche OpenStreetMap-Umrisse über die Overpass API. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Verbindungsproblemen die 🏠-Taste erneut drücken. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -200,7 +200,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.12';
+const VERSION = '0.2.13';
 const START_ZOOM = 18.1; // nah genug für die Straßenansicht
 const MIN_ZOOM = 16.4, MAX_ZOOM = 19.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -324,13 +324,15 @@ function mapPoint(lngLat){
 // Overpass is offline; real GPS data never leaves the page for other game services.
 const OSM_BUILDING_ENDPOINTS = [
   'https://overpass.private.coffee/api/interpreter',
-  'https://overpass-api.de/api/interpreter'
+  'https://overpass-api.de/api/interpreter',
+  'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
 ];
 // Session-only: visiting the same place again does not request the same buildings.
 // Deliberately NOT written to the saved profile or localStorage (GPS privacy).
 const BUILDING_SESSION_CACHE = new Map();
 const BUILDING_CACHE_TTL = 15 * 60 * 1000;
 const BUILDING_GRID_METERS = 260;
+const COLLECT_RING_METERS = 50;
 function buildingRegion(pos){
   const m=latLngToMeters(pos.lat,pos.lng);
   const ix=Math.floor(m.x/BUILDING_GRID_METERS),iy=Math.floor(m.y/BUILDING_GRID_METERS);
@@ -349,7 +351,7 @@ function footprintHash(id){
 function normalizeOSMFeatures(payload, origin){
   const buildings=[], land=[];
   for(const item of (payload?.elements||[])){
-    if(item.type!=='way' || !Array.isArray(item.geometry) || item.geometry.length<4)continue;
+    if((item.type!=='way' && item.type!=='relation') || !Array.isArray(item.geometry) || item.geometry.length<4)continue;
     const coords=item.geometry.map(p=>({lat:Number(p.lat),lng:Number(p.lon)})).filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lng));
     if(coords.length<4)continue;
     if(distanceMeters(coords[0].lat,coords[0].lng,coords.at(-1).lat,coords.at(-1).lng)>4)continue;
@@ -560,10 +562,10 @@ class BackupMap {
     }
     const controller=new AbortController();this._buildingAbort=controller;
     const request=++this._buildingRequest;
-    const bbox=buildingBBox(region.center);
-    // Smaller query: houses first. Mixed park/water/forest requests were often
-    // timing out on public Overpass instances, especially on mobile networks.
-    const query=`[out:json][timeout:13];way["building"](${bbox});out geom;`;
+    const bbox=buildingBBox(region.center,260);
+    // Buildings only, but include multipolygon relations as well.
+    // Smaller radius + POST requests are more reliable on mobile networks.
+    const query=`[out:json][timeout:14];(way["building"](${bbox});relation["building"](${bbox}););out geom;`;
     this.buildingStatus='loading';
     (async()=>{
       for(const endpoint of OSM_BUILDING_ENDPOINTS){
@@ -572,8 +574,7 @@ class BackupMap {
         const stop=()=>attempt.abort();controller.signal.addEventListener('abort',stop,{once:true});
         const timeout=setTimeout(()=>attempt.abort(),endpoint===OSM_BUILDING_ENDPOINTS[0]?7500:8500);
         try{
-          const url=endpoint+'?data='+encodeURIComponent(query);
-          const response=await fetch(url,{mode:'cors',signal:attempt.signal});
+          const response=await fetch(endpoint,{method:'POST',mode:'cors',signal:attempt.signal,headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:'data='+encodeURIComponent(query)});
           if(!response.ok)throw new Error('Gebäudeserver HTTP '+response.status);
           const json=await response.json();
           if(request!==this._buildingRequest||!this.el.isConnected||controller.signal.aborted)return;
@@ -798,6 +799,38 @@ class BackupMap {
     ctx.setTransform(dpr,0,0,dpr,0,0);
     if(this.showBuildings)this.drawLowPolyLand(p);
   }
+  drawCollectRing(p){
+    const pos=getPosition();
+    if(!pos)return;
+    const ctx=this.ctx,dpr=this._renderDpr;
+    const points=[];
+    for(let i=0;i<=40;i++){
+      const angle=2*Math.PI*i/40;
+      const lat=pos.lat+Math.cos(angle)*COLLECT_RING_METERS/111320;
+      const lng=pos.lng+Math.sin(angle)*COLLECT_RING_METERS/(111320*Math.max(.15,Math.cos(pos.lat*Math.PI/180)));
+      const pt=this.pointOnGround({lat,lng},p);
+      if(pt && Number.isFinite(pt.x) && Number.isFinite(pt.y))points.push(pt);
+    }
+    const center=this.pointOnGround(pos,p);
+    if(points.length<8 || !center)return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.save();
+    ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);
+    for(const pt of points.slice(1))ctx.lineTo(pt.x,pt.y);
+    ctx.closePath();
+    const fill=ctx.createRadialGradient(center.x,center.y,4,center.x,center.y,70);
+    fill.addColorStop(0,'rgba(98,222,186,.08)');
+    fill.addColorStop(1,'rgba(98,222,186,.02)');
+    ctx.fillStyle=fill;ctx.fill();
+    ctx.lineWidth=2;ctx.strokeStyle='rgba(221,255,244,.95)';ctx.stroke();
+    ctx.setLineDash([7,6]);ctx.lineWidth=1.5;ctx.strokeStyle='rgba(77,205,164,.75)';ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='rgba(17,39,48,.82)';ctx.strokeStyle='rgba(210,248,237,.85)';ctx.lineWidth=1.25;
+    const labelW=58,labelH=22,labelX=center.x-29,labelY=Math.max(p.topDown?8:p.horizon+6,center.y-58);
+    ctx.beginPath();ctx.roundRect(labelX,labelY,labelW,labelH,9);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#dffcf0';ctx.font='800 11px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('50 m',center.x,labelY+11.5);
+    ctx.restore();
+  }
   // Readable billboard illustrations are kept at a fixed pixel size.
   // Both scenery and sprites are painted into the *same* high-DPI canvas, using
   // identical geographical coordinates and the exact same camera parameters.
@@ -826,6 +859,7 @@ class BackupMap {
     // Depth order: farther objects first; player and collectibles remain tappable.
     sprites.sort((a,b)=>Number(a.kind!=='building')-Number(b.kind!=='building') || a.y-b.y || Number(a.isPlayer)-Number(b.isPlayer));
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    this.drawCollectRing(p);
     for(const s of sprites){
       if(s.kind==='building'){this.drawBuilding(ctx,s,p);continue;}
       const {marker,x,y,isPlayer}=s, elem=marker.element;
@@ -843,6 +877,13 @@ class BackupMap {
         ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
         ctx.fillStyle='rgba(70,205,162,.35)';ctx.fill();
         ctx.lineWidth=2.5;ctx.strokeStyle='#dcfff2';ctx.stroke();
+      }
+      if(inRange && !isPlayer){
+        const pulse=0.72+0.28*Math.sin(performance.now()/260);
+        ctx.beginPath();ctx.ellipse(x,y-6,28,12,0,0,Math.PI*2);
+        ctx.fillStyle='rgba(115,231,173,.16)';ctx.fill();
+        ctx.lineWidth=2.2;ctx.strokeStyle=`rgba(124,245,197,${0.55+0.22*pulse})`;ctx.stroke();
+        ctx.beginPath();ctx.arc(x,y-h+10,10+2*pulse,0,Math.PI*2);ctx.fillStyle='rgba(123,244,196,.16)';ctx.fill();
       }
       if(asset && asset.complete && asset.naturalWidth){
         // Canvas drawImage uses the very same screen foot x/y as the map.
@@ -1012,7 +1053,7 @@ function stage3DMap(){
       try{backup?.remove();}catch{}
       $('map').style.display='none';el.style.visibility='visible';
       attachMapEvents(next);
-      addWorldBuildings();addAccuracyLayer();
+      addWorldBuildings();addAccuracyLayer();addCollectionRangeLayer();
       updatePositionOnMap(true);renderWorld();setMapStatus('3D');
       setTimeout(()=>next.resize(),150);
     });
@@ -1037,7 +1078,7 @@ function finalizeMap(map,kind){
   if(state.map!==map)return;
   state.mapReady=true;state.mapKind=kind;
   $('no-map').classList.add('hidden');
-  if(kind==='maplibre'){addWorldBuildings();addAccuracyLayer();}
+  if(kind==='maplibre'){addWorldBuildings();addAccuracyLayer();addCollectionRangeLayer();}
   updatePositionOnMap(true);renderWorld();updateModeUI();
   setTimeout(()=>state.map?.resize(),80);
 }
@@ -1097,6 +1138,23 @@ function addAccuracyLayer(){
   state.map.addLayer({id:'gps-accuracy-fill',type:'fill',source:'gps-accuracy',paint:{'fill-color':'#49bfae','fill-opacity':.13}});
   state.map.addLayer({id:'gps-accuracy-line',type:'line',source:'gps-accuracy',paint:{'line-color':'#2ea998','line-width':1.5,'line-opacity':.55}});
 }
+function rangePolygon(pos,meters=COLLECT_RING_METERS){
+  if(!pos || !Number.isFinite(meters) || meters<=0)return {type:'FeatureCollection',features:[]};
+  const coords=[];
+  for(let i=0;i<=48;i++){
+    const angle=2*Math.PI*i/48;
+    const lat=pos.lat+Math.cos(angle)*meters/111320;
+    const lng=pos.lng+Math.sin(angle)*meters/(111320*Math.max(0.15,Math.cos(pos.lat*Math.PI/180)));
+    coords.push([lng,lat]);
+  }
+  return {type:'FeatureCollection',features:[{type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[coords]}}]};
+}
+function addCollectionRangeLayer(){
+  if(!state.map || state.map.getSource('collect-range'))return;
+  state.map.addSource('collect-range',{type:'geojson',data:rangePolygon(null,0)});
+  state.map.addLayer({id:'collect-range-fill',type:'fill',source:'collect-range',paint:{'fill-color':'#63e2b8','fill-opacity':0.07}});
+  state.map.addLayer({id:'collect-range-line',type:'line',source:'collect-range',paint:{'line-color':'#d9fff3','line-width':2,'line-opacity':0.9,'line-dasharray':[2,2]}});
+}
 function makePlayerElement(){
   const elem=document.createElement('div');elem.className='world-player';
   elem.innerHTML='<span class="player-aura"></span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTMyIj4KICA8ZWxsaXBzZSBjeD0iNTAiIGN5PSIxMjEiIHJ4PSIyOSIgcnk9IjgiIGZpbGw9IiMxNDJiMjgiIG9wYWNpdHk9Ii4yMiIvPgogIDxwYXRoIGQ9Ik0zMiA5NSA0NyA5NSA0NSAxMTQgMjggMTE3WiIgZmlsbD0iIzI3Mzc0ZSIvPgogIDxwYXRoIGQ9Ik01MyA5NSA2NyA5MyA3MyAxMTQgNTYgMTE3WiIgZmlsbD0iIzMzNDQ1YiIvPgogIDxwYXRoIGQ9Ik0yNyAxMTEgNDUgMTA4IDQ1IDEyMCAyNSAxMjBaIiBmaWxsPSIjZWRlM2JlIi8+CiAgPHBhdGggZD0iTTU3IDEwOCA3MyAxMTAgNzYgMTIwIDU2IDEyMFoiIGZpbGw9IiNlZGUzYmUiLz4KICA8cGF0aCBkPSJNMzAgNjMgNjkgNjMgNzYgOTggNTUgMTA2IDMzIDk5WiIgZmlsbD0iIzJjOWQ5YSIgc3Ryb2tlPSIjMTk2ZDczIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNNTAgNjUgNjkgNjMgNzYgOTggNTUgMTA2WiIgZmlsbD0iIzFiNzI3ZSIvPgogIDxwYXRoIGQ9Ik0zMCA2MyAxOCA4MyAyNiA5MCAzOCA3OFoiIGZpbGw9IiMyNjhiOGMiLz4KICA8cGF0aCBkPSJNNjkgNjMgODIgODMgNzUgOTEgNjIgNzhaIiBmaWxsPSIjMjQ2ZTdhIi8+CiAgPHBhdGggZD0iTTE4IDgzIDI2IDkwIDIzIDk4IDE2IDk1WiIgZmlsbD0iI2Q2YTY3ZiIvPgogIDxwYXRoIGQ9Ik04MiA4MyA3NSA5MSA3OCA5NyA4NiA5NFoiIGZpbGw9IiNkNmE2N2YiLz4KICA8cGF0aCBkPSJNMzIgMzIgMzYgMjIgNjMgMjIgNjkgMzQgNjYgNTQgNTcgNjQgNDEgNjMgMzMgNTNaIiBmaWxsPSIjZWZiYzkwIiBzdHJva2U9IiNiOTg3NmIiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHBhdGggZD0iTTMyIDMyIDM2IDIyIDYzIDIyIDY5IDM0IDYwIDMxIDM5IDMxWiIgZmlsbD0iIzI5M2I0OCIvPgogIDxwYXRoIGQ9Ik0zMCAyNSA0MyAxMiA2MyAxMiA3NCAyNCA3MSAzMiAyNiAzMloiIGZpbGw9IiM1NmMzYjIiIHN0cm9rZT0iIzFlODE3ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHBhdGggZD0iTTMwIDI1IDQzIDEyIDQ5IDEyIDQ5IDMyIDI2IDMyWiIgZmlsbD0iIzgwZDhjMSIvPgogIDxwYXRoIGQ9Ik0zMCAzMCA3MiAzMCA2NSAzNiAzMyAzNloiIGZpbGw9IiMyMDhiODciLz4KICA8Y2lyY2xlIGN4PSI0MiIgY3k9IjQ0IiByPSIyLjIiIGZpbGw9IiM0MzNjM2IiLz48Y2lyY2xlIGN4PSI1OSIgY3k9IjQ0IiByPSIyLjIiIGZpbGw9IiM0MzNjM2IiLz4KICA8cGF0aCBkPSJNNDUgNTUgUTUxIDYwIDU4IDU1IiBzdHJva2U9IiNiNjdjNjQiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQwIDY2IDUwIDc3IDYxIDY1IiBzdHJva2U9IiM4YWQzYzAiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K" alt="" draggable="false"><span class="player-you">DU</span>';
@@ -1118,13 +1176,14 @@ function updateNodeElement(element,node){
 function updatePositionOnMap(follow=false){
   if(!state.mapReady)return;
   const pos=getPosition();
-  if(!pos){state.playerMarker?.remove();state.playerMarker=null;state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(null,0));return;}
+  if(!pos){state.playerMarker?.remove();state.playerMarker=null;state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(null,0));state.map.getSource('collect-range')?.setData(rangePolygon(null,0));return;}
   if(!state.playerMarker){
     state.playerMarker=makeMarker({element:makePlayerElement(),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
       .setLngLat([pos.lng,pos.lat]).addTo(state.map);
   }else state.playerMarker.setLngLat([pos.lng,pos.lat]);
   const gpsAccuracy=state.mode==='gps'?state.accuracy:null;
   state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(pos,gpsAccuracy));
+  state.map.getSource('collect-range')?.setData(rangePolygon(pos,COLLECT_RING_METERS));
   if(state.playerMarker && state.playerMarker.getElement){
     const avatar=state.playerMarker.getElement();
     avatar.classList.remove('is-walking');void avatar.offsetWidth;avatar.classList.add('is-walking');
@@ -1159,7 +1218,7 @@ function updateNearby() {
   const available=nodes.filter(node=>isReady(activeProfile().harvested[node.id])).length;
   $('nearby-counter').textContent=state.mode==='gps'&&!pos?'—':String(available);
   $('nearby-title').textContent=state.mode==='gps'&&!pos?'GPS wird gesucht …':`${available} Fundstellen in der Nähe`;
-  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'Im Umkreis von 310 m · verfügbare Vorkommen';
+  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'Im Umkreis von 310 m · 50 m Sammelradius markiert';
 }
 function updateModeUI() {
   const gps=state.mode==='gps';
@@ -1210,6 +1269,7 @@ function onGeoSuccess(pos) {
       lng:state.position.lng+(lng-state.position.lng)*smoothing};
   if(first)state.followPlayer=true;
   updatePositionOnMap(first);
+  if(state.map?.invalidateBuildings && (first || distance>BUILDING_GRID_METERS*.35)){state.map.invalidateBuildings();}
   renderWorld();updateModeUI();
   if(first) toast('GPS-Position gefunden');
 }
