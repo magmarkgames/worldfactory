@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.18 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
-  <title>Weltwerk · Exploration 3D v0.2.18</title>
+  <meta name="description" content="Weltwerk v0.2.19 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
+  <title>Weltwerk · Exploration 3D v0.2.19</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -115,7 +115,7 @@
 .ww-tile{will-change:auto}
 .ww-object-layer .backup-marker{transform-origin:50% 100%}
 
-/* v0.2.18 — stable Canvas world. No giant rotating 3D DOM surface. */
+/* v0.2.19 — stable Canvas world. No giant rotating 3D DOM surface. */
 .ww-canvas-map{background:linear-gradient(180deg,#4e9bdd 0%,#91d0ed 35%,#dbefde 100%)}
 .ww-canvas-map .ww-sky{z-index:0;inset:0;background:linear-gradient(180deg,#4798dc,#8ecdf2 24%,#ceeef5 43%,#e4f2e4 64%)}
 .ww-canvas-map .ww-world-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block}
@@ -130,12 +130,12 @@
 .ww-canvas-map .world-resource-art{transition:none!important}
 .ww-canvas-map .backup-map-caption{z-index:7}
 .ww-canvas-map .backup-map-attribution{z-index:7}
-/* v0.2.18: collectibles and player are composited into the SAME canvas as the roads.
+/* v0.2.19: collectibles and player are composited into the SAME canvas as the roads.
    Their DOM nodes remain solely as accessible event/storage objects. */
 .ww-canvas-map .ww-object-layer{display:none!important;pointer-events:none!important}
 .ww-canvas-map .ww-world-canvas{image-rendering:auto}
 
-/* V0.2.18: genuine WebGL vector map, not recolored bitmap tiles. */
+/* V0.2.19: genuine WebGL vector map, not recolored bitmap tiles. */
 #map-3d.ww-vector-stage{position:absolute;inset:0;z-index:1;visibility:hidden;background:#9bd2ec}
 #map-3d.ww-vector-stage.ww-vector-active{visibility:visible}
 #map-3d .maplibregl-canvas{outline:0;touch-action:none}
@@ -145,7 +145,7 @@
 .ww-vector-status{position:absolute;left:17px;bottom:calc(148px + env(safe-area-inset-bottom,0px));z-index:550;max-width:calc(100% - 95px);font-size:10px;font-weight:850;color:#214e43;background:#e6fae7ce;border-radius:9px;padding:5px 8px;pointer-events:none;box-shadow:0 1px 5px #123c3520}
 .ww-vector-status.hidden{display:none}
 
-/* V0.2.18: a visible status that can retry the vector renderer on tap. */
+/* V0.2.19: a visible status that can retry the vector renderer on tap. */
 .camera-hint{pointer-events:auto;cursor:pointer;max-width:calc(100vw - 90px);line-height:1.4}
 .camera-hint.ww-vector-failed{background:#203c45de;border-color:#a3d6d099}
 @media(max-width:390px){.camera-hint span{display:inline!important}.camera-hint{max-width:calc(100vw - 105px);font-size:9px;padding:7px 9px}}
@@ -159,7 +159,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.18 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.19 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span>/ 6 entdeckt</span></span></div>
@@ -198,7 +198,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.18 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.19 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -407,6 +407,51 @@ function makeDemoFootprints(center){
   }
   return features;
 }
+
+// WELTWERK 0.2.19: Small Mapbox Vector Tile (MVT/Protobuf) reader.
+// Operates on ArrayBuffers from OpenFreeMap; unlike MapLibre, it does NOT need WebGL.
+// Tiles are parsed once and rendered directly onto the game's existing 2D canvas.
+const CANVAS_VECTOR_Z=14;
+const CANVAS_VECTOR_URL='https://tiles.openfreemap.org/planet/latest/';
+const CANVAS_VECTOR_LAYERS=new Set(['landcover','landuse','water','waterway','building','transportation']);
+const vectorTextDecoder=new TextDecoder();
+class MVTWire{
+  constructor(data,start=0,end=data.length){this.data=data;this.i=start;this.end=end;}
+  varint(){let v=0,m=1,c=0;do{if(this.i>=this.end)throw Error('Unvollständige Vektorkachel');c=this.data[this.i++];v+=(c&127)*m;m*=128;}while(c>=128 && m<2**56);if(c>=128)throw Error('MVT varint overflow');return v;}
+  sub(){const length=this.varint(),end=this.i+length;if(end>this.end)throw Error('Ungültige MVT Länge');const out=new MVTWire(this.data,this.i,end);this.i=end;return out;}
+  string(){const v=this.sub();return vectorTextDecoder.decode(v.data.subarray(v.i,v.end));}
+  skip(w){if(w===0){this.varint();return;}if(w===2){this.sub();return;}if(w===1){this.i+=8;return;}if(w===5){this.i+=4;return;}throw Error('MVT Wire Typ '+w);}
+}
+function mvtValue(w){let answer=null;const view=new DataView(w.data.buffer,w.data.byteOffset,w.data.byteLength);while(w.i<w.end){const field=w.varint(),tag=Math.floor(field/8),kind=field%8;if(tag===1&&kind===2)answer=w.string();else if(tag===2&&kind===5){answer=view.getFloat32(w.i,true);w.i+=4;}else if(tag===3&&kind===1){answer=view.getFloat64(w.i,true);w.i+=8;}else if((tag===4||tag===5||tag===6||tag===7)&&kind===0){answer=w.varint();}else w.skip(kind);}return answer;}
+function mvtFeature(w,keys,values){let tagReader=null,geom=null,type=0;while(w.i<w.end){const field=w.varint(),tag=Math.floor(field/8),kind=field%8;
+  if(tag===2&&kind===2)tagReader=w.sub();else if(tag===3&&kind===0)type=w.varint();else if(tag===4&&kind===2)geom=w.sub();else w.skip(kind);
+}if(type<2||!geom)return null;
+ const props={};if(tagReader){while(tagReader.i<tagReader.end){const k=tagReader.varint(),v=tagReader.varint();if(keys[k]!=null&&values[v]!=null)props[keys[k]]=values[v];}}
+ const paths=[];let x=0,y=0,path=null;
+ while(geom.i<geom.end){const instruction=geom.varint(),cmd=instruction&7,count=Math.floor(instruction/8);if(count>15000)throw Error('MVT Geometrie zu lang');
+  if(cmd===1||cmd===2){for(let i=0;i<count;i++){const a=geom.varint(),b=geom.varint();x+=(a&1)?-(a+1)/2:a/2;y+=(b&1)?-(b+1)/2:b/2;if(cmd===1){path={points:[],closed:false};paths.push(path);}if(path)path.points.push([x,y]);}}
+  else if(cmd===7){for(let i=0;i<count;i++)if(path)path.closed=true;}
+  else break;
+ }
+ const retained=paths.filter(p=>p.points.length>=(type===3?3:2));
+ let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+ for(const path of retained)for(const pt of path.points){
+   minX=Math.min(minX,pt[0]);maxX=Math.max(maxX,pt[0]);
+   minY=Math.min(minY,pt[1]);maxY=Math.max(maxY,pt[1]);
+ }
+ return {type,props,paths:retained,bbox:[minX,minY,maxX,maxY]};
+}
+function decodeWWVectorTile(buffer){const wire=new MVTWire(new Uint8Array(buffer));const layers=[];
+ while(wire.i<wire.end){const tag=wire.varint(),field=Math.floor(tag/8),kind=tag%8;if(field===3&&kind===2){const layer=wire.sub();let name='',extent=4096;const raws=[],keys=[],values=[];
+  while(layer.i<layer.end){const ltag=layer.varint(),lf=Math.floor(ltag/8),lk=ltag%8;
+   if(lf===1&&lk===2)name=layer.string();else if(lf===2&&lk===2)raws.push(layer.sub());else if(lf===3&&lk===2)keys.push(layer.string());else if(lf===4&&lk===2)values.push(mvtValue(layer.sub()));else if(lf===5&&lk===0)extent=layer.varint();else layer.skip(lk);
+  }
+  if(CANVAS_VECTOR_LAYERS.has(name)){const features=[];for(const f of raws){const feature=mvtFeature(f,keys,values);if(feature?.paths.length)features.push(feature);}layers.push({name,extent,features});}
+ }else wire.skip(kind);}
+ return layers;
+}
+function wwTilePointToLngLat(tileX,tileY,z,extent,point){const n=2**z;const lon=(tileX+point[0]/extent)/n*360-180;const merc=Math.PI*(1-2*(tileY+point[1]/extent)/n);return {lat:180/Math.PI*Math.atan(Math.sinh(merc)),lng:lon};}
+
 class BackupMap {
   // Canvas sky-ground renderer: a single inverse camera projection is used for
   // both actual road tiles and interactive resource/player locations.
@@ -420,6 +465,7 @@ class BackupMap {
     this.buildingStatus='idle';this._lastBuildingKey=null;this._lastBuildingAttempt=0;
     this._buildingAbort=null;this._buildingRequest=0;
     this._tileLoading=0;this._tileMaxConcurrent=5;
+    this.vectorTiles=new Map();this._vectorActive=0;this._vectorQueued=0;this._vectorSeenReady=0;this._vectorLastFailure=0;this._vectorLastPlace='';this._vectorBuildingsKey='';this._vectorEnabled=true;this._vectorStatus='loading';
     this.el.innerHTML='';this.el.classList.add('backup-map','ww-canvas-map');
     this.el.style.setProperty('--ww-horizon','32%');
     this.el.innerHTML='<div class="ww-sky"><div class="ww-sun"></div><div class="ww-cloud ww-cloud-a"></div><div class="ww-cloud ww-cloud-b"></div><div class="ww-distant"></div></div>';
@@ -560,6 +606,7 @@ class BackupMap {
     this.scheduleRedraw();
   }
   maybeLoadBuildings(){
+    if(this._vectorEnabled)return;
     if(!this.showBuildings || !state.mode || (state.mode==='gps' && !state.position))return;
     // Always use the LIVE GPS fix in GPS mode, not the previous demo map center.
     const position=state.mode==='gps'?state.position:this.center;
@@ -746,6 +793,144 @@ class BackupMap {
     cx.putImageData(frame,0,0);
     return tile;
   }
+
+  retryCanvasVectors(){
+    for(const t of this.vectorTiles.values())t.controller?.abort();
+    this.vectorTiles.clear();this._vectorActive=0;this._vectorSeenReady=0;
+    this._vectorStatus='loading';this._vectorLastFailure=0;this._vectorBuildingsKey='';
+    this.scheduleRedraw();
+  }
+  fetchVectorTiles(p){
+    const z=CANVAS_VECTOR_Z,cen=world(this.center.lat,this.center.lng,z),cx=Math.floor(cen.x/TILE),cy=Math.floor(cen.y/TILE);
+    const wanted=[];
+    for(let d=0;d<=1;d++)for(let oy=-d;oy<=d;oy++)for(let ox=-d;ox<=d;ox++){
+      if(Math.max(Math.abs(ox),Math.abs(oy))!==d)continue;
+      wanted.push({x:cx+ox,y:cy+oy,d});
+    }
+    const now=Date.now();
+    for(const tile of wanted){
+      const n=2**z;if(tile.y<0||tile.y>=n)continue;
+      const x=(tile.x+n)%n,key=`${z}/${x}/${tile.y}`;
+      let it=this.vectorTiles.get(key);
+      if(it){it.last=now;continue;}
+      if(this._vectorActive>=3)break;
+      const controller=new AbortController();it={status:'loading',last:now,controller,key,z,x,y:tile.y};this.vectorTiles.set(key,it);this._vectorActive++;
+      const timeout=setTimeout(()=>controller.abort(),11000);
+      fetch(`${CANVAS_VECTOR_URL}${key}.pbf`,{signal:controller.signal,mode:'cors'})
+       .then(async r=>{if(!r.ok)throw Error('HTTP '+r.status);let bytes=await r.arrayBuffer();
+        const hdr=new Uint8Array(bytes,0,Math.min(2,bytes.byteLength));
+        if(hdr[0]===31&&hdr[1]===139){if(typeof DecompressionStream==='undefined')throw Error('GZIP nicht unterstützt');
+          const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));bytes=await new Response(stream).arrayBuffer();}
+        const layers=decodeWWVectorTile(bytes);if(!layers.length)throw Error('Leere Vektorkachel');return layers;})
+       .then(layers=>{if(controller.signal.aborted)return;it.layers=layers;it.status='ready';this._vectorSeenReady++;this._vectorStatus='ready';this._vectorBuildingsKey='';})
+       .catch(err=>{if(!controller.signal.aborted){it.status='error';it.failed=Date.now();this._vectorLastFailure=Date.now();console.warn('Canvas-Vektorkachel:',err?.message||err);}})
+       .finally(()=>{clearTimeout(timeout);this._vectorActive=Math.max(0,this._vectorActive-1);if(this.el.isConnected)this.scheduleRedraw();});
+    }
+    // The user may move many kilometers. Do not retain old city geometry in memory.
+    if(this.vectorTiles.size>25){for(const [k,t] of [...this.vectorTiles].sort((a,b)=>a[1].last-b[1].last).slice(0,this.vectorTiles.size-18)){
+      if(t.status==='loading')t.controller.abort();this.vectorTiles.delete(k);
+    }}
+    if(this._vectorSeenReady===0&&this._vectorActive===0&&this._vectorLastFailure){this._vectorStatus='offline';}
+  }
+  vectorFeatures(layerName){
+    const out=[];
+    for(const t of this.vectorTiles.values()){
+      if(t.status!=='ready')continue;
+      const layer=t.layers.find(x=>x.name===layerName);if(layer)out.push({tile:t,layer});
+    }
+    return out;
+  }
+  vectorPath(ctx,feature,tile,layer,p){
+    const factor=TILE*2**(p.z-tile.z),extent=layer.extent;
+    const cenX=p.center.x,cenY=p.center.y;
+    let count=0;
+    ctx.beginPath();
+    for(const path of feature.paths){
+      let started=false;
+      for(const xy of path.points){
+        const wx=(tile.x+xy[0]/extent)*factor,wy=(tile.y+xy[1]/extent)*factor;
+        const dx=(wx-cenX)*p.scale,dy=(wy-cenY)*p.scale;
+        // Do not connect projected lines through the camera/horizon.
+        const q=this.projectOffset(dx,dy,p);
+        if(!q){started=false;continue;}
+        if(!started){ctx.moveTo(q.x,q.y);started=true;}else ctx.lineTo(q.x,q.y);
+        count++;
+      }
+      if(started&&path.closed)ctx.closePath();
+    }
+    return count>=2;
+  }
+  drawVectorGround(p){
+    const ctx=this.ctx,dpr=this._renderDpr;
+    const y0=p.topDown?0:Math.round(p.horizon+1);
+    ctx.save();ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.beginPath();ctx.rect(0,y0,p.w,p.h-y0);ctx.clip();
+    const layers=['landcover','landuse','water','waterway','building','transportation'];
+    for(const name of layers){for(const {tile,layer} of this.vectorFeatures(name)){
+      for(const f of layer.features){
+        // Cull distant vector geometry before projection; this keeps rotation
+        // responsive even in dense cities with thousands of building footprints.
+        const center14=world(this.center.lat,this.center.lng,tile.z);
+        const localX=(center14.x/TILE-tile.x)*layer.extent;
+        const localY=(center14.y/TILE-tile.y)*layer.extent;
+        const metersPerTile=40075017*Math.max(.15,Math.cos(this.center.lat*Math.PI/180))/(2**tile.z);
+        const radius=900/metersPerTile*layer.extent;
+        const bb=f.bbox;
+        if(bb && (bb[2]<localX-radius || bb[0]>localX+radius || bb[3]<localY-radius || bb[1]>localY+radius))continue;
+        const cl=String(f.props.class||'').toLowerCase(),sub=String(f.props.subclass||'').toLowerCase();
+        let color=null,kind='fill',width=1;
+        if(name==='landcover' && f.type===3){color=cl==='wood'?'#57945a':cl==='grass'?'#7dbb70':cl==='farmland'?'#9fbe78':'#91bf7c';}
+        else if(name==='landuse' && f.type===3){
+          color=/commercial|industrial|residential|retail|school|university|hospital|railway|garages|parking/.test(cl)?'#abb2b5':
+            /forest|wood|park|garden|grass|golf|orchard|meadow/.test(cl+' '+sub)?'#75af6f':'#94c37e';
+        }
+        else if(name==='water' && f.type===3){color='#57aee1';}
+        else if(name==='building' && f.type===3){if(!this.showBuildings)continue;color='#a4adb2';}
+        else if(name==='waterway' && f.type===2){color='#57aee1';kind='line';width=cl==='river'?8:cl==='canal'?6:3;}
+        else if(name==='transportation'){
+          if(/rail|aerialway|ferry/.test(cl))continue;
+          color=/path|track|footway|pedestrian|cycleway|steps/.test(cl)?'#556266':'#252d33';kind=f.type===3?'fill':'line';
+          width=/motorway|trunk/.test(cl)?19:/primary|secondary/.test(cl)?16:/tertiary/.test(cl)?13:/service|minor/.test(cl)?8:/path|track/.test(cl)?3.5:10;
+          width*=Math.max(.34,Math.min(1.25,2**((this.zoom-19.5)*.48)));
+        }
+        if(!color)continue;
+        // Skip oversized geometry long before canvas rasterization.
+        if(!this.vectorPath(ctx,f,tile,layer,p))continue;
+        if(kind==='fill'){
+          ctx.fillStyle=color;ctx.fill('evenodd');
+          // Matching outline hides sub-pixel seams between neighboring polygons.
+          if(name!=='transportation'){ctx.strokeStyle=color;ctx.lineWidth=.55;ctx.stroke();}
+        }else{ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();}
+      }
+    }}
+    ctx.restore();
+  }
+  refreshVectorBuildings(){
+    if(!this._vectorSeenReady)return;
+    const at=this.center;
+    const key=`${Math.round(at.lat*4500)}:${Math.round(at.lng*4500)}:${this._vectorSeenReady}`;
+    if(this._vectorBuildingsKey===key)return;
+    this._vectorBuildingsKey=key;
+    const buildings=[];
+    for(const {tile,layer} of this.vectorFeatures('building')){
+      for(let i=0;i<layer.features.length;i++){
+        const f=layer.features[i],outer=f.paths.find(p=>p.closed&&p.points.length>=3&&p.points.length<100);
+        if(!outer)continue;
+        const xy=outer.points;
+        const cxy=xy.reduce((a,q)=>[a[0]+q[0],a[1]+q[1]],[0,0]);
+        const center=wwTilePointToLngLat(tile.x,tile.y,tile.z,layer.extent,[cxy[0]/xy.length,cxy[1]/xy.length]);
+        const dist=distanceMeters(at.lat,at.lng,center.lat,center.lng);if(dist>365)continue;
+        const coords=xy.map(v=>wwTilePointToLngLat(tile.x,tile.y,tile.z,layer.extent,v));
+        const hash=footprintHash(`${tile.key}:${i}`),h=Number(f.props.render_height);
+        const height=Number.isFinite(h)&&h>1?h:6+(hash%4)*2.5;
+        buildings.push({id:`vector:${tile.key}:${i}`,coords,center,dist,height:bound(height,3,31),palette:hash%5,hash});
+      }
+    }
+    buildings.sort((a,b)=>a.dist-b.dist);
+    this.buildings=buildings.slice(0,135);
+    this.buildingStatus='ready';
+  }
+
   getTile(z,x,y){
     const n=2**z;
     if(y<0||y>=n)return null;
@@ -837,18 +1022,19 @@ class BackupMap {
     const bg=ctx.createLinearGradient(0,y0,0,h);
     bg.addColorStop(0,'#a6d89a');bg.addColorStop(.45,'#91c783');bg.addColorStop(1,'#8ec681');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
-    // Animated camera redraws must not restart the network tile downloads.
-    this._requestedThisFrame=0;
-    this.getTile(p.z,Math.floor(p.center.x/TILE),Math.floor(p.center.y/TILE));
-    const farZ=Math.max(12,p.z-2);
-    const nearZ=p.z;
-    // Far terrain uses a lower detail level, just like a 3D game's LOD.
-    this.drawTileLevel(ctx,p,farZ,y0,h,()=>1);
-    // Sharp streets fade in gradually, without a hard rectangular atlas edge.
-    const start=p.topDown?0:p.horizon+(p.playerY-p.horizon)*.20;
-    const end=p.topDown?0:p.horizon+(p.playerY-p.horizon)*.57;
-    this.drawTileLevel(ctx,p,nearZ,p.topDown?0:Math.max(y0,Math.round(start)),h,
-      y=>p.topDown?1:Math.max(0,Math.min(1,(y-start)/Math.max(1,end-start))));
+    // Fetch real geometry, not 256px raster images. WebGL is never required.
+    this.fetchVectorTiles(p);
+    if(this._vectorSeenReady){
+      this.drawVectorGround(p);
+      this.refreshVectorBuildings();
+    }else if(this._vectorStatus==='offline'){
+      // Emergency legacy map only when *all* vector requests fail.
+      // This is intentionally labelled to avoid promising sharp lines in raster mode.
+      this._requestedThisFrame=0;
+      const farZ=Math.max(12,p.z-2);
+      this.drawTileLevel(ctx,p,farZ,y0,h,()=>1);
+      this.drawTileLevel(ctx,p,p.z,y0,h,()=>1);
+    }
     if(!p.topDown){
       // Thin distant haze blurs the transition into the horizon naturally.
       const mist=ctx.createLinearGradient(0,p.horizon,0,p.horizon+110);
@@ -862,7 +1048,7 @@ class BackupMap {
       for(const [key] of old.slice(0,this.tiles.size-110))this.tiles.delete(key);
     }
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(this.showBuildings)this.drawLowPolyLand(p);
+    // Buildings are now assembled from vector footprints (not Overpass).
   }
   drawCollectRing(p){
     const pos=getPosition();
@@ -986,15 +1172,23 @@ class BackupMap {
     if(!this.el.isConnected)return;
     const p=this.params();if(!p.w||!p.h)return;
     this.paintGround(p);
+    // Retry one delayed building assembly if geometry arrived later than roads.
+    if(this._vectorSeenReady && this.buildings.length===0 &&
+       Date.now()-(this._lastVectorBuildingCheck||0)>3500 &&
+       this.vectorFeatures('building').some(item=>item.layer.features.length)) {
+      this._lastVectorBuildingCheck=Date.now();
+      this._vectorBuildingsKey='';
+      this.refreshVectorBuildings();
+    }
     this.maybeLoadBuildings();
     const loaded=[...this.tiles.values()].filter(tile=>tile.status==='ready').length;
     const pending=[...this.tiles.values()].filter(tile=>tile.status==='loading').length;
-    const tileState=loaded?'STRASSENKARTE':pending?'KARTE LÄDT':'ERSATZLANDSCHAFT';
-    const buildingsLabel=!this.showBuildings?'HÄUSER AUS':this.buildingStatus==='loading'?'HÄUSER LADEN':this.buildingStatus==='ready'?`${this.buildings.length} OSM-HÄUSER`:this.buildingStatus==='demo'?'DEMO-HÄUSER':this.buildingStatus==='unavailable'?'HÄUSER OFFLINE · 🏠 NEU LADEN':'HÄUSER BEREIT';
+    const tileState=this._vectorSeenReady?'SCHARFE VEKTORSTRASSEN':this._vectorStatus==='offline'?'RASTER-NOTKARTE · VEKTOR ERNEUT VERSUCHEN':'VEKTORKARTE LÄDT';
+    const buildingsLabel=!this.showBuildings?'HÄUSER AUS':this._vectorSeenReady?`${this.buildings.length} VEKTORHÄUSER`:'HÄUSER WARTEN AUF KARTENDATEN';
     this.caption.textContent=`RICHTUNG ${Math.round(this.bearing)}° · ZOOM ${this.zoom.toFixed(1)} · SPIELKARTE · ${tileState} · ${buildingsLabel}`;
     this.drawSprites(p);
   }
-  remove(){if(this._raf)cancelAnimationFrame(this._raf);clearTimeout(this._tileRefresh);this._buildingAbort?.abort();this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
+  remove(){for(const t of this.vectorTiles.values())t.controller?.abort();if(this._raf)cancelAnimationFrame(this._raf);clearTimeout(this._tileRefresh);this._buildingAbort?.abort();this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
 }
 class BackupMarker {
   constructor({element}){this.element=element;this.pos={lat:0,lng:0};this.map=null;}
@@ -1066,13 +1260,14 @@ function getRange(node) {
 const MAP_STYLE='https://tiles.openfreemap.org/styles/bright';
 const MAP_TILES='https://tiles.openfreemap.org/planet';
 const ICONS=Object.freeze({tree:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTYgMTI4Ij4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InRydW5rIiB4Mj0iMSIgeTI9IjAiPjxzdG9wIHN0b3AtY29sb3I9IiM4ODVmMzciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjODk4NTYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8ZWxsaXBzZSBjeD0iNTgiIGN5PSIxMTIiIHJ4PSIzMiIgcnk9IjkiIGZpbGw9IiMxNzJmMmEiIG9wYWNpdHk9Ii4yNiIvPgogIDxwYXRoIGQ9Ik01MSA4MCA2NiA3OSA2OSAxMDcgNTYgMTEyIDQ5IDEwNloiIGZpbGw9InVybCgjdHJ1bmspIiBzdHJva2U9IiM3NTU0MzgiIHN0cm9rZS13aWR0aD0iMS40Ii8+CiAgPHBhdGggZD0iTTU2IDkyIDY5IDg1IDY5IDEwNyA1NiAxMTJaIiBmaWxsPSIjOGY2OTNmIi8+CiAgPHBhdGggZD0iTTU0IDkxIDQyIDc4IDQ0IDcyIDU5IDg2IiBmaWxsPSIjYWM4MjQ4Ii8+CiAgPHBhdGggZD0iTTU2IDExIDcyIDIxIDgxIDM3IDk0IDUyIDg4IDczIDczIDg3IDUxIDkxIDI3IDgwIDE4IDYyIDI3IDQwIDM1IDIyWiIgZmlsbD0iIzJkODc1NCIgc3Ryb2tlPSIjMWI2MzQ0IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNNTYgMTEgNzAgMjAgNTggNDMgMzUgMjJaIiBmaWxsPSIjYTBkZjkxIi8+CiAgPHBhdGggZD0iTTM1IDIyIDU4IDQzIDMwIDU2IDE4IDYyIDI3IDQwWiIgZmlsbD0iIzY1YmQ2ZSIvPgogIDxwYXRoIGQ9Ik03MCAyMCA4MSAzNyA5NCA1MiA3MyA1MyA1OCA0M1oiIGZpbGw9IiM0NjliNWYiLz4KICA8cGF0aCBkPSJNNTggNDMgNzMgNTMgNzEgNzggNTEgOTEgNDkgNjJaIiBmaWxsPSIjMzU4NjUzIi8+CiAgPHBhdGggZD0iTTE4IDYyIDMwIDU2IDQ5IDYyIDUxIDkxIDI3IDgwWiIgZmlsbD0iIzRhYTU2MiIvPgogIDxwYXRoIGQ9Ik03MyA1MyA5NCA1MiA4OCA3MyA3MyA4NyA1MSA5MSA3MSA3OFoiIGZpbGw9IiMyNDY5NDciLz4KICA8cGF0aCBkPSJNMzUgMjIgNTggNDMgNDkgNjIgMzAgNTYiIGZpbGw9IiM3N2M4NzYiIG9wYWNpdHk9Ii4zNiIvPgogIDxwYXRoIGQ9Ik0zNiAyOCA0MSAyOSAzNCAzOCIgZmlsbD0iI2QwZTlhNyIgb3BhY2l0eT0iLjU1Ii8+Cjwvc3ZnPgo=',rock:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTYgMTI4Ij4KICA8ZWxsaXBzZSBjeD0iNTgiIGN5PSIxMTEiIHJ4PSIzNiIgcnk9IjkiIGZpbGw9IiMyNjNhNDMiIG9wYWNpdHk9Ii4yNSIvPgogIDxwYXRoIGQ9Ik0yMCA4MCAzMiA1MiA1MiAzNiA3OCA0MiA5NiA2OCA4OSAxMDIgNjcgMTExIDM4IDEwN1oiIGZpbGw9IiM3NThlYWEiIHN0cm9rZT0iIzUyNjY3ZCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTUyIDM2IDc4IDQyIDYzIDY5IDMyIDUyWiIgZmlsbD0iI2QwZGNlNSIvPgogIDxwYXRoIGQ9Ik0zMiA1MiA2MyA2OSA1NCA5NSAyMCA4MFoiIGZpbGw9IiNhMmI3YzkiLz4KICA8cGF0aCBkPSJNNzggNDIgOTYgNjggNzMgNzkgNjMgNjlaIiBmaWxsPSIjODA5N2FkIi8+CiAgPHBhdGggZD0iTTYzIDY5IDczIDc5IDY3IDExMSA1NCA5NVoiIGZpbGw9IiM2MjdkOTgiLz4KICA8cGF0aCBkPSJNMjAgODAgNTQgOTUgNjcgMTExIDM4IDEwN1oiIGZpbGw9IiM3ZjlkYjIiLz4KICA8cGF0aCBkPSJNNzMgNzkgOTYgNjggODkgMTAyIDY3IDExMVoiIGZpbGw9IiM1NjcxOGEiLz4KICA8cGF0aCBkPSJNMzkgNjcgNDcgNjMgNTMgNzIgNDggODIgNDAgODBaIiBmaWxsPSIjZTFiNjZkIi8+CiAgPHBhdGggZD0iTTUzIDcyIDYxIDc0IDU5IDg5IDQ4IDgyWiIgZmlsbD0iI2JlODU0YiIvPgogIDxwYXRoIGQ9Ik00MCA4MCA0OCA4MiA1OSA4OSA1NCA5NVoiIGZpbGw9IiNmZmNmODciLz4KICA8cGF0aCBkPSJNNzAgNTQgNzggNTYgNzMgNjVaIiBmaWxsPSIjZTZmMGYwIiBvcGFjaXR5PSIuNTUiLz4KPC9zdmc+Cg==',scrap:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTYgMTI4Ij4KICA8ZWxsaXBzZSBjeD0iNTgiIGN5PSIxMTEiIHJ4PSIzOSIgcnk9IjEwIiBmaWxsPSIjM2EyYzIwIiBvcGFjaXR5PSIuMjciLz4KICA8cGF0aCBkPSJNMTkgODAgMzUgNjUgNTMgNzYgNTQgMTAyIDMzIDExMSAxOSA5OVoiIGZpbGw9IiNhMTZlNTIiIHN0cm9rZT0iIzcwNDgzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHBhdGggZD0iTTE5IDgwIDMzIDg4IDUzIDc2IDM1IDY1WiIgZmlsbD0iI2RiYTc3MiIvPgogIDxwYXRoIGQ9Ik0zMyA4OCA1NCAxMDIgMzMgMTExIDE5IDk5WiIgZmlsbD0iIzg1NTQzZiIvPgogIDxwYXRoIGQ9Ik01NCA1OSA3NCA0OSA5MCA2MyA4NyA5NyA2OSAxMDggNTQgMTAxWiIgZmlsbD0iIzcyOGY5NiIgc3Ryb2tlPSIjNTI2YjcwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNNTQgNTkgNzMgNzAgOTAgNjMgNzQgNDlaIiBmaWxsPSIjYmFkMmNlIi8+CiAgPHBhdGggZD0iTTczIDcwIDkwIDYzIDg3IDk3IDY5IDEwOFoiIGZpbGw9IiM1MzcyNzgiLz4KICA8cGF0aCBkPSJNMzkgNDYgNjYgNDIgNzYgNTkgNTUgNzQgMzUgNjNaIiBmaWxsPSIjZDU5YTY1IiBzdHJva2U9IiM4NzVhM2EiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0zOSA0NiA1NSA1MyA2NiA0MloiIGZpbGw9IiNmNGM0OGIiLz4KICA8cGF0aCBkPSJNNTUgNTMgNzYgNTkgNTUgNzQgMzUgNjNaIiBmaWxsPSIjYWI2ZjRhIi8+CiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI4MyIgcj0iMTAiIGZpbGw9IiNjM2Q0Y2YiIHN0cm9rZT0iIzQ1NjM2YyIgc3Ryb2tlLXdpZHRoPSI1Ii8+CiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI4MyIgcj0iMi42IiBmaWxsPSIjNTk3ODgwIi8+CiAgPHBhdGggZD0iTTc4IDM1IDg0IDMzIDg4IDUwIDgzIDYxIDczIDUzWiIgZmlsbD0iI2Q2YTE2YSIgc3Ryb2tlPSIjODc1ODM5IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNODggNTAgODMgNjEgNzMgNTMiIGZpbGw9IiM5NzYxM2QiLz4KICA8cGF0aCBkPSJNNjEgOTMgNzAgODcgNzggOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2VmYmU3MyIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg=='});
-// Vector map v0.2.18: load a published, validated OpenFreeMap style first,
+// Vector map v0.2.19: load a published, validated OpenFreeMap style first,
 // then recolor the *vector layers* into the game palette. If unavailable, keep
 // the playable Canvas map (whose buildings have the same gray palette).
 let vectorUpgrade={scriptLoaded:false,trying:false,active:false,reason:'Vorbereitung',attempts:0,scriptPromise:null};
 function initMap(){
-  startBackupMap('Spielbare Karte gestartet; Vektordarstellung wird vorbereitet.');
-  queue3DUpgrade();
+  startBackupMap('2D-Canvas zeichnet Vektorkacheln – WebGL wird nicht benötigt.');
+  const el=document.querySelector('.camera-hint');
+  if(el)el.innerHTML='CANVAS-VEKTORWELT <span>· scharfe Straßen · kein WebGL nötig</span>';
 }
 function vectorStatus(text,failed=false){
   vectorUpgrade.reason=text;
@@ -1327,9 +1522,7 @@ function finalizeMap(map,kind){
   if(kind==='maplibre'){addAccuracyLayer();addCollectionRangeLayer();}
   updatePositionOnMap(true);renderWorld();updateModeUI();
   setTimeout(()=>state.map?.resize(),80);
-  if(kind==='backup' && vectorUpgrade.scriptLoaded && !vectorUpgrade.active){
-    setTimeout(requestVectorStart,50);
-  }
+  // Canvas-Vektorkarte ist die bevorzugte Darstellung. Kein WebGL-Upgrade nötig.
 }
 function startBackupMap(reason){
   if(state.mapKind==='backup')return;
@@ -1676,9 +1869,7 @@ function recenter() {
 }
 function bind() {
   document.querySelector('.camera-hint')?.addEventListener('click',()=>{
-    if(state.mapKind==='backup'&&!vectorUpgrade.trying){
-      if(window.maplibregl?.Map)requestVectorStart();else queue3DUpgrade();
-    }
+    if(state.mapKind==='backup'){state.map.retryCanvasVectors?.();toast('Vektorkarten-Daten werden erneut geladen');}
   });
   document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
   $('status-badge').addEventListener('click',()=>setTab('settings'));
@@ -1698,7 +1889,8 @@ function bind() {
       return;
     }
     if(state.mapKind!=='backup')return;
-    if(state.map.showBuildings && ['unavailable','idle'].includes(state.map.buildingStatus)){
+    if(state.map.showBuildings && state.map._vectorStatus==='offline')state.map.retryCanvasVectors?.();
+    if(state.map.showBuildings && ['unavailable','idle'].includes(state.map.buildingStatus) && !state.map._vectorEnabled){
       state.map.retryBuildings();toast('Gebäudedaten werden erneut angefragt …');return;
     }
     state.map.showBuildings=!state.map.showBuildings;
