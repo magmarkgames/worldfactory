@@ -1,10 +1,9 @@
-WELTWERK v0.2.13
+# WELTWERK v0.2.15
 
-Neuerungen:
-- 50-m-Sammelkreis um die Spielfigur
-- Fundstellen in Reichweite werden stärker hervorgehoben
-- Häuserabruf robuster: zusätzliche Overpass-Fallback-Quelle, POST-Requests und erneuter Abruf bei GPS-Wechsel
+Neue Kartenfarben:
+- Häuser und bebaute Flächen braun
+- Wiesen und Wald grün
+- Wasser blau
+- Straßen schwarz / dunkelgrau
 
-Installation:
-- einfach die index.html im GitHub-Repository ersetzen
-- anschließend die Seite mit ?v=0213 neu laden
+Installation: `index.html` ersetzen und Seite mit `?v=0215` neu laden.
