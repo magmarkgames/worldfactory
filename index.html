@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.4.0 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
-  <title>Weltwerk · Exploration & Inselbau v0.4.0</title>
+  <meta name="description" content="Weltwerk v0.4.1 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
+  <title>Weltwerk · Exploration & Inselbau v0.4.1</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -278,7 +278,7 @@
 .factory-map-wrap{contain:layout paint}
 #factory-flat-view[aria-pressed="true"]{background:#6fdab1;color:#143c34;border-color:#c2f8dc}
 
-/* =============== v0.4.0: Compact low-poly workshop =============== */
+/* =============== v0.4.1: Low-poly workshop =============== */
 #workshop-screen{position:absolute;inset:0;z-index:15;background:#132a34;display:flex;flex-direction:column;overflow:hidden;color:#effbf5}
 .ws-head{flex:0 0 auto;padding:calc(12px + env(safe-area-inset-top,0px)) 13px 10px;background:#143540;border-bottom:1px solid #4b7770}
 .ws-headline{display:flex;align-items:center;gap:10px;justify-content:space-between}.ws-headline h2{font-size:20px;letter-spacing:-.5px;margin:2px 0}.ws-small{font-size:10px;color:#a9c7c6;line-height:1.5}.ws-kicker{color:#89e4bd;font-size:9px;font-weight:900;letter-spacing:1.4px}.ws-btn{border:1px solid #567f7d;background:#224650;border-radius:11px;padding:9px 11px;font-size:11px;font-weight:850}.ws-back{min-height:41px;background:#294b53}
@@ -301,6 +301,49 @@
 .ws-tip{display:flex;gap:8px;align-items:flex-start;font-size:10px;color:#c9dbd3;margin-top:8px}.ws-go{background:#8adaac!important;color:#173d28!important}
 @media(max-width:360px){.ws-scroll{padding:8px}.ws-floor-shell{padding:8px;border-width:4px}.ws-floor{gap:1px}.ws-head{padding-left:9px;padding-right:9px}.ws-stat span{font-size:8px}}
 
+
+/* =============== v0.4.1: recognizable industrial equipment and zoom =============== */
+.ws-floor-shell{max-width:500px;padding:9px;background:#365b61;border:5px solid #aa9370;border-top-color:#d6bf93;border-left-color:#d6bf93}
+.ws-zoom-bar{max-width:500px;margin:0 auto 9px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ws-zoom-hint{font-size:10px;font-weight:850;color:#d1e6dc;letter-spacing:.25px}
+.ws-zoom-controls{display:flex;gap:5px;align-items:center}
+.ws-zoom-controls button{border:1px solid #527a77;color:#e1faf2;background:#24484e;border-radius:8px;min-width:36px;height:36px;font-size:20px;font-weight:900;display:grid;place-items:center;touch-action:manipulation}
+.ws-zoom-controls button:active{background:#36726b}.ws-zoom-controls button.ws-zoom-fit{min-width:52px;font-size:11px}
+.ws-zoom-readout{font-size:11px;min-width:42px;text-align:center;font-weight:850;font-variant-numeric:tabular-nums;color:#cde6e0}
+.ws-viewport{width:100%;aspect-ratio:1;overflow:hidden;position:relative;background:#64736e;border:2px solid #193b40;border-radius:6px;touch-action:none;user-select:none;overscroll-behavior:contain;cursor:grab;contain:layout paint}
+.ws-viewport.ws-panning{cursor:grabbing}
+.ws-floor{position:absolute;left:0;top:0;width:100%;height:100%;aspect-ratio:1;gap:2px;transform-origin:0 0;will-change:transform;touch-action:none}
+.ws-cell{overflow:hidden;border-radius:3px}
+.ws-cell.ws-unlocked{background:linear-gradient(145deg,#e0d6bc,#c4bba2);border:1px solid #aaa58c;box-shadow:inset 0 1px #fff9}
+.ws-cell.ws-locked{background:repeating-linear-gradient(135deg,#637573 0,#637573 9px,#5b6c68 9px,#5b6c68 18px);border:1px solid #3d5757;color:#899995;opacity:.8}
+.ws-cell.ws-wall-right.ws-unlocked{border-right:4px solid #7d7666}.ws-cell.ws-wall-bottom.ws-unlocked{border-bottom:4px solid #7d7666}
+.ws-cell.ws-belt{background:#283f41;border:1px solid #142f35;box-shadow:inset 0 0 0 1px #6b7973,inset 0 -2px #14252c}
+.ws-belt-art{display:block;width:100%;height:100%;position:absolute;inset:0;pointer-events:none}
+.ws-cell.ws-port-in{background:linear-gradient(135deg,#7cc0db,#3e7fa5);border:2px solid #bde8ff;box-shadow:inset 0 -3px #215478}
+.ws-cell.ws-port-out{background:linear-gradient(135deg,#9be0a8,#4d986f);border:2px solid #c9f6d2;box-shadow:inset 0 -3px #276444}
+.ws-port-glyph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;position:absolute;inset:0;color:#10303d;pointer-events:none}
+.ws-port-glyph strong{font-size:clamp(7px,1.8vw,13px);font-weight:950;line-height:1.1;letter-spacing:.4px}
+.ws-port-glyph em{font-size:clamp(13px,3vw,22px);font-weight:950;line-height:1;font-style:normal}
+.ws-cell.ws-saw{background:linear-gradient(145deg,#cf9658,#ae754b);border:2px solid #684b3e;box-shadow:inset 0 -3px #795137;color:#fff9de}
+.ws-cell.ws-saw.ws-saw-tier-2{background:linear-gradient(145deg,#b89e73,#8e7a60)}
+.ws-cell.ws-saw.ws-saw-tier-3{background:linear-gradient(145deg,#909ea0,#5b737c)}
+.ws-cell.ws-saw.ws-saw-tier-4{background:linear-gradient(145deg,#7aa1b0,#456b81)}
+.ws-machine-art{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);pointer-events:none;opacity:.98}
+.ws-saw-mark{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:clamp(8px,1.8vw,12px);font-weight:950;line-height:1.1;color:#fff3ce;background:#3b5956;border:1px solid #a7bcb5;border-radius:3px;padding:0 5px;pointer-events:none}
+.ws-saw-port{position:absolute;z-index:2;font-family:system-ui,sans-serif;font-size:clamp(7px,1.35vw,9px);font-weight:950;letter-spacing:.1px;padding:1px 3px;color:#0d2d37;border:1px solid #e7fbff;background:#90cbe4;box-shadow:0 1px 0 #1b4455;line-height:1.05;pointer-events:none;border-radius:2px}
+.ws-saw-port.ws-port-label-out{background:#96dca5;color:#16482b;border-color:#e4ffe5}
+.ws-side-left{left:2px;top:2px}.ws-side-right{right:2px;top:2px}.ws-side-top{left:50%;top:1px;transform:translateX(-50%)}.ws-side-bottom{left:50%;bottom:2px;transform:translateX(-50%)}
+.ws-cell.ws-working{outline:2px solid #b5ffd0;outline-offset:-3px;animation:ws-running-glow 1.6s ease-in-out infinite alternate}
+@keyframes ws-running-glow{from{box-shadow:inset 0 -3px #795137}to{box-shadow:inset 0 -3px #795137,0 0 0 1px #d6ffb9}}
+.ws-cell.ws-selected{outline:3px solid #fff6d7;outline-offset:-4px}
+.ws-cargo{z-index:3;display:grid;place-items:center;top:1px;left:1px;width:52%;height:52%;font-size:clamp(10px,2.6vw,20px);border:1px solid #fff6c8;border-radius:4px;box-shadow:0 1px 2px #172c39ab;background:#ffe6a2;color:#584118;line-height:1}
+.ws-floor-caption{max-width:500px;margin:9px auto 0;align-items:center}
+.ws-legend{max-width:500px;margin:8px auto 2px;display:flex;flex-wrap:wrap;gap:5px 13px;font-size:10px;color:#c8e3df}
+.ws-legend b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:3px;vertical-align:-1px}.ws-legend .ws-legend-in{background:#66b0d2}.ws-legend .ws-legend-out{background:#7fcf94}.ws-legend .ws-legend-belt{background:#daac57}.ws-legend .ws-legend-machine{background:#b98252}
+.ws-flow-note{margin-top:8px;padding:8px 9px;border-radius:8px;background:#244850;border:1px solid #426d6e;font-size:11px;color:#d8f2e7;line-height:1.5}
+@media(max-width:370px){.ws-floor-shell{padding:5px;border-width:4px}.ws-zoom-hint{font-size:9px}.ws-zoom-controls button{min-width:32px;height:32px}.ws-zoom-controls button.ws-zoom-fit{min-width:44px}}
+@media(prefers-reduced-motion:reduce){.ws-cell.ws-working{animation:none}}
+
 </style>
 </head>
 <body>
@@ -309,7 +352,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.3.0 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.1 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -355,8 +398,10 @@
         <div class="ws-switch"><button id="ws-mode-view" class="chosen">▶ Produktion</button><button id="ws-mode-edit">⚒ Bauen & umbauen</button></div>
       </header>
       <div class="ws-scroll">
-        <div class="ws-floor-shell"><div class="ws-floor" id="ws-floor" aria-label="Interaktiver 10 mal 10 Fabrikgrundriss"></div></div>
-        <div class="ws-floor-caption"><span>🔵 Eingang · 🟢 Ausgang</span><strong id="ws-status">○ BEREIT</strong></div>
+        <div class="ws-zoom-bar"><span class="ws-zoom-hint">🏭 PRODUKTIONSHALLE</span><div class="ws-zoom-controls" aria-label="Hallenansicht zoomen"><button id="ws-zoom-out" aria-label="Verkleinern" title="Verkleinern">−</button><span class="ws-zoom-readout" id="ws-zoom-label">180%</span><button id="ws-zoom-in" aria-label="Vergrößern" title="Vergrößern">+</button><button id="ws-zoom-fit" class="ws-zoom-fit" title="Auf Startbereich oder gesamte Halle zentrieren">Fokus</button></div></div>
+        <div class="ws-floor-shell"><div class="ws-viewport" id="ws-viewport" aria-label="Verschiebbare und zoombare Produktionshalle"><div class="ws-floor" id="ws-floor" aria-label="Interaktiver 10 mal 10 Fabrikgrundriss"></div></div></div>
+        <div class="ws-floor-caption"><span>Mit einem Finger verschieben · mit zwei Fingern zoomen</span><strong id="ws-status">○ BEREIT</strong></div>
+        <div class="ws-legend"><span><b class="ws-legend-in"></b>Materialeingang</span><span><b class="ws-legend-out"></b>Warenausgang</span><span><b class="ws-legend-belt"></b>Förderband</span><span><b class="ws-legend-machine"></b>Säge · IN / OUT</span></div>
         <div class="ws-panel ws-detail" id="ws-detail"><span class="ws-small">Säge wählen für Produktionsfortschritt.</span></div>
         <div class="ws-panel" id="ws-control">
           <h3>📦 Holz freigeben</h3><p>Du bestimmst, wie viel Holz aus dem Rucksack zur Eingangsstation kommt. Erst dann läuft die Produktion. Die Säge benötigt zwei Holz und 60 Sekunden pro Brett.</p>
@@ -364,7 +409,7 @@
           <div class="ws-actions" style="margin-top:9px"><button id="ws-pause" class="ws-btn">⏸ Pausieren</button><button id="ws-cancel" class="ws-danger">■ Auftrag abbrechen</button></div>
           <div class="ws-tip">💡 Holz fährt alle 2 Sekunden ein Feld weiter. Nach 60 Sekunden in der Säge muss das Brett den Ausgang erreichen, um im Rucksack zu erscheinen.</div>
         </div>
-        <div class="ws-panel hidden" id="ws-build"><h3>⚒ Baukasten</h3><p>Alle Maschinen sind selbst platzierbar. Eine Säge belegt 2 × 1 Felder, ein Förderband genau eines. Zum Umbauen wird die Produktion angehalten.</p>
+        <div class="ws-panel hidden" id="ws-build"><h3>⚒ Baukasten</h3><p>Alle Maschinen sind selbst platzierbar. Eine Säge belegt 2 × 1 Felder, ein Förderband genau eines. Blaue IN-Seite = Holzaufnahme, grüne OUT-Seite = Bretterausgabe. Zum Umbauen wird pausiert.</p>
           <div class="ws-tools"><button data-wstool="belt" class="chosen">➜ Förderband<span>1 Zweig · 4 frei zu Beginn</span></button><button data-wstool="saw">🪚 Kreissäge<span>5 Holz · 3 Altmetall</span></button><button data-wstool="move">↗ Versetzen<span>Säge antippen, neuen Platz wählen</span></button><button data-wstool="input">⇥ Eingang<span>An Außenwand setzen</span></button><button data-wstool="output">⇤ Ausgang<span>An Außenwand setzen</span></button><button data-wstool="erase">✕ Entfernen<span>Bandteile zurück in Vorrat</span></button></div>
           <div class="ws-actions" style="margin-top:9px"><button class="ws-btn" id="ws-direction">Richtung →</button></div>
           <div class="ws-tip">💡 Ein Band antippen, um seine Richtung einzustellen. Die Maschine nimmt Holz nur an ihrer Eingangsseite entgegen und gibt Bretter auf der gegenüberliegenden Seite aus.</div>
@@ -395,7 +440,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.0 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.1 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -416,7 +461,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.0';
+const VERSION = '0.4.1';
 const START_ZOOM = 20.5; // maximal erlaubter Startzoom; manuell weiterhin verkleinerbar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -600,7 +645,7 @@ const FACTORY_DEFS=Object.freeze({
  press:{name:'Metallpresse',icon:'⚙️',w:2,h:2,cost:{scrap:5,stone:3},input:{scrap:2},output:'plate',outputCount:1,seconds:25,detail:'Presst Altmetall zu Metallplatten.'},
  harbor:{name:'Hafenlager',icon:'⚓',w:3,h:2,detail:'Zentrales Lager deiner Insel.'}
 });
-/* ========= WELTWERK v0.4.0 · EDITABLE SAWMILL INTERIOR ========= */
+/* ========= WELTWERK v0.4.1 · EDITABLE SAWMILL INTERIOR ========= */
 const WS_MS=2000;
 const WS_DIR=[[1,0],[0,1],[-1,0],[0,-1]];
 const WS_ARROWS=['→','↓','←','↑'];
@@ -731,14 +776,69 @@ function wsRefund(profile,w){
   w.stock=0;w.items=[];w.active=false;w.last=Date.now();
   return {raw,finished};
 }
-const workshopUI={id:null,mode:'view',tool:'belt',direction:0,selectedSaw:null,selectX:null,selectY:null};
+const workshopUI={id:null,mode:'view',tool:'belt',direction:0,selectedSaw:null,selectX:null,selectY:null,zoom:1.8,panX:0,panY:0,lastPanAt:0};
+const WS_ZOOM_MIN=1,WS_ZOOM_MAX=3.5;
+function wsClampCamera(){
+  const vp=document.getElementById('ws-viewport');if(!vp)return;
+  const size=vp.clientWidth||320,edge=size*(1-workshopUI.zoom);
+  workshopUI.panX=Math.min(0,Math.max(edge,workshopUI.panX));
+  workshopUI.panY=Math.min(0,Math.max(edge,workshopUI.panY));
+}
+function wsUpdateCamera(){
+  const grid=document.getElementById('ws-floor');if(!grid)return;
+  wsClampCamera();
+  grid.style.transform=`translate3d(${workshopUI.panX}px,${workshopUI.panY}px,0) scale(${workshopUI.zoom})`;
+  const label=document.getElementById('ws-zoom-label');if(label)label.textContent=Math.round(workshopUI.zoom*100)+'%';
+}
+function wsZoomAt(next,px=null,py=null){
+  const vp=document.getElementById('ws-viewport');if(!vp)return;
+  const size=vp.clientWidth||320;
+  px=px??size/2;py=py??size/2;
+  const old=workshopUI.zoom,z=Math.max(WS_ZOOM_MIN,Math.min(WS_ZOOM_MAX,next));
+  workshopUI.panX=px-(px-workshopUI.panX)*z/old;
+  workshopUI.panY=py-(py-workshopUI.panY)*z/old;
+  workshopUI.zoom=z;wsUpdateCamera();
+}
+function wsFocusCamera(){
+  const current=wsCurrent();const level=current?.w.level||1;
+  workshopUI.zoom=level===1?1.85:level===2?1.12:1;
+  workshopUI.panX=0;workshopUI.panY=0;wsUpdateCamera();
+}
+function wsBindCamera(){
+  const vp=document.getElementById('ws-viewport');if(!vp)return;
+  const pointers=new Map();let pinchDistance=null;
+  function distance(){const p=[...pointers.values()];return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);}
+  vp.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2)pinchDistance=distance();});
+  vp.addEventListener('pointermove',e=>{
+    const prior=pointers.get(e.pointerId);if(!prior)return;
+    const dx=e.clientX-prior.x,dy=e.clientY-prior.y;
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pointers.size===2){
+      const d=distance();if(pinchDistance&&d>0){
+        const r=vp.getBoundingClientRect(),points=[...pointers.values()],mx=(points[0].x+points[1].x)/2-r.left,my=(points[0].y+points[1].y)/2-r.top;
+        wsZoomAt(workshopUI.zoom*d/pinchDistance,mx,my);
+        workshopUI.lastPanAt=Date.now();
+      }
+      pinchDistance=d;vp.classList.add('ws-panning');e.preventDefault();return;
+    }
+    if(Math.abs(dx)+Math.abs(dy)>0){
+      workshopUI.panX+=dx;workshopUI.panY+=dy;wsUpdateCamera();
+      if(Math.abs(dx)+Math.abs(dy)>2){workshopUI.lastPanAt=Date.now();vp.classList.add('ws-panning');}
+      e.preventDefault();
+    }
+  });
+  function end(e){pointers.delete(e.pointerId);pinchDistance=null;if(!pointers.size)vp.classList.remove('ws-panning');}
+  vp.addEventListener('pointerup',end);vp.addEventListener('pointercancel',end);vp.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')end(e);});
+  vp.addEventListener('wheel',e=>{e.preventDefault();const r=vp.getBoundingClientRect();wsZoomAt(workshopUI.zoom*(e.deltaY<0?1.13:1/1.13),e.clientX-r.left,e.clientY-r.top);},{passive:false});
+  window.addEventListener('resize',()=>{if(workshopUI.id)wsUpdateCamera();});
+}
 function wsCurrent(){const b=activeProfile().factory.buildings.find(x=>x.id===workshopUI.id&&x.type==='sawmill');return b?{b,w:b.workshop,p:activeProfile()}:null;}
 function wsOpen(id){
   const b=activeProfile().factory.buildings.find(x=>x.id===id&&x.type==='sawmill');if(!b)return;
   workshopUI.id=id;workshopUI.mode='view';workshopUI.tool='belt';workshopUI.selectedSaw=null;
   document.getElementById('workshop-screen').classList.remove('hidden');
   document.getElementById('factory-inspector').classList.add('hidden');
-  wsRender();
+  wsRender();wsFocusCamera();
 }
 function wsClose(){workshopUI.id=null;document.getElementById('workshop-screen').classList.add('hidden');renderFactory();renderPanels();}
 function wsSetMode(mode){const x=wsCurrent();if(!x)return;if(mode==='edit'&&x.w.active){wsAdvance(x.p,x.w);x.w.active=false;x.w.last=Date.now();toast('Fabrik für den Umbau pausiert');save();}workshopUI.mode=mode;wsRender();}
@@ -806,6 +906,49 @@ function wsSelectedUpgrade(){const x=wsCurrent();if(!x)return;const {p,w}=x;
 }
 function wsDuration(s){return WS_SAW_TIMES[s.level];}
 function wsAreaStats(w){return `${w.level*25}/100`;}
+function wsBeltArt(dir){
+  // Fixed roller graphics are rotated with the conveyor direction. No external images or textures.
+  return `<svg class="ws-belt-art" viewBox="0 0 64 64" aria-hidden="true" style="transform:rotate(${dir*90}deg)">
+  <rect x="3" y="11" width="58" height="42" rx="5" fill="#304b51" stroke="#182e34" stroke-width="3"/>
+  <rect x="6" y="13" width="52" height="5" rx="1" fill="#e1ae5b"/><rect x="6" y="46" width="52" height="5" rx="1" fill="#c28e42"/>
+  <g stroke="#81989a" stroke-width="3" opacity=".85"><path d="M13 21V43 M23 21V43 M33 21V43 M43 21V43 M53 21V43"/></g>
+  <path d="M23 32H40m-7-7 7 7-7 7" fill="none" stroke="#e8ffe3" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+  </svg>`;
+}
+function wsSawArt(part){
+  return part===0?`<svg class="ws-machine-art" viewBox="0 0 60 60" aria-hidden="true">
+    <rect x="5" y="12" width="50" height="37" rx="5" fill="#5b6460" stroke="#393f3d" stroke-width="3"/>
+    <path d="M8 24H52 M8 38H52" stroke="#c3bbb0" stroke-width="4"/>
+    <path d="M14 17V45 M27 17V45 M41 17V45" stroke="#d7b377" stroke-width="3"/>
+    <rect x="13" y="24" width="35" height="12" rx="2" fill="#a7764c" stroke="#eac58c" stroke-width="1.5"/>
+  </svg>`:`<svg class="ws-machine-art" viewBox="0 0 60 60" aria-hidden="true">
+    <rect x="5" y="12" width="50" height="37" rx="5" fill="#465956" stroke="#333c40" stroke-width="3"/>
+    <circle cx="30" cy="30" r="19" fill="#c4d3cc" stroke="#364a50" stroke-width="4"/>
+    <path d="M30 8L35 15 44 13 44 22 53 27 46 33 48 43 38 43 30 52 23 44 13 45 14 34 7 29 16 24 16 14 26 16Z" fill="#e5ddd1" stroke="#596d6e" stroke-width="2"/>
+    <circle cx="30" cy="30" r="7" fill="#718b89" stroke="#394c4e" stroke-width="3"/>
+  </svg>`;
+}
+function wsSawPortMarks(s,first){
+  const inFirst=s.dir===0||s.dir===1;
+  const sideIn=['left','top','right','bottom'][s.dir],sideOut=['right','bottom','left','top'][s.dir];
+  const input=(inFirst===first)?`<span class="ws-saw-port ws-side-${sideIn}" aria-hidden="true">IN</span>`:'';
+  const output=(inFirst!==first)?`<span class="ws-saw-port ws-port-label-out ws-side-${sideOut}" aria-hidden="true">OUT</span>`:'';
+  return input+output;
+}
+function wsPortArrow(w,x,y,kind){
+  // IN: reflect the same priority and routing as wsStep (right, down, left, up).
+  // This keeps the direction drawn on the socket consistent with its actual next delivery.
+  if(kind==='input')for(let i=0;i<4;i++){
+    const [dx,dy]=WS_DIR[i],a=x+dx,b=y+dy;
+    if(!wsUnlocked(w.level,a,b))continue;
+    const target=wsCanAccept(w,a,b,'wood',x,y),belt=wsBeltAt(w,a,b);
+    if(target&&(target!=='belt'||(belt&&!(a+WS_DIR[belt.dir][0]===x&&b+WS_DIR[belt.dir][1]===y))))return WS_ARROWS[i];
+  }
+  // Without an active connected route, show the direction normal to the nearest exposed wall.
+  const outside=WS_DIR.findIndex(([dx,dy])=>!wsUnlocked(w.level,x+dx,y+dy));
+  const dir=outside<0?0:outside;
+  return WS_ARROWS[kind==='input'?(dir+2)%4:dir];
+}
 function wsGridHtml(w){
   let html='';const occ=new Map();
   for(const s of w.saws)for(const [x,y] of wsSawCells(s))occ.set(factoryKey(x,y),s);
@@ -814,14 +957,18 @@ function wsGridHtml(w){
     const inp=w.input.x===x&&w.input.y===y,out=w.output.x===x&&w.output.y===y;
     const rightEdge=!wsUnlocked(w.level,x+1,y),bottomEdge=!wsUnlocked(w.level,x,y+1);
     const selected=saw&&saw.id===workshopUI.selectedSaw;
-    let content='';let cls='';
-    if(inp){content='⇥';cls='ws-port-in';}
-    else if(out){content='⇤';cls='ws-port-out';}
-    else if(saw){content=`<span class="ws-saw-symbol">${wsSawCells(saw)[0][0]===x&&wsSawCells(saw)[0][1]===y?'⚙':'🪚'}</span>`;cls='ws-saw';}
-    else if(belt){content=`<span class="ws-arrow">${WS_ARROWS[belt.dir]}</span>${item?`<span class="ws-cargo">${item.kind==='wood'?'🪵':'▰'}</span>`:''}`;cls='ws-belt';}
-    else if(active)content='';else{content='⌁';cls='ws-locked';}
+    let content='',cls='',name='Freies Baufeld';
+    if(inp){content=`<span class="ws-port-glyph"><strong>IN</strong><em>${wsPortArrow(w,x,y,'input')}</em></span>`;cls='ws-port-in';name='Materialeingang: Holz fließt in die Halle';}
+    else if(out){content=`<span class="ws-port-glyph"><strong>OUT</strong><em>${wsPortArrow(w,x,y,'output')}</em></span>`;cls='ws-port-out';name='Warenausgang: Bretter ins Inventar';}
+    else if(saw){
+      const cells=wsSawCells(saw),first=cells[0][0]===x&&cells[0][1]===y;
+      content=wsSawArt(((saw.dir===0||saw.dir===1)===first)?0:1)+`<span class="ws-saw-mark">${WS_ARROWS[saw.dir]}</span>`+wsSawPortMarks(saw,first);
+      cls=`ws-saw ws-saw-tier-${saw.level}`;name=`Kreissäge Level ${saw.level} · Material läuft ${WS_ARROWS[saw.dir]} · blauer Eingang, grüner Ausgang`;
+    }
+    else if(belt){content=wsBeltArt(belt.dir)+(item?`<span class="ws-cargo" aria-label="${item.kind==='wood'?'Holz':'Brett'}">${item.kind==='wood'?'🪵':'▰'}</span>`:'');cls='ws-belt';name=`Förderband transportiert ${WS_ARROWS[belt.dir]}`;}
+    else if(!active){content='';cls='ws-locked';name='Noch gesperrtes Baufeld';}
     if(saw&&saw.work>0&&saw.inputCount>0)cls+=' ws-working';
-    html+=`<button class="ws-cell ${cls} ${active?'ws-unlocked':''} ${selected?'ws-selected':''} ${rightEdge?'ws-wall-right':''} ${bottomEdge?'ws-wall-bottom':''}" data-wsx="${x}" data-wsy="${y}" ${active?'':'disabled'} title="${inp?'Holzeingang':out?'Warenausgang':saw?`Säge Lv. ${saw.level}`:belt?'Förderband':active?'Baufeld':'Gesperrt'}">${content}</button>`;
+    html+=`<button type="button" class="ws-cell ${cls} ${active?'ws-unlocked':''} ${selected?'ws-selected':''} ${rightEdge?'ws-wall-right':''} ${bottomEdge?'ws-wall-bottom':''}" data-wsx="${x}" data-wsy="${y}" ${active?'':'disabled'} aria-label="${name}" title="${name}">${content}</button>`;
   }
   return html;
 }
@@ -841,6 +988,7 @@ function wsRender(){
   root.querySelector('#ws-plank').textContent=p.inventory.plank||0;
   root.querySelector('#ws-stock').textContent=w.stock;
   root.querySelector('#ws-floor').innerHTML=wsGridHtml(w);
+  wsUpdateCamera();
   root.querySelector('#ws-pause').textContent=w.active?'⏸ Pausieren':'▶ Fortsetzen';
   root.querySelector('#ws-pause').disabled=!(w.active||w.stock||w.items.length||w.saws.some(s=>s.inputCount||s.outputCount||s.work));
   root.querySelector('#ws-pause').classList.toggle('ws-go',!w.active);
@@ -861,12 +1009,19 @@ function wsRender(){
   if(sel){const next=sel.level+1;const sawState=sel.outputCount?'Ausgang belegt / Bretter abtransportieren':sel.inputCount>=(sel.level>=3?3:2)?`Sägt · noch ${Math.ceil((WS_SAW_TIMES[sel.level]*1000-sel.work)/1000)} Sekunden`: `Wartet auf Holz (${sel.inputCount}/${sel.level>=3?3:2})`;detail.innerHTML=`<div class="ws-detail-top"><b>🪚 Kreissäge · Level ${sel.level}</b><span>${sawState}</span></div>
     <div class="ws-meter"><i style="width:${Math.round(100*sel.work/(WS_SAW_TIMES[sel.level]*1000))}%"></i></div>
     <div class="ws-small">Material in Säge: ${sel.inputCount}/${sel.level>=3?3:2} Holz · Fertige Bretter: ${sel.outputCount} · Rezept: ${sel.level>=3?'3 Holz → 2 Bretter':'2 Holz → 1 Brett'}</div>
+    <div class="ws-flow-note">🔵 <b>IN:</b> ${['von links →','von oben ↓','von rechts ←','von unten ↑'][sel.dir]} &nbsp;·&nbsp; 🟢 <b>OUT:</b> ${['nach rechts →','nach unten ↓','nach links ←','nach oben ↑'][sel.dir]}. <br>Die Pfeile auf der Säge zeigen die Materialrichtung.</div>
     <button id="ws-saw-upgrade" ${next>w.level||next>4||w.active||sel.inputCount||sel.work||sel.outputCount||!factoryEnough(p.inventory,WS_SAW_UPGRADES[next])?'disabled':''}>${next>4?'Maximale Säge-Stufe':next>w.level?'Benötigt Sägewerk Lv. '+next:`Säge auf Lv. ${next} verbessern · ${factoryCostText(WS_SAW_UPGRADES[next])}`}</button>`;
   }else detail.innerHTML=`<span class="ws-small">${workshopUI.mode==='edit'?'Wähle ein Bauteil und tippe auf ein freies Feld.':'Säge antippen für Timer, Rezept und Verbesserungen.'}</span>`;
 }
 function wsBind(){
   const root=document.getElementById('workshop-screen');
+  wsBindCamera();
   root.addEventListener('click',e=>{
+    if(e.target.closest('#ws-zoom-in')){wsZoomAt(workshopUI.zoom*1.25);return;}
+    if(e.target.closest('#ws-zoom-out')){wsZoomAt(workshopUI.zoom/1.25);return;}
+    if(e.target.closest('#ws-zoom-fit')){wsFocusCamera();return;}
+    // Distinguish a short tap for building from a drag/pinch for navigating.
+    if(e.target.closest('[data-wsx]')&&Date.now()-workshopUI.lastPanAt<110){e.preventDefault();return;}
     const tile=e.target.closest('[data-wsx]');if(tile){wsSelect(Number(tile.dataset.wsx),Number(tile.dataset.wsy));return;}
     const tool=e.target.closest('[data-wstool]');if(tool){workshopUI.tool=tool.dataset.wstool;workshopUI.selectedSaw=null;wsRender();return;}
     if(e.target.closest('#ws-close'))wsClose();
@@ -2786,7 +2941,7 @@ function setTab(tab) {
 function exportSave() {
   const data=localStorage.getItem(SAVE_KEY);if(!data){toast('Noch kein Spielstand vorhanden.',true);return;}
   const url=URL.createObjectURL(new Blob([JSON.stringify(JSON.parse(data),null,2)],{type:'application/json'}));
-  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.4.0-spielstand.json';
+  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.4.1-spielstand.json';
   document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
   toast('Spielstand exportiert');
 }
