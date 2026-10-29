@@ -1,61 +1,34 @@
-# WELTWERK v0.3.0 — Die erste Fabrikinsel
+# WELTWERK v0.3.1 – Produktionssteuerung & Inselansicht
 
-**Spielbare erste Insel-Aufbauversion** im Stil klassischer Aufbau- und Wirtschaftsspiele. Noch ohne Einwohner, Handel und Multiplayer.
+Diese Version überarbeitet die erste spielbare Fabrikinsel anhand des Feedbacks zur v0.3.0. Die GPS-Sammelkarte bleibt Bestandteil der App. Für die Fabrik werden keine externen Bibliotheken benötigt.
 
-## Was neu ist
+## Die fünf Verbesserungen
 
-- **Fabrik** als fünfter Tab neben Welt, Rucksack, Sammlung und Mehr.
-- **Eigene Insel** mit stilisierter isometrischer Ansicht, Wasser, Küste, Bäumen und freier Baufläche.
-- **Hafenlager** und ein erstes Netz aus verbundenen Straßen.
-- **Straßen** auf einzelnen Feldern bauen und entfernen.
-- **Sägewerk, Steinmetz und Metallpresse** auf dem Inselraster bauen, verschieben, drehen, pausieren und abreißen.
-- **Vorschau mit Bau-Bestätigung**: Im Baumenü Gebäude wählen, freie Fläche antippen, dann „Gebäude bauen“ bestätigen.
-- **Produktionsketten mit echtem Inventar**: Rohstoffe werden beim Start einer Charge entnommen. Nach einer festen Zeit landen die Produkte im Rucksack. Bei genügend Nachschub läuft die Produktion automatisch weiter.
-- **Straßenanbindung zählt**: Nur Betriebe mit Verbindung zum Hafen können neue Produktionschargen starten.
-- **Offline-Fortschritt**: Bei erneutem Öffnen wird verstrichene Produktionszeit verarbeitet, sofern die Materialien reichen.
-- **Persistenz**: Neue Fabrikdaten werden gemeinsam mit deinem bisherigen Demo- bzw. GPS-Profil lokal gespeichert, inklusive Export und Import als JSON.
-- **Demo-Testpaket**: Im Demo-Modus lassen sich zum Testen Rohstoffe hinzufügen. Im GPS-Modus gibt es keinen Testpaket-Button.
+1. **Sichtbarer Timer:** Sägewerk (15 s), Steinmetz (20 s), Metallpresse (25 s) zeigen Rezept, Materialbedarf, verstrichene Zeit und Fortschrittsbalken. Gebäude antippen, um den Status zu sehen.
+2. **Manuelle Materialzufuhr:** Ein neu gebautes Gebäude startet **nicht** automatisch. Tippe das Gebäude an und wähle **„Material einsetzen & starten“**, um genau eine Charge aus deinem Rucksack einzusetzen. Nach Fertigstellung wird nicht automatisch die nächste Charge begonnen.
+3. **Alles im Rucksack:** Fertige Bretter, Steinblöcke und Metallplatten landen nach Fertigstellung im vorhandenen Rucksack im neuen Abschnitt **„Hergestellte Waren“**. GPS- und Demo-Rucksack bleiben wie zuvor voneinander getrennt.
+4. **Anhalten & Abbrechen:** **„Anhalten“** stoppt die Uhr; **„Fortsetzen“** setzt bei derselben Restzeit fort (Straßenanbindung nötig). **„Abbrechen · Material zurück“** beendet die Charge sofort und erstattet die eingesetzten Rohstoffe. Auch beim Abriss laufender Gebäude werden eingelegte Rohstoffe zurückgebucht.
+5. **Flüssigeres Ziehen & bessere Sicht:** Das Verschieben nutzt gedrosselte Bildschirmaktualisierung statt vieler unnötiger Layoutberechnungen. Gebäude und Bäume sind niedriger; mit der Taste **▦** rechts in der Inselansicht kannst du alle Gebäude als flache Grundrisse darstellen. Beim Bauen wird diese flache Ansicht automatisch verwendet.
 
-## Die ersten Rezepte
+## Update
 
-| Gebäude | Baukosten | Laufende Verarbeitung | Dauer je Ware |
-|---|---|---|---|
-| Straße | 1 Stein | Verbindet Betriebe mit Hafen | — |
-| Sägewerk | 4 Holz + 2 Stein | 2 Holz → 1 Brett | 15 Sek. |
-| Steinmetz | 4 Stein + 2 Holz | 2 Stein → 1 Steinblock | 20 Sek. |
-| Metallpresse | 5 Altmetall + 3 Stein | 2 Altmetall → 1 Metallplatte | 25 Sek. |
+1. Vorher in **Mehr → Export (JSON)** einen Spielstand sichern.
+2. Die neue `index.html` ins Hauptverzeichnis des bisherigen GitHub-Repositories kopieren und die alte Datei ersetzen. Keine weiteren Dateien nötig.
+3. Änderungen committen und die Website aktualisieren. Falls die alte Seite im Browsercache hängt, `?v=031` an die URL anhängen.
+4. Im **Demo-Modus** den Tab **Fabrik** öffnen und **Testmaterial** hinzufügen.
+5. Sägewerk bauen, danach den neu geöffneten Gebäude-Dialog benutzen, um Holz bewusst einzusetzen und die Produktion zu starten.
+6. Nach einer abgeschlossenen Charge auf **Rucksack → Hergestellte Waren** gehen.
 
-Baukosten und Zeiten sind bewusst **erste Balancing-Werte**, die wir mit Spielerfahrung anpassen.
+## Speicherung & Abwärtskompatibilität
 
-## Kurzer Funktionstest
+- Der vorhandene lokale WELTWERK-Speicherschlüssel `weltwerk-exploration-save-v1` bleibt unverändert.
+- Gebäude, begonnene und pausierte Produktionschargen und fertige Waren werden zusammen mit dem bestehenden Spielstand gespeichert.
+- Die Umstellung verarbeitet eine aus v0.3.0 möglicherweise bereits laufende Produktionscharge **ein einziges Mal**, beginnt danach aber keine neue automatisch. Vorhandene Rohstoffe werden nicht rückwirkend zurückgebucht.
+- Alle Produktionsdaten werden weiterhin lokal im Browser gespeichert; für die GPS-Karte werden ggf. öffentliche Kartendienste geladen.
 
-1. `index.html` in einem Browser öffnen bzw. als GitHub-Pages-Website starten.
-2. Im Startfenster „Im Demo-Modus testen“ wählen.
-3. Unten **Fabrik** wählen und **Testmaterial** hinzufügen.
-4. **Sägewerk** antippen, ein freies Feld direkt neben einer bereits verbundenen Straße wählen und **Gebäude bauen** drücken.
-5. Sägewerk antippen: Der Produktionsstatus und die Verarbeitungszeit erscheinen.
-6. Einige Sekunden später sind Bretter im Lager und im Rucksack zu sehen. Weitere Gebäude und Straßen ausprobieren.
+## Grenzen der Version
 
-Tipp: Mit dem Finger die Insel verschieben, mit `+` und `−` zoomen. Der Zentrieren-Button stellt die ursprüngliche Ansicht wieder her.
-
-## Aktualisieren (GitHub Pages)
-
-1. **Vorher unbedingt deinen aktuellen Spielstand exportieren**: Mehr → Export (JSON).
-2. Die `index.html` aus dieser ZIP in deinem Repository im Hauptverzeichnis anstelle der bisherigen Datei hochladen.
-3. Änderungen committen und deine Seite aktualisieren (ggf. mit `?v=0300`).
-4. Oben muss **V0.3.0** stehen und unten der neue Tab **Fabrik** erscheinen.
-5. Bestehende Spielstände sollten über den unveränderten Speicher-Schlüssel übernommen werden. Importiere ggf. den zuvor gesicherten JSON-Spielstand.
-
-## Wichtig zum zugrundeliegenden Projektstand
-
-Die hier zugängliche vollständige WELTWERK-Quelldatei war **v0.2.20**. Für v0.3.0 wurden die aus der späteren v0.2.23-Konzeption bekannten Werte ebenfalls berücksichtigt: **30 m Sammelradius**, **Startzoom bis 20,5**, ungefähr **2,5-fache Fundstellendichte** unter Erhalt der ursprünglichen Fundstellen-IDs, mindestens 18 m Abstand für die zusätzlichen Fundstellen in einer Rasterzelle und **60 Minuten Regeneration**. Auch die später vereinbarten Baum-Bonuschancen wurden angeglichen. Ohne den Original-Quellstand von v0.2.23 können aber weitere dort enthaltene Detailänderungen nicht garantiert vollständig übernommen werden. Deshalb **vor einem Ersatz unbedingt sichern**.
-
-Es werden keine externen Bibliotheken für die Insel gebraucht; die bisherige GPS-Karte lädt weiterhin öffentliche Kartendaten, sofern verfügbar. Standortverläufe werden nicht gespeichert.
-
-## Bewusste Grenzen dieser ersten Version
-
-- Kein Wohnbau, keine Einwohner, kein Handel und keine Währung.
-- Nur eine kleine Insel und drei Produktionsgebäude.
-- Alle Rohstoffe liegen im gemeinsamen Hafenlager, keine einzelnen Lieferkarren.
-- Die Produktionslogik ist prototypisch lokal und noch nicht gegen manipulierte Gerätezeiten geschützt.
-- Auf GPS-Fundstellen nur von sicheren, erlaubten Orten zugreifen; die generierten Rohstoffpositionen sind keine geprüften Wege.
+- Die Fabrik besitzt nur Sägewerk, Steinmetz und Metallpresse, noch keine Bewohner oder Handel.
+- Ein Auftrag stellt genau **eine** Ware her; eine Warteschlange und automatisierte Zulieferung können später folgen.
+- Performance wurde für Smartphone-Bildschirmgröße im Browser getestet; sie kann je nach Gerät und Browser variieren.
+- Grundlage ist die im Projekt vorhandene v0.3.0-Version, die ihrerseits auf dem vollständigen v0.2.20-Quellstand beruhte. Nicht verfügbare Detailänderungen aus v0.2.23 können weiterhin nicht garantiert übernommen werden.

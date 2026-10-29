@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.3.0 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
-  <title>Weltwerk · Exploration & Inselbau v0.3.0</title>
+  <meta name="description" content="Weltwerk v0.3.1 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
+  <title>Weltwerk · Exploration & Inselbau v0.3.1</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -190,7 +190,7 @@
 @keyframes tree-loot-fly{0%{opacity:1;transform:translate(-50%,0) scale(.8)}100%{opacity:0;transform:translate(-50%,-65px) scale(1.18)}}
 @media(max-height:725px){.tree-top{padding-top:calc(7px + env(safe-area-inset-top,0px));padding-bottom:7px}.tree-bottom{padding-top:8px}.tree-hint{font-size:10px}.tree-hotspot{width:36px;height:36px;font-size:19px}}
 
-/* WELTWERK v0.3.0 — Insel-Manufaktur */
+/* WELTWERK v0.3.1 — Insel-Manufaktur */
 .bottom-nav{grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding-left:5px;padding-right:5px}
 .nav-item{font-size:9px;gap:4px;letter-spacing:-.15px}
 .nav-item svg{width:22px;height:22px}
@@ -220,7 +220,7 @@
 .factory-map-actions{position:absolute;z-index:3;top:12px;right:12px;display:flex;flex-direction:column;gap:6px}
 .factory-map-actions button{background:#122d36eb;color:#effff8;border:1px solid #ffffff55;border-radius:11px;width:36px;height:36px;font-size:18px;font-weight:800;box-shadow:0 3px 12px #16445255}
 .factory-guidance{position:absolute;z-index:2;bottom:10px;left:10px;right:10px;pointer-events:none;text-align:center;color:#e8ffff;background:#153740ce;border:1px solid #ffffff35;border-radius:10px;padding:8px 9px;font-size:10px;font-weight:750;line-height:1.3}
-.factory-inspector{position:absolute;z-index:6;bottom:48px;left:10px;right:10px;border:1px solid #679184;background:linear-gradient(145deg,#213f46f2,#132b35f5);backdrop-filter:blur(16px);padding:12px;border-radius:16px;box-shadow:0 10px 35px #081d2d77;max-height:57%;overflow-y:auto}
+.factory-inspector{position:absolute;z-index:6;bottom:48px;left:10px;right:10px;border:1px solid #679184;background:linear-gradient(145deg,#213f46f2,#132b35f5);backdrop-filter:blur(16px);padding:12px;border-radius:16px;box-shadow:0 10px 35px #081d2d77;max-height:70%;overflow-y:auto}
 .factory-inspector .fi-head{display:flex;align-items:center;gap:10px}
 .factory-inspector .fi-icon{font-size:27px;display:grid;place-items:center;background:#ffffff16;border-radius:12px;width:45px;height:45px;flex:0 0 auto}
 .factory-inspector .fi-copy{flex:1;min-width:0}
@@ -264,6 +264,19 @@
 
 
 .factory-place-confirm{border:1px solid #9cefc7;background:#81e7b8;color:#12392f;border-radius:9px;padding:9px 11px;font-size:10px;font-weight:900;box-shadow:0 3px 12px #153e30}.factory-place-confirm:disabled{opacity:.42}
+
+/* v0.3.1: gut lesbare, touchfreundliche Produktionssteuerung */
+.fi-recipe{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0d2932;border:1px solid #355967;border-radius:12px;margin-top:11px;padding:10px 9px}
+.fi-recipe>div{flex:1;min-width:0}.fi-caption{display:block;color:#8cb9bf;font-size:9px;letter-spacing:.5px;margin-bottom:5px;font-weight:800}
+.fi-recipe strong{display:block;font-size:11px;line-height:1.55}.fi-recipe strong small{font-weight:500;color:#8fcbb0;display:block}
+.fi-recipe-arrow{color:#81dcb9;font-size:18px;font-weight:900}.fi-timer-head{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;color:#c5e0da;font-size:11px}
+.fi-timer-head b{font-size:13px;font-variant-numeric:tabular-nums;color:#f6edd2}.fi-hint{color:#a9c3c7;font-size:10px;line-height:1.5;margin:8px 0 0}
+.fi-actions-main button.primary{background:#73d9ad;border-color:#b3f0cd;color:#123b35;flex:1 1 100%;font-size:12px;min-height:41px}
+.fi-actions button:disabled{opacity:.43;cursor:not-allowed}
+#factory-map{contain:layout paint;touch-action:none;-webkit-tap-highlight-color:transparent}
+.factory-map-hud .factory-hud-pill,.factory-inspector{backdrop-filter:none;-webkit-backdrop-filter:none}
+.factory-map-wrap{contain:layout paint}
+#factory-flat-view[aria-pressed="true"]{background:#6fdab1;color:#143c34;border-color:#c2f8dc}
 </style>
 </head>
 <body>
@@ -297,27 +310,29 @@
     <div class="factory-shell">
       <header class="factory-header">
         <div class="factory-topline"><span class="factory-eyebrow">WELTWERK · INSELMANUFAKTUR</span><span class="factory-level">⚓ STUFE 01 · AUSSENPOSTEN</span></div>
-        <div class="factory-heading"><div><h1>Deine Insel<span>.</span></h1><p>Baue Straßen. Verbinde Gebäude. Verarbeite Rohstoffe.</p></div><button id="factory-stock-open" class="factory-store-button">📦 Lager</button></div>
+        <div class="factory-heading"><div><h1>Deine Insel<span>.</span></h1><p>Baue Straßen. Setze Rohstoffe ein. Starte Aufträge.</p></div><button id="factory-stock-open" class="factory-store-button">📦 Lager</button></div>
         <div id="factory-resources" class="factory-resources" aria-label="Materialbestand"></div>
       </header>
       <div class="factory-map-wrap" id="factory-map-wrap">
         <svg id="factory-map" viewBox="0 0 950 700" role="application" aria-label="Interaktive Inselkarte. Bauflächen antippen und Karte mit dem Finger verschieben." xmlns="http://www.w3.org/2000/svg"></svg>
         <div class="factory-map-hud"><div class="factory-hud-pill"><strong>🏝️ DEIN AUSSENPOSTEN</strong><span id="factory-hud-buildings">0 Produktionsgebäude</span> · <span id="factory-hud-production">0 Waren hergestellt</span></div><div class="factory-hud-pill" id="factory-mode-label">DEMO-LAGER</div></div>
-        <div class="factory-map-actions"><button id="factory-zoom-plus" title="Insel vergrößern" aria-label="Vergrößern">+</button><button id="factory-zoom-minus" title="Insel verkleinern" aria-label="Verkleinern">−</button><button id="factory-center" title="Insel zentrieren" aria-label="Zentrieren">⌖</button></div>
+        <div class="factory-map-actions"><button id="factory-flat-view" title="Flachansicht (Baufelder sichtbar)" aria-label="Dächer ausblenden und alle Baufelder sehen" aria-pressed="false">▦</button><button id="factory-zoom-plus" title="Insel vergrößern" aria-label="Vergrößern">+</button><button id="factory-zoom-minus" title="Insel verkleinern" aria-label="Verkleinern">−</button><button id="factory-center" title="Insel zentrieren" aria-label="Zentrieren">⌖</button></div>
         <div id="factory-inspector" class="factory-inspector hidden" aria-live="polite"></div>
-        <div class="factory-guidance">Tippe ein Gebäude für Details an · Ziehe die Karte zum Verschieben</div>
+        <div class="factory-guidance">Gebäude antippen · Ziehen verschiebt die Insel · ▦ für flache Bauansicht</div>
         <div id="factory-store-overlay" class="factory-store-overlay hidden"><section class="factory-store-card"><div class="factory-store-top"><h2>📦 Hafenlager</h2><button id="factory-stock-close" aria-label="Lager schließen">×</button></div><p class="factory-store-note">Deine gesammelten Rohstoffe und produzierten Materialien liegen im selben Rucksack. Demo und GPS besitzen getrennte Bestände.</p><div id="factory-store-list"></div></section></div>
       </div>
-      <div class="factory-tray"><div class="factory-tray-head"><strong id="factory-tray-name">Bauen & verwalten</strong><span id="factory-tray-hint">Gebäude auswählen</span></div><div id="factory-catalog" class="factory-catalog"></div><div class="factory-tray-footer"><button id="factory-demo-kit" class="factory-demo-kit hidden">✦ Testmaterial (nur Demo)</button><span style="font-size:10px;color:#8ea9ae">Tippen · Platzieren · Produzieren</span><button id="factory-place-confirm" class="factory-place-confirm hidden">Bauen ✓</button><button id="factory-cancel" class="factory-cancel hidden">Abbrechen ×</button></div></div>
+      <div class="factory-tray"><div class="factory-tray-head"><strong id="factory-tray-name">Bauen & verwalten</strong><span id="factory-tray-hint">Gebäude auswählen</span></div><div id="factory-catalog" class="factory-catalog"></div><div class="factory-tray-footer"><button id="factory-demo-kit" class="factory-demo-kit hidden">✦ Testmaterial (nur Demo)</button><span style="font-size:10px;color:#8ea9ae">Produktion: Gebäude antippen und Auftrag starten</span><button id="factory-place-confirm" class="factory-place-confirm hidden">Bauen ✓</button><button id="factory-cancel" class="factory-cancel hidden">Abbrechen ×</button></div></div>
     </div>
   </main>
 
   <main id="screen-inventory" class="screen inner-screen" aria-label="Inventar">
-    <div class="page-head"><div class="eyebrow">DEINE SAMMLUNG</div><h1>Rucksack<span class="dot">.</span></h1><p>Alles, was du bisher draußen gefunden hast.</p></div>
+    <div class="page-head"><div class="eyebrow">DEINE SAMMLUNG</div><h1>Rucksack<span class="dot">.</span></h1><p>Gesammelte Rohstoffe und selbst hergestellte Waren an einem Ort.</p></div>
     <div class="info-stripe"><div class="info-circle">📦</div><div><span>GESAMMELTE MATERIALIEN</span><strong id="inventory-total">0</strong></div><span class="info-extra">Rohstoffe & Waren</span></div>
-    <div class="section-title"><h2>Materialien</h2><span id="inventory-type-count">6 Typen</span></div>
+    <div class="section-title"><h2>🏭 Hergestellte Waren</h2><span id="inventory-made-count">0 Waren</span></div>
+    <div id="crafted-inventory-grid" class="resource-grid"></div>
+    <div class="section-title"><h2>Gesammelte Rohstoffe</h2><span id="inventory-type-count">0 Typen</span></div>
     <div id="inventory-grid" class="resource-grid"></div>
-    <div class="soft-note"><span>💡</span><p>Die Ressourcen bleiben gespeichert. In deiner Fabrik kannst du aus gesammelten Rohstoffen bereits Bretter, Steinblöcke und Metallplatten herstellen.</p></div>
+    <div class="soft-note"><span>💡</span><p>Die Ressourcen bleiben gespeichert. Fertige Bretter, Steinblöcke und Metallplatten erscheinen hier direkt nach jeder abgeschlossenen Charge.</p></div>
   </main>
 
   <main id="screen-collection" class="screen inner-screen" aria-label="Entdeckungen">
@@ -331,7 +346,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.3.0 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: Inselbau und Produktion. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.3.1 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -352,7 +367,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.3.0';
+const VERSION = '0.3.1';
 const START_ZOOM = 20.5; // maximal erlaubter Startzoom; manuell weiterhin verkleinerbar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -522,7 +537,7 @@ function formatRemaining(ms) {
 }
 const DEMO_START = Object.freeze({lat:51.9625, lng:7.6270});
 const SAVE_KEY = 'weltwerk-exploration-save-v1';
-// WELTWERK Stadtbau / v0.3.0. Persistiert im bekannten Weltwerk-Speicherformat.
+// WELTWERK Stadtbau / v0.3.1. Persistiert im bekannten Weltwerk-Speicherformat.
 const FACTORY_SIZE=18;
 const FACTORY_HARBOR=Object.freeze({id:'harbor',type:'harbor',x:8,y:13,w:3,h:2});
 const FACTORY_START_ROADS=Object.freeze([[9,12],[9,11],[9,10],[9,9],[8,9],[8,8],[7,8]]);
@@ -569,9 +584,14 @@ function cleanFactory(candidate){
     const id=String(item.id||'').slice(0,35);
     if(!/^b\d+$/.test(id)||f.buildings.some(b=>b.id===id)||!factoryPlacement(f,item.type,item.x,item.y))continue;
     const startedAt=Number(item.startedAt),doneAt=Number(item.doneAt);
-    f.buildings.push({id,type:item.type,x:item.x,y:item.y,rot:item.rot===1?1:0,enabled:item.enabled!==false,
-      startedAt:Number.isFinite(startedAt)&&startedAt>0&&startedAt<Date.now()+3600000?startedAt:0,
-      doneAt:Number.isFinite(doneAt)&&doneAt>0&&doneAt<Date.now()+3600000*24*90?doneAt:0});
+    const oldJob=Number.isFinite(doneAt)&&doneAt>0&&doneAt<Date.now()+3600000*24*90;
+    const running=oldJob&&item.enabled!==false;
+    const oldPaused=oldJob&&item.enabled===false;
+    const pausedMs=Number(item.pausedMs);
+    f.buildings.push({id,type:item.type,x:item.x,y:item.y,rot:item.rot===1?1:0,enabled:running,
+      startedAt:running&&Number.isFinite(startedAt)&&startedAt>0&&startedAt<Date.now()+3600000?startedAt:0,
+      doneAt:running?doneAt:0,
+      pausedMs:oldPaused?Math.max(1,Math.min(FACTORY_DEFS[item.type].seconds*1000,doneAt-Date.now())):(Number.isFinite(pausedMs)&&pausedMs>0&&pausedMs<=FACTORY_DEFS[item.type].seconds*1000?pausedMs:0)});
     mx=Math.max(mx,Number(id.slice(1))||0);
   }
   f.nextId=mx+1;
@@ -601,30 +621,52 @@ function factoryConnected(f,b,network=factoryRoadNetwork(f)){
   }
   return false;
 }
+// Produktion erfolgt chargenweise: keine automatische Entnahme, kein Auto-Neustart.
+function factoryStartJob(profile,b,now=Date.now()){
+  const def=FACTORY_DEFS[b.type];
+  if(!def||b.doneAt||b.pausedMs)return false;
+  if(!factoryConnected(profile.factory,b)||!factoryEnough(profile.inventory,def.input))return false;
+  factorySpend(profile.inventory,def.input);
+  b.enabled=true;b.pausedMs=0;b.startedAt=now;b.doneAt=now+def.seconds*1000;
+  return true;
+}
+function factoryPauseJob(b,now=Date.now()){
+  if(!b.doneAt)return false;
+  b.pausedMs=Math.max(1,b.doneAt-now);
+  b.startedAt=0;b.doneAt=0;b.enabled=false;
+  return true;
+}
+function factoryResumeJob(profile,b,now=Date.now()){
+  if(!b.pausedMs||!factoryConnected(profile.factory,b))return false;
+  const duration=FACTORY_DEFS[b.type].seconds*1000;
+  b.doneAt=now+b.pausedMs;
+  b.startedAt=now-(duration-b.pausedMs);
+  b.enabled=true;b.pausedMs=0;
+  return true;
+}
+function factoryCancelJob(profile,b){
+  if(!b.doneAt&&!b.pausedMs)return false;
+  for(const [id,n] of Object.entries(FACTORY_DEFS[b.type].input||{}))profile.inventory[id]=(profile.inventory[id]||0)+n;
+  b.enabled=false;b.startedAt=0;b.doneAt=0;b.pausedMs=0;
+  return true;
+}
 function factoryTickProfile(profile,now=Date.now()){
   const f=profile.factory;if(!f)return false;
   let changed=false;
   const connected=factoryRoadNetwork(f);
   for(const b of f.buildings){
+    if(!b.doneAt)continue;
+    if(!factoryConnected(f,b,connected)){
+      factoryPauseJob(b,now);
+      changed=true;continue;
+    }
+    if(b.doneAt>now)continue;
     const def=FACTORY_DEFS[b.type];
-    const linked=factoryConnected(f,b,connected);
-    if(b.doneAt&&b.doneAt<=now){
-      let i=0;
-      while(b.doneAt&&b.doneAt<=now&&i++<1000){
-        const finishAt=b.doneAt;
-        profile.inventory[def.output]=(profile.inventory[def.output]||0)+def.outputCount;
-        if(!profile.discovered.includes(def.output))profile.discovered.push(def.output);
-        f.produced+=def.outputCount;
-        b.doneAt=0;b.startedAt=0;changed=true;
-        if(!b.enabled||!linked||!factoryEnough(profile.inventory,def.input))break;
-        factorySpend(profile.inventory,def.input);
-        b.startedAt=finishAt;b.doneAt=finishAt+def.seconds*1000;
-      }
-    }
-    if(!b.doneAt&&b.enabled&&linked&&factoryEnough(profile.inventory,def.input)){
-      factorySpend(profile.inventory,def.input);
-      b.startedAt=now;b.doneAt=now+def.seconds*1000;changed=true;
-    }
+    profile.inventory[def.output]=(profile.inventory[def.output]||0)+def.outputCount;
+    if(!profile.discovered.includes(def.output))profile.discovered.push(def.output);
+    f.produced+=def.outputCount;
+    b.enabled=false;b.startedAt=0;b.doneAt=0;b.pausedMs=0;
+    changed=true;
   }
   return changed;
 }
@@ -2358,14 +2400,16 @@ function renderPanels() {
   $('top-discoveries').textContent=profile.discovered.length;
   $('top-discoveries-max').textContent=`/ ${Object.keys(MATERIALS).length} entdeckt`;
   $('inventory-total').textContent=total.toLocaleString('de-DE');
-  $('inventory-grid').innerHTML=Object.entries(MATERIALS).map(([id,item])=>`
-    <article class="resource-card ${item.rarity!=='common'?'rare':''}"><div class="res-icon">${item.icon}</div><strong>${item.name}</strong><div class="res-bottom"><b>${(profile.inventory[id]||0).toLocaleString('de-DE')}</b><small>${item.rarity==='common'?'Basis':'Bonus'}</small></div></article>`).join('');
+  const inventoryCard=([id,item])=>`<article class="resource-card ${item.rarity!=='common'?'rare':''}"><div class="res-icon">${item.icon}</div><strong>${item.name}</strong><div class="res-bottom"><b>${(profile.inventory[id]||0).toLocaleString('de-DE')}</b><small>${item.rarity==='crafted'?'Hergestellt':item.rarity==='common'?'Basis':'Bonus'}</small></div></article>`;
+  $('crafted-inventory-grid').innerHTML=Object.entries(MATERIALS).filter(([,item])=>item.rarity==='crafted').map(inventoryCard).join('');
+  $('inventory-grid').innerHTML=Object.entries(MATERIALS).filter(([,item])=>item.rarity!=='crafted').map(inventoryCard).join('');
+  $('inventory-made-count').textContent=`${Object.entries(MATERIALS).filter(([id,item])=>item.rarity==='crafted').reduce((sum,[id])=>sum+(profile.inventory[id]||0),0)} Waren`;
   $('stat-discovered').innerHTML=`${profile.discovered.length} <small>/ ${Object.keys(MATERIALS).length}</small>`;
   $('stat-harvests').textContent=profile.stats.harvests.toLocaleString('de-DE');
   $('stat-collected').textContent=profile.stats.collected.toLocaleString('de-DE');
   $('stat-rare').textContent=profile.stats.rare.toLocaleString('de-DE');
   $('lexicon-progress').textContent=`${profile.discovered.length} / ${Object.keys(MATERIALS).length}`;
-  $('inventory-type-count').textContent=`${Object.keys(MATERIALS).length} Typen`;
+  $('inventory-type-count').textContent=`${Object.values(MATERIALS).filter(x=>x.rarity!=='crafted').length} Typen`;
   $('animal-progress').textContent=`${profile.encounters.length} / ${Object.keys(ANIMALS).length}`;
   $('animal-grid').innerHTML=Object.entries(ANIMALS).map(([id,item])=>{
     const seen=profile.encounters.includes(id);
@@ -2381,13 +2425,13 @@ function setTab(tab) {
   for (const name of ['map','factory','inventory','collection','settings']) $('screen-'+name).classList.toggle('active',name===tab);
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('selected',el.dataset.tab===tab));
   if(tab==='map' && state.mapReady)setTimeout(()=>state.map.resize(),60);
-  if(tab==='factory'){factoryUI.selected=null;factoryExitTool(false);renderFactory();setTimeout(factoryView,55);}
+  if(tab==='factory'){factoryUI.selected=null;factoryExitTool(false);renderFactory();setTimeout(()=>{const map=$('factory-map');factoryUI.viewportRatio=map.clientHeight/Math.max(1,map.clientWidth);factoryView();},55);}
   renderPanels();
 }
 function exportSave() {
   const data=localStorage.getItem(SAVE_KEY);if(!data){toast('Noch kein Spielstand vorhanden.',true);return;}
   const url=URL.createObjectURL(new Blob([JSON.stringify(JSON.parse(data),null,2)],{type:'application/json'}));
-  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.3.0-spielstand.json';
+  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.3.1-spielstand.json';
   document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
   toast('Spielstand exportiert');
 }
@@ -2475,19 +2519,19 @@ function bind() {
     }
   });
 }
-const factoryUI={tool:null,selected:null,moveId:null,ghost:null,rotation:0,zoom:1.26,centerX:476,centerY:357,pointer:null,suppressClick:false,storeOpen:false};
-const fp=(x,y)=>({x:474+(x-y)*25,y:79+(x+y)*14});
+const factoryUI={tool:null,selected:null,moveId:null,ghost:null,rotation:0,zoom:1.26,centerX:476,centerY:395,pointer:null,suppressClick:false,storeOpen:false,flatView:false,raf:0,viewportRatio:1,dragScale:1};
+const fp=(x,y)=>({x:474+(x-y)*25,y:43+(x+y)*19});
 const fpts=(points)=>points.map(p=>`${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
 const fsvg=(x,y,w=1,h=1)=>[fp(x,y),fp(x+w,y),fp(x+w,y+h),fp(x,y+h)];
 const fpoly=(points,fill,extra='')=>`<polygon points="${fpts(points)}" fill="${fill}" ${extra}/>`;
 const fhash=(x,y,k=0)=>((Math.imul(x+119,73856093)^Math.imul(y+71,19349663)^Math.imul(k+17,83492791))>>>0)%100;
 const fstatus=(b,p,network)=>{
   if(b.type==='harbor')return 'Alle gesammelten und produzierten Materialien werden hier gelagert.';
+  if(b.pausedMs)return `Angehalten · ${Math.ceil(b.pausedMs/1000)} s verbleibend`;
+  if(b.doneAt)return `Produktion läuft · ${Math.max(0,Math.ceil((b.doneAt-Date.now())/1000))} s verbleibend`;
   if(!factoryConnected(p.factory,b,network))return 'Keine Straßenverbindung zum Hafen';
-  if(!b.enabled)return 'Produktion pausiert';
-  if(b.doneAt)return `In Produktion · noch ${Math.max(0,Math.ceil((b.doneAt-Date.now())/1000))} s`;
-  if(!factoryEnough(p.inventory,FACTORY_DEFS[b.type].input))return 'Wartet auf Rohstoffe';
-  return 'Bereit zur Produktion';
+  if(!factoryEnough(p.inventory,FACTORY_DEFS[b.type].input))return 'Nicht genügend Rohstoffe im Rucksack';
+  return 'Bereit · Material einsetzen und starten';
 };
 function factorySvgBuilding(b,selected=false){
   const d=FACTORY_DEFS[b.type],u=fsvg(b.x,b.y,d.w,d.h);
@@ -2497,8 +2541,9 @@ function factorySvgBuilding(b,selected=false){
     masonry:['#c9d7e0','#8399a7','#576d7d','#54707a'],
     press:['#eab98a','#bf6f4c','#7d4c43','#665358']
   }[b.type];
-  const roofheight=b.type==='harbor'?39:b.type==='press'?42:31;
-  const top=u.map(v=>({x:v.x,y:v.y-roofheight})),middle=u.map(v=>({x:v.x,y:v.y-5}));
+  const low=factoryUI.flatView||!!factoryUI.tool||!!factoryUI.moveId;
+  const roofheight=low?3:b.type==='harbor'?17:b.type==='press'?16:12;
+  const top=u.map(v=>({x:v.x,y:v.y-roofheight}));
   const [rt,rr,rb,rl]=top,[gt,gr,gb,gl]=u;
   const cx=(rt.x+rb.x)/2,cy=(rt.y+rb.y)/2;
   let s=`<g data-fbid="${b.id}" class="f-svg-building" style="cursor:pointer">`;
@@ -2508,33 +2553,34 @@ function factorySvgBuilding(b,selected=false){
   s+=fpoly(top,palette[0],`stroke="${palette[3]}" stroke-width="2.1"`);
   s+=`<path d="M${rt.x},${rt.y} L${rb.x},${rb.y}" stroke="${palette[3]}" stroke-opacity=".65" stroke-width="2"/>`;
   s+=`<path d="M${rl.x+7},${rl.y+7} L${rb.x-11},${rb.y-4}" stroke="${palette[3]}" stroke-opacity=".27" stroke-width="2.4"/>`;
-  if(b.type==='sawmill'){
+  if(!low&&b.type==='sawmill'){
     s+=`<path d="M${b.rot?rr.x-14:rl.x+17},${b.rot?rr.y+5:rl.y+5} L${rb.x-10},${rb.y-5}" stroke="#fff0d0" stroke-width="3.5" opacity=".5"/>`;
     s+=`<circle cx="${cx+9}" cy="${cy+2}" r="10" fill="#e9b96e" stroke="#865937" stroke-width="3"/><path d="M${cx+2},${cy+2}h14m-7,-7v14" stroke="#8e6444" stroke-width="2"/>`;
-  }else if(b.type==='masonry'){
+  }else if(!low&&b.type==='masonry'){
     for(let i=0;i<3;i++)s+=`<path d="M${rl.x+7+i*6},${rl.y+3+i*2} l30,17" stroke="#eef7f6" stroke-width="2" opacity=".55"/>`;
     s+=`<rect x="${rb.x-27}" y="${rb.y-7}" width="13" height="9" rx="1" fill="#c4ddde" stroke="#496d78" stroke-width="1.2"/>`;
-  }else if(b.type==='press'){
+  }else if(!low&&b.type==='press'){
     s+=`<path d="M${cx+(b.rot?5:-14)},${cy-5} l20,-10 18,10 -20,10Z" fill="#c89e81" stroke="#735750" stroke-width="2"/>`;
     s+=`<rect x="${rr.x-16}" y="${rr.y-58}" width="13" height="30" fill="#836e6b"/>`;
     s+=`<path d="M${rr.x-16},${rr.y-58} l6,-4 7,4 -6,4Z" fill="#bab3a0"/>`;
     s+=`<circle cx="${rr.x-10}" cy="${rr.y-66}" r="8" fill="#e7ded0" opacity=".34"/>`;
-  }else if(b.type==='harbor'){
+  }else if(!low&&b.type==='harbor'){
     s+=`<path d="M${cx-17},${cy+2}h34 M${cx-10},${cy-8}v20 M${cx+8},${cy-8}v20" stroke="#9b6948" stroke-width="3"/>`;
     s+=`<path d="M${rl.x+5},${rl.y-5}v-24" stroke="#76503b" stroke-width="3"/><path d="M${rl.x+7},${rl.y-28}l23,6 -23,9Z" fill="#efc37c"/>`;
   }
-  s+=`<path d="M${(rl.x+rb.x)/2},${(rl.y+rb.y)/2+4} l0,18 l13,7 l0,-18Z" fill="${palette[3]}" opacity=".7"/>`;
-  s+=`<path d="M${(rr.x+rb.x)/2-7},${(rr.y+rb.y)/2+9} l0,9 l10,5 l0,-9Z" fill="#f7d8a7" opacity=".9"/>`;
+  if(!low)s+=`<path d="M${(rl.x+rb.x)/2},${(rl.y+rb.y)/2+4} l0,18 l13,7 l0,-18Z" fill="${palette[3]}" opacity=".7"/>`;
+  if(!low)s+=`<path d="M${(rr.x+rb.x)/2-7},${(rr.y+rb.y)/2+9} l0,9 l10,5 l0,-9Z" fill="#f7d8a7" opacity=".9"/>`;
+  if(low)s+=`<text pointer-events="none" x="${cx}" y="${cy+5}" text-anchor="middle" font-size="18">${d.icon}</text>`;
   if(selected)s+=fpoly(u,'none','stroke="#9ff2d2" stroke-width="4" stroke-dasharray="8 4"');
   if(b.type!=='harbor'){
     const profile=activeProfile();const linked=factoryConnected(profile.factory,b);
     const indicator=b.doneAt?'#8bf0b9':!linked?'#f8a5a5':b.enabled?'#f4d292':'#a9c4c9';
-    s+=`<circle cx="${cx+28}" cy="${cy-40}" r="9" fill="#18363c" stroke="${indicator}" stroke-width="2"/><circle cx="${cx+28}" cy="${cy-40}" r="3.5" fill="${indicator}"/>`;
+    s+=`<circle cx="${cx+28}" cy="${cy-(low?13:28)}" r="9" fill="#18363c" stroke="${indicator}" stroke-width="2"/><circle cx="${cx+28}" cy="${cy-(low?13:28)}" r="3.5" fill="${indicator}"/>`;
   }
   return s+'</g>';
 }
 function factorySvgTree(x,y,variant=0){
-  const c=fp(x+.48,y+.47),s=variant===0?1:0.72;
+  const c=fp(x+.48,y+.47),s=variant===0?0.82:0.62;
   return `<g pointer-events="none" opacity=".95" transform="translate(${c.x} ${c.y}) scale(${s})"><ellipse cx="4" cy="5" rx="12" ry="5" fill="#2f5a3e" opacity=".2"/><path d="M-2,2V-17H3V2Z" fill="#775b39"/><path d="M-15,-13L0,-46L15,-13Z" fill="#2d7954"/><path d="M-13,-24L0,-51L13,-24Z" fill="#4e9a60"/><path d="M-7,-30L0,-44L6,-30Z" fill="#8ac67e"/></g>`;
 }
 function factorySvgRoad(r,connected){
@@ -2572,7 +2618,7 @@ function renderFactoryMap(){
     if(!factoryLand(x,y+1))out+=fpoly([points[3],points[2],{x:points[2].x,y:points[2].y+12},{x:points[3].x,y:points[3].y+12}],'#ac946b');
     const color=coast?(fhash(x,y,1)%2?'#ecd9a9':'#e6cca0'):(fhash(x,y,1)%3===0?'#a3d287':fhash(x,y,1)%3===1?'#acd68e':'#a7d18a');
     out+=fpoly(points,color,`data-fx="${x}" data-fy="${y}" stroke="${coast?'#d7c39b':'#83b878'}" stroke-width=".6"`);
-    if(!coast&&!occupied.has(factoryKey(x,y))&&!roads.has(factoryKey(x,y))&&fhash(x,y,3)<20)out+=factorySvgTree(x,y,fhash(x,y,7)%2);
+    if(!coast&&!occupied.has(factoryKey(x,y))&&!roads.has(factoryKey(x,y))&&fhash(x,y,3)<15)out+=factorySvgTree(x,y,fhash(x,y,7)%2);
     else if(!coast&&!occupied.has(factoryKey(x,y))&&!roads.has(factoryKey(x,y))&&fhash(x,y,3)>93){const c=fp(x+.5,y+.5);out+=`<circle cx="${c.x}" cy="${c.y}" r="3.2" fill="#e9e3c2" pointer-events="none"/>`;}
   }
   const objects=[...factory.roads.map(r=>({...r,type:'road',depth:r.x+r.y+1})),{...FACTORY_HARBOR,depth:FACTORY_HARBOR.x+FACTORY_HARBOR.y+4.5},...factory.buildings.map(b=>({...b,depth:b.x+b.y+4}))];
@@ -2581,13 +2627,19 @@ function renderFactoryMap(){
     if(ob.type==='road')out+=factorySvgRoad(ob,network);
     else out+=factorySvgBuilding(ob,factoryUI.selected===ob.id);
   }
-  out+=factorySvgGhost();
+  out+=`<g id="factory-ghost-layer">${factorySvgGhost()}</g>`;
   svg.innerHTML=out;factoryView();
+}
+function factoryUpdateGhost(){
+  const layer=document.getElementById('factory-ghost-layer');if(layer)layer.innerHTML=factorySvgGhost();
+}
+function factoryScheduleView(){
+  if(factoryUI.raf)return;
+  factoryUI.raf=requestAnimationFrame(()=>{factoryUI.raf=0;factoryView();});
 }
 function factoryView(){
   const el=document.getElementById('factory-map');if(!el)return;
-  const bounds=el.getBoundingClientRect();if(!bounds.width||!bounds.height)return;
-  const w=860/factoryUI.zoom,h=w*bounds.height/bounds.width;
+  const w=860/factoryUI.zoom,h=w*(factoryUI.viewportRatio||1);
   factoryUI.centerX=Math.min(910,Math.max(70,factoryUI.centerX));
   factoryUI.centerY=Math.min(620,Math.max(110,factoryUI.centerY));
   el.setAttribute('viewBox',`${factoryUI.centerX-w/2} ${factoryUI.centerY-h/2} ${w} ${h}`);
@@ -2628,11 +2680,30 @@ function factoryInspector(){
   el.classList.remove('hidden');
   if(road){el.innerHTML=`<div class="fi-head"><div class="fi-icon">🛤️</div><div class="fi-copy"><h3>Straße</h3><small>Verbindet Produktionsgebäude mit dem Hafen.</small></div><button class="fi-close" data-faction="close" aria-label="Schließen">×</button></div><div class="fi-actions"><button class="alert" data-faction="demolish-road">Straße entfernen</button></div>`;return;}
   const def=FACTORY_DEFS[b.type],status=fstatus(b,p,factoryRoadNetwork(f));
-  const running=b.doneAt>0;
-  const percent=running?Math.min(100,Math.max(0,100*(Date.now()-b.startedAt)/(b.doneAt-b.startedAt))):0;
-  el.innerHTML=`<div class="fi-head"><div class="fi-icon">${def.icon}</div><div class="fi-copy"><h3>${def.name}</h3><small>${status}</small></div><button class="fi-close" data-faction="close" aria-label="Schließen">×</button></div>
-  ${b.type==='harbor'?'<p style="font-size:11px;color:#bcd8d4;margin:10px 2px 3px">Deine Rohstoffe vom GPS-Sammeln werden automatisch in diesem Lager verfügbar. Über „Lager“ siehst du alle Waren.</p>':`<div class="fi-progress"><div style="width:${percent}%"></div></div><div class="fi-details"><span>${factoryCostText(def.input)} → ${MATERIALS[def.output].icon} ${def.outputCount} ${MATERIALS[def.output].name}</span><span>${def.seconds} s / Einheit</span></div>`}
-  ${b.type==='harbor'?'':`<div class="fi-actions"><button data-faction="toggle">${b.enabled?'⏸ Pausieren':'▶ Aktivieren'}</button><button data-faction="move">↗ Verschieben</button><button data-faction="rotate">↻ Drehen</button><button class="alert" data-faction="demolish">Abreißen</button></div>`}`;
+  const running=!!b.doneAt,paused=!!b.pausedMs;
+  const remaining=running?Math.max(0,Math.ceil((b.doneAt-Date.now())/1000)):paused?Math.ceil(b.pausedMs/1000):def.seconds;
+  const percent=running?Math.min(100,Math.max(0,100*(Date.now()-b.startedAt)/(def.seconds*1000))):paused?100*(1-b.pausedMs/(def.seconds*1000)):0;
+  const canStart=!running&&!paused&&factoryConnected(f,b)&&factoryEnough(p.inventory,def.input);
+  const canResume=paused&&factoryConnected(f,b);
+  el.innerHTML=`<div class="fi-head"><div class="fi-icon">${def.icon}</div><div class="fi-copy"><h3>${def.name}</h3><small id="fi-status">${status}</small></div><button class="fi-close" data-faction="close" aria-label="Schließen">×</button></div>
+  ${b.type==='harbor'?'<p style="font-size:11px;color:#bcd8d4;margin:10px 2px 3px">Gesammelte und hergestellte Materialien liegen direkt im normalen Rucksack. Tippe unten auf „Rucksack“, um alles zu sehen.</p>':`<div class="fi-recipe"><div><span class="fi-caption">BENÖTIGT · AUS DEM RUCKSACK</span><strong>${Object.entries(def.input).map(([id,n])=>`${MATERIALS[id].icon} ${n} ${MATERIALS[id].name} <small>(du hast ${p.inventory[id]||0})</small>`).join('')}</strong></div><span class="fi-recipe-arrow">→</span><div><span class="fi-caption">ERGEBNIS · IM RUCKSACK</span><strong>${MATERIALS[def.output].icon} ${def.outputCount} ${def.output==='plank'?'Brett':def.output==='block'?'Steinblock':'Metallplatte'}</strong></div></div>
+  <div class="fi-timer-head"><span>${running?'In Bearbeitung':paused?'Angehalten':'Produktionsdauer'}</span><b id="fi-timer">${remaining} / ${def.seconds} Sekunden</b></div>
+  <div class="fi-progress"><div id="fi-progress-bar" style="width:${percent}%"></div></div>
+  <p class="fi-hint">${running?'Nach Ablauf landet die Ware direkt im Rucksack.':paused?'Die Zeit ist angehalten. Du kannst fortsetzen oder abbrechen.':'Rohstoffe werden erst entnommen, wenn du auf „Material einsetzen & starten“ tippst.'}</p>
+  <div class="fi-actions fi-actions-main">${running?'<button data-faction="pause" class="primary">⏸ Anhalten</button>':paused?`<button data-faction="resume" class="primary" ${canResume?'':'disabled'}>▶ Fortsetzen</button>`:`<button data-faction="start" class="primary" ${canStart?'':'disabled'}>▶ Material einsetzen & starten</button>`}${running||paused?'<button data-faction="cancel-job" class="alert">■ Abbrechen · Material zurück</button>':''}</div>
+  <div class="fi-actions"><button data-faction="move">↗ Verschieben</button><button data-faction="rotate">↻ Drehen</button><button class="alert" data-faction="demolish">Abreißen</button></div>`}`;
+  el.scrollTop=0;
+}
+function factoryUpdateTimer(){
+  const b=activeProfile().factory.buildings.find(x=>x.id===factoryUI.selected);
+  if(!b)return;
+  const def=FACTORY_DEFS[b.type];
+  const secs=b.doneAt?Math.max(0,Math.ceil((b.doneAt-Date.now())/1000)):b.pausedMs?Math.ceil(b.pausedMs/1000):def.seconds;
+  const pct=b.doneAt?Math.min(100,Math.max(0,100*(Date.now()-b.startedAt)/(def.seconds*1000))):b.pausedMs?100*(1-b.pausedMs/(def.seconds*1000)):0;
+  const timer=document.getElementById('fi-timer'),bar=document.getElementById('fi-progress-bar'),status=document.getElementById('fi-status');
+  if(timer)timer.textContent=`${secs} / ${def.seconds} Sekunden`;
+  if(bar)bar.style.width=`${pct}%`;
+  if(status&&(b.doneAt||b.pausedMs))status.textContent=fstatus(b,activeProfile(),factoryRoadNetwork(activeProfile().factory));
 }
 function factoryStore(){
   const p=activeProfile();
@@ -2640,7 +2711,8 @@ function factoryStore(){
 }
 function renderFactory(){factoryTickProfiles();factorySummary();factoryCatalog();factoryInspector();renderFactoryMap();if(factoryUI.storeOpen)factoryStore();}
 function factoryTickProfiles(){
-  if(factoryTickProfile(state.demo)||factoryTickProfile(state.gps)){save();return true;}
+  const changedDemo=factoryTickProfile(state.demo),changedGps=factoryTickProfile(state.gps);
+  if(changedDemo||changedGps){save();return true;}
   return false;
 }
 function factoryChoose(type){
@@ -2652,7 +2724,7 @@ function factoryChoose(type){
 function factoryClickTile(x,y){
   if(factoryUI.tool||factoryUI.moveId){
     factoryUI.ghost={x,y};
-    factoryCatalog();renderFactoryMap();
+    factoryCatalog();factoryUpdateGhost();
     const type=factoryUI.moveId?activeProfile().factory.buildings.find(b=>b.id===factoryUI.moveId)?.type:factoryUI.tool;
     if(type&&!factoryPlacement(activeProfile().factory,type,x,y,factoryUI.moveId))toast('Hier ist kein Platz – wähle eine freie Fläche.',true);
     return;
@@ -2674,7 +2746,7 @@ function factoryConfirmPlacement(){
   if(!factoryEnough(p.inventory,def.cost)){toast(`Zu wenig Material: ${factoryCostText(def.cost)}`,true);return;}
   factorySpend(p.inventory,def.cost);
   if(type==='road')f.roads.push({x,y});
-  else f.buildings.push({id:'b'+f.nextId++,type,x,y,rot:factoryUI.rotation,enabled:true,startedAt:0,doneAt:0});
+  else {const id='b'+f.nextId++;f.buildings.push({id,type,x,y,rot:factoryUI.rotation,enabled:false,startedAt:0,doneAt:0,pausedMs:0});factoryUI.selected=id;factoryUI.tool=null;}
   factoryUI.ghost=null;
   factoryTickProfiles();save();renderPanels();renderFactory();toast(`${def.name} gebaut!`);
 }
@@ -2690,42 +2762,57 @@ function factoryAction(action){
   if(action==='demolish-road'){
     if(!confirm('Diese Straße wirklich entfernen? Eingesetzte Materialien werden nicht erstattet.'))return;
     const [,x,y]=id.split(':');f.roads=f.roads.filter(r=>!(r.x===+x&&r.y===+y));factoryUI.selected=null;
-  }else if(b&&action==='toggle'){
-    b.enabled=!b.enabled;toast(b.enabled?'Produktion aktiviert':'Produktion pausiert');
+  }else if(b&&action==='start'){
+    if(!factoryStartJob(p,b)){toast('Bitte Rohstoffe und Straßenverbindung prüfen.',true);return;}
+    toast(`${FACTORY_DEFS[b.type].name}: Material eingesetzt · Produktion gestartet`);
+  }else if(b&&action==='pause'){
+    if(!factoryPauseJob(b))return;
+    toast('Produktion tatsächlich angehalten');
+  }else if(b&&action==='resume'){
+    if(!factoryResumeJob(p,b)){toast('Bitte zuerst eine Straße zum Hafen verbinden.',true);return;}
+    toast('Produktion läuft weiter');
+  }else if(b&&action==='cancel-job'){
+    if(!factoryCancelJob(p,b))return;
+    toast('Auftrag abgebrochen · Rohstoffe zurück im Rucksack');
   }else if(b&&action==='move'){
     factoryUI.moveId=b.id;factoryUI.tool=null;factoryUI.ghost={x:b.x,y:b.y};renderFactory();toast('Neue freie Position antippen');return;
   }else if(b&&action==='rotate'){
     b.rot=b.rot?0:1;toast('Gebäudeausrichtung geändert');
   }else if(b&&action==='demolish'){
-    if(!confirm('Gebäude wirklich abreißen? Bereits eingesetzte Rohstoffe werden nicht erstattet.'))return;
+    if(!confirm('Gebäude wirklich abreißen? Eine laufende Charge wird abgebrochen und die Rohstoffe erstattet.'))return;
+    factoryCancelJob(p,b);
     f.buildings=f.buildings.filter(o=>o.id!==b.id);factoryUI.selected=null;
   }else return;
   factoryTickProfiles();save();renderFactory();renderPanels();
 }
-function factorySetZoom(delta){factoryUI.zoom=Math.min(2.7,Math.max(.8,factoryUI.zoom+delta));factoryView();}
+function factorySetZoom(delta){factoryUI.zoom=Math.min(2.7,Math.max(.8,factoryUI.zoom+delta));factoryScheduleView();}
 function factoryInteraction(){
   const svg=document.getElementById('factory-map');
+  const updateRatio=()=>{factoryUI.viewportRatio=svg.clientHeight/Math.max(1,svg.clientWidth);};
+  updateRatio();
   svg.addEventListener('pointerdown',e=>{
     if(e.button>0)return;
+    updateRatio();
     factoryUI.pointer={id:e.pointerId,lastX:e.clientX,lastY:e.clientY,downX:e.clientX,downY:e.clientY,moved:false};
+    factoryUI.dragScale=(860/factoryUI.zoom)/Math.max(1,svg.clientWidth);
+    try{svg.setPointerCapture(e.pointerId);}catch{}
   });
   svg.addEventListener('pointermove',e=>{
     const p=factoryUI.pointer;
-    if(p&&p.id===e.pointerId){
-      const dist=Math.hypot(e.clientX-p.downX,e.clientY-p.downY);
-      if(dist>7)p.moved=true;
-      if(p.moved){
-        const rect=svg.getBoundingClientRect();const k=(860/factoryUI.zoom)/rect.width;
-        factoryUI.centerX-=(e.clientX-p.lastX)*k;factoryUI.centerY-=(e.clientY-p.lastY)*k;
-        factoryView();
-      }
-      p.lastX=e.clientX;p.lastY=e.clientY;
+    if(!p||p.id!==e.pointerId)return;
+    if(Math.hypot(e.clientX-p.downX,e.clientY-p.downY)>7)p.moved=true;
+    if(p.moved){
+      factoryUI.centerX-=(e.clientX-p.lastX)*factoryUI.dragScale;
+      factoryUI.centerY-=(e.clientY-p.lastY)*factoryUI.dragScale;
+      factoryScheduleView();
     }
+    p.lastX=e.clientX;p.lastY=e.clientY;
   });
   svg.addEventListener('pointerup',e=>{
     if(factoryUI.pointer?.id!==e.pointerId)return;
-    if(factoryUI.pointer.moved){factoryUI.suppressClick=true;setTimeout(()=>factoryUI.suppressClick=false,100);}
+    if(factoryUI.pointer.moved){factoryUI.suppressClick=true;setTimeout(()=>factoryUI.suppressClick=false,110);}
     factoryUI.pointer=null;
+    try{svg.releasePointerCapture(e.pointerId);}catch{}
   });
   svg.addEventListener('pointercancel',()=>factoryUI.pointer=null);
   svg.addEventListener('click',e=>{
@@ -2741,7 +2828,7 @@ function factoryInteraction(){
     if(!factoryUI.tool&&!factoryUI.moveId)return;
     const tile=e.target.closest('[data-fx]');if(!tile)return;
     const x=Number(tile.dataset.fx),y=Number(tile.dataset.fy);
-    if(factoryUI.ghost?.x!==x||factoryUI.ghost?.y!==y){factoryUI.ghost={x,y};renderFactoryMap();}
+    if(factoryUI.ghost?.x!==x||factoryUI.ghost?.y!==y){factoryUI.ghost={x,y};factoryUpdateGhost();factoryCatalog();}
   });
   svg.addEventListener('wheel',e=>{e.preventDefault();factorySetZoom(e.deltaY<0?.15:-.15);},{passive:false});
   document.getElementById('factory-catalog').addEventListener('click',e=>{
@@ -2752,7 +2839,15 @@ function factoryInteraction(){
   });
   document.getElementById('factory-zoom-plus').addEventListener('click',()=>factorySetZoom(.23));
   document.getElementById('factory-zoom-minus').addEventListener('click',()=>factorySetZoom(-.23));
-  document.getElementById('factory-center').addEventListener('click',()=>{factoryUI.centerX=476;factoryUI.centerY=357;factoryUI.zoom=1.26;factoryView();});
+  document.getElementById('factory-center').addEventListener('click',()=>{factoryUI.centerX=476;factoryUI.centerY=395;factoryUI.zoom=1.26;factoryScheduleView();});
+  document.getElementById('factory-flat-view').addEventListener('click',()=>{
+    factoryUI.flatView=!factoryUI.flatView;
+    const button=document.getElementById('factory-flat-view');
+    button.setAttribute('aria-pressed',String(factoryUI.flatView));
+    button.textContent=factoryUI.flatView?'🏠':'▦';
+    button.title=factoryUI.flatView?'3D-Ansicht':'Flachansicht (Baufelder sichtbar)';
+    renderFactoryMap();
+  });
   document.getElementById('factory-cancel').addEventListener('click',()=>factoryExitTool());
   document.getElementById('factory-place-confirm').addEventListener('click',factoryConfirmPlacement);
   document.getElementById('factory-demo-kit').addEventListener('click',()=>{
@@ -2770,11 +2865,12 @@ function factoryInteraction(){
   document.getElementById('factory-store-overlay').addEventListener('click',e=>{
     if(e.target.id==='factory-store-overlay'){factoryUI.storeOpen=false;e.currentTarget.classList.add('hidden');}
   });
-  window.addEventListener('resize',factoryView);
+  window.addEventListener('resize',()=>{updateRatio();factoryScheduleView();});
   setInterval(()=>{
     const changed=factoryTickProfiles();
     if(state.activeTab==='factory'){
-      factorySummary();factoryInspector();if(changed){factoryCatalog();renderFactoryMap();if(factoryUI.storeOpen)factoryStore();}
+      if(changed){factorySummary();factoryInspector();factoryCatalog();renderFactoryMap();if(factoryUI.storeOpen)factoryStore();}
+      else factoryUpdateTimer();
     }
     if(changed)renderPanels();
   },1000);
