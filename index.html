@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.3.1 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
-  <title>Weltwerk · Exploration & Inselbau v0.3.1</title>
+  <meta name="description" content="Weltwerk v0.4.0 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
+  <title>Weltwerk · Exploration & Inselbau v0.4.0</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -190,7 +190,7 @@
 @keyframes tree-loot-fly{0%{opacity:1;transform:translate(-50%,0) scale(.8)}100%{opacity:0;transform:translate(-50%,-65px) scale(1.18)}}
 @media(max-height:725px){.tree-top{padding-top:calc(7px + env(safe-area-inset-top,0px));padding-bottom:7px}.tree-bottom{padding-top:8px}.tree-hint{font-size:10px}.tree-hotspot{width:36px;height:36px;font-size:19px}}
 
-/* WELTWERK v0.3.1 — Insel-Manufaktur */
+/* WELTWERK v0.4.0 — Insel-Manufaktur */
 .bottom-nav{grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding-left:5px;padding-right:5px}
 .nav-item{font-size:9px;gap:4px;letter-spacing:-.15px}
 .nav-item svg{width:22px;height:22px}
@@ -265,7 +265,7 @@
 
 .factory-place-confirm{border:1px solid #9cefc7;background:#81e7b8;color:#12392f;border-radius:9px;padding:9px 11px;font-size:10px;font-weight:900;box-shadow:0 3px 12px #153e30}.factory-place-confirm:disabled{opacity:.42}
 
-/* v0.3.1: gut lesbare, touchfreundliche Produktionssteuerung */
+/* v0.4.0: gut lesbare, touchfreundliche Produktionssteuerung */
 .fi-recipe{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0d2932;border:1px solid #355967;border-radius:12px;margin-top:11px;padding:10px 9px}
 .fi-recipe>div{flex:1;min-width:0}.fi-caption{display:block;color:#8cb9bf;font-size:9px;letter-spacing:.5px;margin-bottom:5px;font-weight:800}
 .fi-recipe strong{display:block;font-size:11px;line-height:1.55}.fi-recipe strong small{font-weight:500;color:#8fcbb0;display:block}
@@ -277,6 +277,30 @@
 .factory-map-hud .factory-hud-pill,.factory-inspector{backdrop-filter:none;-webkit-backdrop-filter:none}
 .factory-map-wrap{contain:layout paint}
 #factory-flat-view[aria-pressed="true"]{background:#6fdab1;color:#143c34;border-color:#c2f8dc}
+
+/* =============== v0.4.0: Compact low-poly workshop =============== */
+#workshop-screen{position:absolute;inset:0;z-index:15;background:#132a34;display:flex;flex-direction:column;overflow:hidden;color:#effbf5}
+.ws-head{flex:0 0 auto;padding:calc(12px + env(safe-area-inset-top,0px)) 13px 10px;background:#143540;border-bottom:1px solid #4b7770}
+.ws-headline{display:flex;align-items:center;gap:10px;justify-content:space-between}.ws-headline h2{font-size:20px;letter-spacing:-.5px;margin:2px 0}.ws-small{font-size:10px;color:#a9c7c6;line-height:1.5}.ws-kicker{color:#89e4bd;font-size:9px;font-weight:900;letter-spacing:1.4px}.ws-btn{border:1px solid #567f7d;background:#224650;border-radius:11px;padding:9px 11px;font-size:11px;font-weight:850}.ws-back{min-height:41px;background:#294b53}
+.ws-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:10px}.ws-stat{background:#1e4549;border:1px solid #426868;border-radius:9px;padding:6px 4px;text-align:center}.ws-stat strong{font-size:13px;display:block}.ws-stat span{font-size:9px;color:#abcecc}
+.ws-switch{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:9px}.ws-switch button,.ws-tools button{border:1px solid #426b69;background:#1a3841;border-radius:10px;padding:9px 6px;font-size:11px;font-weight:850}.ws-switch button.chosen,.ws-tools button.chosen{background:#75ddb3;color:#12392f;border-color:#b4f7d6}
+.ws-scroll{overflow-y:auto;overscroll-behavior:contain;flex:1;min-height:0;padding:12px 12px 26px;background:radial-gradient(circle at 50% 10%,#2c6873,#143039 75%)}
+.ws-floor-shell{padding:12px;background:#365c5c;border:5px solid #b49a6e;border-bottom-color:#806b50;border-right-color:#907455;border-radius:13px;box-shadow:0 9px 0 #0a222b,0 14px 22px #051e2990;margin:0 auto;max-width:460px}
+.ws-floor{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:2px;aspect-ratio:1;width:100%;touch-action:manipulation}
+.ws-cell{min-width:0;min-height:0;aspect-ratio:1;display:grid;place-items:center;position:relative;background:#7c8569;border:1px solid #263f3961;color:#4a6052;border-radius:2px;font-size:11px;padding:0;box-shadow:inset 0 1px #ffffff25;overflow:hidden}
+.ws-cell.ws-unlocked{background:#d7cbb0;color:#40544a}.ws-cell.ws-locked{background:#627366;color:#b9b9a566;opacity:.57}.ws-cell.ws-wall-right.ws-unlocked{border-right:3px solid #5b6452}.ws-cell.ws-wall-bottom.ws-unlocked{border-bottom:3px solid #5b6452}
+.ws-cell.ws-belt{background:linear-gradient(135deg,#a6a18e,#7f857c);border:2px solid #6a6760;color:#effbe9;box-shadow:inset 0 -3px #4b6354}.ws-arrow{font-size:16px;line-height:1;opacity:.94}.ws-cargo{position:absolute;top:0;left:0;font-size:11px;line-height:1.1;background:#f5d49d;color:#573a19;border-radius:3px}
+.ws-cell.ws-saw{background:linear-gradient(145deg,#d49f61,#9b693e);border:2px solid #644e39;box-shadow:inset 0 -4px #694c36;color:#f9ebd2}.ws-saw-symbol{font-size:16px}.ws-cell.ws-working{outline:2px solid #95f3b5;outline-offset:-3px}.ws-cell.ws-selected{outline:3px solid #ffffff;outline-offset:-3px}
+.ws-cell.ws-port-in{background:#68a9cf;color:#052a45;font-size:20px;font-weight:900;border:2px solid #d0f4ff}.ws-cell.ws-port-out{background:#83c88e;color:#133e24;font-size:20px;font-weight:900;border:2px solid #d5ffd4}
+.ws-floor-caption{display:flex;justify-content:space-between;margin:10px 3px 0;font-size:10px;color:#cbebe4;gap:8px}
+.ws-panel{margin:14px auto 0;padding:13px;background:#173640;border:1px solid #406a6b;border-radius:14px;max-width:460px}.ws-panel h3{font-size:13px;margin:0 0 7px}.ws-panel p{font-size:11px;color:#a9c6c5;line-height:1.5;margin:6px 0 9px}
+.ws-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.ws-tools button{min-height:46px;line-height:1.3}.ws-tools span{font-size:9px;display:block;font-weight:600;margin-top:2px;opacity:.85}
+.ws-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.ws-actions button{flex:1;min-width:95px}.ws-primary{border:1px solid #b8f4d4;background:#79dbb1;color:#13352a;border-radius:10px;padding:10px 8px;font-size:11px;font-weight:900}.ws-danger{border:1px solid #935d62;background:#52373e;color:#ffe1d9;border-radius:10px;padding:10px 8px;font-size:11px;font-weight:850}
+.ws-amount{background:#284851;color:white;border:1px solid #638c86;border-radius:9px;padding:9px;width:62px;font-size:14px;font-weight:bold;text-align:center}.ws-control-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.ws-control-row label{font-size:11px;color:#e7faf3;font-weight:750}
+.ws-detail-top{display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:11px}.ws-detail button{border:1px solid #80ceb0;background:#285f54;color:#dcffed;border-radius:8px;padding:9px;width:100%;font-size:11px;font-weight:800;margin-top:8px}.ws-meter{height:7px;border-radius:10px;overflow:hidden;background:#40615f;margin:10px 0 7px}.ws-meter i{height:100%;display:block;background:#8deeb4}
+.ws-tip{display:flex;gap:8px;align-items:flex-start;font-size:10px;color:#c9dbd3;margin-top:8px}.ws-go{background:#8adaac!important;color:#173d28!important}
+@media(max-width:360px){.ws-scroll{padding:8px}.ws-floor-shell{padding:8px;border-width:4px}.ws-floor{gap:1px}.ws-head{padding-left:9px;padding-right:9px}.ws-stat span{font-size:8px}}
+
 </style>
 </head>
 <body>
@@ -309,7 +333,7 @@
   <main id="screen-factory" class="screen factory-screen" aria-label="Deine Fabrikinsel">
     <div class="factory-shell">
       <header class="factory-header">
-        <div class="factory-topline"><span class="factory-eyebrow">WELTWERK · INSELMANUFAKTUR</span><span class="factory-level">⚓ STUFE 01 · AUSSENPOSTEN</span></div>
+        <div class="factory-topline"><span class="factory-eyebrow">WELTWERK · INSELMANUFAKTUR</span><span class="factory-level">🏝️ DEINE INDUSTRIEINSEL</span></div>
         <div class="factory-heading"><div><h1>Deine Insel<span>.</span></h1><p>Baue Straßen. Setze Rohstoffe ein. Starte Aufträge.</p></div><button id="factory-stock-open" class="factory-store-button">📦 Lager</button></div>
         <div id="factory-resources" class="factory-resources" aria-label="Materialbestand"></div>
       </header>
@@ -323,6 +347,31 @@
       </div>
       <div class="factory-tray"><div class="factory-tray-head"><strong id="factory-tray-name">Bauen & verwalten</strong><span id="factory-tray-hint">Gebäude auswählen</span></div><div id="factory-catalog" class="factory-catalog"></div><div class="factory-tray-footer"><button id="factory-demo-kit" class="factory-demo-kit hidden">✦ Testmaterial (nur Demo)</button><span style="font-size:10px;color:#8ea9ae">Produktion: Gebäude antippen und Auftrag starten</span><button id="factory-place-confirm" class="factory-place-confirm hidden">Bauen ✓</button><button id="factory-cancel" class="factory-cancel hidden">Abbrechen ×</button></div></div>
     </div>
+
+    <section id="workshop-screen" class="hidden" aria-label="Sägewerk-Innenraum">
+      <header class="ws-head">
+        <div class="ws-headline"><div><div class="ws-kicker">WELTWERK · FABRIKINNENRAUM</div><h2>🪚 Dein Sägewerk</h2><div class="ws-kicker" id="ws-level">SÄGEWERK · LEVEL 1</div></div><button class="ws-btn ws-back" id="ws-close">← Insel</button></div>
+        <div class="ws-stats"><div class="ws-stat"><strong id="ws-area">25/100</strong><span>Felder</span></div><div class="ws-stat"><strong id="ws-wood">0</strong><span>🪵 Holz</span></div><div class="ws-stat"><strong id="ws-plank">0</strong><span>🪚 Bretter</span></div><div class="ws-stat"><strong id="ws-stock">0</strong><span>Im Eingang</span></div></div>
+        <div class="ws-switch"><button id="ws-mode-view" class="chosen">▶ Produktion</button><button id="ws-mode-edit">⚒ Bauen & umbauen</button></div>
+      </header>
+      <div class="ws-scroll">
+        <div class="ws-floor-shell"><div class="ws-floor" id="ws-floor" aria-label="Interaktiver 10 mal 10 Fabrikgrundriss"></div></div>
+        <div class="ws-floor-caption"><span>🔵 Eingang · 🟢 Ausgang</span><strong id="ws-status">○ BEREIT</strong></div>
+        <div class="ws-panel ws-detail" id="ws-detail"><span class="ws-small">Säge wählen für Produktionsfortschritt.</span></div>
+        <div class="ws-panel" id="ws-control">
+          <h3>📦 Holz freigeben</h3><p>Du bestimmst, wie viel Holz aus dem Rucksack zur Eingangsstation kommt. Erst dann läuft die Produktion. Die Säge benötigt zwei Holz und 60 Sekunden pro Brett.</p>
+          <div class="ws-control-row"><label for="ws-queue-value">Holzstücke</label><input id="ws-queue-value" class="ws-amount" type="number" min="1" max="40" value="2" step="1"><button class="ws-primary" id="ws-feed">Holz einsetzen & starten</button></div>
+          <div class="ws-actions" style="margin-top:9px"><button id="ws-pause" class="ws-btn">⏸ Pausieren</button><button id="ws-cancel" class="ws-danger">■ Auftrag abbrechen</button></div>
+          <div class="ws-tip">💡 Holz fährt alle 2 Sekunden ein Feld weiter. Nach 60 Sekunden in der Säge muss das Brett den Ausgang erreichen, um im Rucksack zu erscheinen.</div>
+        </div>
+        <div class="ws-panel hidden" id="ws-build"><h3>⚒ Baukasten</h3><p>Alle Maschinen sind selbst platzierbar. Eine Säge belegt 2 × 1 Felder, ein Förderband genau eines. Zum Umbauen wird die Produktion angehalten.</p>
+          <div class="ws-tools"><button data-wstool="belt" class="chosen">➜ Förderband<span>1 Zweig · 4 frei zu Beginn</span></button><button data-wstool="saw">🪚 Kreissäge<span>5 Holz · 3 Altmetall</span></button><button data-wstool="move">↗ Versetzen<span>Säge antippen, neuen Platz wählen</span></button><button data-wstool="input">⇥ Eingang<span>An Außenwand setzen</span></button><button data-wstool="output">⇤ Ausgang<span>An Außenwand setzen</span></button><button data-wstool="erase">✕ Entfernen<span>Bandteile zurück in Vorrat</span></button></div>
+          <div class="ws-actions" style="margin-top:9px"><button class="ws-btn" id="ws-direction">Richtung →</button></div>
+          <div class="ws-tip">💡 Ein Band antippen, um seine Richtung einzustellen. Die Maschine nimmt Holz nur an ihrer Eingangsseite entgegen und gibt Bretter auf der gegenüberliegenden Seite aus.</div>
+        </div>
+        <div class="ws-panel"><h3>🏗 Hallenerweiterung</h3><p>Jede Erweiterung schaltet 25 zusätzliche Felder und neue Maschinenstufen frei. Der vorhandene Innenaufbau bleibt erhalten. Kein globales Zeitalter.</p><button class="ws-primary" style="width:100%;line-height:1.4" id="ws-upgrade">Halle verbessern</button></div>
+      </div>
+    </section>
   </main>
 
   <main id="screen-inventory" class="screen inner-screen" aria-label="Inventar">
@@ -346,7 +395,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.3.1 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.0 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -367,7 +416,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.3.1';
+const VERSION = '0.4.0';
 const START_ZOOM = 20.5; // maximal erlaubter Startzoom; manuell weiterhin verkleinerbar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -537,7 +586,7 @@ function formatRemaining(ms) {
 }
 const DEMO_START = Object.freeze({lat:51.9625, lng:7.6270});
 const SAVE_KEY = 'weltwerk-exploration-save-v1';
-// WELTWERK Stadtbau / v0.3.1. Persistiert im bekannten Weltwerk-Speicherformat.
+// WELTWERK Stadtbau / v0.4.0. Persistiert im bekannten Weltwerk-Speicherformat.
 const FACTORY_SIZE=18;
 const FACTORY_HARBOR=Object.freeze({id:'harbor',type:'harbor',x:8,y:13,w:3,h:2});
 const FACTORY_START_ROADS=Object.freeze([[9,12],[9,11],[9,10],[9,9],[8,9],[8,8],[7,8]]);
@@ -546,11 +595,301 @@ const FACTORY_ITEMS=Object.freeze({
 });
 const FACTORY_DEFS=Object.freeze({
  road:{name:'Straße',icon:'🛤️',w:1,h:1,cost:{stone:1},detail:'Verbindet Gebäude mit dem Hafen.'},
- sawmill:{name:'Sägewerk',icon:'🪚',w:2,h:2,cost:{wood:4,stone:2},input:{wood:2},output:'plank',outputCount:1,seconds:15,detail:'Verarbeitet Holz zu Brettern.'},
+ sawmill:{name:'Sägewerk',icon:'🪚',w:2,h:2,cost:{wood:10,leaf:6,twig:4},input:{wood:2},output:'plank',outputCount:1,seconds:60,detail:'Begehbare 5×5-Halle mit Maschinen & Förderbändern.'},
  masonry:{name:'Steinmetz',icon:'🧱',w:2,h:2,cost:{stone:4,wood:2},input:{stone:2},output:'block',outputCount:1,seconds:20,detail:'Verarbeitet Stein zu Steinblöcken.'},
  press:{name:'Metallpresse',icon:'⚙️',w:2,h:2,cost:{scrap:5,stone:3},input:{scrap:2},output:'plate',outputCount:1,seconds:25,detail:'Presst Altmetall zu Metallplatten.'},
  harbor:{name:'Hafenlager',icon:'⚓',w:3,h:2,detail:'Zentrales Lager deiner Insel.'}
 });
+/* ========= WELTWERK v0.4.0 · EDITABLE SAWMILL INTERIOR ========= */
+const WS_MS=2000;
+const WS_DIR=[[1,0],[0,1],[-1,0],[0,-1]];
+const WS_ARROWS=['→','↓','←','↑'];
+const WS_UPGRADES=[null,{},{plank:12,stone:8,wood:6},{block:12,plate:8,resin:4},{iron:12,copper:8,plate:8}];
+const WS_SAW_COST={wood:5,scrap:3};
+const WS_SAW_UPGRADES=[null,null,{plank:4,scrap:4},{plate:6,block:4},{iron:5,copper:6}];
+const WS_SAW_TIMES=[0,60,50,40,30];
+function wsUnlocked(level,x,y){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&x<10&&y>=0&&y<10&&((x<5&&y<5)||(level>=2&&x>=5&&y<5)||(level>=3&&x>=5&&y>=5)||(level>=4&&x<5&&y>=5));}
+function wsBoundary(w,x,y){return wsUnlocked(w.level,x,y)&&WS_DIR.some(([dx,dy])=>!wsUnlocked(w.level,x+dx,y+dy));}
+function wsNew(){return {level:1,input:{x:0,y:2},output:{x:4,y:2},belts:[{x:1,y:2,dir:0}],saws:[{id:'s1',x:2,y:2,dir:0,level:1,inputCount:0,work:0,outputCount:0}],items:[],freeBelts:4,stock:0,active:false,last:Date.now(),produced:0,nextId:2};}
+function wsSawCells(s){return s.dir%2===0?[[s.x,s.y],[s.x+1,s.y]]:[[s.x,s.y],[s.x,s.y+1]];}
+function wsSawPorts(s){let x=s.x,y=s.y;return s.dir===0?{input:[x-1,y],output:[x+2,y]}:s.dir===2?{input:[x+2,y],output:[x-1,y]}:s.dir===1?{input:[x,y-1],output:[x,y+2]}:{input:[x,y+2],output:[x,y-1]};}
+function wsSawAt(w,x,y){return w.saws.find(s=>wsSawCells(s).some(p=>p[0]===x&&p[1]===y));}
+function wsBeltAt(w,x,y){return w.belts.find(t=>t.x===x&&t.y===y);}
+function wsItemAt(w,x,y){return w.items.find(t=>t.x===x&&t.y===y);}
+function wsOccupied(w,x,y,ignore=null){return wsBeltAt(w,x,y)||w.saws.some(s=>s!==ignore&&wsSawCells(s).some(p=>p[0]===x&&p[1]===y))||(w.input.x===x&&w.input.y===y)||(w.output.x===x&&w.output.y===y);}
+function wsValidSaw(w,s,ignore=null){return wsSawCells(s).every(([x,y])=>wsUnlocked(w.level,x,y)&&!wsOccupied(w,x,y,ignore)&&!wsItemAt(w,x,y));}
+function wsClean(raw){
+  const w=wsNew();if(!raw||typeof raw!=='object')return w;
+  w.level=[1,2,3,4].includes(raw.level)?raw.level:1;
+  const int=(v,a,b,f=0)=>Number.isInteger(v)&&v>=a&&v<=b?v:f;
+  w.belts=[];w.saws=[];w.items=[];
+  const inp=raw.input,out=raw.output;
+  w.input=inp&&wsBoundary(w,inp.x,inp.y)?{x:inp.x,y:inp.y}:{x:0,y:2};
+  w.output=out&&wsBoundary(w,out.x,out.y)&&!(out.x===w.input.x&&out.y===w.input.y)?{x:out.x,y:out.y}:{x:w.level===1?4:9,y:2};
+  for(const b of (Array.isArray(raw.belts)?raw.belts:[]).slice(0,100)){
+    if(b&&wsUnlocked(w.level,b.x,b.y)&&!wsOccupied(w,b.x,b.y))w.belts.push({x:b.x,y:b.y,dir:int(b.dir,0,3,0)});
+  }
+  let sid=1;
+  for(const s of (Array.isArray(raw.saws)?raw.saws:[]).slice(0,30)){
+    if(!s)continue;
+    const saw={id:'s'+sid++,x:s.x,y:s.y,dir:int(s.dir,0,3,0),level:Math.min(w.level,int(s.level,1,4,1)),inputCount:0,work:0,outputCount:0};
+    if(!wsValidSaw(w,saw))continue;
+    const req=saw.level>=3?3:2;
+    saw.inputCount=int(s.inputCount,0,req,0);
+    saw.work=int(s.work,0,WS_SAW_TIMES[saw.level]*1000,0);
+    saw.outputCount=int(s.outputCount,0,2,0);
+    w.saws.push(saw);
+  }
+  w.nextId=sid;
+  for(const it of (Array.isArray(raw.items)?raw.items:[]).slice(0,100)){
+    if(it&&['wood','plank'].includes(it.kind)&&wsBeltAt(w,it.x,it.y)&&!wsItemAt(w,it.x,it.y))w.items.push({x:it.x,y:it.y,kind:it.kind});
+  }
+  w.freeBelts=int(raw.freeBelts,0,100,0);
+  w.stock=int(raw.stock,0,500,0);
+  w.active=raw.active===true;
+  w.last=Number.isFinite(raw.last)&&raw.last>0&&raw.last<=Date.now()+10000?raw.last:Date.now();
+  w.produced=int(raw.produced,0,10000000,0);
+  if(!w.saws.length && !raw.saws){const def=wsNew();w.saws=def.saws;w.belts=def.belts;w.freeBelts=4;}
+  return w;
+}
+function wsCanAccept(w,x,y,kind,fromX=null,fromY=null){
+  if(w.output.x===x&&w.output.y===y)return kind==='plank'?'exit':null;
+  const s=w.saws.find(s=>{const p=wsSawPorts(s).input;return p[0]===fromX&&p[1]===fromY&&wsSawCells(s).some(q=>q[0]===x&&q[1]===y);});
+  if(s&&kind==='wood'&&s.inputCount<(s.level>=3?3:2))return s;
+  if(wsBeltAt(w,x,y)&&!wsItemAt(w,x,y))return 'belt';
+  return null;
+}
+function wsDeliver(profile,w,x,y,kind,target){
+  if(target==='exit'){
+    profile.inventory.plank=(profile.inventory.plank||0)+1;
+    if(!profile.discovered.includes('plank'))profile.discovered.push('plank');
+    profile.factory.produced++;w.produced++;
+  }else if(target==='belt'){w.items.push({x,y,kind});}
+  else if(target&&typeof target==='object'){target.inputCount++;}
+}
+function wsStep(profile,w){
+  let changed=false;
+  // A completed piece may leave only if the output cell is free.
+  for(const s of w.saws){
+    const out=wsSawPorts(s).output,req=s.level>=3?3:2;
+    if(s.outputCount){const t=wsCanAccept(w,out[0],out[1],'plank');if(t){wsDeliver(profile,w,out[0],out[1],'plank',t);s.outputCount--;changed=true;}}
+    if(!s.outputCount&&s.inputCount>=req){
+      s.work+=WS_MS;changed=true;
+      if(s.work>=WS_SAW_TIMES[s.level]*1000){s.inputCount-=req;s.outputCount=s.level>=3?2:1;s.work=0;}
+    }
+  }
+  // Move from downstream to upstream in rounds; a destination may be freed this tick.
+  const remaining=[...w.items];
+  w.items=[];
+  for(const it of remaining){
+    const t=wsBeltAt(w,it.x,it.y);
+    if(!t){w.items.push(it);continue;}
+    const [dx,dy]=WS_DIR[t.dir];const x=it.x+dx,y=it.y+dy;
+    // Stationary items in the old snapshot are still blockers, avoiding duplication or leapfrogging.
+    const blocked=remaining.some(o=>o!==it&&o.x===x&&o.y===y)||w.items.some(o=>o.x===x&&o.y===y);
+    const target=!blocked&&wsCanAccept(w,x,y,it.kind,it.x,it.y);
+    if(target){wsDeliver(profile,w,x,y,it.kind,target);changed=true;}
+    else w.items.push(it);
+  }
+  if(w.stock>0){
+    // Ports face into the hall; choose an adjacent tile with a belt leading away or a saw input.
+    const {x,y}=w.input;
+    const options=WS_DIR.map(([dx,dy])=>[x+dx,y+dy]).filter(([a,b])=>wsUnlocked(w.level,a,b));
+    for(const [a,b] of options){
+      const t=wsCanAccept(w,a,b,'wood',x,y);
+      // Prefer a belt that actually points away from the inlet.
+      const belt=wsBeltAt(w,a,b);
+      if(t&&(t!=='belt'||(belt&&!(a+WS_DIR[belt.dir][0]===x&&b+WS_DIR[belt.dir][1]===y)))){wsDeliver(profile,w,a,b,'wood',t);w.stock--;changed=true;break;}
+    }
+  }
+  if(!w.stock&&!w.items.length&&w.saws.every(s=>!s.inputCount&&!s.work&&!s.outputCount))w.active=false;
+  return changed;
+}
+function wsAdvance(profile,w,now=Date.now()){
+  if(!w)return false;
+  if(!w.active){w.last=now;return false;}
+  const elapsed=Math.max(0,now-w.last),n=Math.min(50000,Math.floor(elapsed/WS_MS));
+  let changed=false,stalled=0,steps=0;
+  for(let i=0;i<n&&w.active;i++){
+    const step=wsStep(profile,w);changed=step||changed;steps++;
+    if(!step && w.saws.every(s=>!s.work)){
+      if(++stalled>=2){w.last=now;return changed;}
+    }else stalled=0;
+  }
+  w.last+=steps*WS_MS;
+  if(!w.active)w.last=now;
+  return changed;
+}
+function wsRefund(profile,w){
+  let raw=w.stock,finished=0;
+  for(const it of w.items){if(it.kind==='wood')raw++;else if(it.kind==='plank')finished++;}
+  for(const s of w.saws){raw+=s.inputCount;finished+=s.outputCount; // a partly sawn batch is a work in progress: refund its input
+    s.inputCount=0;s.outputCount=0;s.work=0;}
+  profile.inventory.wood=(profile.inventory.wood||0)+raw;
+  profile.inventory.plank=(profile.inventory.plank||0)+finished;
+  if(finished&&!profile.discovered.includes('plank'))profile.discovered.push('plank');
+  w.stock=0;w.items=[];w.active=false;w.last=Date.now();
+  return {raw,finished};
+}
+const workshopUI={id:null,mode:'view',tool:'belt',direction:0,selectedSaw:null,selectX:null,selectY:null};
+function wsCurrent(){const b=activeProfile().factory.buildings.find(x=>x.id===workshopUI.id&&x.type==='sawmill');return b?{b,w:b.workshop,p:activeProfile()}:null;}
+function wsOpen(id){
+  const b=activeProfile().factory.buildings.find(x=>x.id===id&&x.type==='sawmill');if(!b)return;
+  workshopUI.id=id;workshopUI.mode='view';workshopUI.tool='belt';workshopUI.selectedSaw=null;
+  document.getElementById('workshop-screen').classList.remove('hidden');
+  document.getElementById('factory-inspector').classList.add('hidden');
+  wsRender();
+}
+function wsClose(){workshopUI.id=null;document.getElementById('workshop-screen').classList.add('hidden');renderFactory();renderPanels();}
+function wsSetMode(mode){const x=wsCurrent();if(!x)return;if(mode==='edit'&&x.w.active){wsAdvance(x.p,x.w);x.w.active=false;x.w.last=Date.now();toast('Fabrik für den Umbau pausiert');save();}workshopUI.mode=mode;wsRender();}
+function wsStart(n){const x=wsCurrent();if(!x)return;const {w,p,b}=x;if(!factoryConnected(p.factory,b)){toast('Zuerst Sägewerk per Straße mit Hafen verbinden.',true);return;}
+  const count=Math.min(40,Math.max(0,Number(n)||0));if(!Number.isInteger(count)||count<1||p.inventory.wood<count){toast('Nicht genügend Holz im Rucksack.',true);return;}
+  p.inventory.wood-=count;w.stock+=count;w.active=true;w.last=Date.now();workshopUI.mode='view';save();wsRender();renderPanels();toast(`${count} Holz für die Förderlinie freigegeben`);
+}
+function wsPauseResume(){const x=wsCurrent();if(!x)return;const {w,p,b}=x;
+  if(w.active){wsAdvance(p,w);w.active=false;toast('Fabrik pausiert – alle Waren bleiben liegen');}
+  else{if(!factoryConnected(p.factory,b)){toast('Sägewerk braucht eine Hafenstraße.',true);return;}if(!(w.stock||w.items.length||w.saws.some(s=>s.inputCount||s.outputCount||s.work))){toast('Zuerst Holz freigeben.',true);return;}w.active=true;toast('Fabrik läuft wieder');}
+  w.last=Date.now();save();wsRender();renderPanels();
+}
+function wsUpgradeBuilding(){const x=wsCurrent();if(!x)return;const {w,p}=x;
+  if(w.level>=4)return;
+  const target=w.level+1,cost=WS_UPGRADES[target];if(!factoryEnough(p.inventory,cost)){toast('Dir fehlen Materialien für den Hallenausbau.',true);return;}
+  if(w.active){toast('Vor dem Ausbau Produktion pausieren.',true);return;}
+  factorySpend(p.inventory,cost);w.level=target;
+  for(const port of ['input','output']){
+    if(!wsBoundary(w,w[port].x,w[port].y)){
+      const prev=w[port],candidates=[];
+      for(let y=0;y<10;y++)for(let x=0;x<10;x++)if(wsBoundary(w,x,y)&&!(port==='output'&&x===w.input.x&&y===w.input.y)&&!wsOccupied(w,x,y))candidates.push({x,y,d:Math.abs(x-prev.x)+Math.abs(y-prev.y)});
+      candidates.sort((a,b)=>a.d-b.d);if(candidates[0])w[port]={x:candidates[0].x,y:candidates[0].y};
+    }
+  }
+  save();wsRender();renderPanels();toast(`Sägewerk Level ${target}! +25 Baufelder freigeschaltet`);
+}
+function wsSelectedAt(w,x,y){return wsSawAt(w,x,y)||wsBeltAt(w,x,y)||null;}
+function wsSelect(x,y){const current=wsCurrent();if(!current)return;const {w,p}=current;
+  if(workshopUI.mode!=='edit'){const saw=wsSawAt(w,x,y);workshopUI.selectedSaw=saw?.id||null;wsRender();return;}
+  if(!wsUnlocked(w.level,x,y)){toast('Dieser Hallenbereich wird später freigeschaltet.',true);return;}
+  const tool=workshopUI.tool;
+  if(tool==='input'||tool==='output'){
+    if(!wsBoundary(w,x,y)){toast('Anschlüsse gehören an die Außenwand.',true);return;}
+    const other=tool==='input'?'output':'input';if((w[other].x===x&&w[other].y===y)||wsBeltAt(w,x,y)||wsSawAt(w,x,y)||wsItemAt(w,x,y)){toast('Dieses Wandfeld ist belegt.',true);return;}
+    w[tool]={x,y};
+  }else if(tool==='belt'){
+    if(wsOccupied(w,x,y)){const belt=wsBeltAt(w,x,y);if(belt){if(wsItemAt(w,x,y)){toast('Auf diesem Band liegt Material. Erst Auftrag abbrechen.',true);return;}belt.dir=workshopUI.direction;}else{toast('Feld ist bereits belegt.',true);return;}}
+    else{if(!w.freeBelts&&!factoryEnough(p.inventory,{twig:1})){toast('Ein Förderband kostet 1 Zweig.',true);return;}if(w.freeBelts)w.freeBelts--;else factorySpend(p.inventory,{twig:1});w.belts.push({x,y,dir:workshopUI.direction});}
+  }else if(tool==='saw'){
+    const s={id:'s'+w.nextId,x,y,dir:workshopUI.direction,level:1,inputCount:0,work:0,outputCount:0};
+    if(!wsValidSaw(w,s)){toast('Säge braucht 2 nebeneinanderliegende freie Felder.',true);return;}
+    if(!factoryEnough(p.inventory,WS_SAW_COST)){toast('Säge kostet 5 Holz und 3 Altmetall.',true);return;}
+    factorySpend(p.inventory,WS_SAW_COST);w.nextId++;w.saws.push(s);workshopUI.selectedSaw=s.id;
+  }else if(tool==='erase'){
+    const saw=wsSawAt(w,x,y),belt=wsBeltAt(w,x,y);
+    if(saw){if(saw.inputCount||saw.work||saw.outputCount){toast('Säge enthält Material. Zuerst Auftrag abbrechen.',true);return;}w.saws=w.saws.filter(s=>s!==saw);workshopUI.selectedSaw=null;}
+    else if(belt){if(wsItemAt(w,x,y)){toast('Band enthält Material. Zuerst Auftrag abbrechen.',true);return;}w.belts=w.belts.filter(t=>t!==belt);w.freeBelts++;}
+    else return;
+  }else if(tool==='move'){
+    const saw=wsSawAt(w,x,y);
+    if(!workshopUI.selectedSaw){if(!saw){toast('Zuerst eine Säge zum Verschieben antippen.',true);return;}workshopUI.selectedSaw=saw.id;wsRender();return;}
+    const sel=w.saws.find(s=>s.id===workshopUI.selectedSaw);if(!sel){workshopUI.selectedSaw=null;return;}
+    if(sel.inputCount||sel.work||sel.outputCount){toast('Säge enthält Material. Zuerst Auftrag abbrechen.',true);return;}
+    const shifted={...sel,x,y,dir:workshopUI.direction};if(!wsValidSaw(w,shifted,sel)){toast('Für die Säge sind zwei freie Felder nötig.',true);return;}
+    sel.x=x;sel.y=y;sel.dir=workshopUI.direction;workshopUI.selectedSaw=null;
+  }
+  save();wsRender();renderPanels();
+}
+function wsSelectedUpgrade(){const x=wsCurrent();if(!x)return;const {p,w}=x;
+  const saw=w.saws.find(s=>s.id===workshopUI.selectedSaw);if(!saw)return;
+  const lv=saw.level+1;if(lv>w.level||lv>4){toast('Erhöhe zuerst den Level des Sägewerks.',true);return;}
+  const cost=WS_SAW_UPGRADES[lv];if(!factoryEnough(p.inventory,cost)){toast('Zu wenig Upgrade-Material.',true);return;}
+  if(saw.work||saw.inputCount||saw.outputCount||w.active){toast('Zum Upgrade Säge leeren und Fabrik pausieren.',true);return;}
+  factorySpend(p.inventory,cost);saw.level=lv;save();wsRender();renderPanels();toast(`Säge jetzt Level ${lv} · ${WS_SAW_TIMES[lv]} Sekunden`);
+}
+function wsDuration(s){return WS_SAW_TIMES[s.level];}
+function wsAreaStats(w){return `${w.level*25}/100`;}
+function wsGridHtml(w){
+  let html='';const occ=new Map();
+  for(const s of w.saws)for(const [x,y] of wsSawCells(s))occ.set(factoryKey(x,y),s);
+  for(let y=0;y<10;y++)for(let x=0;x<10;x++){
+    const active=wsUnlocked(w.level,x,y),id=factoryKey(x,y),saw=occ.get(id),belt=wsBeltAt(w,x,y),item=wsItemAt(w,x,y);
+    const inp=w.input.x===x&&w.input.y===y,out=w.output.x===x&&w.output.y===y;
+    const rightEdge=!wsUnlocked(w.level,x+1,y),bottomEdge=!wsUnlocked(w.level,x,y+1);
+    const selected=saw&&saw.id===workshopUI.selectedSaw;
+    let content='';let cls='';
+    if(inp){content='⇥';cls='ws-port-in';}
+    else if(out){content='⇤';cls='ws-port-out';}
+    else if(saw){content=`<span class="ws-saw-symbol">${wsSawCells(saw)[0][0]===x&&wsSawCells(saw)[0][1]===y?'⚙':'🪚'}</span>`;cls='ws-saw';}
+    else if(belt){content=`<span class="ws-arrow">${WS_ARROWS[belt.dir]}</span>${item?`<span class="ws-cargo">${item.kind==='wood'?'🪵':'▰'}</span>`:''}`;cls='ws-belt';}
+    else if(active)content='';else{content='⌁';cls='ws-locked';}
+    if(saw&&saw.work>0&&saw.inputCount>0)cls+=' ws-working';
+    html+=`<button class="ws-cell ${cls} ${active?'ws-unlocked':''} ${selected?'ws-selected':''} ${rightEdge?'ws-wall-right':''} ${bottomEdge?'ws-wall-bottom':''}" data-wsx="${x}" data-wsy="${y}" ${active?'':'disabled'} title="${inp?'Holzeingang':out?'Warenausgang':saw?`Säge Lv. ${saw.level}`:belt?'Förderband':active?'Baufeld':'Gesperrt'}">${content}</button>`;
+  }
+  return html;
+}
+function wsStatus(w){
+  if(w.active)return '● PRODUKTION LÄUFT';
+  if(w.stock||w.items.length||w.saws.some(s=>s.inputCount||s.work||s.outputCount))return 'Ⅱ ANGEHALTEN';
+  return '○ BEREIT';
+}
+function wsRender(){
+  const current=wsCurrent();if(!current)return;
+  const {b,w,p}=current,root=document.getElementById('workshop-screen');
+  const linked=factoryConnected(p.factory,b);
+  root.querySelector('#ws-level').textContent=`SÄGEWERK · LEVEL ${w.level}`;
+  root.querySelector('#ws-status').textContent=wsStatus(w)+(linked?'':' · STRASSE FEHLT');
+  root.querySelector('#ws-area').textContent=wsAreaStats(w);
+  root.querySelector('#ws-wood').textContent=p.inventory.wood||0;
+  root.querySelector('#ws-plank').textContent=p.inventory.plank||0;
+  root.querySelector('#ws-stock').textContent=w.stock;
+  root.querySelector('#ws-floor').innerHTML=wsGridHtml(w);
+  root.querySelector('#ws-pause').textContent=w.active?'⏸ Pausieren':'▶ Fortsetzen';
+  root.querySelector('#ws-pause').disabled=!(w.active||w.stock||w.items.length||w.saws.some(s=>s.inputCount||s.outputCount||s.work));
+  root.querySelector('#ws-pause').classList.toggle('ws-go',!w.active);
+  root.querySelector('#ws-mode-view').classList.toggle('chosen',workshopUI.mode==='view');
+  root.querySelector('#ws-mode-edit').classList.toggle('chosen',workshopUI.mode==='edit');
+  root.querySelector('#ws-build').classList.toggle('hidden',workshopUI.mode!=='edit');
+  root.querySelector('#ws-control').classList.toggle('hidden',workshopUI.mode==='edit');
+  root.querySelectorAll('[data-wstool]').forEach(btn=>btn.classList.toggle('chosen',btn.dataset.wstool===workshopUI.tool));
+  root.querySelector('#ws-direction').textContent=`Richtung ${WS_ARROWS[workshopUI.direction]}`;
+  root.querySelector('#ws-queue-value').max=Math.min(40,p.inventory.wood||1);
+  const stock=Number(root.querySelector('#ws-queue-value').value);
+  root.querySelector('#ws-feed').disabled=!linked||!(p.inventory.wood>0)||!(stock>=1);
+  const upgrade=root.querySelector('#ws-upgrade');
+  if(w.level<4){upgrade.textContent=`Halle auf Lv. ${w.level+1} erweitern · ${factoryCostText(WS_UPGRADES[w.level+1])}`;upgrade.disabled=w.active||!factoryEnough(p.inventory,WS_UPGRADES[w.level+1]);}
+  else{upgrade.textContent='✓ Maximale Hallengröße erreicht';upgrade.disabled=true;}
+  const sel=w.saws.find(s=>s.id===workshopUI.selectedSaw);
+  const detail=root.querySelector('#ws-detail');
+  if(sel){const next=sel.level+1;const sawState=sel.outputCount?'Ausgang belegt / Bretter abtransportieren':sel.inputCount>=(sel.level>=3?3:2)?`Sägt · noch ${Math.ceil((WS_SAW_TIMES[sel.level]*1000-sel.work)/1000)} Sekunden`: `Wartet auf Holz (${sel.inputCount}/${sel.level>=3?3:2})`;detail.innerHTML=`<div class="ws-detail-top"><b>🪚 Kreissäge · Level ${sel.level}</b><span>${sawState}</span></div>
+    <div class="ws-meter"><i style="width:${Math.round(100*sel.work/(WS_SAW_TIMES[sel.level]*1000))}%"></i></div>
+    <div class="ws-small">Material in Säge: ${sel.inputCount}/${sel.level>=3?3:2} Holz · Fertige Bretter: ${sel.outputCount} · Rezept: ${sel.level>=3?'3 Holz → 2 Bretter':'2 Holz → 1 Brett'}</div>
+    <button id="ws-saw-upgrade" ${next>w.level||next>4||w.active||sel.inputCount||sel.work||sel.outputCount||!factoryEnough(p.inventory,WS_SAW_UPGRADES[next])?'disabled':''}>${next>4?'Maximale Säge-Stufe':next>w.level?'Benötigt Sägewerk Lv. '+next:`Säge auf Lv. ${next} verbessern · ${factoryCostText(WS_SAW_UPGRADES[next])}`}</button>`;
+  }else detail.innerHTML=`<span class="ws-small">${workshopUI.mode==='edit'?'Wähle ein Bauteil und tippe auf ein freies Feld.':'Säge antippen für Timer, Rezept und Verbesserungen.'}</span>`;
+}
+function wsBind(){
+  const root=document.getElementById('workshop-screen');
+  root.addEventListener('click',e=>{
+    const tile=e.target.closest('[data-wsx]');if(tile){wsSelect(Number(tile.dataset.wsx),Number(tile.dataset.wsy));return;}
+    const tool=e.target.closest('[data-wstool]');if(tool){workshopUI.tool=tool.dataset.wstool;workshopUI.selectedSaw=null;wsRender();return;}
+    if(e.target.closest('#ws-close'))wsClose();
+    else if(e.target.closest('#ws-mode-view'))wsSetMode('view');
+    else if(e.target.closest('#ws-mode-edit'))wsSetMode('edit');
+    else if(e.target.closest('#ws-direction')){workshopUI.direction=(workshopUI.direction+1)%4;wsRender();}
+    else if(e.target.closest('#ws-feed'))wsStart(Number(root.querySelector('#ws-queue-value').value));
+    else if(e.target.closest('#ws-pause'))wsPauseResume();
+    else if(e.target.closest('#ws-cancel')){const x=wsCurrent();if(x&&(x.w.stock||x.w.items.length||x.w.saws.some(s=>s.inputCount||s.outputCount||s.work))&&confirm('Aktuellen Auftrag abbrechen? Unverarbeitetes Holz wird zurückgegeben, fertige Bretter eingelagert.')){wsRefund(x.p,x.w);save();wsRender();renderPanels();toast('Auftrag abgebrochen · Materialien zurück');}}
+    else if(e.target.closest('#ws-upgrade'))wsUpgradeBuilding();
+    else if(e.target.closest('#ws-saw-upgrade'))wsSelectedUpgrade();
+  });
+}
+function wsTickAll(now=Date.now()){
+  let changed=false;
+  for(const p of [state.demo,state.gps])if(p?.factory)for(const b of p.factory.buildings)if(b.type==='sawmill'&&b.workshop){
+    // Disconnected workshops pause immediately; disconnected workshops never consume new materials.
+    if(b.workshop.active&&!factoryConnected(p.factory,b)){wsAdvance(p,b.workshop,now);b.workshop.active=false;changed=true;}
+    else changed=wsAdvance(p,b.workshop,now)||changed;
+  }
+  return changed;
+}
+
 function factoryLand(x,y){
   if(x<0||y<0||x>=FACTORY_SIZE||y>=FACTORY_SIZE)return false;
   const dx=(x-8.5)/8.35,dy=(y-8.4)/7.65;
@@ -588,10 +927,14 @@ function cleanFactory(candidate){
     const running=oldJob&&item.enabled!==false;
     const oldPaused=oldJob&&item.enabled===false;
     const pausedMs=Number(item.pausedMs);
-    f.buildings.push({id,type:item.type,x:item.x,y:item.y,rot:item.rot===1?1:0,enabled:running,
-      startedAt:running&&Number.isFinite(startedAt)&&startedAt>0&&startedAt<Date.now()+3600000?startedAt:0,
-      doneAt:running?doneAt:0,
-      pausedMs:oldPaused?Math.max(1,Math.min(FACTORY_DEFS[item.type].seconds*1000,doneAt-Date.now())):(Number.isFinite(pausedMs)&&pausedMs>0&&pausedMs<=FACTORY_DEFS[item.type].seconds*1000?pausedMs:0)});
+    const workshop=item.type==='sawmill'?wsClean(item.workshop):undefined;
+    // Alte v0.3.1-Charge wurde bereits vom Rucksack abgezogen. Einmalig als Holzvorrat übernehmen.
+    if(item.type==='sawmill'&&oldJob&&!item.workshop)workshop.stock=Math.min(500,workshop.stock+2);
+    f.buildings.push({id,type:item.type,x:item.x,y:item.y,rot:item.rot===1?1:0,enabled:item.type==='sawmill'?false:running,
+      startedAt:item.type==='sawmill'?0:(running&&Number.isFinite(startedAt)&&startedAt>0&&startedAt<Date.now()+3600000?startedAt:0),
+      doneAt:item.type==='sawmill'?0:(running?doneAt:0),
+      pausedMs:item.type==='sawmill'?0:(oldPaused?Math.max(1,Math.min(FACTORY_DEFS[item.type].seconds*1000,doneAt-Date.now())):(Number.isFinite(pausedMs)&&pausedMs>0&&pausedMs<=FACTORY_DEFS[item.type].seconds*1000?pausedMs:0)),
+      ...(workshop?{workshop}:{})});
     mx=Math.max(mx,Number(id.slice(1))||0);
   }
   f.nextId=mx+1;
@@ -655,6 +998,7 @@ function factoryTickProfile(profile,now=Date.now()){
   let changed=false;
   const connected=factoryRoadNetwork(f);
   for(const b of f.buildings){
+    if(b.type==='sawmill'&&b.workshop)continue;
     if(!b.doneAt)continue;
     if(!factoryConnected(f,b,connected)){
       factoryPauseJob(b,now);
@@ -722,6 +1066,16 @@ function cleanProfile(candidate) {
     if (Number.isSafeInteger(val) && val>=0 && val<=1e9) p.stats[key]=val;
   }
   p.factory=cleanFactory(candidate.factory);
+  for(const old of (Array.isArray(candidate.factory?.buildings)?candidate.factory.buildings:[])){
+    if(old?.type!=='sawmill'||old.workshop||!Number.isFinite(old.doneAt)||old.doneAt<=0||old.doneAt>Date.now())continue;
+    const upgraded=p.factory.buildings.find(b=>b.id===old.id);
+    if(upgraded?.workshop&&upgraded.workshop.stock>=2){
+      upgraded.workshop.stock-=2;
+      p.inventory.plank=(p.inventory.plank||0)+1;
+      if(!p.discovered.includes('plank'))p.discovered.push('plank');
+      p.factory.produced++;
+    }
+  }
   return p;
 }
 
@@ -2421,6 +2775,7 @@ function renderPanels() {
   }).join('');
 }
 function setTab(tab) {
+  if(workshopUI.id&&tab!=='factory')wsClose();
   state.activeTab=tab;
   for (const name of ['map','factory','inventory','collection','settings']) $('screen-'+name).classList.toggle('active',name===tab);
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('selected',el.dataset.tab===tab));
@@ -2431,7 +2786,7 @@ function setTab(tab) {
 function exportSave() {
   const data=localStorage.getItem(SAVE_KEY);if(!data){toast('Noch kein Spielstand vorhanden.',true);return;}
   const url=URL.createObjectURL(new Blob([JSON.stringify(JSON.parse(data),null,2)],{type:'application/json'}));
-  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.3.1-spielstand.json';
+  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.4.0-spielstand.json';
   document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
   toast('Spielstand exportiert');
 }
@@ -2541,6 +2896,11 @@ function factorySvgBuilding(b,selected=false){
     masonry:['#c9d7e0','#8399a7','#576d7d','#54707a'],
     press:['#eab98a','#bf6f4c','#7d4c43','#665358']
   }[b.type];
+  if(b.type==='sawmill'){
+    const level=b.workshop?.level||1;
+    const facades={1:['#8a9e67','#bd875b','#8e6545','#604b3b'],2:['#dfc492','#b69f7c','#8b8e83','#5d655c'],3:['#c8aaa0','#a36f66','#806160','#54494b'],4:['#a3cad1','#7b9da7','#526f81','#3f5a69']};
+    palette.splice(0,4,...facades[level]);
+  }
   const low=factoryUI.flatView||!!factoryUI.tool||!!factoryUI.moveId;
   const roofheight=low?3:b.type==='harbor'?17:b.type==='press'?16:12;
   const top=u.map(v=>({x:v.x,y:v.y-roofheight}));
@@ -2554,6 +2914,10 @@ function factorySvgBuilding(b,selected=false){
   s+=`<path d="M${rt.x},${rt.y} L${rb.x},${rb.y}" stroke="${palette[3]}" stroke-opacity=".65" stroke-width="2"/>`;
   s+=`<path d="M${rl.x+7},${rl.y+7} L${rb.x-11},${rb.y-4}" stroke="${palette[3]}" stroke-opacity=".27" stroke-width="2.4"/>`;
   if(!low&&b.type==='sawmill'){
+    const level=b.workshop?.level||1;
+    if(level>=2)s+=`<path d="M${rl.x+6},${rl.y+5}L${rr.x-6},${rr.y+5}" stroke="#f9f0d6" stroke-width="2" opacity=".55"/>`;
+    if(level>=3)s+=`<path d="M${cx+10},${cy+3}v-16h7v16" stroke="#516b69" stroke-width="6" fill="none"/>`;
+    if(level>=4)s+=`<path d="M${rl.x+7},${rl.y+12}l19,10 14,-8 -19,-10Z" fill="#a8e4e2" opacity=".9"/>`;
     s+=`<path d="M${b.rot?rr.x-14:rl.x+17},${b.rot?rr.y+5:rl.y+5} L${rb.x-10},${rb.y-5}" stroke="#fff0d0" stroke-width="3.5" opacity=".5"/>`;
     s+=`<circle cx="${cx+9}" cy="${cy+2}" r="10" fill="#e9b96e" stroke="#865937" stroke-width="3"/><path d="M${cx+2},${cy+2}h14m-7,-7v14" stroke="#8e6444" stroke-width="2"/>`;
   }else if(!low&&b.type==='masonry'){
@@ -2577,6 +2941,7 @@ function factorySvgBuilding(b,selected=false){
     const indicator=b.doneAt?'#8bf0b9':!linked?'#f8a5a5':b.enabled?'#f4d292':'#a9c4c9';
     s+=`<circle cx="${cx+28}" cy="${cy-(low?13:28)}" r="9" fill="#18363c" stroke="${indicator}" stroke-width="2"/><circle cx="${cx+28}" cy="${cy-(low?13:28)}" r="3.5" fill="${indicator}"/>`;
   }
+  s+=fpoly([rt,rr,gr,gb,gl,rl],'transparent','pointer-events="all"');
   return s+'</g>';
 }
 function factorySvgTree(x,y,variant=0){
@@ -2679,6 +3044,15 @@ function factoryInspector(){
   if(!b&&!road){factoryUI.selected=null;el.classList.add('hidden');return;}
   el.classList.remove('hidden');
   if(road){el.innerHTML=`<div class="fi-head"><div class="fi-icon">🛤️</div><div class="fi-copy"><h3>Straße</h3><small>Verbindet Produktionsgebäude mit dem Hafen.</small></div><button class="fi-close" data-faction="close" aria-label="Schließen">×</button></div><div class="fi-actions"><button class="alert" data-faction="demolish-road">Straße entfernen</button></div>`;return;}
+  if(b.type==='sawmill'){
+    const w=b.workshop||(b.workshop=wsNew());
+    el.innerHTML=`<div class="fi-head"><div class="fi-icon">🪚</div><div class="fi-copy"><h3>Sägewerk · Level ${w.level}</h3><small>${factoryConnected(f,b)?wsStatus(w):'Keine Straßenverbindung zum Hafen'}</small></div><button class="fi-close" data-faction="close">×</button></div>
+      <div class="fi-recipe"><div><span class="fi-caption">INNENHALLE</span><strong>${w.level*25} / 100 Felder</strong></div><span class="fi-recipe-arrow">⚙</span><div><span class="fi-caption">PRODUZIERT</span><strong>🪚 ${w.produced} Bretter</strong></div></div>
+      <p class="fi-hint">Holz auf Förderbänder geben, Sägen einzeln aufwerten und eigene Produktionslinien bauen. Säge Lv. 1: 60 Sekunden pro Charge.</p>
+      <div class="fi-actions fi-actions-main"><button class="primary" data-faction="enter">🏭 Sägewerk betreten →</button></div>
+      <div class="fi-actions"><button data-faction="move">↗ Verschieben</button><button data-faction="rotate">↻ Drehen</button><button class="alert" data-faction="demolish">Abreißen</button></div>`;
+    return;
+  }
   const def=FACTORY_DEFS[b.type],status=fstatus(b,p,factoryRoadNetwork(f));
   const running=!!b.doneAt,paused=!!b.pausedMs;
   const remaining=running?Math.max(0,Math.ceil((b.doneAt-Date.now())/1000)):paused?Math.ceil(b.pausedMs/1000):def.seconds;
@@ -2711,8 +3085,8 @@ function factoryStore(){
 }
 function renderFactory(){factoryTickProfiles();factorySummary();factoryCatalog();factoryInspector();renderFactoryMap();if(factoryUI.storeOpen)factoryStore();}
 function factoryTickProfiles(){
-  const changedDemo=factoryTickProfile(state.demo),changedGps=factoryTickProfile(state.gps);
-  if(changedDemo||changedGps){save();return true;}
+  const changedDemo=factoryTickProfile(state.demo),changedGps=factoryTickProfile(state.gps),changedWorkshop=wsTickAll();
+  if(changedDemo||changedGps||changedWorkshop){save();return true;}
   return false;
 }
 function factoryChoose(type){
@@ -2746,7 +3120,7 @@ function factoryConfirmPlacement(){
   if(!factoryEnough(p.inventory,def.cost)){toast(`Zu wenig Material: ${factoryCostText(def.cost)}`,true);return;}
   factorySpend(p.inventory,def.cost);
   if(type==='road')f.roads.push({x,y});
-  else {const id='b'+f.nextId++;f.buildings.push({id,type,x,y,rot:factoryUI.rotation,enabled:false,startedAt:0,doneAt:0,pausedMs:0});factoryUI.selected=id;factoryUI.tool=null;}
+  else {const id='b'+f.nextId++;f.buildings.push({id,type,x,y,rot:factoryUI.rotation,enabled:false,startedAt:0,doneAt:0,pausedMs:0,...(type==='sawmill'?{workshop:wsNew()}:{})});factoryUI.selected=id;factoryUI.tool=null;}
   factoryUI.ghost=null;
   factoryTickProfiles();save();renderPanels();renderFactory();toast(`${def.name} gebaut!`);
 }
@@ -2759,6 +3133,7 @@ function factoryAction(action){
   const f=activeProfile().factory,p=activeProfile(),id=factoryUI.selected;
   const b=f.buildings.find(b=>b.id===id);
   if(action==='close'){factoryUI.selected=null;factoryInspector();renderFactoryMap();return;}
+  if(action==='enter'&&b?.type==='sawmill'){wsOpen(b.id);return;}
   if(action==='demolish-road'){
     if(!confirm('Diese Straße wirklich entfernen? Eingesetzte Materialien werden nicht erstattet.'))return;
     const [,x,y]=id.split(':');f.roads=f.roads.filter(r=>!(r.x===+x&&r.y===+y));factoryUI.selected=null;
@@ -2780,7 +3155,7 @@ function factoryAction(action){
     b.rot=b.rot?0:1;toast('Gebäudeausrichtung geändert');
   }else if(b&&action==='demolish'){
     if(!confirm('Gebäude wirklich abreißen? Eine laufende Charge wird abgebrochen und die Rohstoffe erstattet.'))return;
-    factoryCancelJob(p,b);
+    if(b.type==='sawmill'&&b.workshop)wsRefund(p,b.workshop);else factoryCancelJob(p,b);
     f.buildings=f.buildings.filter(o=>o.id!==b.id);factoryUI.selected=null;
   }else return;
   factoryTickProfiles();save();renderFactory();renderPanels();
@@ -2795,12 +3170,11 @@ function factoryInteraction(){
     updateRatio();
     factoryUI.pointer={id:e.pointerId,lastX:e.clientX,lastY:e.clientY,downX:e.clientX,downY:e.clientY,moved:false};
     factoryUI.dragScale=(860/factoryUI.zoom)/Math.max(1,svg.clientWidth);
-    try{svg.setPointerCapture(e.pointerId);}catch{}
   });
   svg.addEventListener('pointermove',e=>{
     const p=factoryUI.pointer;
     if(!p||p.id!==e.pointerId)return;
-    if(Math.hypot(e.clientX-p.downX,e.clientY-p.downY)>7)p.moved=true;
+    if(!p.moved && Math.hypot(e.clientX-p.downX,e.clientY-p.downY)>7){p.moved=true;try{svg.setPointerCapture(e.pointerId);}catch{}}
     if(p.moved){
       factoryUI.centerX-=(e.clientX-p.lastX)*factoryUI.dragScale;
       factoryUI.centerY-=(e.clientY-p.lastY)*factoryUI.dragScale;
@@ -2873,11 +3247,12 @@ function factoryInteraction(){
       else factoryUpdateTimer();
     }
     if(changed)renderPanels();
+    if(workshopUI.id&&state.activeTab==='factory'){if(changed||Date.now()%2===0)wsRender();}
   },1000);
 }
 
 function boot(){
-  restore();bind();factoryInteraction();factoryTickProfiles();renderPanels();initMap();
+  restore();bind();factoryInteraction();wsBind();factoryTickProfiles();renderPanels();initMap();
   if(!state.mode)showWelcome();
   else setMode(state.mode,false);
   setInterval(()=>{
