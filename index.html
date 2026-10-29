@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.2.23 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
-  <title>Weltwerk · Exploration 3D v0.2.23</title>
+  <meta name="description" content="Weltwerk v0.3.0 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
+  <title>Weltwerk · Exploration & Inselbau v0.3.0</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -152,17 +152,7 @@
 #map-3d.ww-vector-stage{position:absolute;inset:0;z-index:1;visibility:hidden;background:#8bc576}
 #map-3d.ww-vector-stage.ww-vector-active{visibility:visible}
 
-/* Tropical World: bright sea-glass sky and greener landscape. */
-.ww-canvas-map{background:linear-gradient(180deg,#4bb8e7 0%,#9de4f1 44%,#b3e8cd 100%)}
-.ww-canvas-map .ww-sky{background:linear-gradient(180deg,#43a8e2 0%,#79cfea 27%,#b8e9ed 49%,#daf3e8 65%)}
-.ww-canvas-map .ww-distant{opacity:.42;filter:hue-rotate(38deg) saturate(1.14)}
-.ww-canvas-map .ww-horizon-mist{background:linear-gradient(180deg,#d7f3e6d9,transparent)}
-/* MapLibre's HTML markers also align their visible feet with their coordinate. */
-.maplibregl-marker.world-resource .world-resource-art{transform:translateY(9px);}
-.maplibregl-marker.world-resource .world-resource-shadow{bottom:-1px;}
-.maplibregl-marker.world-resource .world-resource-dot{bottom:-4px;}
-
-/* World Tappables v1.1: independent full-screen tree collector. */
+/* World Tappables v1: independent full-screen tree collector. */
 .tree-scene{position:fixed;inset:0;z-index:1250;display:flex;justify-content:center;background:#0c1a1d;color:#f3fff9;overflow:hidden}
 .tree-scene-inner{width:100%;max-width:540px;height:100%;height:100dvh;display:flex;flex-direction:column;position:relative;background:linear-gradient(180deg,#183d47 0%,#193f41 46%,#13352e 100%)}
 .tree-top{display:flex;align-items:center;gap:11px;padding:calc(13px + env(safe-area-inset-top,0px)) 17px 11px;z-index:5;flex-shrink:0;border-bottom:1px solid #b6ffe41f}
@@ -200,6 +190,80 @@
 @keyframes tree-loot-fly{0%{opacity:1;transform:translate(-50%,0) scale(.8)}100%{opacity:0;transform:translate(-50%,-65px) scale(1.18)}}
 @media(max-height:725px){.tree-top{padding-top:calc(7px + env(safe-area-inset-top,0px));padding-bottom:7px}.tree-bottom{padding-top:8px}.tree-hint{font-size:10px}.tree-hotspot{width:36px;height:36px;font-size:19px}}
 
+/* WELTWERK v0.3.0 — Insel-Manufaktur */
+.bottom-nav{grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding-left:5px;padding-right:5px}
+.nav-item{font-size:9px;gap:4px;letter-spacing:-.15px}
+.nav-item svg{width:22px;height:22px}
+.factory-screen{background:#0f1f2a;overscroll-behavior:none}
+.factory-shell{height:100%;display:flex;flex-direction:column;min-height:0;background:linear-gradient(180deg,#183844 0%,#132833 100%)}
+.factory-header{flex:0 0 auto;padding:calc(16px + env(safe-area-inset-top,0px)) 17px 12px;z-index:5;background:linear-gradient(150deg,#153542,#122733);border-bottom:1px solid #41707962}
+.factory-topline{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.factory-eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:900;color:#80e5ba}
+.factory-level{font-size:10px;font-weight:850;color:#e6d8aa;border:1px solid #d9c27c53;background:#c9a4631c;padding:7px 9px;border-radius:20px;white-space:nowrap}
+.factory-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px}
+.factory-heading h1{margin:0;font-size:27px;letter-spacing:-.9px;font-weight:900;line-height:1.1}
+.factory-heading h1 span{color:#8cedc0}
+.factory-heading p{margin:5px 0 0;color:#a8c7ca;font-size:11px}
+.factory-store-button{border:1px solid #457c76;color:#dbfaf1;background:#234b50;border-radius:12px;padding:9px 11px;font-size:12px;font-weight:800;white-space:nowrap}
+.factory-resources{display:flex;overflow-x:auto;gap:6px;scrollbar-width:none;padding-top:14px}
+.factory-resources::-webkit-scrollbar{display:none}
+.factory-res-chip{display:flex;align-items:center;gap:6px;border:1px solid #ffffff18;background:#ffffff0c;padding:7px 10px;border-radius:10px;flex:0 0 auto;font-size:11px;white-space:nowrap}
+.factory-res-chip b{font-size:12px;font-weight:850}
+.factory-res-chip.new{background:#3c674d80;border-color:#8bd6a555}
+.factory-map-wrap{position:relative;flex:1;min-height:160px;overflow:hidden;background:radial-gradient(ellipse at 48% 60%,#a9e0d1 0%,#5caec9 40%,#28788e 100%)}
+.factory-map-wrap::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#0d25312c,transparent 19%,transparent 75%,#0c253077)}
+#factory-map{display:block;width:100%;height:100%;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#factory-map:active{cursor:grabbing}
+.factory-map-hud{position:absolute;z-index:2;top:12px;left:12px;pointer-events:none;display:flex;gap:6px;flex-direction:column;max-width:210px}
+.factory-hud-pill{background:#122b35e3;backdrop-filter:blur(10px);border:1px solid #ffffff35;border-radius:11px;color:white;padding:8px 10px;font-size:10px;line-height:1.35;box-shadow:0 4px 13px #10303b2b}
+.factory-hud-pill strong{display:block;color:#9af2ca;font-size:11px}
+.factory-map-actions{position:absolute;z-index:3;top:12px;right:12px;display:flex;flex-direction:column;gap:6px}
+.factory-map-actions button{background:#122d36eb;color:#effff8;border:1px solid #ffffff55;border-radius:11px;width:36px;height:36px;font-size:18px;font-weight:800;box-shadow:0 3px 12px #16445255}
+.factory-guidance{position:absolute;z-index:2;bottom:10px;left:10px;right:10px;pointer-events:none;text-align:center;color:#e8ffff;background:#153740ce;border:1px solid #ffffff35;border-radius:10px;padding:8px 9px;font-size:10px;font-weight:750;line-height:1.3}
+.factory-inspector{position:absolute;z-index:6;bottom:48px;left:10px;right:10px;border:1px solid #679184;background:linear-gradient(145deg,#213f46f2,#132b35f5);backdrop-filter:blur(16px);padding:12px;border-radius:16px;box-shadow:0 10px 35px #081d2d77;max-height:57%;overflow-y:auto}
+.factory-inspector .fi-head{display:flex;align-items:center;gap:10px}
+.factory-inspector .fi-icon{font-size:27px;display:grid;place-items:center;background:#ffffff16;border-radius:12px;width:45px;height:45px;flex:0 0 auto}
+.factory-inspector .fi-copy{flex:1;min-width:0}
+.factory-inspector h3{margin:0 0 4px;font-size:16px}
+.factory-inspector small{font-size:11px;color:#bad4d3}
+.factory-inspector .fi-close{border:0;background:transparent;padding:6px;font-size:22px;align-self:flex-start;color:#aac5c3}
+.fi-progress{height:6px;border-radius:8px;background:#07212a;overflow:hidden;margin:11px 0 8px}
+.fi-progress>div{height:100%;border-radius:8px;background:linear-gradient(90deg,#43b89c,#b3f0b0);transition:width .5s}
+.fi-details{display:flex;justify-content:space-between;font-size:10px;color:#c5e0da;gap:7px}
+.fi-actions{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
+.fi-actions button{flex:1 1 25%;min-width:85px;background:#2b5960;border:1px solid #598987;border-radius:10px;padding:9px 8px;font-size:11px;font-weight:800}
+.fi-actions button.alert{background:#492d31;border-color:#81555b;color:#f8caca}
+.factory-tray{flex:0 0 auto;padding:11px 11px calc(12px + env(safe-area-inset-bottom,0px) * .15);background:#0d202b;border-top:1px solid #45626d;z-index:4;max-height:240px;overflow-y:auto}
+.factory-tray-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 4px 10px}
+.factory-tray-head strong{font-size:13px}
+.factory-tray-head span{font-size:10px;color:#a9c3c7}
+.factory-catalog{display:flex;overflow-x:auto;gap:8px;scrollbar-width:none;padding-bottom:3px}
+.factory-catalog::-webkit-scrollbar{display:none}
+.factory-catalog-card{flex:0 0 119px;min-height:105px;border:1px solid #31505c;background:#192f3c;color:#f0f8f8;border-radius:14px;padding:10px 8px;display:flex;align-items:flex-start;flex-direction:column;text-align:left;gap:5px;transition:background .14s}
+.factory-catalog-card.active{background:#275a55;border-color:#82e7b9;box-shadow:0 0 0 1px #82e7b9}
+.factory-catalog-card .fcat-icon{font-size:22px;height:28px}
+.factory-catalog-card strong{font-size:11px}
+.factory-catalog-card small{font-size:10px;color:#abc0c7;line-height:1.35}
+.factory-catalog-card.unaffordable{border-color:#4d464a}
+.factory-catalog-card.unaffordable small{color:#debdab}
+.factory-tray-footer{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:10px}
+.factory-demo-kit{border:1px dashed #8fc898;background:#194c3d;color:#c9f5d7;padding:8px 10px;border-radius:9px;font-size:10px;font-weight:800}
+.factory-cancel{border:1px solid #54747a;background:#243d48;padding:8px 10px;border-radius:9px;font-size:10px;font-weight:800}
+.factory-store-overlay{position:absolute;inset:0;z-index:12;display:flex;flex-direction:column;justify-content:flex-end;background:#061921b9;backdrop-filter:blur(3px)}
+.factory-store-card{background:#102733;border-radius:22px 22px 0 0;padding:20px 17px 23px;border:1px solid #4b777a;max-height:85%;overflow:auto}
+.factory-store-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.factory-store-top h2{margin:0;font-size:22px}
+.factory-store-top button{border:0;background:#254750;border-radius:9px;width:34px;height:34px;font-size:19px}
+.factory-store-row{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid #29464c}
+.factory-store-row span{font-size:22px}
+.factory-store-row strong{flex:1;font-size:12px}
+.factory-store-row b{font-size:13px}
+.factory-store-note{color:#a9c5c6;font-size:11px;line-height:1.5;margin:13px 0}
+@media (max-width:365px){.factory-heading h1{font-size:24px}.factory-header{padding-left:12px;padding-right:12px}.factory-catalog-card{flex-basis:112px}}
+@media (min-width:700px){.factory-header{padding-left:25px;padding-right:25px}.factory-tray{padding-left:25px;padding-right:25px}.factory-catalog-card{flex-basis:155px}.factory-inspector{max-width:400px;left:auto;right:18px}}
+
+
+.factory-place-confirm{border:1px solid #9cefc7;background:#81e7b8;color:#12392f;border-radius:9px;padding:9px 11px;font-size:10px;font-weight:900;box-shadow:0 3px 12px #153e30}.factory-place-confirm:disabled{opacity:.42}
 </style>
 </head>
 <body>
@@ -208,7 +272,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.2.23 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.3.0 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -228,12 +292,32 @@
     </div>
   </main>
 
+
+  <main id="screen-factory" class="screen factory-screen" aria-label="Deine Fabrikinsel">
+    <div class="factory-shell">
+      <header class="factory-header">
+        <div class="factory-topline"><span class="factory-eyebrow">WELTWERK · INSELMANUFAKTUR</span><span class="factory-level">⚓ STUFE 01 · AUSSENPOSTEN</span></div>
+        <div class="factory-heading"><div><h1>Deine Insel<span>.</span></h1><p>Baue Straßen. Verbinde Gebäude. Verarbeite Rohstoffe.</p></div><button id="factory-stock-open" class="factory-store-button">📦 Lager</button></div>
+        <div id="factory-resources" class="factory-resources" aria-label="Materialbestand"></div>
+      </header>
+      <div class="factory-map-wrap" id="factory-map-wrap">
+        <svg id="factory-map" viewBox="0 0 950 700" role="application" aria-label="Interaktive Inselkarte. Bauflächen antippen und Karte mit dem Finger verschieben." xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="factory-map-hud"><div class="factory-hud-pill"><strong>🏝️ DEIN AUSSENPOSTEN</strong><span id="factory-hud-buildings">0 Produktionsgebäude</span> · <span id="factory-hud-production">0 Waren hergestellt</span></div><div class="factory-hud-pill" id="factory-mode-label">DEMO-LAGER</div></div>
+        <div class="factory-map-actions"><button id="factory-zoom-plus" title="Insel vergrößern" aria-label="Vergrößern">+</button><button id="factory-zoom-minus" title="Insel verkleinern" aria-label="Verkleinern">−</button><button id="factory-center" title="Insel zentrieren" aria-label="Zentrieren">⌖</button></div>
+        <div id="factory-inspector" class="factory-inspector hidden" aria-live="polite"></div>
+        <div class="factory-guidance">Tippe ein Gebäude für Details an · Ziehe die Karte zum Verschieben</div>
+        <div id="factory-store-overlay" class="factory-store-overlay hidden"><section class="factory-store-card"><div class="factory-store-top"><h2>📦 Hafenlager</h2><button id="factory-stock-close" aria-label="Lager schließen">×</button></div><p class="factory-store-note">Deine gesammelten Rohstoffe und produzierten Materialien liegen im selben Rucksack. Demo und GPS besitzen getrennte Bestände.</p><div id="factory-store-list"></div></section></div>
+      </div>
+      <div class="factory-tray"><div class="factory-tray-head"><strong id="factory-tray-name">Bauen & verwalten</strong><span id="factory-tray-hint">Gebäude auswählen</span></div><div id="factory-catalog" class="factory-catalog"></div><div class="factory-tray-footer"><button id="factory-demo-kit" class="factory-demo-kit hidden">✦ Testmaterial (nur Demo)</button><span style="font-size:10px;color:#8ea9ae">Tippen · Platzieren · Produzieren</span><button id="factory-place-confirm" class="factory-place-confirm hidden">Bauen ✓</button><button id="factory-cancel" class="factory-cancel hidden">Abbrechen ×</button></div></div>
+    </div>
+  </main>
+
   <main id="screen-inventory" class="screen inner-screen" aria-label="Inventar">
     <div class="page-head"><div class="eyebrow">DEINE SAMMLUNG</div><h1>Rucksack<span class="dot">.</span></h1><p>Alles, was du bisher draußen gefunden hast.</p></div>
-    <div class="info-stripe"><div class="info-circle">📦</div><div><span>GESAMMELTE MATERIALIEN</span><strong id="inventory-total">0</strong></div><span class="info-extra">Kein Limit in v0.2</span></div>
+    <div class="info-stripe"><div class="info-circle">📦</div><div><span>GESAMMELTE MATERIALIEN</span><strong id="inventory-total">0</strong></div><span class="info-extra">Rohstoffe & Waren</span></div>
     <div class="section-title"><h2>Materialien</h2><span id="inventory-type-count">6 Typen</span></div>
     <div id="inventory-grid" class="resource-grid"></div>
-    <div class="soft-note"><span>💡</span><p>Die Ressourcen bleiben gespeichert. In einer späteren Version kannst du daraus Maschinen, Werkzeuge und mehr herstellen.</p></div>
+    <div class="soft-note"><span>💡</span><p>Die Ressourcen bleiben gespeichert. In deiner Fabrik kannst du aus gesammelten Rohstoffen bereits Bretter, Steinblöcke und Metallplatten herstellen.</p></div>
   </main>
 
   <main id="screen-collection" class="screen inner-screen" aria-label="Entdeckungen">
@@ -246,13 +330,13 @@
   <main id="screen-settings" class="screen inner-screen" aria-label="Einstellungen">
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
-    <section class="setting-panel"><div class="panel-heading">Erkundung & Sammelradius</div><p>Der Sammelradius beträgt in dieser Version <strong>30 Meter</strong>. Es erscheinen ungefähr 2,5-mal so viele Rohstoffvorkommen wie bisher. Später können wir die Reichweite über Skill-Tree-Fortschritt oder Ausrüstung verbessern.</p></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.2.23 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Keine Fabrik oder Multiplayer in dieser Version.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.3.0 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: Inselbau und Produktion. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
     <button class="nav-item selected" data-tab="map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15"/></svg><span>Welt</span></button>
+    <button class="nav-item" data-tab="factory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l5 3V8l5 3V4l5 3v14Z"/><path d="M18 10h3v11H3"/><path d="M7 17h2m4 0h2"/></svg><span>Fabrik</span></button>
     <button class="nav-item" data-tab="inventory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="7" width="16" height="14" rx="3"/><path d="M9 7V5a3 3 0 0 1 6 0v2M4 13h16"/></svg><span>Rucksack</span></button>
     <button class="nav-item" data-tab="collection"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 3h12a3 3 0 0 1 3 3v15H7a3 3 0 0 1-3-3zM4 18a3 3 0 0 1 3-3h12M8 7h7M8 10h5"/></svg><span>Sammlung</span></button>
     <button class="nav-item" data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="m19 12 2-1.5-2-4-2.5.7-1.5-.9-.5-2.6h-5L9 6.3l-1.5.9L5 6.5l-2 4L5 12l-2 1.5 2 4 2.5-.7 1.5.9.5 2.6h5l.5-2.6 1.5-.9 2.5.7 2-4z"/></svg><span>Mehr</span></button>
@@ -261,31 +345,20 @@
 
 <div id="tree-scene" class="tree-scene hidden" aria-hidden="true"></div>
 <div id="modal-backdrop" class="modal-backdrop hidden" aria-hidden="true"><section id="resource-sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"><div class="sheet-handle"></div><button class="sheet-close" id="btn-sheet-close" aria-label="Schließen">×</button><div id="sheet-content"></div></section></div>
-<div id="welcome" class="welcome-backdrop hidden"><section class="welcome-card"><div class="welcome-mark"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div class="eyebrow">DEIN ABENTEUER BEGINNT</div><h1>Deine Welt.<br><em>Deine Entdeckungen.</em></h1><p>Erkunde eine echte Karte, finde Rohstoffe und baue deine Sammlung auf. Die Fabrik folgt in einer späteren Version.</p><button id="welcome-demo" class="solid-btn full-btn">Im Demo-Modus testen <span>→</span></button><button id="welcome-gps" class="outline-btn full-btn">Mit echtem GPS starten</button><div class="welcome-caption">Im Demo-Modus kannst du dich auch vom Sofa aus bewegen. Keine Registrierung erforderlich.</div></section></div>
+<div id="welcome" class="welcome-backdrop hidden"><section class="welcome-card"><div class="welcome-mark"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div class="eyebrow">DEIN ABENTEUER BEGINNT</div><h1>Deine Welt.<br><em>Deine Entdeckungen.</em></h1><p>Erkunde eine echte Karte, finde Rohstoffe und baue deine Sammlung auf. Errichte auf deiner Insel Produktionsgebäude und verwandle deine Funde in Baumaterialien.</p><button id="welcome-demo" class="solid-btn full-btn">Im Demo-Modus testen <span>→</span></button><button id="welcome-gps" class="outline-btn full-btn">Mit echtem GPS starten</button><div class="welcome-caption">Im Demo-Modus kannst du dich auch vom Sofa aus bewegen. Keine Registrierung erforderlich.</div></section></div>
 <div id="toast-area" class="toast-area" aria-live="polite"></div>
 <div id="no-map" class="no-map hidden">Die Karte konnte nicht gestartet werden. Prüfe deine Internetverbindung und lade die Seite erneut.</div>
 <script>
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.2.23';
-const START_ZOOM = 20.5; // maximal erlaubter Startzoom: näher an Figur und Fundstellen
+const VERSION = '0.3.0';
+const START_ZOOM = 20.5; // maximal erlaubter Startzoom; manuell weiterhin verkleinerbar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
-const MAX_RASTER_TILE_ZOOM = 19; // Bildkacheln nur als Notkarte; hochzoomen statt nicht existierende z20/21 abrufen
 const REGEN_MS = 60 * 60 * 1000;
-// Basis-Sammelreichweite. Eine spätere Skill-Tree-/Werkzeugverbesserung muss
-// nur getCollectionRadius() erweitern, ohne Karte und Sammellogik zu trennen.
-const BASE_COLLECTION_RADIUS_METERS = 30;
-const GRID_METERS = 195; // Altes Raster beibehalten, sonst wandern bestehende Fundstellen!
-const RESOURCE_RADIUS = 720; // Das bestehende Weltgebiet bleibt gleich.
-const DISPLAY_RADIUS_METERS = 430; // Nur nahe Objekte als Marker anlegen (Handy-Performance).
-const EXTRA_SPAWN_CHANCE = 0.62; // Zwei weitere Kandidaten pro Rasterzelle: ~2,5x gegenüber v0.2.22.
-const MIN_NODE_SPACING_METERS = 18;
-const NODE_KEY_PATTERN = /^-?\d+:-?\d+(?::[12])?$/;
-function getCollectionRadius(){
-  // Platzhalter für spätere +5-m-Upgrades. Der aktuelle Wert beträgt exakt 30 m.
-  return BASE_COLLECTION_RADIUS_METERS;
-}
+const REACH_METERS = 30;
+const GRID_METERS = 195;
+const RESOURCE_RADIUS = 720;
 const MATERIALS = Object.freeze({
   wood:   { name: 'Holz', icon: '🪵', rarity: 'common', note: 'Das Grundmaterial für Bretter und einfache Bauteile.' },
   stone:  { name: 'Stein', icon: '🪨', rarity: 'common', note: 'Robustes Material für spätere Bauprojekte.' },
@@ -300,11 +373,13 @@ const MATERIALS = Object.freeze({
   apple: {name:'Apfel',icon:'🍎',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
   pear: {name:'Birne',icon:'🍐',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
   cherry: {name:'Kirsche',icon:'🍒',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
-  seed: {name:'Besonderer Samen',icon:'🌱',rarity:'rare',note:'Ein seltener Fund in einer Baumkrone, später für besondere Rezepte.'},
   honey: {name:'Honig',icon:'🍯',rarity:'uncommon',note:'Ein virtueller Fund aus einem Bienennest.'},
   wax: {name:'Wachs',icon:'🕯️',rarity:'uncommon',note:'Ein seltener virtueller Fund aus einem Bienennest.'},
   egg: {name:'Ei',icon:'🥚',rarity:'uncommon',note:'Ein virtuelles Fundstück aus einer Vogelnest-Szene.'},
   feather: {name:'Feder',icon:'🪶',rarity:'uncommon',note:'Ein Fundstück eines Vogelnests.'},
+  plank: {name:'Bretter',icon:'🪚',rarity:'crafted',note:'Im Sägewerk aus Holz gefertigt.'},
+  block: {name:'Steinblöcke',icon:'🧱',rarity:'crafted',note:'Im Steinmetz aus Stein gefertigt.'},
+  plate: {name:'Metallplatten',icon:'⚙️',rarity:'crafted',note:'In der Metallpresse aus Altmetall hergestellt.'},
 });
 const ANIMALS = Object.freeze({
   squirrel:{name:'Eichhörnchen',icon:'🐿️',note:'Virtuelle Sichtung am Stamm.'},
@@ -312,7 +387,7 @@ const ANIMALS = Object.freeze({
   bird:{name:'Vogel',icon:'🐦',note:'Virtuelle Sichtung am Vogelnest.'}
 });
 const TYPES = Object.freeze({
-  tree: { name: 'Baum', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.03, color: '#63c58f', desc: 'Untersuche drei Stammstellen, Zweige und mit Glück versteckte Sonderfunde.' },
+  tree: { name: 'Baum', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.20, color: '#63c58f', desc: 'Untersuche drei Stammstellen, Zweige und mit Glück versteckte Sonderfunde.' },
   rock: { name: 'Steinvorkommen', icon: '🪨', material: 'stone', bonus: 'iron', bonusProbability: 0.15, color: '#94adca', desc: 'Ein Steinvorkommen mit einer kleinen Chance auf Eisenerz.' },
   scrap: { name: 'Schrottfundstelle', icon: '🔩', material: 'scrap', bonus: 'copper', bonusProbability: 0.15, color: '#e7b375', desc: 'Zurückgelassene Metallteile. Manchmal findet sich Kupferdraht.' },
 });
@@ -335,66 +410,38 @@ function distanceMeters(lat1, lon1, lat2, lon2) {
   const a = Math.sin((lat2-lat1)*rad/2)**2 + Math.cos(lat1*rad)*Math.cos(lat2*rad)*Math.sin((lon2-lon1)*rad/2)**2;
   return 6371000 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(Math.max(0,1-a)));
 }
-// WELTWERK v0.2.23: stable deterministic world with ~2.5x as many nodes.
-// Preserve *all* original grid positions and IDs ("x:y"): saves/tree sessions
-// stay valid. New positions use suffixes ":1" / ":2" and separate random salts.
-// Locations are virtual and NOT checked for public/safe access.
+// Coordinates depend only on the cell's world coordinates — same resource after refresh.
+// These are prototype GAME locations, not verified public/access-safe real-world sites.
 function generateResources(lat, lng, radius = RESOURCE_RADIUS) {
   const center = latLngToMeters(lat, lng);
-  // Web Mercator stretches distances by 1/cos(latitude). Include that in
-  // the search bbox, otherwise a ~310 m circle is clipped at northern latitudes.
-  const projectedRadius = radius / Math.max(.25, Math.cos(lat * Math.PI / 180));
-  const pad=1;
-  const minX=Math.floor((center.x-projectedRadius)/GRID_METERS)-pad;
-  const maxX=Math.floor((center.x+projectedRadius)/GRID_METERS)+pad;
-  const minY=Math.floor((center.y-projectedRadius)/GRID_METERS)-pad;
-  const maxY=Math.floor((center.y+projectedRadius)/GRID_METERS)+pad;
-  const original=[],extra=[];
-  const make=(ix,iy,ox,oy,slot)=>{
-    const worldX=(ix+ox)*GRID_METERS,worldY=(iy+oy)*GRID_METERS;
-    const roll=randomCell(ix,iy,slot===0?4:slot===1?14:24);
-    const type=roll<.43?'tree':roll<.77?'rock':'scrap';
-    const rich=randomCell(ix,iy,slot===0?5:slot===1?15:25)<.10;
-    const id=slot===0?`${ix}:${iy}`:`${ix}:${iy}:${slot}`;
-    return {id,...metersToLatLng(worldX,worldY),type,rich,worldX,worldY};
-  };
-  for(let ix=minX;ix<=maxX;ix++) for(let iy=minY;iy<=maxY;iy++){
-    // Existing nodes are generated with their exact old coordinates and type.
-    if(randomCell(ix,iy,1)<=.80){
-      original.push(make(ix,iy,.20+randomCell(ix,iy,2)*.60,.20+randomCell(ix,iy,3)*.60,0));
+  const minX=Math.floor((center.x-radius)/GRID_METERS)-1;
+  const maxX=Math.floor((center.x+radius)/GRID_METERS)+1;
+  const minY=Math.floor((center.y-radius)/GRID_METERS)-1;
+  const maxY=Math.floor((center.y+radius)/GRID_METERS)+1;
+  const result=[];
+  for(let ix=minX;ix<=maxX;ix++)for(let iy=minY;iy<=maxY;iy++){
+    if(randomCell(ix,iy,1)>.80)continue;
+    const coords=[];
+    const originals=[{id:`${ix}:${iy}`,x:.20+randomCell(ix,iy,2)*.60,y:.20+randomCell(ix,iy,3)*.60}];
+    for(let k=1;k<=2;k++){
+      if(randomCell(ix,iy,27+k)> (k===1?.85:.65))continue;
+      let found=null;
+      for(let trial=0;trial<10;trial++){
+        const x=.11+randomCell(ix,iy,k*100+trial*2)*.78;
+        const y=.11+randomCell(ix,iy,k*100+trial*2+1)*.78;
+        if(originals.every(c=>Math.hypot((c.x-x)*GRID_METERS,(c.y-y)*GRID_METERS)>=18)){found={id:`${ix}:${iy}:${k}`,x,y};break;}
+      }
+      if(found)originals.push(found);
     }
-    // Extras occupy different portions of a cell to avoid unnatural clusters.
-    if(randomCell(ix,iy,11)<EXTRA_SPAWN_CHANCE){
-      extra.push(make(ix,iy,.12+randomCell(ix,iy,12)*.28,.59+randomCell(ix,iy,13)*.29,1));
-    }
-    if(randomCell(ix,iy,21)<EXTRA_SPAWN_CHANCE){
-      extra.push(make(ix,iy,.59+randomCell(ix,iy,22)*.29,.12+randomCell(ix,iy,23)*.28,2));
+    for(let n=0;n<originals.length;n++){
+      const point=originals[n];
+      const coord=metersToLatLng((ix+point.x)*GRID_METERS,(iy+point.y)*GRID_METERS);
+      if(distanceMeters(lat,lng,coord.lat,coord.lng)>radius)continue;
+      const roll=randomCell(ix,iy,n?4+n*11:4);
+      result.push({id:point.id,...coord,type:roll<.43?'tree':roll<.77?'rock':'scrap',rich:randomCell(ix,iy,n?5+n*11:5)<.10});
     }
   }
-  // Admit original locations first so nothing in a previous save is displaced.
-  // Neighbor checks in a small metric grid keep generation fast on mobile.
-  const occupied=new Map();const all=[];
-  const spacingGrid=MIN_NODE_SPACING_METERS/Math.max(.25,Math.cos(lat*Math.PI/180));
-  const canAdmit=(n)=>{
-    const bx=Math.floor(n.worldX/spacingGrid),by=Math.floor(n.worldY/spacingGrid);
-    for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++){
-      for(const old of occupied.get(`${bx+dx}:${by+dy}`)||[]){
-        if(distanceMeters(n.lat,n.lng,old.lat,old.lng)<MIN_NODE_SPACING_METERS)return false;
-      }
-    }
-    return true;
-  };
-  const admit=(n,always=false)=>{
-    if(!always&&!canAdmit(n))return;
-    const bx=Math.floor(n.worldX/spacingGrid),by=Math.floor(n.worldY/spacingGrid);
-    const key=`${bx}:${by}`;
-    if(!occupied.has(key))occupied.set(key,[]);
-    occupied.get(key).push(n);
-    all.push({id:n.id,lat:n.lat,lng:n.lng,type:n.type,rich:n.rich});
-  };
-  for(const n of original)admit(n,true);
-  for(const n of extra)admit(n);
-  return all.filter(n=>distanceMeters(lat,lng,n.lat,n.lng)<=radius);
+  return result;
 }
 // Independent bonus chance. One harvest always gives guaranteed material.
 function rollHarvest(node, rand = Math.random) {
@@ -424,31 +471,26 @@ function createTreeSession(node,random=Math.random,now=Date.now()){
   for(let i=0;i<3;i++){
     const [x,y]=TRUNK_POINTS[i],id='trunk-'+i;
     add(id,'trunk','wood',mult,x,y);
-    // Balancing v1.1: mushroom 7%, resin 3%; animals are NOT per-trunk drops.
-    const bonus=weightedPick([[null,.90],['mushroom',.07],['resin',.03]],random);
+    const bonus=weightedPick([[null,.885],['mushroom',.07],['resin',.03],['squirrel',.015]],random);
     if(bonus)add('trunkbonus-'+i,'bonus',bonus,1,x,y,id);
   }
   const branchCount=random()<.5?6:3;
   for(let i=0;i<branchCount;i++){
     const [x,y]=BRANCH_POINTS[i],id='branch-'+i;
     add(id,'branch','twig',mult,x,y);
-    const bonus=weightedPick([[null,.35],['leaf',.50],['cone',.08],['apple',.02],['pear',.02],['cherry',.02],['seed',.01]],random);
+    const bonus=weightedPick([[null,.325],['leaf',.50],['cone',.10],['apple',.025],['pear',.025],['cherry',.025]],random);
     if(bonus)add('branchbonus-'+i,'bonus',bonus,1,x,y,id);
   }
-  // Only one squirrel encounter roll per tree, independent of wood slots.
-  if(random()<.015)add('squirrel','event','squirrel',1,65,58);
-  // Mutually exclusive nests: 1% beehive, 1% bird nest, 98% neither.
   const nestRoll=random();const nestType=nestRoll<.01?'bee':nestRoll<.02?'bird':null;
   if(nestType){
     add('nest','nest',null,0,nestType==='bee'?64:29,nestType==='bee'?34:39,null,nestType);
     const table=nestType==='bee'?[[null,.10],['honey',.80],['wax',.05],['bee',.05]]
       :[[null,.25],['egg',.60],['feather',.10],['bird',.05]];
-    // Every rare nest contains at least one useful find. The second slot
-    // retains the original odds (including the chance for an empty slot).
-    const guaranteed=nestType==='bee'?'honey':'feather';
-    add('nestitem-0','nestItem',guaranteed,1,0,0,'nest',nestType);
-    const second=weightedPick(table,random);
-    add('nestitem-1','nestItem',second,second?1:0,0,0,'nest',nestType);
+    for(let i=0;i<2;i++){
+      const item=weightedPick(table,random);
+      // Empty nest compartments are examined, but cannot be harvested repeatedly.
+      add('nestitem-'+i,'nestItem',item,item?1:0,0,0,'nest',nestType);
+    }
   }
   return {startedAt:now,slots,nestOpen:false,completeAt:0,earned:{}};
 }
@@ -463,12 +505,11 @@ function treeSlotIcon(slot){
   if(slot.zone==='trunk')return '🪵';
   if(slot.zone==='branch')return '🌿';
   if(slot.zone==='nest')return slot.nestType==='bee'?'🐝':'🪺';
-  if(slot.zone==='event')return '🐿️';
   return MATERIALS[slot.item]?.icon || ANIMALS[slot.item]?.icon || '🔎';
 }
 const TREE_ACTIONS=Object.freeze({
   wood:'Holz lösen',twig:'Zweig abbrechen',mushroom:'Pilz herausziehen',resin:'Harz abkratzen',
-  leaf:'Blatt pflücken',cone:'Zapfen aufheben',apple:'Apfel pflücken',pear:'Birne pflücken',cherry:'Kirsche pflücken',seed:'Samen entdecken',
+  leaf:'Blatt pflücken',cone:'Zapfen aufheben',apple:'Apfel pflücken',pear:'Birne pflücken',cherry:'Kirsche pflücken',
   honey:'Honig entnehmen',wax:'Wachs lösen',egg:'Nest behutsam untersuchen',feather:'Feder entdecken',
   squirrel:'Eichhörnchen beobachten',bee:'Biene beobachten',bird:'Vogel beobachten'
 });
@@ -481,8 +522,115 @@ function formatRemaining(ms) {
 }
 const DEMO_START = Object.freeze({lat:51.9625, lng:7.6270});
 const SAVE_KEY = 'weltwerk-exploration-save-v1';
+// WELTWERK Stadtbau / v0.3.0. Persistiert im bekannten Weltwerk-Speicherformat.
+const FACTORY_SIZE=18;
+const FACTORY_HARBOR=Object.freeze({id:'harbor',type:'harbor',x:8,y:13,w:3,h:2});
+const FACTORY_START_ROADS=Object.freeze([[9,12],[9,11],[9,10],[9,9],[8,9],[8,8],[7,8]]);
+const FACTORY_ITEMS=Object.freeze({
+ plank:{name:'Bretter',icon:'🪚'}, block:{name:'Steinblöcke',icon:'🧱'}, plate:{name:'Metallplatten',icon:'⚙️'}
+});
+const FACTORY_DEFS=Object.freeze({
+ road:{name:'Straße',icon:'🛤️',w:1,h:1,cost:{stone:1},detail:'Verbindet Gebäude mit dem Hafen.'},
+ sawmill:{name:'Sägewerk',icon:'🪚',w:2,h:2,cost:{wood:4,stone:2},input:{wood:2},output:'plank',outputCount:1,seconds:15,detail:'Verarbeitet Holz zu Brettern.'},
+ masonry:{name:'Steinmetz',icon:'🧱',w:2,h:2,cost:{stone:4,wood:2},input:{stone:2},output:'block',outputCount:1,seconds:20,detail:'Verarbeitet Stein zu Steinblöcken.'},
+ press:{name:'Metallpresse',icon:'⚙️',w:2,h:2,cost:{scrap:5,stone:3},input:{scrap:2},output:'plate',outputCount:1,seconds:25,detail:'Presst Altmetall zu Metallplatten.'},
+ harbor:{name:'Hafenlager',icon:'⚓',w:3,h:2,detail:'Zentrales Lager deiner Insel.'}
+});
+function factoryLand(x,y){
+  if(x<0||y<0||x>=FACTORY_SIZE||y>=FACTORY_SIZE)return false;
+  const dx=(x-8.5)/8.35,dy=(y-8.4)/7.65;
+  const undulation=.055*Math.sin(x*1.42)+.038*Math.cos(y*1.86+x*.33);
+  return dx*dx+dy*dy<1.02+undulation;
+}
+function factoryKey(x,y){return x+':'+y;}
+function freshFactory(){return {roads:FACTORY_START_ROADS.map(([x,y])=>({x,y})),buildings:[],produced:0,nextId:1};}
+function factoryOverlap(a,b){return a.x<b.x+(b.w||FACTORY_DEFS[b.type]?.w||1) && a.x+(a.w||FACTORY_DEFS[a.type]?.w||1)>b.x && a.y<b.y+(b.h||FACTORY_DEFS[b.type]?.h||1) && a.y+(a.h||FACTORY_DEFS[a.type]?.h||1)>b.y;}
+function factoryPlacement(factory,type,x,y,ignoreId=null){
+  const def=FACTORY_DEFS[type];if(!def||!Number.isInteger(x)||!Number.isInteger(y)||type==='harbor')return false;
+  for(let a=x;a<x+def.w;a++)for(let b=y;b<y+def.h;b++){
+    if(!factoryLand(a,b))return false;
+    if(factoryOverlap({x:a,y:b,w:1,h:1},FACTORY_HARBOR))return false;
+    if(factory.roads.some(r=>r.x===a&&r.y===b && !(type==='road' && ignoreId===factoryKey(a,b))))return false;
+    if(factory.buildings.some(o=>o.id!==ignoreId && factoryOverlap({x:a,y:b,w:1,h:1},o)))return false;
+  }
+  return true;
+}
+function cleanFactory(candidate){
+  const f=freshFactory();if(!candidate||typeof candidate!=='object')return f;
+  if(Number.isInteger(candidate.produced)&&candidate.produced>=0&&candidate.produced<=1e9)f.produced=candidate.produced;
+  const sourceRoads=Array.isArray(candidate.roads)?candidate.roads:FACTORY_START_ROADS.map(([x,y])=>({x,y}));
+  f.roads=[];
+  for(const item of sourceRoads.slice(0,400)){
+    if(item&&factoryPlacement(f,'road',item.x,item.y))f.roads.push({x:item.x,y:item.y});
+  }
+  let mx=0;
+  for(const item of (Array.isArray(candidate.buildings)?candidate.buildings:[]).slice(0,200)){
+    if(!item||!['sawmill','masonry','press'].includes(item.type))continue;
+    const id=String(item.id||'').slice(0,35);
+    if(!/^b\d+$/.test(id)||f.buildings.some(b=>b.id===id)||!factoryPlacement(f,item.type,item.x,item.y))continue;
+    const startedAt=Number(item.startedAt),doneAt=Number(item.doneAt);
+    f.buildings.push({id,type:item.type,x:item.x,y:item.y,rot:item.rot===1?1:0,enabled:item.enabled!==false,
+      startedAt:Number.isFinite(startedAt)&&startedAt>0&&startedAt<Date.now()+3600000?startedAt:0,
+      doneAt:Number.isFinite(doneAt)&&doneAt>0&&doneAt<Date.now()+3600000*24*90?doneAt:0});
+    mx=Math.max(mx,Number(id.slice(1))||0);
+  }
+  f.nextId=mx+1;
+  return f;
+}
+function factoryEnough(inv,requires){return Object.entries(requires||{}).every(([key,n])=>(inv[key]||0)>=n);}
+function factorySpend(inv,requires){for(const [key,n] of Object.entries(requires||{}))inv[key]-=n;}
+function factoryRoadNetwork(f){
+  const roads=new Set(f.roads.map(p=>factoryKey(p.x,p.y))),connected=new Set(),queue=[];
+  for(const r of f.roads){
+    if(r.x>=FACTORY_HARBOR.x-1&&r.x<=FACTORY_HARBOR.x+FACTORY_HARBOR.w && r.y>=FACTORY_HARBOR.y-1&&r.y<=FACTORY_HARBOR.y+FACTORY_HARBOR.h &&
+      (r.x===FACTORY_HARBOR.x-1||r.x===FACTORY_HARBOR.x+FACTORY_HARBOR.w ? r.y>=FACTORY_HARBOR.y&&r.y<FACTORY_HARBOR.y+FACTORY_HARBOR.h : r.x>=FACTORY_HARBOR.x&&r.x<FACTORY_HARBOR.x+FACTORY_HARBOR.w)){
+      const k=factoryKey(r.x,r.y);connected.add(k);queue.push(r);
+    }
+  }
+  for(let i=0;i<queue.length;i++){
+    const cur=queue[i];for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+      const nx=cur.x+dx,ny=cur.y+dy,k=factoryKey(nx,ny);
+      if(roads.has(k)&&!connected.has(k)){connected.add(k);queue.push({x:nx,y:ny});}
+    }
+  }
+  return connected;
+}
+function factoryConnected(f,b,network=factoryRoadNetwork(f)){
+  for(let x=b.x;x<b.x+FACTORY_DEFS[b.type].w;x++)for(let y=b.y;y<b.y+FACTORY_DEFS[b.type].h;y++){
+    for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]])if(network.has(factoryKey(x+dx,y+dy)))return true;
+  }
+  return false;
+}
+function factoryTickProfile(profile,now=Date.now()){
+  const f=profile.factory;if(!f)return false;
+  let changed=false;
+  const connected=factoryRoadNetwork(f);
+  for(const b of f.buildings){
+    const def=FACTORY_DEFS[b.type];
+    const linked=factoryConnected(f,b,connected);
+    if(b.doneAt&&b.doneAt<=now){
+      let i=0;
+      while(b.doneAt&&b.doneAt<=now&&i++<1000){
+        const finishAt=b.doneAt;
+        profile.inventory[def.output]=(profile.inventory[def.output]||0)+def.outputCount;
+        if(!profile.discovered.includes(def.output))profile.discovered.push(def.output);
+        f.produced+=def.outputCount;
+        b.doneAt=0;b.startedAt=0;changed=true;
+        if(!b.enabled||!linked||!factoryEnough(profile.inventory,def.input))break;
+        factorySpend(profile.inventory,def.input);
+        b.startedAt=finishAt;b.doneAt=finishAt+def.seconds*1000;
+      }
+    }
+    if(!b.doneAt&&b.enabled&&linked&&factoryEnough(profile.inventory,def.input)){
+      factorySpend(profile.inventory,def.input);
+      b.startedAt=now;b.doneAt=now+def.seconds*1000;changed=true;
+    }
+  }
+  return changed;
+}
+
 function freshProfile() {
-  return {inventory:Object.fromEntries(Object.keys(MATERIALS).map(k=>[k,0])), discovered:[], harvested:{}, treeSessions:{}, encounters:[], stats:{harvests:0, collected:0, rare:0}};
+  return {inventory:Object.fromEntries(Object.keys(MATERIALS).map(k=>[k,0])), discovered:[], harvested:{}, treeSessions:{}, encounters:[], factory:freshFactory(), stats:{harvests:0, collected:0, rare:0}};
 }
 function cleanProfile(candidate) {
   const p=freshProfile();
@@ -496,14 +644,14 @@ function cleanProfile(candidate) {
   // Preserve in-progress tree scenes and their exact pending rewards. Never reroll on reopen.
   if(candidate.treeSessions && typeof candidate.treeSessions==='object'){
     for(const [key,raw] of Object.entries(candidate.treeSessions).slice(0,200)){
-      if(!NODE_KEY_PATTERN.test(key)||!raw||typeof raw!=='object')continue;
+      if(!/^-?\d+:-?\d+(?::\d{1,2})?$/.test(key)||!raw||typeof raw!=='object')continue;
       if(!Number.isFinite(raw.startedAt)||raw.startedAt<=0||raw.startedAt>Date.now()+60000)continue;
       if(raw.completeAt && Date.now()-raw.completeAt>REGEN_MS)continue;
       if(!Array.isArray(raw.slots)||raw.slots.length>45)continue;
       const slots=[];
       for(const r of raw.slots){
         if(!r||typeof r!=='object'||typeof r.id!=='string'||!/^[a-zA-Z0-9-]{1,40}$/.test(r.id))continue;
-        if(!['trunk','branch','bonus','event','nest','nestItem'].includes(r.zone))continue;
+        if(!['trunk','branch','bonus','nest','nestItem'].includes(r.zone))continue;
         if(r.item!==null && typeof r.item!=='string')continue;
         if(r.item!==null && !(r.item in MATERIALS) && !(r.item in ANIMALS))continue;
         if(!Number.isInteger(r.count)||r.count<0||r.count>8)continue;
@@ -524,13 +672,14 @@ function cleanProfile(candidate) {
   if(candidate.harvested && typeof candidate.harvested==='object') {
     for (const [key,value] of Object.entries(candidate.harvested)) {
       const t=Number(value);
-      if (NODE_KEY_PATTERN.test(key) && Number.isFinite(t) && t>0 && t<=Date.now()+60000 && Date.now()-t<REGEN_MS) p.harvested[key]=t;
+      if (/^-?\d+:-?\d+(?::\d{1,2})?$/.test(key) && Number.isFinite(t) && t>0 && t<=Date.now()+60000 && Date.now()-t<REGEN_MS) p.harvested[key]=t;
     }
   }
   for (const key of Object.keys(p.stats)) {
     const val=Number(candidate.stats?.[key]);
     if (Number.isSafeInteger(val) && val>=0 && val<=1e9) p.stats[key]=val;
   }
+  p.factory=cleanFactory(candidate.factory);
   return p;
 }
 
@@ -564,17 +713,12 @@ const OSM_BUILDING_ENDPOINTS = [
 const BUILDING_SESSION_CACHE = new Map();
 const BUILDING_CACHE_TTL = 15 * 60 * 1000;
 const BUILDING_GRID_METERS = 260;
-// Ring uses getCollectionRadius(): future upgrades change circle and gameplay together.
-// Tropical World: colors are intentionally playful rather than realistic.
-// The same palette is used by Canvas vectors, the optional WebGL map, and raster fallback.
-const TROPICAL_WORLD=Object.freeze({
-  grass:'#91d768',park:'#6ec160',forest:'#10805b',farmland:'#a7d78b',
-  urban:'#c4d9cf',building:'#e4e8dc',roof:'#bfcbbb',road:'#647e82',
-  path:'#a6bfb1',water:'#0dc1d7',roadEdge:'#d4e3cf',wetland:'#70cbb1'
-});
-const WORLD_PALETTE=Object.freeze(Object.fromEntries(
-  Object.entries(TROPICAL_WORLD).map(([key,hex])=>[key,[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16))])
-));
+const COLLECT_RING_METERS = 50;
+const WORLD_PALETTE={
+  grass:[137,197,115], park:[115,184,100], forest:[87,153,87],
+  water:[86,169,222], road:[33,36,39], path:[57,62,64],
+  built:[151,157,158], roof:[117,127,130]
+};
 function buildingRegion(pos){
   const m=latLngToMeters(pos.lat,pos.lng);
   const ix=Math.floor(m.x/BUILDING_GRID_METERS),iy=Math.floor(m.y/BUILDING_GRID_METERS);
@@ -928,11 +1072,11 @@ class BackupMap {
   drawBuilding(ctx,b,p){
     const {pts,rise,building:feature,center,width}=b;
     const palettes=[
-      {wall:'#ecf0df',dark:'#becfc0',roof:'#d4d8bb',line:'#a2b6a0'},
-      {wall:'#e4ece0',dark:'#b8cbc2',roof:'#b9ccbb',line:'#91ada0'},
-      {wall:'#f2eedd',dark:'#d2d0be',roof:'#ded6bb',line:'#b8b29d'},
-      {wall:'#d9e7df',dark:'#b4c9c5',roof:'#aacbc3',line:'#88aca4'},
-      {wall:'#eceddc',dark:'#c5cfbc',roof:'#cbd6b7',line:'#9fb49a'}
+      {wall:'#d4dadb',dark:'#a1adb0',roof:'#87969a',line:'#66787e'},
+      {wall:'#c9d0d1',dark:'#9aa8ad',roof:'#808f98',line:'#61717b'},
+      {wall:'#bbc9cc',dark:'#8e9ea3',roof:'#71868a',line:'#5c737a'},
+      {wall:'#d6d5d0',dark:'#aaaead',roof:'#8d9495',line:'#717a7d'},
+      {wall:'#c6d0d0',dark:'#93a6a7',roof:'#788d91',line:'#576f74'}
     ];
     const palette=palettes[feature.palette];
     // Shadow anchors the house visually on the original OSM footprint.
@@ -958,7 +1102,7 @@ class BackupMap {
         for(let j=0;j<count;j++){
           const t=(j+1)/(count+1),xx=a.x+(next.x-a.x)*t,yy=a.y+(next.y-a.y)*t;
           ctx.beginPath();ctx.ellipse(xx,yy-rise*.56,Math.min(2.4,edge/(count*15)),Math.max(2,rise*.105),0,0,Math.PI*2);
-          ctx.fillStyle='#73b6ab';ctx.fill();
+          ctx.fillStyle='#749fa5';ctx.fill();
         }
       }
     }
@@ -1099,20 +1243,19 @@ class BackupMap {
         if(bb && (bb[2]<localX-radius || bb[0]>localX+radius || bb[3]<localY-radius || bb[1]>localY+radius))continue;
         const cl=String(f.props.class||'').toLowerCase(),sub=String(f.props.subclass||'').toLowerCase();
         let color=null,kind='fill',width=1;
-        if(name==='landcover' && f.type===3){color=cl==='wood'?TROPICAL_WORLD.forest:cl==='grass'?TROPICAL_WORLD.park:cl==='farmland'?TROPICAL_WORLD.farmland:TROPICAL_WORLD.grass;}
+        if(name==='landcover' && f.type===3){color=cl==='wood'?'#57945a':cl==='grass'?'#7dbb70':cl==='farmland'?'#9fbe78':'#91bf7c';}
         else if(name==='landuse' && f.type===3){
-          color=/commercial|industrial|residential|retail|school|university|hospital|railway|garages|parking/.test(cl)?TROPICAL_WORLD.urban:
-            /forest|wood/.test(cl+' '+sub)?TROPICAL_WORLD.forest:
-            /park|garden|grass|golf|orchard|meadow/.test(cl+' '+sub)?TROPICAL_WORLD.park:TROPICAL_WORLD.grass;
+          color=/commercial|industrial|residential|retail|school|university|hospital|railway|garages|parking/.test(cl)?'#abb2b5':
+            /forest|wood|park|garden|grass|golf|orchard|meadow/.test(cl+' '+sub)?'#75af6f':'#94c37e';
         }
-        else if(name==='water' && f.type===3){color=TROPICAL_WORLD.water;}
-        else if(name==='building' && f.type===3){if(!this.showBuildings)continue;color=TROPICAL_WORLD.building;}
-        else if(name==='waterway' && f.type===2){color=TROPICAL_WORLD.water;kind='line';width=cl==='river'?8:cl==='canal'?6:3;}
+        else if(name==='water' && f.type===3){color='#57aee1';}
+        else if(name==='building' && f.type===3){if(!this.showBuildings)continue;color='#a4adb2';}
+        else if(name==='waterway' && f.type===2){color='#57aee1';kind='line';width=cl==='river'?8:cl==='canal'?6:3;}
         else if(name==='transportation'){
           if(/rail|aerialway|ferry/.test(cl))continue;
-          color=/path|track|footway|pedestrian|cycleway|steps/.test(cl)?TROPICAL_WORLD.path:TROPICAL_WORLD.road;kind=f.type===3?'fill':'line';
+          color=/path|track|footway|pedestrian|cycleway|steps/.test(cl)?'#556266':'#252d33';kind=f.type===3?'fill':'line';
           width=/motorway|trunk/.test(cl)?19:/primary|secondary/.test(cl)?16:/tertiary/.test(cl)?13:/service|minor/.test(cl)?8:/path|track/.test(cl)?3.5:10;
-          width*=Math.max(.34,Math.min(1.6,2**((this.zoom-19.5)*.48)));
+          width*=Math.max(.34,Math.min(1.25,2**((this.zoom-19.5)*.48)));
         }
         if(!color)continue;
         // Skip oversized geometry long before canvas rasterization.
@@ -1241,7 +1384,7 @@ class BackupMap {
     ctx.clearRect(0,0,w,h);
     const y0=p.topDown?0:Math.round(p.horizon+1);
     const bg=ctx.createLinearGradient(0,y0,0,h);
-    bg.addColorStop(0,'#b2e4b3');bg.addColorStop(.40,TROPICAL_WORLD.grass);bg.addColorStop(1,'#85cf6a');
+    bg.addColorStop(0,'#a6d89a');bg.addColorStop(.45,'#91c783');bg.addColorStop(1,'#8ec681');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
     // Fetch real geometry, not 256px raster images. WebGL is never required.
     this.fetchVectorTiles(p);
@@ -1252,15 +1395,14 @@ class BackupMap {
       // Emergency legacy map only when *all* vector requests fail.
       // This is intentionally labelled to avoid promising sharp lines in raster mode.
       this._requestedThisFrame=0;
-      const nearZ=Math.min(p.z,MAX_RASTER_TILE_ZOOM);
-      const farZ=Math.max(12,nearZ-2);
+      const farZ=Math.max(12,p.z-2);
       this.drawTileLevel(ctx,p,farZ,y0,h,()=>1);
-      this.drawTileLevel(ctx,p,nearZ,y0,h,()=>1);
+      this.drawTileLevel(ctx,p,p.z,y0,h,()=>1);
     }
     if(!p.topDown){
       // Thin distant haze blurs the transition into the horizon naturally.
       const mist=ctx.createLinearGradient(0,p.horizon,0,p.horizon+110);
-      mist.addColorStop(0,'rgba(193,239,210,.45)');
+      mist.addColorStop(0,'rgba(179,219,166,.48)');
       mist.addColorStop(1,'rgba(226,244,224,0)');
       ctx.setTransform(dpr,0,0,dpr,0,0);
       ctx.fillStyle=mist;ctx.fillRect(0,p.horizon,w,110);
@@ -1279,8 +1421,8 @@ class BackupMap {
     const points=[];
     for(let i=0;i<=40;i++){
       const angle=2*Math.PI*i/40;
-      const lat=pos.lat+Math.cos(angle)*getCollectionRadius()/111320;
-      const lng=pos.lng+Math.sin(angle)*getCollectionRadius()/(111320*Math.max(.15,Math.cos(pos.lat*Math.PI/180)));
+      const lat=pos.lat+Math.cos(angle)*COLLECT_RING_METERS/111320;
+      const lng=pos.lng+Math.sin(angle)*COLLECT_RING_METERS/(111320*Math.max(.15,Math.cos(pos.lat*Math.PI/180)));
       const pt=this.pointOnGround({lat,lng},p);
       if(pt && Number.isFinite(pt.x) && Number.isFinite(pt.y))points.push(pt);
     }
@@ -1301,7 +1443,7 @@ class BackupMap {
     const labelW=58,labelH=22,labelX=center.x-29,labelY=Math.max(p.topDown?8:p.horizon+6,center.y-58);
     ctx.beginPath();ctx.roundRect(labelX,labelY,labelW,labelH,9);ctx.fill();ctx.stroke();
     ctx.fillStyle='#dffcf0';ctx.font='800 11px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(`${getCollectionRadius()} m`,center.x,labelY+11.5);
+    ctx.fillText('50 m',center.x,labelY+11.5);
     ctx.restore();
   }
   // Readable billboard illustrations are kept at a fixed pixel size.
@@ -1318,7 +1460,7 @@ class BackupMap {
       const isPlayer=marker.element.classList.contains('world-player');
       if((!p.topDown && meters>235 && !isPlayer)||!projected||!Number.isFinite(projected.x)||!Number.isFinite(projected.y))continue;
       if(projected.x < -95 || projected.x>p.w+95 || projected.y<(p.topDown?-90:p.horizon+24) || projected.y>p.h+100)continue;
-      sprites.push({marker,x:projected.x,y:projected.y,isPlayer,meters});
+      sprites.push({marker,x:projected.x,y:projected.y,isPlayer});
     }
     // Houses and collectibles are depth-sorted in one renderer, so buildings
     // can appear in front of the player without the resource layer drifting.
@@ -1335,61 +1477,47 @@ class BackupMap {
     this.drawCollectRing(p);
     for(const s of sprites){
       if(s.kind==='building'){this.drawBuilding(ctx,s,p);continue;}
-      const {marker,x,y,isPlayer,meters}=s, elem=marker.element;
+      const {marker,x,y,isPlayer}=s, elem=marker.element;
       const asset=elem.querySelector('img');
       const inRange=elem.classList.contains('in-range');
       const depleted=elem.classList.contains('depleted');
       const rich=elem.classList.contains('rich');
-      // A sprite's geographical position is its CONTACT point on the ground.
-      // Earlier SVG assets contained ~12% transparent padding beneath the feet,
-      // so the visible trunk/rock ended above this point and appeared to hover.
-      // Scale the artwork to put its real contact pixel on y. Use distance from
-      // the player for size so rotation cannot cause unintended size changes.
-      // Use actual distance, not projected screen Y: merely rotating the
-      // camera must NOT change an object's size or apparent physical scale.
-      const visualScale=isPlayer?1:Math.max(.46,Math.min(1.15,1.10-meters/220));
-      const w=(isPlayer?72:76)*visualScale,h=(isPlayer?98:83)*visualScale;
-      const baseRadius=(isPlayer?28:23)*visualScale;
+      const w=isPlayer?72:76,h=isPlayer?98:83;
+      // The shadow/ring is the world contact point, exactly at the geo coordinate.
       ctx.save();
       ctx.globalAlpha=depleted?.53:1;
-      // A flat, depth-scaled contact shadow is painted on the SAME map projection
-      // before the artwork, not as a second floating sprite element.
-      ctx.beginPath();ctx.ellipse(x,y-1,baseRadius,Math.max(2,5*visualScale),0,0,Math.PI*2);
-      ctx.fillStyle='rgba(25,83,63,.20)';ctx.fill();
+      ctx.fillStyle='rgba(25,65,53,.22)';
+      ctx.beginPath();ctx.ellipse(x,y-3,isPlayer?27:24,6,0,0,Math.PI*2);ctx.fill();
       if(isPlayer||inRange){
-        ctx.beginPath();ctx.ellipse(x,y-1,baseRadius*1.10,Math.max(3,7*visualScale),0,0,Math.PI*2);
-        ctx.fillStyle='rgba(28,209,149,.12)';ctx.fill();
-        ctx.lineWidth=Math.max(1,1.7*visualScale);ctx.strokeStyle='rgba(215,255,230,.86)';ctx.stroke();
+        ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
+        ctx.fillStyle='rgba(70,205,162,.35)';ctx.fill();
+        ctx.lineWidth=2.5;ctx.strokeStyle='#dcfff2';ctx.stroke();
       }
       if(inRange && !isPlayer){
-        ctx.beginPath();ctx.ellipse(x,y-2,baseRadius*1.2,Math.max(3,9*visualScale),0,0,Math.PI*2);
-        ctx.strokeStyle='rgba(134,255,181,.8)';ctx.lineWidth=1.4;ctx.stroke();
+        const pulse=0.72+0.28*Math.sin(performance.now()/260);
+        ctx.beginPath();ctx.ellipse(x,y-6,28,12,0,0,Math.PI*2);
+        ctx.fillStyle='rgba(115,231,173,.16)';ctx.fill();
+        ctx.lineWidth=2.2;ctx.strokeStyle=`rgba(124,245,197,${0.55+0.22*pulse})`;ctx.stroke();
+        ctx.beginPath();ctx.arc(x,y-h+10,10+2*pulse,0,Math.PI*2);ctx.fillStyle='rgba(123,244,196,.16)';ctx.fill();
       }
       if(asset && asset.complete && asset.naturalWidth){
-        // Original SVG viewBoxes are 116x128 resources / 100x132 avatar.
-        // Roots/shoe soles end around 112/121, before the transparent bottom.
-        // Compensate for that padding to align the contact pixel to y.
-        const visibleFootRatio=isPlayer?121/132:112/128;
-        // SVG sources are vector images: Chrome/Android sometimes leaves the
-        // 9-argument cropped drawImage blank. Scale the *full* SVG and align
-        // its visible feet to y instead; transparent padding is harmless.
-        ctx.drawImage(asset,x-w/2,y-h,w,h/visibleFootRatio);
+        // Canvas drawImage uses the very same screen foot x/y as the map.
+        ctx.drawImage(asset,x-w/2,y-h-4,w,h);
       }else{
-        ctx.font=`${Math.round(34*visualScale)}px system-ui`;ctx.textAlign='center';
-        ctx.fillText(isPlayer?'🧍':'🌳',x,y-4);
+        ctx.font='34px system-ui';ctx.textAlign='center';
+        ctx.fillText(isPlayer?'🧍':'🌳',x,y-15);
       }
-      // A grounded sprite keeps its center and hit rectangle synced to this x/y.
       if(isPlayer){
         ctx.font='800 10px system-ui';ctx.textAlign='center';
         ctx.fillStyle='#12434b';ctx.beginPath();ctx.roundRect(x-21,y-h-26,42,20,7);ctx.fill();
         ctx.fillStyle='#f2fff9';ctx.fillText('DU',x,y-h-12);
       }else{
         if(rich){
-          ctx.beginPath();ctx.arc(x+w/2-6*visualScale,y-h+5*visualScale,11*visualScale,0,Math.PI*2);ctx.fillStyle='#eab85f';ctx.fill();
-          ctx.font=`${Math.round(17*visualScale)}px system-ui`;ctx.textAlign='center';ctx.fillStyle='#543916';ctx.fillText('✦',x+w/2-6*visualScale,y-h+10*visualScale);
+          ctx.beginPath();ctx.arc(x+w/2-6,y-h+1,11,0,Math.PI*2);ctx.fillStyle='#eab85f';ctx.fill();
+          ctx.font='17px system-ui';ctx.textAlign='center';ctx.fillStyle='#543916';ctx.fillText('✦',x+w/2-6,y-h+6);
         }
         // Generous hit area around the sprite, independent of the hidden DOM.
-        this._hitTargets.push({element:elem,x,y,left:x-w*.5-8,right:x+w*.5+8,top:y-h-8,bottom:y+10});
+        this._hitTargets.push({element:elem,x,y,left:x-w*.5-6,right:x+w*.5+6,top:y-h-13,bottom:y+10});
       }
       ctx.restore();
     }
@@ -1488,7 +1616,7 @@ function getRange(node) {
   if(state.mode==='gps' && getAccuracy()>140) return {ok:false,reason:'GPS ist zu ungenau. Gehe möglichst ins Freie.'};
   if(state.mode==='gps' && state.speed>8.3) return {ok:false,reason:'Sammeln bei schneller Fortbewegung gesperrt.'};
   const distance=distanceMeters(pos.lat,pos.lng,node.lat,node.lng);
-  const reach=getCollectionRadius(); // exakt derselbe Radius wie der sichtbare Kreis
+  const reach=REACH_METERS;
   return {ok:distance<=reach,distance,reach,reason:`Noch ${Math.max(1,Math.ceil(distance-reach))} m bis zur Reichweite.`};
 }
 // MapLibre vector tiles + extruded OSM buildings. The virtual resource positions
@@ -1579,7 +1707,11 @@ function setMapStatus(label){
   else if(label==='2.5D')vectorStatus(vectorUpgrade.reason||'WebGL nicht verfügbar',true);
   $('btn-tilt').textContent=state.map?.getPitch()>=25?'3D':'2D';
 }
-const VECTOR_PALETTE=TROPICAL_WORLD;
+const VECTOR_PALETTE=Object.freeze({
+  grass:'#8bc576',forest:'#57945a',park:'#75b36b',farmland:'#9dc783',
+  urban:'#969fa2',building:'#a2aaae',roof:'#7c898f',road:'#292d30',
+  path:'#50595b',water:'#55afe4',roadEdge:'#b9c4bd'
+});
 function applyVectorPalette(map){
   const c=VECTOR_PALETTE;
   for(const layer of map.getStyle().layers||[]){
@@ -1595,7 +1727,7 @@ function applyVectorPalette(map){
         else if(/landuse/.test(sourceLayer))color=['match',['get','class'],
           ['residential','commercial','industrial','retail','garages','railway','school','hospital','university','construction'],c.urban,
           ['park','forest','wood','grass','farmland','allotments','orchard'],c.park,c.grass];
-        else if(/landcover/.test(sourceLayer))color=['match',['get','class'],'wood',c.forest,'grass',c.park,'wetland',c.wetland,c.grass];
+        else if(/landcover/.test(sourceLayer))color=['match',['get','class'],'wood',c.forest,'grass',c.park,'wetland','#79b5a3',c.grass];
         else if(/park|wood|forest|grass|green|meadow/.test(id))color=c.park;
         map.setPaintProperty(layer.id,'fill-color',color);
         map.setPaintProperty(layer.id,'fill-opacity',1);
@@ -1625,7 +1757,7 @@ function applyVectorPalette(map){
     'fill-opacity':.95
   });
   mk('ww-landcover','fill','landcover',{
-    'fill-color':['match',['get','class'],'wood',c.forest,'grass',c.park,'wetland',c.wetland,c.grass],
+    'fill-color':['match',['get','class'],'wood',c.forest,'grass',c.park,'wetland','#79b5a3',c.grass],
     'fill-opacity':1
   });
   mk('ww-water','fill','water',{'fill-color':c.water,'fill-opacity':1});
@@ -1785,22 +1917,22 @@ function applyGameMapPalette(){
       const sourceLayer=String(layer['source-layer']||'').toLowerCase();
       const label=id+' '+sourceLayer;
       if(layer.type==='background'){
-        state.map.setPaintProperty(layer.id,'background-color',TROPICAL_WORLD.grass);
+        state.map.setPaintProperty(layer.id,'background-color','#89c573');
       }else if(layer.type==='fill'){
-        let color=TROPICAL_WORLD.grass;
-        if(/water|ocean|river|lake|reservoir|pond|wetland/.test(label))color=TROPICAL_WORLD.water;
-        else if(/building|commercial|industrial|residential|retail|urban|landuse.*(school|hospital|construction)|parking|amenity/.test(label))color=TROPICAL_WORLD.urban;
-        else if(/forest|wood|tree|scrub/.test(label))color=TROPICAL_WORLD.forest;
-        else if(/park|grass|meadow|farmland|garden|orchard|green|nature/.test(label))color=TROPICAL_WORLD.park;
-        else if(/road|motorway|street|highway/.test(label))color=TROPICAL_WORLD.road;
+        let color='#89c573';
+        if(/water|ocean|river|lake|reservoir|pond|wetland/.test(label))color='#56a9de';
+        else if(/building|commercial|industrial|residential|retail|urban|landuse.*(school|hospital|construction)|parking|amenity/.test(label))color='#b18f70';
+        else if(/forest|wood|tree|scrub/.test(label))color='#579957';
+        else if(/park|grass|meadow|farmland|garden|orchard|green|nature/.test(label))color='#73b864';
+        else if(/road|motorway|street|highway/.test(label))color='#212427';
         state.map.setPaintProperty(layer.id,'fill-color',color);
         state.map.setPaintProperty(layer.id,'fill-opacity',1);
       }else if(layer.type==='line'){
         if(/road|street|highway|motorway|bridge|tunnel|transport|path|track|footway/.test(label)){
-          state.map.setPaintProperty(layer.id,'line-color',TROPICAL_WORLD.road);
+          state.map.setPaintProperty(layer.id,'line-color','#222529');
           state.map.setPaintProperty(layer.id,'line-opacity',1);
         }else if(/water|river|stream/.test(label)){
-          state.map.setPaintProperty(layer.id,'line-color',TROPICAL_WORLD.water);
+          state.map.setPaintProperty(layer.id,'line-color','#56a9de');
         }
       }else if(layer.type==='symbol'){
         state.map.setLayoutProperty(layer.id,'visibility','none');
@@ -1818,7 +1950,7 @@ function addWorldBuildings(){
       id:'weltwerk-buildings',type:'fill-extrusion',source:'weltwerk-vector',
       'source-layer':'building',minzoom:15,filter:['!=',['get','hide_3d'],true],
       paint:{
-        'fill-extrusion-color':TROPICAL_WORLD.building,
+        'fill-extrusion-color':['interpolate',['linear'],['coalesce',['to-number',['get','render_height']],8],0,'#d0ab86',18,'#b7926c',60,'#a17750'],
         'fill-extrusion-height':['interpolate',['linear'],['zoom'],15,0,16,['coalesce',['to-number',['get','render_height']],8]],
         'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],0],
         'fill-extrusion-opacity':0.83
@@ -1843,7 +1975,7 @@ function addAccuracyLayer(){
   state.map.addLayer({id:'gps-accuracy-fill',type:'fill',source:'gps-accuracy',paint:{'fill-color':'#49bfae','fill-opacity':.13}});
   state.map.addLayer({id:'gps-accuracy-line',type:'line',source:'gps-accuracy',paint:{'line-color':'#2ea998','line-width':1.5,'line-opacity':.55}});
 }
-function rangePolygon(pos,meters=getCollectionRadius()){
+function rangePolygon(pos,meters=COLLECT_RING_METERS){
   if(!pos || !Number.isFinite(meters) || meters<=0)return {type:'FeatureCollection',features:[]};
   const coords=[];
   for(let i=0;i<=48;i++){
@@ -1888,7 +2020,7 @@ function updatePositionOnMap(follow=false){
   }else state.playerMarker.setLngLat([pos.lng,pos.lat]);
   const gpsAccuracy=state.mode==='gps'?state.accuracy:null;
   state.map.getSource('gps-accuracy')?.setData(accuracyPolygon(pos,gpsAccuracy));
-  state.map.getSource('collect-range')?.setData(rangePolygon(pos,getCollectionRadius()));
+  state.map.getSource('collect-range')?.setData(rangePolygon(pos,COLLECT_RING_METERS));
   if(state.playerMarker && state.playerMarker.getElement){
     const avatar=state.playerMarker.getElement();
     avatar.classList.remove('is-walking');void avatar.offsetWidth;avatar.classList.add('is-walking');
@@ -1902,13 +2034,11 @@ function renderWorld(){
   const pos=getPosition();
   if(!pos){for(const marker of state.markers.values())marker.remove();state.markers.clear();state.resources=[];updateNearby();return;}
   state.resources=generateResources(pos.lat,pos.lng,RESOURCE_RADIUS);
-  // Only render nearby icons to keep the larger world density mobile-friendly.
-  const nearResources=state.resources.filter(n=>distanceMeters(pos.lat,pos.lng,n.lat,n.lng)<=DISPLAY_RADIUS_METERS);
-  const visible=new Set(nearResources.map(n=>n.id));
+  const visible=new Set(state.resources.map(n=>n.id));
   for(const [id,marker] of state.markers){
     if(!visible.has(id)){marker.remove();state.markers.delete(id);}
   }
-  for(const node of nearResources){
+  for(const node of state.resources){
     let marker=state.markers.get(node.id);
     if(!marker){
       marker=makeMarker({element:makeResourceElement(node),anchor:'bottom',pitchAlignment:'viewport',rotationAlignment:'viewport'})
@@ -1925,7 +2055,7 @@ function updateNearby() {
   const available=nodes.filter(node=>isReady(activeProfile().harvested[node.id])).length;
   $('nearby-counter').textContent=state.mode==='gps'&&!pos?'—':String(available);
   $('nearby-title').textContent=state.mode==='gps'&&!pos?'GPS wird gesucht …':`${available} Fundstellen in der Nähe`;
-  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':`Im Umkreis von 310 m · ${getCollectionRadius()} m Sammelradius markiert`;
+  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'Im Umkreis von 310 m · 50 m Sammelradius markiert';
 }
 function updateModeUI() {
   const gps=state.mode==='gps';
@@ -2067,7 +2197,7 @@ function renderTreeScene(){
   const nestItems=session.slots.filter(s=>s.zone==='nestItem'&&!s.collected);
   const showNest=session.nestOpen&&!session.completeAt;
   const hotspots=displaySlots.map(slot=>{
-    const kind=(slot.zone==='bonus'||slot.zone==='event')?'bonus':slot.zone==='nest'?'nest':'';
+    const kind=slot.zone==='bonus'?'bonus':slot.zone==='nest'?'nest':'';
     const label=treeAction(slot);
     return `<button class="tree-hotspot ${kind}" style="left:${slot.x}%;top:${slot.y}%" data-tree-slot="${slot.id}" aria-label="${label}" title="${label}" ${canCollect?'':'disabled'}>${treeSlotIcon(slot)}</button>`;
   }).join('');
@@ -2248,15 +2378,16 @@ function renderPanels() {
 }
 function setTab(tab) {
   state.activeTab=tab;
-  for (const name of ['map','inventory','collection','settings']) $('screen-'+name).classList.toggle('active',name===tab);
+  for (const name of ['map','factory','inventory','collection','settings']) $('screen-'+name).classList.toggle('active',name===tab);
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('selected',el.dataset.tab===tab));
   if(tab==='map' && state.mapReady)setTimeout(()=>state.map.resize(),60);
+  if(tab==='factory'){factoryUI.selected=null;factoryExitTool(false);renderFactory();setTimeout(factoryView,55);}
   renderPanels();
 }
 function exportSave() {
   const data=localStorage.getItem(SAVE_KEY);if(!data){toast('Noch kein Spielstand vorhanden.',true);return;}
   const url=URL.createObjectURL(new Blob([JSON.stringify(JSON.parse(data),null,2)],{type:'application/json'}));
-  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.2-spielstand.json';
+  const link=document.createElement('a');link.href=url;link.download='weltwerk-v0.3.0-spielstand.json';
   document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
   toast('Spielstand exportiert');
 }
@@ -2344,8 +2475,313 @@ function bind() {
     }
   });
 }
+const factoryUI={tool:null,selected:null,moveId:null,ghost:null,rotation:0,zoom:1.26,centerX:476,centerY:357,pointer:null,suppressClick:false,storeOpen:false};
+const fp=(x,y)=>({x:474+(x-y)*25,y:79+(x+y)*14});
+const fpts=(points)=>points.map(p=>`${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+const fsvg=(x,y,w=1,h=1)=>[fp(x,y),fp(x+w,y),fp(x+w,y+h),fp(x,y+h)];
+const fpoly=(points,fill,extra='')=>`<polygon points="${fpts(points)}" fill="${fill}" ${extra}/>`;
+const fhash=(x,y,k=0)=>((Math.imul(x+119,73856093)^Math.imul(y+71,19349663)^Math.imul(k+17,83492791))>>>0)%100;
+const fstatus=(b,p,network)=>{
+  if(b.type==='harbor')return 'Alle gesammelten und produzierten Materialien werden hier gelagert.';
+  if(!factoryConnected(p.factory,b,network))return 'Keine Straßenverbindung zum Hafen';
+  if(!b.enabled)return 'Produktion pausiert';
+  if(b.doneAt)return `In Produktion · noch ${Math.max(0,Math.ceil((b.doneAt-Date.now())/1000))} s`;
+  if(!factoryEnough(p.inventory,FACTORY_DEFS[b.type].input))return 'Wartet auf Rohstoffe';
+  return 'Bereit zur Produktion';
+};
+function factorySvgBuilding(b,selected=false){
+  const d=FACTORY_DEFS[b.type],u=fsvg(b.x,b.y,d.w,d.h);
+  const palette={
+    harbor:['#f1d7a1','#d69a65','#a75c48','#83564b'],
+    sawmill:['#ecd39b','#cb8154','#9b5c3d','#6c4d3b'],
+    masonry:['#c9d7e0','#8399a7','#576d7d','#54707a'],
+    press:['#eab98a','#bf6f4c','#7d4c43','#665358']
+  }[b.type];
+  const roofheight=b.type==='harbor'?39:b.type==='press'?42:31;
+  const top=u.map(v=>({x:v.x,y:v.y-roofheight})),middle=u.map(v=>({x:v.x,y:v.y-5}));
+  const [rt,rr,rb,rl]=top,[gt,gr,gb,gl]=u;
+  const cx=(rt.x+rb.x)/2,cy=(rt.y+rb.y)/2;
+  let s=`<g data-fbid="${b.id}" class="f-svg-building" style="cursor:pointer">`;
+  s+=fpoly(u,'#203b36','opacity=".34" transform="translate(0 9)"');
+  s+=fpoly([rl,rb,gb,gl],palette[2],`stroke="${palette[3]}" stroke-width="1.1"`);
+  s+=fpoly([rr,rb,gb,gr],palette[1],`stroke="${palette[3]}" stroke-width="1.1"`);
+  s+=fpoly(top,palette[0],`stroke="${palette[3]}" stroke-width="2.1"`);
+  s+=`<path d="M${rt.x},${rt.y} L${rb.x},${rb.y}" stroke="${palette[3]}" stroke-opacity=".65" stroke-width="2"/>`;
+  s+=`<path d="M${rl.x+7},${rl.y+7} L${rb.x-11},${rb.y-4}" stroke="${palette[3]}" stroke-opacity=".27" stroke-width="2.4"/>`;
+  if(b.type==='sawmill'){
+    s+=`<path d="M${b.rot?rr.x-14:rl.x+17},${b.rot?rr.y+5:rl.y+5} L${rb.x-10},${rb.y-5}" stroke="#fff0d0" stroke-width="3.5" opacity=".5"/>`;
+    s+=`<circle cx="${cx+9}" cy="${cy+2}" r="10" fill="#e9b96e" stroke="#865937" stroke-width="3"/><path d="M${cx+2},${cy+2}h14m-7,-7v14" stroke="#8e6444" stroke-width="2"/>`;
+  }else if(b.type==='masonry'){
+    for(let i=0;i<3;i++)s+=`<path d="M${rl.x+7+i*6},${rl.y+3+i*2} l30,17" stroke="#eef7f6" stroke-width="2" opacity=".55"/>`;
+    s+=`<rect x="${rb.x-27}" y="${rb.y-7}" width="13" height="9" rx="1" fill="#c4ddde" stroke="#496d78" stroke-width="1.2"/>`;
+  }else if(b.type==='press'){
+    s+=`<path d="M${cx+(b.rot?5:-14)},${cy-5} l20,-10 18,10 -20,10Z" fill="#c89e81" stroke="#735750" stroke-width="2"/>`;
+    s+=`<rect x="${rr.x-16}" y="${rr.y-58}" width="13" height="30" fill="#836e6b"/>`;
+    s+=`<path d="M${rr.x-16},${rr.y-58} l6,-4 7,4 -6,4Z" fill="#bab3a0"/>`;
+    s+=`<circle cx="${rr.x-10}" cy="${rr.y-66}" r="8" fill="#e7ded0" opacity=".34"/>`;
+  }else if(b.type==='harbor'){
+    s+=`<path d="M${cx-17},${cy+2}h34 M${cx-10},${cy-8}v20 M${cx+8},${cy-8}v20" stroke="#9b6948" stroke-width="3"/>`;
+    s+=`<path d="M${rl.x+5},${rl.y-5}v-24" stroke="#76503b" stroke-width="3"/><path d="M${rl.x+7},${rl.y-28}l23,6 -23,9Z" fill="#efc37c"/>`;
+  }
+  s+=`<path d="M${(rl.x+rb.x)/2},${(rl.y+rb.y)/2+4} l0,18 l13,7 l0,-18Z" fill="${palette[3]}" opacity=".7"/>`;
+  s+=`<path d="M${(rr.x+rb.x)/2-7},${(rr.y+rb.y)/2+9} l0,9 l10,5 l0,-9Z" fill="#f7d8a7" opacity=".9"/>`;
+  if(selected)s+=fpoly(u,'none','stroke="#9ff2d2" stroke-width="4" stroke-dasharray="8 4"');
+  if(b.type!=='harbor'){
+    const profile=activeProfile();const linked=factoryConnected(profile.factory,b);
+    const indicator=b.doneAt?'#8bf0b9':!linked?'#f8a5a5':b.enabled?'#f4d292':'#a9c4c9';
+    s+=`<circle cx="${cx+28}" cy="${cy-40}" r="9" fill="#18363c" stroke="${indicator}" stroke-width="2"/><circle cx="${cx+28}" cy="${cy-40}" r="3.5" fill="${indicator}"/>`;
+  }
+  return s+'</g>';
+}
+function factorySvgTree(x,y,variant=0){
+  const c=fp(x+.48,y+.47),s=variant===0?1:0.72;
+  return `<g pointer-events="none" opacity=".95" transform="translate(${c.x} ${c.y}) scale(${s})"><ellipse cx="4" cy="5" rx="12" ry="5" fill="#2f5a3e" opacity=".2"/><path d="M-2,2V-17H3V2Z" fill="#775b39"/><path d="M-15,-13L0,-46L15,-13Z" fill="#2d7954"/><path d="M-13,-24L0,-51L13,-24Z" fill="#4e9a60"/><path d="M-7,-30L0,-44L6,-30Z" fill="#8ac67e"/></g>`;
+}
+function factorySvgRoad(r,connected){
+  const c=fsvg(r.x,r.y),tile=connected.has(factoryKey(r.x,r.y));
+  const col=tile?'#b69c79':'#6e8988';
+  return `<g data-froad="${factoryKey(r.x,r.y)}" style="cursor:pointer">${fpoly(c,col,'stroke="#8f8a76" stroke-width=".8"')}<path d="M${c[0].x},${c[0].y}L${c[2].x},${c[2].y}" stroke="#e7d9b6" stroke-width="1.7" stroke-dasharray="4 5" opacity=".55"/></g>`;
+}
+function factorySvgGhost(){
+  let item=factoryUI.ghost;if(!item)return '';
+  const type=factoryUI.moveId?activeProfile().factory.buildings.find(b=>b.id===factoryUI.moveId)?.type:factoryUI.tool;
+  if(!type||!FACTORY_DEFS[type])return '';
+  const factory=activeProfile().factory;
+  const valid=factoryPlacement(factory,type,item.x,item.y,factoryUI.moveId);
+  const points=fsvg(item.x,item.y,FACTORY_DEFS[type].w,FACTORY_DEFS[type].h);
+  const col=valid?'#b6f7c8':'#ff9b92';
+  return `<g pointer-events="none">${fpoly(points,col,`fill-opacity=".45" stroke="${valid?'#2c9e5d':'#d14242'}" stroke-width="3" stroke-dasharray="8 5"`)}<text x="${(points[0].x+points[2].x)/2}" y="${(points[0].y+points[2].y)/2-7}" fill="#18363c" font-size="19" font-weight="900" text-anchor="middle">${valid?'✓':'×'}</text></g>`;
+}
+function renderFactoryMap(){
+  const svg=document.getElementById('factory-map');if(!svg)return;
+  const factory=activeProfile().factory, network=factoryRoadNetwork(factory),occupied=new Set();
+  for(const b of [FACTORY_HARBOR,...factory.buildings])for(let x=b.x;x<b.x+FACTORY_DEFS[b.type].w;x++)for(let y=b.y;y<b.y+FACTORY_DEFS[b.type].h;y++)occupied.add(factoryKey(x,y));
+  const roads=new Set(factory.roads.map(r=>factoryKey(r.x,r.y)));
+  let out=`<defs><radialGradient id="f-water"><stop offset="0" stop-color="#9ce1dc"/><stop offset=".55" stop-color="#5eb8ca"/><stop offset="1" stop-color="#236c87"/></radialGradient><linearGradient id="f-land" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbe8aa"/><stop offset="1" stop-color="#81b96e"/></linearGradient></defs>`;
+  out+=`<rect x="-500" y="-500" width="2000" height="2000" fill="url(#f-water)"/>`;
+  for(let i=0;i<58;i++){
+    const x=(i*193)%1003-20,y=(i*127)%680+15;
+    out+=`<path d="M${x} ${y} q7 -4 15 0 q7 -4 15 0" fill="none" stroke="#e4fff6" stroke-opacity=".19" stroke-width="2" pointer-events="none"/>`;
+  }
+  const tiles=[];
+  for(let y=0;y<FACTORY_SIZE;y++)for(let x=0;x<FACTORY_SIZE;x++)if(factoryLand(x,y))tiles.push({x,y,depth:x+y});
+  tiles.sort((a,b)=>a.depth-b.depth||a.x-b.x);
+  for(const {x,y} of tiles){
+    const points=fsvg(x,y),coast=[[1,0],[0,1],[-1,0],[0,-1]].some(([a,b])=>!factoryLand(x+a,y+b));
+    if(!factoryLand(x+1,y))out+=fpoly([points[1],points[2],{x:points[2].x,y:points[2].y+12},{x:points[1].x,y:points[1].y+12}],'#907852','opacity=".9"');
+    if(!factoryLand(x,y+1))out+=fpoly([points[3],points[2],{x:points[2].x,y:points[2].y+12},{x:points[3].x,y:points[3].y+12}],'#ac946b');
+    const color=coast?(fhash(x,y,1)%2?'#ecd9a9':'#e6cca0'):(fhash(x,y,1)%3===0?'#a3d287':fhash(x,y,1)%3===1?'#acd68e':'#a7d18a');
+    out+=fpoly(points,color,`data-fx="${x}" data-fy="${y}" stroke="${coast?'#d7c39b':'#83b878'}" stroke-width=".6"`);
+    if(!coast&&!occupied.has(factoryKey(x,y))&&!roads.has(factoryKey(x,y))&&fhash(x,y,3)<20)out+=factorySvgTree(x,y,fhash(x,y,7)%2);
+    else if(!coast&&!occupied.has(factoryKey(x,y))&&!roads.has(factoryKey(x,y))&&fhash(x,y,3)>93){const c=fp(x+.5,y+.5);out+=`<circle cx="${c.x}" cy="${c.y}" r="3.2" fill="#e9e3c2" pointer-events="none"/>`;}
+  }
+  const objects=[...factory.roads.map(r=>({...r,type:'road',depth:r.x+r.y+1})),{...FACTORY_HARBOR,depth:FACTORY_HARBOR.x+FACTORY_HARBOR.y+4.5},...factory.buildings.map(b=>({...b,depth:b.x+b.y+4}))];
+  objects.sort((a,b)=>a.depth-b.depth);
+  for(const ob of objects){
+    if(ob.type==='road')out+=factorySvgRoad(ob,network);
+    else out+=factorySvgBuilding(ob,factoryUI.selected===ob.id);
+  }
+  out+=factorySvgGhost();
+  svg.innerHTML=out;factoryView();
+}
+function factoryView(){
+  const el=document.getElementById('factory-map');if(!el)return;
+  const bounds=el.getBoundingClientRect();if(!bounds.width||!bounds.height)return;
+  const w=860/factoryUI.zoom,h=w*bounds.height/bounds.width;
+  factoryUI.centerX=Math.min(910,Math.max(70,factoryUI.centerX));
+  factoryUI.centerY=Math.min(620,Math.max(110,factoryUI.centerY));
+  el.setAttribute('viewBox',`${factoryUI.centerX-w/2} ${factoryUI.centerY-h/2} ${w} ${h}`);
+}
+function factoryCostText(cost){return Object.entries(cost||{}).map(([id,n])=>`${MATERIALS[id]?.icon||'📦'}${n}`).join('  ');}
+function factorySummary(){
+  const p=activeProfile(),f=p.factory;
+  document.getElementById('factory-hud-production').textContent=`${f.produced} Waren hergestellt`;
+  document.getElementById('factory-hud-buildings').textContent=`${f.buildings.length} Produktionsgebäude`;
+  document.getElementById('factory-mode-label').textContent=state.mode==='gps'?'GPS-LAGER':'DEMO-LAGER';
+  const raw=['wood','stone','scrap','iron','plank','block','plate'];
+  document.getElementById('factory-resources').innerHTML=raw.map(k=>`<div class="factory-res-chip ${FACTORY_ITEMS[k]?'new':''}">${MATERIALS[k].icon} <b>${p.inventory[k]||0}</b><span>${MATERIALS[k].name}</span></div>`).join('');
+  document.getElementById('factory-demo-kit').classList.toggle('hidden',state.mode!=='demo');
+}
+function factoryCatalog(){
+  const f=activeProfile().factory,inv=activeProfile().inventory;
+  document.getElementById('factory-catalog').innerHTML=Object.entries(FACTORY_DEFS).filter(([k])=>k!=='harbor').map(([key,d])=>{
+    const active=factoryUI.tool===key && !factoryUI.moveId;
+    return `<button class="factory-catalog-card ${active?'active':''} ${!factoryEnough(inv,d.cost)?'unaffordable':''}" data-fpick="${key}" aria-pressed="${active}"><span class="fcat-icon">${d.icon}</span><strong>${d.name}</strong><small>${factoryCostText(d.cost)}</small></button>`;
+  }).join('');
+  document.getElementById('factory-tray-name').textContent=factoryUI.moveId?'Gebäude verschieben':factoryUI.tool?FACTORY_DEFS[factoryUI.tool].name:'Bauen & verwalten';
+  document.getElementById('factory-tray-hint').textContent=factoryUI.ghost?'Position bestätigen':factoryUI.moveId?'Neuen Standort wählen':factoryUI.tool?'Freie Fläche antippen':'Gebäude auswählen';
+  document.getElementById('factory-cancel').classList.toggle('hidden',!factoryUI.tool&&!factoryUI.moveId);
+  const confirmBtn=document.getElementById('factory-place-confirm');
+  confirmBtn.classList.toggle('hidden',!factoryUI.ghost||(!factoryUI.tool&&!factoryUI.moveId));
+  const previewType=factoryUI.moveId?f.buildings.find(b=>b.id===factoryUI.moveId)?.type:factoryUI.tool;
+  confirmBtn.disabled=!previewType||!factoryUI.ghost||!factoryPlacement(f,previewType,factoryUI.ghost.x,factoryUI.ghost.y,factoryUI.moveId);
+  confirmBtn.textContent=factoryUI.moveId?'Verschieben ✓':factoryUI.tool==='road'?'Straße bauen ✓':'Gebäude bauen ✓';
+}
+function factoryInspector(){
+  const el=document.getElementById('factory-inspector');if(!el)return;
+  const p=activeProfile(),f=p.factory,sel=factoryUI.selected;
+  if(!sel||factoryUI.tool||factoryUI.moveId){el.classList.add('hidden');return;}
+  let b=sel==='harbor'?FACTORY_HARBOR:f.buildings.find(b=>b.id===sel);
+  let road=null;
+  if(sel.startsWith('road:')){const [,x,y]=sel.split(':');road=f.roads.find(r=>r.x===+x&&r.y===+y);}
+  if(!b&&!road){factoryUI.selected=null;el.classList.add('hidden');return;}
+  el.classList.remove('hidden');
+  if(road){el.innerHTML=`<div class="fi-head"><div class="fi-icon">🛤️</div><div class="fi-copy"><h3>Straße</h3><small>Verbindet Produktionsgebäude mit dem Hafen.</small></div><button class="fi-close" data-faction="close" aria-label="Schließen">×</button></div><div class="fi-actions"><button class="alert" data-faction="demolish-road">Straße entfernen</button></div>`;return;}
+  const def=FACTORY_DEFS[b.type],status=fstatus(b,p,factoryRoadNetwork(f));
+  const running=b.doneAt>0;
+  const percent=running?Math.min(100,Math.max(0,100*(Date.now()-b.startedAt)/(b.doneAt-b.startedAt))):0;
+  el.innerHTML=`<div class="fi-head"><div class="fi-icon">${def.icon}</div><div class="fi-copy"><h3>${def.name}</h3><small>${status}</small></div><button class="fi-close" data-faction="close" aria-label="Schließen">×</button></div>
+  ${b.type==='harbor'?'<p style="font-size:11px;color:#bcd8d4;margin:10px 2px 3px">Deine Rohstoffe vom GPS-Sammeln werden automatisch in diesem Lager verfügbar. Über „Lager“ siehst du alle Waren.</p>':`<div class="fi-progress"><div style="width:${percent}%"></div></div><div class="fi-details"><span>${factoryCostText(def.input)} → ${MATERIALS[def.output].icon} ${def.outputCount} ${MATERIALS[def.output].name}</span><span>${def.seconds} s / Einheit</span></div>`}
+  ${b.type==='harbor'?'':`<div class="fi-actions"><button data-faction="toggle">${b.enabled?'⏸ Pausieren':'▶ Aktivieren'}</button><button data-faction="move">↗ Verschieben</button><button data-faction="rotate">↻ Drehen</button><button class="alert" data-faction="demolish">Abreißen</button></div>`}`;
+}
+function factoryStore(){
+  const p=activeProfile();
+  document.getElementById('factory-store-list').innerHTML=Object.entries(MATERIALS).filter(([k])=>FACTORY_ITEMS[k]||(p.inventory[k]||0)>0).map(([k,m])=>`<div class="factory-store-row"><span>${m.icon}</span><strong>${m.name}</strong><b>${(p.inventory[k]||0).toLocaleString('de-DE')}</b></div>`).join('');
+}
+function renderFactory(){factoryTickProfiles();factorySummary();factoryCatalog();factoryInspector();renderFactoryMap();if(factoryUI.storeOpen)factoryStore();}
+function factoryTickProfiles(){
+  if(factoryTickProfile(state.demo)||factoryTickProfile(state.gps)){save();return true;}
+  return false;
+}
+function factoryChoose(type){
+  factoryUI.tool=(factoryUI.tool===type&& !factoryUI.moveId)?null:type;
+  factoryUI.moveId=null;factoryUI.selected=null;factoryUI.ghost=null;
+  renderFactory();
+  if(factoryUI.tool)toast(`${FACTORY_DEFS[type].name} ausgewählt · auf die Insel tippen`);
+}
+function factoryClickTile(x,y){
+  if(factoryUI.tool||factoryUI.moveId){
+    factoryUI.ghost={x,y};
+    factoryCatalog();renderFactoryMap();
+    const type=factoryUI.moveId?activeProfile().factory.buildings.find(b=>b.id===factoryUI.moveId)?.type:factoryUI.tool;
+    if(type&&!factoryPlacement(activeProfile().factory,type,x,y,factoryUI.moveId))toast('Hier ist kein Platz – wähle eine freie Fläche.',true);
+    return;
+  }
+  factoryUI.selected=null;factoryInspector();renderFactoryMap();
+}
+function factoryConfirmPlacement(){
+  const point=factoryUI.ghost;
+  if(!point)return;
+  const {x,y}=point,f=activeProfile().factory,p=activeProfile();
+  if(factoryUI.moveId){
+    const b=f.buildings.find(b=>b.id===factoryUI.moveId);
+    if(!b)return factoryExitTool();
+    if(!factoryPlacement(f,b.type,x,y,b.id)){toast('Dieser Platz ist nicht frei.',true);return;}
+    b.x=x;b.y=y;factoryUI.selected=b.id;factoryExitTool(false);factoryTickProfiles();save();renderFactory();toast('Gebäude verschoben');return;
+  }
+  const type=factoryUI.tool,def=FACTORY_DEFS[type];if(!def)return;
+  if(!factoryPlacement(f,type,x,y)){toast('Hier kann nicht gebaut werden.',true);return;}
+  if(!factoryEnough(p.inventory,def.cost)){toast(`Zu wenig Material: ${factoryCostText(def.cost)}`,true);return;}
+  factorySpend(p.inventory,def.cost);
+  if(type==='road')f.roads.push({x,y});
+  else f.buildings.push({id:'b'+f.nextId++,type,x,y,rot:factoryUI.rotation,enabled:true,startedAt:0,doneAt:0});
+  factoryUI.ghost=null;
+  factoryTickProfiles();save();renderPanels();renderFactory();toast(`${def.name} gebaut!`);
+}
+function factoryClickBuilding(id){
+  if(factoryUI.tool||factoryUI.moveId){toast('Dieses Feld ist bereits bebaut.',true);return;}
+  factoryUI.selected=id;factoryInspector();renderFactoryMap();
+}
+function factoryExitTool(doRender=true){factoryUI.tool=null;factoryUI.moveId=null;factoryUI.ghost=null;if(doRender)renderFactory();}
+function factoryAction(action){
+  const f=activeProfile().factory,p=activeProfile(),id=factoryUI.selected;
+  const b=f.buildings.find(b=>b.id===id);
+  if(action==='close'){factoryUI.selected=null;factoryInspector();renderFactoryMap();return;}
+  if(action==='demolish-road'){
+    if(!confirm('Diese Straße wirklich entfernen? Eingesetzte Materialien werden nicht erstattet.'))return;
+    const [,x,y]=id.split(':');f.roads=f.roads.filter(r=>!(r.x===+x&&r.y===+y));factoryUI.selected=null;
+  }else if(b&&action==='toggle'){
+    b.enabled=!b.enabled;toast(b.enabled?'Produktion aktiviert':'Produktion pausiert');
+  }else if(b&&action==='move'){
+    factoryUI.moveId=b.id;factoryUI.tool=null;factoryUI.ghost={x:b.x,y:b.y};renderFactory();toast('Neue freie Position antippen');return;
+  }else if(b&&action==='rotate'){
+    b.rot=b.rot?0:1;toast('Gebäudeausrichtung geändert');
+  }else if(b&&action==='demolish'){
+    if(!confirm('Gebäude wirklich abreißen? Bereits eingesetzte Rohstoffe werden nicht erstattet.'))return;
+    f.buildings=f.buildings.filter(o=>o.id!==b.id);factoryUI.selected=null;
+  }else return;
+  factoryTickProfiles();save();renderFactory();renderPanels();
+}
+function factorySetZoom(delta){factoryUI.zoom=Math.min(2.7,Math.max(.8,factoryUI.zoom+delta));factoryView();}
+function factoryInteraction(){
+  const svg=document.getElementById('factory-map');
+  svg.addEventListener('pointerdown',e=>{
+    if(e.button>0)return;
+    factoryUI.pointer={id:e.pointerId,lastX:e.clientX,lastY:e.clientY,downX:e.clientX,downY:e.clientY,moved:false};
+  });
+  svg.addEventListener('pointermove',e=>{
+    const p=factoryUI.pointer;
+    if(p&&p.id===e.pointerId){
+      const dist=Math.hypot(e.clientX-p.downX,e.clientY-p.downY);
+      if(dist>7)p.moved=true;
+      if(p.moved){
+        const rect=svg.getBoundingClientRect();const k=(860/factoryUI.zoom)/rect.width;
+        factoryUI.centerX-=(e.clientX-p.lastX)*k;factoryUI.centerY-=(e.clientY-p.lastY)*k;
+        factoryView();
+      }
+      p.lastX=e.clientX;p.lastY=e.clientY;
+    }
+  });
+  svg.addEventListener('pointerup',e=>{
+    if(factoryUI.pointer?.id!==e.pointerId)return;
+    if(factoryUI.pointer.moved){factoryUI.suppressClick=true;setTimeout(()=>factoryUI.suppressClick=false,100);}
+    factoryUI.pointer=null;
+  });
+  svg.addEventListener('pointercancel',()=>factoryUI.pointer=null);
+  svg.addEventListener('click',e=>{
+    if(factoryUI.suppressClick)return;
+    const b=e.target.closest('[data-fbid]');if(b){factoryClickBuilding(b.dataset.fbid);return;}
+    const road=e.target.closest('[data-froad]');if(road){
+      if(factoryUI.tool||factoryUI.moveId){const [x,y]=road.dataset.froad.split(':').map(Number);factoryClickTile(x,y);}else factoryClickBuilding('road:'+road.dataset.froad);
+      return;
+    }
+    const tile=e.target.closest('[data-fx]');if(tile){factoryClickTile(Number(tile.dataset.fx),Number(tile.dataset.fy));}
+  });
+  svg.addEventListener('mousemove',e=>{
+    if(!factoryUI.tool&&!factoryUI.moveId)return;
+    const tile=e.target.closest('[data-fx]');if(!tile)return;
+    const x=Number(tile.dataset.fx),y=Number(tile.dataset.fy);
+    if(factoryUI.ghost?.x!==x||factoryUI.ghost?.y!==y){factoryUI.ghost={x,y};renderFactoryMap();}
+  });
+  svg.addEventListener('wheel',e=>{e.preventDefault();factorySetZoom(e.deltaY<0?.15:-.15);},{passive:false});
+  document.getElementById('factory-catalog').addEventListener('click',e=>{
+    const btn=e.target.closest('[data-fpick]');if(btn)factoryChoose(btn.dataset.fpick);
+  });
+  document.getElementById('factory-inspector').addEventListener('click',e=>{
+    const btn=e.target.closest('[data-faction]');if(btn)factoryAction(btn.dataset.faction);
+  });
+  document.getElementById('factory-zoom-plus').addEventListener('click',()=>factorySetZoom(.23));
+  document.getElementById('factory-zoom-minus').addEventListener('click',()=>factorySetZoom(-.23));
+  document.getElementById('factory-center').addEventListener('click',()=>{factoryUI.centerX=476;factoryUI.centerY=357;factoryUI.zoom=1.26;factoryView();});
+  document.getElementById('factory-cancel').addEventListener('click',()=>factoryExitTool());
+  document.getElementById('factory-place-confirm').addEventListener('click',factoryConfirmPlacement);
+  document.getElementById('factory-demo-kit').addEventListener('click',()=>{
+    if(state.mode!=='demo')return;
+    const inv=activeProfile().inventory;
+    for(const [id,n] of Object.entries({wood:24,stone:24,scrap:16,iron:5}))inv[id]=(inv[id]||0)+n;
+    factoryTickProfiles();save();renderFactory();renderPanels();toast('Demo-Rohstoffe ins Lager gelegt');
+  });
+  document.getElementById('factory-stock-open').addEventListener('click',()=>{
+    factoryUI.storeOpen=true;factoryStore();document.getElementById('factory-store-overlay').classList.remove('hidden');
+  });
+  document.getElementById('factory-stock-close').addEventListener('click',()=>{
+    factoryUI.storeOpen=false;document.getElementById('factory-store-overlay').classList.add('hidden');
+  });
+  document.getElementById('factory-store-overlay').addEventListener('click',e=>{
+    if(e.target.id==='factory-store-overlay'){factoryUI.storeOpen=false;e.currentTarget.classList.add('hidden');}
+  });
+  window.addEventListener('resize',factoryView);
+  setInterval(()=>{
+    const changed=factoryTickProfiles();
+    if(state.activeTab==='factory'){
+      factorySummary();factoryInspector();if(changed){factoryCatalog();renderFactoryMap();if(factoryUI.storeOpen)factoryStore();}
+    }
+    if(changed)renderPanels();
+  },1000);
+}
+
 function boot(){
-  restore();bind();renderPanels();initMap();
+  restore();bind();factoryInteraction();factoryTickProfiles();renderPanels();initMap();
   if(!state.mode)showWelcome();
   else setMode(state.mode,false);
   setInterval(()=>{
@@ -2355,7 +2791,7 @@ function boot(){
       if(state.treeNode)renderTreeScene();
     }
   },30000);
-  console.info(`Weltwerk v${VERSION} · self-contained exploration`);
+  console.info(`Weltwerk v${VERSION} · Exploration + Inselsiedlung`);
 }
 boot();
 
