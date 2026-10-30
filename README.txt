@@ -1,30 +1,31 @@
-WELTWERK v0.4.4 – REDUZIERTES BUCHEN-SAMMELDESIGN
-==================================================
+WELTWERK v0.4.6 - Buche: interaktive Baumbestandteile
+=======================================================
 
 INSTALLATION
-1. Vorher unter „Mehr“ den Spielstand als JSON exportieren.
-2. Die ZIP-Datei entpacken.
-3. Die index.html im bisherigen WELTWERK-Projekt ersetzen.
-4. Seite neu laden. Ggf. den Browser-Cache aktualisieren.
+1. Unter Mehr -> Export (JSON) den bisherigen Spielstand sichern.
+2. index.html im bestehenden WELTWERK-Projekt durch die Datei aus diesem ZIP ersetzen.
+3. Browser/App neu laden.
 
-ÄNDERUNGEN
-- Minimalistischer Low-Poly-Buchenbaum mit wenigen großen geometrischen Blattgruppen.
-- Einfacher Himmel und flache Landschaft; keine aufwendigen Effekte/Glasflächen.
-- Neue goldene Sammelpunkte mit grünem Haken nach dem Aufdecken.
-- Seltenes Nest als kleines Element direkt am Baum mit violetter Markierung.
-- Helles, kompaktes Inventar-Panel unten mit einfachen, eigenen SVG-Item-Icons.
-- Dezente kurze Fundmeldungen statt großer seltener Fund-Popups.
-- Die Nestansicht zeigt drei übersichtliche Bonus-Sammelpunkte.
+NEUES SAMMELSYSTEM
+- Immer vorhanden: Holz am Stamm und Blätter in der mittleren Baumkrone.
+- Zehn zusätzliche Fundteile erscheinen mit ihren festgelegten unabhängigen Chancen.
+- Äste und Holz herausziehen, Blätter abstreifen, Harz und Moos abkratzen,
+  Pilze herausziehen, Bucheckern antippen.
+- Bienenstock (1 %, legendär) und Vogelnest (2 %, episch) enthalten je 3
+  zusätzliche sammelbare Teile mit den bestehenden 50/50-Belohnungen.
+- Kein Kreis an gewöhnlichen Buchen. Blau = selten, violett = episch,
+  gold = legendär. Die Menge der Bestandteile bleibt auf der Karte verborgen.
+- Alle Funde landen sofort im gemeinsamen Rucksack und werden lokal gespeichert.
+- Für die Map werden keine detaillierten Sammelszenen vorgeladen.
+- Angefangene alte Baum-Sammelrunden werden zur Vermeidung von Fundverlusten
+  in der bisherigen Interaktion zu Ende geführt; erst neue Runden nutzen
+  den neuen Baumaufbau.
 
-WEITERHIN UNVERÄNDERT
-- 3 SP: 50%; 4 SP: 35%; 5 SP: 10%; 6 SP: 5%.
-  Damit mindestens 5 SP: 15%; mindestens 6 SP: 5%.
-- Dropraten: Holz 45%, Blatt 20%, Ast 15%, Moos 7%, Harz 6%, Pilz 4%, Buchecker 3%.
-- Seltene Ereignisse: Vogelnest und Bienenstock unabhängig jeweils 1% pro Buche,
-  je 3 Extra-SP; Vogelnest 50% Ei/50% Ast, Bienenstock 50% Honig/50% Wachs.
-- Sofortige Inventargutschrift beim Antippen, gespeicherte Sammelsitzungen,
-  GPS-Karte, Demo-Modus und Fabrik aus dem Vorgänger.
+BEDIENUNG
+- Am Handy die sichtbaren Bestandteile festhalten und etwa 20 px ziehen/wischen.
+- Einfache Items (Buchecker) und die beiden Nester lassen sich antippen.
+- Für Barrierefreiheit funktionieren die Bauteile auch per Tastatur (Enter/Leertaste).
 
 HINWEIS
-Dies ist ein Design-Update. Die Grafiken sind als handgezeichnete SVG-Formen
-im HTML/CSS enthalten, kein eingebettetes Mockup-Bild.
+Fundstellen und Tier-/Nestereignisse sind virtuell. Bitte niemals echte
+Bienenstöcke, Vogelnester oder Privatgrundstücke aufsuchen oder stören.

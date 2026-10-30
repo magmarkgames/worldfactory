@@ -372,6 +372,32 @@
 @media(prefers-reduced-motion:reduce){.ws-cell.ws-working{animation:none}}
 
 
+
+.beech-v044 .beech-empty-loot{font-size:12px;color:#728b7d;padding:14px 4px;display:block}
+/* v0.4.6: ONLY genuinely rare beeches get a colored circle on the map. */
+.world-resource.type-tree .world-resource-dot,.world-resource.type-tree .world-resource-star{display:none!important}
+.world-resource.type-tree::after{content:none}
+.world-resource.type-tree:not(.depleted).beech-rarity-rare::after,
+.world-resource.type-tree:not(.depleted).beech-rarity-epic::after,
+.world-resource.type-tree:not(.depleted).beech-rarity-legendary::after{content:"";position:absolute;bottom:0;left:10%;width:80%;height:14px;border-radius:50%;border:3px solid var(--beech-ring);box-shadow:0 0 0 1px #ffffff77;pointer-events:none}
+.world-resource.beech-rarity-rare{--beech-ring:#5598db}
+.world-resource.beech-rarity-epic{--beech-ring:#a96cdb}
+.world-resource.beech-rarity-legendary{--beech-ring:#e6b846}
+/* Physical parts replace abstract numbered SP buttons; invisible hit targets remain large. */
+.beech-v044 .beech-part{position:absolute;z-index:5;transform:translate(-50%,-50%);width:68px;height:65px;padding:0;border:0;background:transparent;display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;overflow:visible;filter:drop-shadow(0 2px 1px #38533c35)}
+.beech-v044 .beech-part:active{cursor:grabbing}
+.beech-v044 .beech-part svg{width:100%;height:100%;pointer-events:none;overflow:visible}
+.beech-v044 .beech-part.part-crown{width:92px;height:86px}
+.beech-v044 .beech-part.part-branch{width:94px;height:73px}
+.beech-v044 .beech-part.part-nest{width:74px;height:72px}
+.beech-v044 .beech-part.part-nut,.beech-v044 .beech-part.part-moss,.beech-v044 .beech-part.part-resin,.beech-v044 .beech-part.part-mushroom{width:61px;height:61px}
+.beech-v044 .beech-part:focus-visible{outline:2px dashed #245e75;border-radius:12px}
+.beech-v044 .beech-part.gesture-active{filter:brightness(1.13) drop-shadow(0 3px 2px #36552a44)}
+.beech-v044 .beech-part.used{opacity:0;pointer-events:none}
+.beech-v044 .beech-part-hint{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);z-index:9;background:#f5f3e8ee;color:#315348;border-radius:9px;padding:7px 12px;max-width:88%;text-align:center;font-size:12px;font-weight:800;pointer-events:none;box-shadow:0 2px 7px #35534420}
+.beech-v044 .beech-part-description{color:#456c59;font-weight:650;font-size:10px;margin:0;padding:2px 12px 0}
+@media(prefers-reduced-motion:reduce){.beech-v044 .beech-part{transition:none!important}}
+
 /* WELTWERK v0.4.4: reductive, flat low-poly collection scene — inspired by the approved mockup, entirely code-rendered. */
 .beech-v044{background:#8ec3e4;color:#173b38;font-family:inherit}
 .beech-v044 .tree-top{background:#90c7e9;color:#193f3e;border:0;box-shadow:none;border-radius:0;flex-shrink:0;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 5px;gap:12px;min-height:62px}
@@ -611,7 +637,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.5 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.6 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -632,7 +658,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.5'; // Hauptbildschirm: klare Low-Poly-Welt, minimales HUD, ausklappbare Kartensteuerung
+const VERSION = '0.4.6'; // Buche: sammelbare Low-Poly-Objekte, Seltenheitsring nur ab selten
 const START_ZOOM = window.innerWidth<360?18.7:19.0; // Gut lesbarer 30-m-Kreis auch auf kleinen Handys; bis 20.5 zoombar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -643,20 +669,20 @@ const MATERIALS = Object.freeze({
   wood:   { name: 'Holz', icon: '🪵', rarity: 'common', note: 'Das Grundmaterial für Bretter und einfache Bauteile.' },
   stone:  { name: 'Stein', icon: '🪨', rarity: 'common', note: 'Robustes Material für spätere Bauprojekte.' },
   scrap:  { name: 'Altmetall', icon: '🔩', rarity: 'common', note: 'Alte Metallteile, die später verarbeitet werden können.' },
-  resin:  { name: 'Harz', icon: '🏵️', rarity: 'uncommon', note: 'Seltener Fund von Bäumen – später für spezielle Teile.' },
+  resin:  { name: 'Harz', icon: '🏵️', rarity: 'rare', note: 'Seltener Fund von Bäumen – später für spezielle Teile.' },
   iron:   { name: 'Eisenerz', icon: '⛏️', rarity: 'uncommon', note: 'Wichtig für die künftige Metallverarbeitung.' },
   copper: { name: 'Kupferdraht', icon: '🔌', rarity: 'uncommon', note: 'Später für Elektronik und Erkundungstechnik.' },
   twig: {name:'Ast',icon:'🌿',rarity:'common',note:'Ein Ast von einer Buche, der sich für einfache Bauprojekte eignet.'},
-  moss: {name:'Moos',icon:'🌱',rarity:'uncommon',note:'Ein ungewöhnlicher Fund an einem Baumstamm.'},
-  beechnut: {name:'Buchecker',icon:'🌰',rarity:'rare',note:'Ein seltener Samen der Buche.'},
+  moss: {name:'Moos',icon:'🌱',rarity:'common',note:'Ein Fund an einem Baumstamm.'},
+  beechnut: {name:'Buchecker',icon:'🌰',rarity:'common',note:'Ein Samen der Buche.'},
   leaf: {name:'Blatt',icon:'🍃',rarity:'common',note:'Ein Blatt aus der Baumkrone.'},
   mushroom: {name:'Pilz',icon:'🍄',rarity:'rare',note:'Ein Pilz, der gelegentlich an Baumstämmen wächst.'},
   cone: {name:'Tannenzapfen',icon:'🌰',rarity:'uncommon',note:'Später vor allem an Nadelbäumen zu finden.'},
   apple: {name:'Apfel',icon:'🍎',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
   pear: {name:'Birne',icon:'🍐',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
   cherry: {name:'Kirsche',icon:'🍒',rarity:'uncommon',note:'Eine seltene Frucht am Baum.'},
-  honey: {name:'Honig',icon:'🍯',rarity:'epic',note:'Ein virtueller Fund aus einem Bienennest.'},
-  wax: {name:'Wachs',icon:'🕯️',rarity:'epic',note:'Ein seltener virtueller Fund aus einem Bienennest.'},
+  honey: {name:'Honig',icon:'🍯',rarity:'legendary',note:'Ein virtueller Fund aus einem Bienennest.'},
+  wax: {name:'Wachs',icon:'🕯️',rarity:'legendary',note:'Ein seltener virtueller Fund aus einem Bienennest.'},
   egg: {name:'Ei',icon:'🥚',rarity:'epic',note:'Ein virtuelles Fundstück aus einer Vogelnest-Szene.'},
   feather: {name:'Feder',icon:'🪶',rarity:'uncommon',note:'Ein Fundstück eines Vogelnests.'},
   plank: {name:'Bretter',icon:'🪚',rarity:'crafted',note:'Im Sägewerk aus Holz gefertigt.'},
@@ -669,7 +695,7 @@ const ANIMALS = Object.freeze({
   bird:{name:'Vogel',icon:'🐦',note:'Virtuelle Sichtung am Vogelnest.'}
 });
 const TYPES = Object.freeze({
-  tree: { name: 'Buche', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.06, color: '#63c58f', desc: 'Untersuche 3–6 Sammelpunkte und entdecke mit Glück ein virtuelles Nest.' },
+  tree: { name: 'Buche', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.06, color: '#63c58f', desc: 'Untersuche echte Baumbestandteile: Holz und Blatt sind garantiert, seltene Funde sind möglich.' },
   rock: { name: 'Steinvorkommen', icon: '🪨', material: 'stone', bonus: 'iron', bonusProbability: 0.15, color: '#94adca', desc: 'Ein Steinvorkommen mit einer kleinen Chance auf Eisenerz.' },
   scrap: { name: 'Schrottfundstelle', icon: '🔩', material: 'scrap', bonus: 'copper', bonusProbability: 0.15, color: '#e7b375', desc: 'Zurückgelassene Metallteile. Manchmal findet sich Kupferdraht.' },
 });
@@ -735,43 +761,78 @@ function rollHarvest(node, rand = Math.random) {
   return result;
 }
 
-// Buche v0.4.2: all probabilities are absolute per beech, NOT chained.
-// 3 normal SP: 100%; 4th: 50%; 5th: 15%; 6th: 5%.
-// Therefore exactly 3: 50%, 4: 35%, 5: 10%, 6: 5%.
-const BEECH_SP_DROPS = Object.freeze([
-  ['wood',.45], ['leaf',.20], ['twig',.15], ['moss',.07],
-  ['resin',.06], ['mushroom',.04], ['beechnut',.03]
+// Buche v0.4.6: two guaranteed pieces, ten independent optional items.
+// No rarity is rolled separately: the highest-present part determines the ring.
+const BEECH_PARTS=Object.freeze([
+  {id:'branch-left-high',item:'twig',chance:.90,x:34,y:42,gesture:'pull',name:'Ast links oben'},
+  {id:'crown-right',item:'leaf',chance:.75,x:78,y:42,gesture:'swipe',name:'Baumkrone rechts'},
+  {id:'branch-right-low',item:'twig',chance:.50,x:70,y:65,gesture:'pull',name:'Ast rechts unten'},
+  {id:'crown-left',item:'leaf',chance:.25,x:20,y:56,gesture:'swipe',name:'Baumkrone links'},
+  {id:'beechnut-ground',item:'beechnut',chance:.15,x:39,y:87,gesture:'tap',name:'Buchecker'},
+  {id:'moss-trunk',item:'moss',chance:.10,x:53,y:78,gesture:'scratch',name:'Moos am Stamm'},
+  {id:'resin-trunk',item:'resin',chance:.05,x:48,y:67,gesture:'scratch',name:'Harz'},
+  {id:'mushroom-root',item:'mushroom',chance:.03,x:61,y:89,gesture:'pull',name:'Pilz am Baumfuß'},
+  {id:'nest-bird',item:null,chance:.02,x:66,y:29,gesture:'tap',name:'Vogelnest',nestType:'bird'},
+  {id:'nest-bee',item:null,chance:.01,x:79,y:57,gesture:'tap',name:'Bienenstock',nestType:'bee'}
 ]);
-const BEECH_POSITIONS = Object.freeze([
-  [49,76],[37,59],[61,49],[39,31],[62,22],[23,44]
+const BEECH_GUARANTEED=Object.freeze([
+ {id:'trunk-core',item:'wood',x:47,y:73,gesture:'pull',name:'Holz am Stamm'},
+ {id:'crown-center',item:'leaf',x:51,y:26,gesture:'swipe',name:'Mittlere Baumkrone'}
 ]);
-function weightedPick(entries,random=Math.random){
-  const r=Math.min(.999999999,Math.max(0,Number(random())||0));let sum=0;
-  for(const [value,chance] of entries){sum+=chance;if(r<sum)return value;}
-  return entries[entries.length-1][0];
+const BEECH_RARITY_COLORS=Object.freeze({rare:'#5598db',epic:'#a96cdb',legendary:'#e6b846'});
+const beechRarityCache=new Map();
+function beechSeed(node,previousHarvest=0){
+  const key=`weltwerk-beech-v046:${node.id}:${previousHarvest}`;
+  let h=2166136261;
+  for(let i=0;i<key.length;i++){h^=key.charCodeAt(i);h=Math.imul(h,16777619);}
+  return h>>>0;
 }
-function createTreeSession(node,random=Math.random,now=Date.now()){
-  if(node.type!=='tree')throw new Error('Not a tree');
-  const r=Math.min(.999999999,Math.max(0,Number(random())||0));
-  const amount=r<.50?3:r<.85?4:r<.95?5:6;
-  const slots=[];
-  const add=(id,zone,item,x,y,parent=null,nestType=null)=>slots.push({
-    id,zone,item,count:item?1:0,x,y,parent,nestType,collected:false
-  });
-  for(let i=0;i<amount;i++){
-    const [x,y]=BEECH_POSITIONS[i];
-    add('beech-sp-'+i,i<2?'trunk':'branch',weightedPick(BEECH_SP_DROPS,random),x,y);
-  }
-  // Independent 1% rolls. Both events may coexist (0.01% joint chance).
-  if(random()<.01){
-    add('nest-bee','nest',null,77,59,null,'bee');
-    for(let i=0;i<3;i++)add('bee-sp-'+i,'nestItem',random()<.5?'honey':'wax',0,0,'nest-bee','bee');
-  }
-  if(random()<.01){
-    add('nest-bird','nest',null,24,23,null,'bird');
-    for(let i=0;i<3;i++)add('bird-sp-'+i,'nestItem',random()<.5?'egg':'twig',0,0,'nest-bird','bird');
-  }
-  return {startedAt:now,slots,nestOpen:false,nestOpenType:null,completeAt:0,earned:{}};
+function beechRandom(node,previousHarvest=0){
+ let state=beechSeed(node,previousHarvest);
+ return ()=>{state+=0x6D2B79F5;let t=state;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};
+}
+function beechRarityForParts(parts){
+ if(parts.some(p=>p.id==='nest-bee'))return 'legendary';
+ if(parts.some(p=>p.id==='nest-bird'))return 'epic';
+ if(parts.some(p=>p.item==='resin'||p.item==='mushroom'))return 'rare';
+ return 'common';
+}
+function beechLegacyRarity(session){
+ if(session.slots.some(s=>s.zone==='nest'&&s.nestType==='bee'))return 'legendary';
+ if(session.slots.some(s=>s.zone==='nest'&&s.nestType==='bird'))return 'epic';
+ if(session.slots.some(s=>s.item==='resin'||s.item==='mushroom'))return 'rare';
+ return 'common';
+}
+function beechMapRarity(node){
+ const profile=activeProfile();const prev=profile.harvested[node.id]||0;
+ const session=profile.treeSessions[node.id];
+ if(session&&!(session.completeAt && isReady(prev)))return session.schema===2?(session.rarity||beechRarityForParts(session.slots)):beechLegacyRarity(session);
+ const key=node.id+':'+prev;
+ if(beechRarityCache.has(key))return beechRarityCache.get(key);
+ const random=beechRandom(node,prev);
+ const parts=BEECH_PARTS.filter(p=>random()<p.chance);
+ const rarity=beechRarityForParts(parts);
+ if(beechRarityCache.size>400)beechRarityCache.clear();
+ beechRarityCache.set(key,rarity);return rarity;
+}
+function createTreeSession(node,random=null,now=Date.now(),previousHarvest=0){
+ if(node.type!=='tree')throw new Error('Not a tree');
+ const rand=random||beechRandom(node,previousHarvest);
+ const selected=BEECH_PARTS.filter(p=>rand()<p.chance);
+ const slots=[];
+ const add=(item,zone,p,parent=null)=>slots.push({id:p.id,zone,item,count:item?1:0,x:p.x,y:p.y,
+   parent,nestType:p.nestType||null,collected:false});
+ for(const p of BEECH_GUARANTEED)add(p.item,'branch',p);
+ for(const p of selected){
+   if(p.nestType){
+     add(null,'nest',p);
+     for(let i=0;i<3;i++){
+       const reward=p.nestType==='bee'?(rand()<.5?'honey':'wax'):(rand()<.5?'egg':'twig');
+       add(reward,'nestItem',{id:p.nestType+'-piece-'+i,x:0,y:0,nestType:p.nestType},p.id);
+     }
+   }else add(p.item,'branch',p);
+ }
+ return {schema:2,rarity:beechRarityForParts(selected),startedAt:now,slots,nestOpen:false,nestOpenType:null,completeAt:0,earned:{}};
 }
 function activeNestType(session){
   return session.nestOpenType || (session.nestOpen?session.slots.find(s=>s.zone==='nest'&&s.id==='nest')?.nestType:null);
@@ -1383,7 +1444,7 @@ function cleanProfile(candidate) {
           parent:typeof r.parent==='string'?r.parent:null,collected:r.collected===true,
           nestType:r.nestType==='bird'?'bird':r.nestType==='bee'?'bee':null});
       }
-      if(slots.length) p.treeSessions[key]={startedAt:raw.startedAt,slots,nestOpen:raw.nestOpen===true,
+      if(slots.length) p.treeSessions[key]={schema:raw.schema===2?2:1,rarity:['common','rare','epic','legendary'].includes(raw.rarity)?raw.rarity:null,startedAt:raw.startedAt,slots,nestOpen:raw.nestOpen===true,
         nestOpenType:raw.nestOpenType==='bee'||raw.nestOpenType==='bird'?raw.nestOpenType:null,
         completeAt:Number.isFinite(raw.completeAt)?raw.completeAt:0,earned:{}};
       if(p.treeSessions[key] && raw.earned && typeof raw.earned==='object'){
@@ -1396,7 +1457,7 @@ function cleanProfile(candidate) {
   if(candidate.harvested && typeof candidate.harvested==='object') {
     for (const [key,value] of Object.entries(candidate.harvested)) {
       const t=Number(value);
-      if (/^-?\d+:-?\d+(?::\d{1,2})?$/.test(key) && Number.isFinite(t) && t>0 && t<=Date.now()+60000 && Date.now()-t<REGEN_MS) p.harvested[key]=t;
+      if (/^-?\d+:-?\d+(?::\d{1,2})?$/.test(key) && Number.isFinite(t) && t>0 && t<=Date.now()+60000 && Date.now()-t<REGEN_MS*24*30) p.harvested[key]=t; // Hold the cycle seed across reloads after the 60m cooldown.
     }
   }
   for (const key of Object.keys(p.stats)) {
@@ -2237,18 +2298,20 @@ class BackupMap {
       const inRange=elem.classList.contains('in-range');
       const depleted=elem.classList.contains('depleted');
       const rich=elem.classList.contains('rich');
+      const isTree=elem.classList.contains('type-tree');
+      const beechRing=isTree&&!depleted?(elem.classList.contains('beech-rarity-legendary')?'#e6b846':elem.classList.contains('beech-rarity-epic')?'#a96cdb':elem.classList.contains('beech-rarity-rare')?'#5598db':null):null;
       const w=isPlayer?72:76,h=isPlayer?98:83;
       // The shadow/ring is the world contact point, exactly at the geo coordinate.
       ctx.save();
       ctx.globalAlpha=depleted?.53:1;
       ctx.fillStyle='rgba(25,65,53,.22)';
       ctx.beginPath();ctx.ellipse(x,y-3,isPlayer?27:24,6,0,0,Math.PI*2);ctx.fill();
-      if(isPlayer||inRange){
+      if(isPlayer || (inRange&&!isTree)){
         ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
         ctx.fillStyle='rgba(70,205,162,.35)';ctx.fill();
         ctx.lineWidth=2.5;ctx.strokeStyle='#dcfff2';ctx.stroke();
       }
-      if(inRange && !isPlayer){
+      if(inRange && !isPlayer && !isTree){
         const pulse=0.72+0.28*Math.sin(performance.now()/260);
         ctx.beginPath();ctx.ellipse(x,y-6,28,12,0,0,Math.PI*2);
         ctx.fillStyle='rgba(115,231,173,.16)';ctx.fill();
@@ -2267,10 +2330,11 @@ class BackupMap {
         ctx.fillStyle='#12434b';ctx.beginPath();ctx.roundRect(x-21,y-h-26,42,20,7);ctx.fill();
         ctx.fillStyle='#f2fff9';ctx.fillText('DU',x,y-h-12);
       }else{
-        if(rich){
+        if(rich && !isTree){
           ctx.beginPath();ctx.arc(x+w/2-6,y-h+1,11,0,Math.PI*2);ctx.fillStyle='#eab85f';ctx.fill();
           ctx.font='17px system-ui';ctx.textAlign='center';ctx.fillStyle='#543916';ctx.fillText('✦',x+w/2-6,y-h+6);
         }
+        if(beechRing){ctx.beginPath();ctx.ellipse(x,y-3,26,8,0,0,Math.PI*2);ctx.lineWidth=3;ctx.strokeStyle=beechRing;ctx.stroke();}
         // Generous hit area around the sprite, independent of the hidden DOM.
         this._hitTargets.push({element:elem,x,y,left:x-w*.5-6,right:x+w*.5+6,top:y-h-13,bottom:y+10});
       }
@@ -2771,7 +2835,9 @@ function makeResourceElement(node){
 function updateNodeElement(element,node){
   const ready=isReady(activeProfile().harvested[node.id]);
   const range=getRange(node);
-  element.className=['world-resource',`type-${node.type}`,node.rich?'rich':'',range.ok?'in-range':'',ready?'':'depleted'].filter(Boolean).join(' ');
+  const rarity=node.type==='tree'&&ready?beechMapRarity(node):'common';
+  element.className=['world-resource',`type-${node.type}`,node.type!=='tree'&&node.rich?'rich':'',rarity!=='common'?`beech-rarity-${rarity}`:'',range.ok?'in-range':'',ready?'':'depleted'].filter(Boolean).join(' ');
+  element.setAttribute('aria-label',`${TYPES[node.type].name}${rarity!=='common'?' · '+({rare:'selten',epic:'episch',legendary:'legendär'}[rarity]):''} auf der Karte öffnen`);
 }
 function updatePositionOnMap(follow=false){
   if(!state.mapReady)return;
@@ -2900,7 +2966,7 @@ function getTreeSession(node){
     delete profile.treeSessions[node.id];session=null;
   }
   if(!session){
-    session=createTreeSession(node);
+    session=createTreeSession(node,null,Date.now(),profile.harvested[node.id]||0);
     profile.treeSessions[node.id]=session;
     save();
   }
@@ -2917,7 +2983,7 @@ function openTreeScene(node){
   }
   // Clean up a completed cycle after its 60-minute cooldown before reopening.
   getTreeSession(node);
-  state.treeNode={...node};state.treeMessage='Tippe auf leuchtende Sammelpunkte. Jeder Fund landet sofort im Rucksack.';
+  state.treeNode={...node};state.treeMessage='Ziehe Äste, streiche Blätter ab und tippe kleinere Fundstücke an.';
   $('tree-scene').classList.remove('hidden');$('tree-scene').setAttribute('aria-hidden','false');
   renderTreeScene();
 }
@@ -2925,40 +2991,81 @@ function closeTreeScene(){
   $('tree-scene').classList.add('hidden');$('tree-scene').setAttribute('aria-hidden','true');
   state.treeNode=null;state.treeMessage='';renderWorld();
 }
-function treeArtwork(){return `<svg class="tree-svg" viewBox="0 0 420 500" preserveAspectRatio="none" role="img" aria-label="Schlichte Low-Poly-Buche mit vier geometrischen Blattgruppen und sichtbaren Ästen">
-<ellipse cx="212" cy="481" rx="110" ry="10" fill="#7d9b65" opacity=".27"/>
-<!-- Branches behind the foliage -->
-<path d="M207 356 L139 276 L102 238 L122 228 L191 304 L202 270 L185 197 L198 193 L218 284 L277 230 L288 240 L224 324 L249 355 L316 282 L330 293 L255 395Z" fill="#80634b"/>
-<path d="M208 350 L147 280 L132 280 L201 368 L215 376Z" fill="#a58460"/>
-<path d="M221 330 L276 239 L287 241 L232 358Z" fill="#b39269"/>
-<!-- Wide readable trunk -->
-<path d="M191 262 L223 263 L231 377 L251 474 L229 469 L211 478 L194 470 L171 478 L194 382Z" fill="#8b6e55"/>
-<path d="M208 263 L223 263 L231 377 L243 465 L226 463 L216 477 L203 466Z" fill="#ab8962"/>
-<path d="M191 336 L207 350 L204 469 L191 472Z" fill="#715a49"/>
-<path d="M207 350 L219 341 L231 377 L225 446 L218 477 L204 466Z" fill="#bd9b70" opacity=".56"/>
-<!-- Four uncomplicated polygon foliage masses; each at most 6 facets -->
-<path d="M135 162 L167 70 L222 36 L290 80 L314 160 L277 215 L195 229 L151 206Z" fill="#78a451"/>
-<polygon points="167,70 222,36 241,132 184,135" fill="#a9ca70"/>
-<polygon points="222,36 290,80 241,132" fill="#94b960"/>
-<polygon points="290,80 314,160 241,132" fill="#6c964a"/>
-<polygon points="241,132 314,160 277,215 214,182" fill="#648b49"/>
-<polygon points="167,70 184,135 135,162" fill="#739e54"/>
-<polygon points="184,135 241,132 214,182 151,206 135,162" fill="#85b35e"/>
-<path d="M28 206 L65 148 L129 134 L177 175 L181 246 L131 296 L55 286 L14 246Z" fill="#76a955"/>
-<polygon points="65,148 129,134 111,211 28,206" fill="#a2c76b"/>
-<polygon points="129,134 177,175 111,211" fill="#8fbd64"/>
-<polygon points="28,206 111,211 55,286 14,246" fill="#5b954b"/>
-<polygon points="111,211 177,175 181,246 131,296 55,286" fill="#6da04e"/>
-<path d="M249 196 L294 157 L363 166 L406 222 L394 287 L335 311 L262 278 L230 238Z" fill="#80b257"/>
-<polygon points="294,157 363,166 342,227 249,196" fill="#abd06e"/>
-<polygon points="363,166 406,222 342,227" fill="#94bf61"/>
-<polygon points="249,196 342,227 262,278 230,238" fill="#6f9b52"/>
-<polygon points="342,227 406,222 394,287 335,311 262,278" fill="#67984e"/>
-<path d="M73 292 L112 259 L164 272 L194 314 L179 352 L116 369 L60 345Z" fill="#669a4f"/>
-<polygon points="112,259 164,272 152,316 73,292" fill="#90b65a"/>
-<polygon points="73,292 152,316 116,369 60,345" fill="#6ca452"/>
-<polygon points="152,316 194,314 179,352 116,369" fill="#568a47"/>
+function treeArtwork(){return `<svg class="tree-svg" viewBox="0 0 420 500" preserveAspectRatio="none" role="img" aria-label="Schlichte Low-Poly-Buche mit Stamm und mittlerer Krone">
+  <ellipse cx="215" cy="482" rx="102" ry="10" fill="#749b58" opacity=".30"/>
+  <!-- Trunk and its permanent, short central branch structure -->
+  <path d="M194 455 L198 269 L171 212 L183 204 L216 265 L247 208 L259 214 L228 283 L231 451 L249 482 L217 476 L204 489 L186 479 L170 484Z" fill="#8b7154"/>
+  <path d="M212 263 L217 451 L237 478 L221 475 L209 489 L198 476 L206 343Z" fill="#ae8c67"/>
+  <path d="M197 349 L207 329 L205 470 L190 478Z" fill="#6c5746"/>
+  <!-- One permanent central canopy, intentionally only a few colored facets -->
+  <path d="M115 170 L131 111 L181 69 L236 55 L292 93 L321 162 L298 227 L243 255 L169 242 L117 209Z" fill="#79a954"/>
+  <polygon points="131,111 181,69 211,155 115,170" fill="#96c56b"/>
+  <polygon points="181,69 236,55 253,144 211,155" fill="#a6cf78"/>
+  <polygon points="236,55 292,93 253,144" fill="#8bbb60"/>
+  <polygon points="292,93 321,162 253,144" fill="#72a251"/>
+  <polygon points="115,170 211,155 169,242 117,209" fill="#659750"/>
+  <polygon points="211,155 253,144 243,255 169,242" fill="#78ab59"/>
+  <polygon points="253,144 321,162 298,227 243,255" fill="#619447"/>
+  <path d="M192 459 l-28 25 22 -5 M231 457 l22 24 -22 -5" stroke="#83694e" stroke-width="11" fill="none"/>
 </svg>`;}
+function beechPartDefinition(slot){
+ return [...BEECH_GUARANTEED,...BEECH_PARTS].find(p=>p.id===slot.id)||{gesture:'tap',name:MATERIALS[slot.item]?.name||'Fundstück'};
+}
+function beechPartArtwork(slot){
+ const id=slot.id;
+ const svg=(shapes)=>`<svg viewBox="0 0 100 86" aria-hidden="true" focusable="false">${shapes}</svg>`;
+ if(id==='trunk-core')return svg('<path d="M28 69 L35 31 L59 23 L66 61 L51 74 Z" fill="#c4a078"/><path d="M35 31 L59 23 L66 61 L50 56Z" fill="#e5be86"/><path d="M28 69 L50 56 L51 74" fill="#9b704d"/>');
+ if(id.includes('branch')){
+   const flip=id==='branch-right-low'?'translate(100 0) scale(-1 1)':'';
+   return svg(`<g transform="${flip}"><path d="M11 71 L75 22 L81 30 L21 79Z" fill="#936b46"/><path d="M15 71 L75 22 L82 25 L20 75Z" fill="#bf9463"/><path d="M48 46 L43 18 L53 15 L62 37Z" fill="#aa8155"/><path d="M27 61 L18 36 L27 32 L39 52Z" fill="#926b49"/><circle cx="79" cy="25" r="6" fill="#d8b183"/></g>`);
+ }
+ if(id.includes('crown'))return svg('<path d="M8 44 L23 23 L52 12 L82 22 L95 47 L78 73 L36 75Z" fill="#71a551"/><polygon points="23,23 52,12 51,47 8,44" fill="#a1c66e"/><polygon points="52,12 82,22 95,47 51,47" fill="#91bd62"/><polygon points="8,44 51,47 36,75" fill="#5f954c"/><polygon points="51,47 95,47 78,73 36,75" fill="#74a656"/>');
+ if(id==='nest-bee')return svg('<path d="M5 65 L76 26 L82 33 L13 75Z" fill="#a67c50"/><path d="M12 65 L77 26 L82 29 L13 69Z" fill="#d4a66e"/><path d="M64 38 L64 49" stroke="#74512e" stroke-width="3"/><path d="M49 51 Q64 39 78 51 L85 72 Q76 85 64 83 Q50 80 47 69Z" fill="#d7a13b"/><path d="M50 60 Q63 66 80 60 M50 69 Q65 74 82 68 M54 78 Q66 81 79 76" stroke="#f0c66c" stroke-width="4" fill="none"/><circle cx="65" cy="69" r="4" fill="#77501d"/>');
+ if(id==='nest-bird')return svg('<path d="M6 69 L73 29 L80 35 L15 77Z" fill="#99704b"/><path d="M36 49 Q60 27 92 47 Q81 70 63 69 Q42 68 36 49Z" fill="#a57744"/><path d="M42 51 Q63 61 85 49 M46 58 Q65 64 81 56" stroke="#ceac6b" stroke-width="3" fill="none"/><ellipse cx="59" cy="43" rx="8" ry="11" fill="#ece8d7"/><ellipse cx="73" cy="44" rx="8" ry="11" fill="#e1e6d8"/>');
+ if(slot.zone==='nest')return beechNestArtwork(slot.nestType);
+ const art=beechItemIcon(slot.item).replace('class="beech-item-svg"','class="beech-part-item"');
+ return art;
+}
+function beechPhysicalPart(slot,canCollect){
+ const def=beechPartDefinition(slot);
+ const type=slot.zone==='nest'?'nest':slot.id.includes('crown')?'crown':slot.id.includes('branch')?'branch':slot.id.includes('beechnut')?'nut':slot.id.includes('moss')?'moss':slot.id.includes('resin')?'resin':slot.id.includes('mushroom')?'mushroom':'wood';
+ const gesture=slot.zone==='nest'?'tap':def.gesture;
+ return `<button type="button" class="beech-part part-${type}" data-tree-slot="${slot.id}" data-gesture="${gesture}" style="left:${slot.x}%;top:${slot.y}%" ${canCollect?'':'disabled'} aria-label="${def.name}: ${gesture==='tap'?'antippen':gesture==='pull'?'ziehen':gesture==='scratch'?'abkratzen':'wischen'}" title="${def.name}">${beechPartArtwork(slot)}</button>`;
+}
+function beechInteractionMessage(gesture){
+ return {pull:'Halte das Teil fest und ziehe es heraus',swipe:'Streiche mit dem Finger über die Blätter',scratch:'Wische über das Material, um es abzukratzen',tap:'Tippe auf das Fundstück'}[gesture]||'Untersuche das Teil';
+}
+function showBeechInteractionHint(message){
+ const el=document.querySelector('#tree-scene .beech-part-hint');
+ if(el)el.textContent=message;
+}
+function bindBeechPartGestures(nodeId){
+ document.querySelectorAll('#tree-scene .beech-part').forEach(button=>{
+  let start=null,accepted=false;
+  const gesture=button.dataset.gesture;
+  button.addEventListener('pointerdown',e=>{
+    if(button.disabled)return;
+    start={id:e.pointerId,x:e.clientX,y:e.clientY};accepted=false;
+    button.classList.add('gesture-active');
+    try{button.setPointerCapture(e.pointerId);}catch{}
+    showBeechInteractionHint(beechInteractionMessage(gesture));
+  });
+  button.addEventListener('pointerup',e=>{
+    if(!start||e.pointerId!==start.id)return;
+    const moved=Math.hypot(e.clientX-start.x,e.clientY-start.y);
+    start=null;button.classList.remove('gesture-active');
+    if(gesture==='tap'||moved>=20){accepted=true;collectTreeSlot(nodeId,button.dataset.treeSlot);}
+    else showBeechInteractionHint(beechInteractionMessage(gesture));
+  });
+  button.addEventListener('pointercancel',()=>{start=null;button.classList.remove('gesture-active');});
+  button.addEventListener('click',e=>{e.preventDefault();
+    if(accepted){accepted=false;return;}
+    // Keyboard accessibility (Enter / Space) does not have a pointer detail.
+    if(e.detail===0){collectTreeSlot(nodeId,button.dataset.treeSlot);return;}
+    if(gesture!=='tap')showBeechInteractionHint(beechInteractionMessage(gesture));
+  });
+ });
+}
 
 function treeLootHTML(session){
   const items=Object.entries(session.earned||{}).filter(([,amount])=>amount>0);
@@ -2996,11 +3103,8 @@ function beechItemIcon(id){
 function beechLootCards(session){
  const items=Object.entries(session.earned||{}).filter(([,qty])=>qty>0);
  const cards=items.map(([id,amount])=>{const material=MATERIALS[id]||ANIMALS[id]||{};return `<div class="beech-loot-card rarity-${dropRarity(id)}"><span class="beech-loot-icon">${beechItemIcon(id)}</span><span class="beech-loot-qty">×${amount}</span><strong>${material.name||id}</strong></div>`;});
- // Show preview placeholders even before the very first tap; real hidden drops are never exposed.
- const left=session.slots.filter(s=>s.zone!=='nest'&&!s.collected).length;
- const total=left?Math.max(5,cards.length+Math.min(3,left)):cards.length;
- while(cards.length<total)cards.push(`<div class="beech-loot-card beech-loot-unknown"><span class="beech-loot-icon">?</span><strong>Unbekannt</strong></div>`);
- return cards.join('');
+ // No decorative empty slots: keep the collection screen as quiet as possible.
+ return cards.length?cards.join(''):'<span class="beech-empty-loot">Noch keine Items gesammelt</span>';
 }
 function renderTreeScene(){
  const node=state.treeNode;if(!node)return;
@@ -3014,11 +3118,20 @@ function renderTreeScene(){
  const openType=activeNestType(session);
  const nestItems=session.slots.filter(s=>s.zone==='nestItem'&&s.nestType===openType);
  const pendingNestItems=nestItems.filter(s=>!s.collected);
+ const isPhysical=session.schema===2;
  const hotspots=session.slots.filter(s=>s.zone!=='nestItem').map(slot=>{
+   if(isPhysical){
+     if(slot.zone==='nest'){
+       if(openType || !session.slots.some(s=>s.zone==='nestItem'&&s.parent===slot.id&&!s.collected))return '';
+       return beechPhysicalPart(slot,canCollect);
+     }
+     return slot.collected?'':beechPhysicalPart(slot,canCollect);
+   }
+   // Preserve the progress of an unfinished legacy v0.4.5 tree until its next regeneration.
    if(slot.zone==='nest'){
      const outstanding=session.slots.some(s=>s.zone==='nestItem'&&s.parent===slot.id&&!s.collected);
      const label=slot.nestType==='bee'?'Bienenstock':'Vogelnest';
-     return `<div class="beech-event" style="left:${slot.x}%;top:${slot.y}%">${beechNestArtwork(slot.nestType)}${outstanding&&!openType?`<button class="beech-event-button" data-tree-slot="${slot.id}" ${canCollect?'':'disabled'} aria-label="${label} mit drei Extra-Sammelpunkten öffnen"><span aria-hidden="true"></span></button>`:''}</div>`;
+     return `<div class="beech-event" style="left:${slot.x}%;top:${slot.y}%">${beechNestArtwork(slot.nestType)}${outstanding&&!openType?`<button class="beech-event-button" data-tree-slot="${slot.id}" ${canCollect?'':'disabled'} aria-label="${label} öffnen"><span aria-hidden="true"></span></button>`:''}</div>`;
    }
    return slot.collected?`<span class="tree-hotspot used" style="left:${slot.x}%;top:${slot.y}%" aria-label="Bereits untersucht"><span aria-hidden="true">✓</span></span>`
     : `<button class="tree-hotspot" style="left:${slot.x}%;top:${slot.y}%" data-tree-slot="${slot.id}" ${canCollect?'':'disabled'} aria-label="Sammelpunkt entdecken"><span aria-hidden="true"></span></button>`;
@@ -3031,7 +3144,7 @@ function renderTreeScene(){
  $('tree-scene').innerHTML=`<div class="tree-scene-inner beech-v044">
    <header class="tree-top"><button class="tree-back" id="tree-back" aria-label="Zur Karte zurück">←</button>
    <div class="tree-heading"><h2>Buche</h2></div><span class="tree-step">${harvestedNormal} / ${regular.length}</span></header>
-   <div class="tree-stage">${beechLandscape()}<div class="tree-visual">${treeArtwork()}${hotspots}</div>${nestPanel}</div>
+   <div class="tree-stage">${beechLandscape()}<div class="tree-visual">${treeArtwork()}${hotspots}</div>${isPhysical?'<div class="beech-part-hint" aria-live="polite">Ziehe Äste · Streiche Blätter · Tippe auf Funde</div>':''}${nestPanel}</div>
    <div class="tree-bottom"><div class="beech-bottom-head"><strong>Gefundene Items</strong><span>${earned} gesammelt${extraSlots.length?` · ${doneExtra}/${extraSlots.length} Extra-SP`:''}</span></div>
    <div class="beech-loot-cards" aria-live="polite">${beechLootCards(session)}</div>
    ${!canCollect?`<div class="beech-small-hint">${range.reason}</div>`:''}
@@ -3041,7 +3154,8 @@ function renderTreeScene(){
  $('tree-return')?.addEventListener('click',closeTreeScene);
  $('tree-nest-close')?.addEventListener('click',closeTreeNest);
  $('tree-nest-return')?.addEventListener('click',closeTreeNest);
- $('tree-scene').querySelectorAll('[data-tree-slot]').forEach(btn=>btn.addEventListener('click',()=>collectTreeSlot(node.id,btn.dataset.treeSlot)));
+ $('tree-scene').querySelectorAll('[data-tree-slot]:not(.beech-part)').forEach(btn=>btn.addEventListener('click',()=>collectTreeSlot(node.id,btn.dataset.treeSlot)));
+ if(isPhysical)bindBeechPartGestures(node.id);
 }
 
 function awardTreeItem(session,slot,profile){
@@ -3087,7 +3201,7 @@ function collectTreeSlot(nodeId,slotId){
     awardTreeItem(session,slot,profile);slot.collected=true;
     const display=slot.item?(MATERIALS[slot.item]?.name||ANIMALS[slot.item]?.name):null;
     const rarity=dropRarity(slot.item);
-    const rarityLabel={common:'Basic',uncommon:'Ungewöhnlich',rare:'Selten',epic:'Episch'}[rarity]||'Fund';
+    const rarityLabel={common:'Basic',rare:'Selten',epic:'Episch',legendary:'Legendär'}[rarity]||'Fund';
     state.treeMessage=display?`${MATERIALS[slot.item]?.icon||'✦'} ${slot.count}× ${display} · ${rarityLabel}`:'Dieser Platz ist leer.';
     if(slot.zone==='nestItem' && session.slots.filter(s=>s.zone==='nestItem'&&s.nestType===slot.nestType).every(s=>s.collected)){session.nestOpen=false;session.nestOpenType=null;}
   }
@@ -3130,13 +3244,15 @@ function renderResourceSheet() {
   if(node.type==='tree'){
     $('sheet-content').innerHTML=`
       <div class="sheet-header"><div class="sheet-icon">🌳</div><div><div class="sheet-badge">WORLD TAPPABLE · BUCHE</div><h2 id="sheet-title">Buche untersuchen</h2></div></div>
-      <p class="sheet-desc">An einer Buche findest du 3 bis 6 unabhängig ausgewürfelte Sammelpunkte. Jeder Punkt enthält genau ein verborgenes Item; mit etwas Glück entdeckst du ein virtuelles Nest mit 3 zusätzlichen SP.</p>
+      <p class="sheet-desc">Holz am Stamm und Blätter in der mittleren Krone sind garantiert. Weitere natürliche Baumteile erscheinen zufällig. Ziehe Äste heraus, streiche Blätter ab und entdecke seltene Nester.</p>
       <span class="distance-pill ${range.ok?'':'outside'}">◎ ${dist}</span>
-      <div class="sheet-block"><div class="sheet-block-heading">MÖGLICHE FUNDE PRO SP</div>
-        ${BEECH_SP_DROPS.map(([id,p])=>`<div class="possible-drop"><span>${MATERIALS[id].icon}</span><span class="drop-name">${MATERIALS[id].name}</span><strong>${Math.round(p*100)} %</strong></div>`).join('')}
-        <p class="beech-sheet-note">🐝 Bienenstock: 1 % · 🪺 Vogelnest: 1 % · jeweils 3 Extra-SP</p></div>
+      <div class="sheet-block"><div class="sheet-block-heading">MÖGLICHE FUNDTEILE</div>
+        <div class="possible-drop"><span>🪵</span><span class="drop-name">Baumstamm · Holz</span><strong>100 %</strong></div>
+        <div class="possible-drop"><span>🍃</span><span class="drop-name">Mittlere Krone · Blatt</span><strong>100 %</strong></div>
+        ${BEECH_PARTS.map(p=>`<div class="possible-drop"><span>${p.nestType==='bird'?'🪺':p.nestType==='bee'?'🐝':MATERIALS[p.item]?.icon||'🌳'}</span><span class="drop-name">${p.name}</span><strong>${Math.round(p.chance*100)} %</strong></div>`).join('')}
+        <p class="beech-sheet-note">Kein Kreis = Basic · Blau = selten · Violett = episch · Gold = legendär. Die Anzahl der Teile bleibt bis zum Öffnen verborgen.</p></div>
       <button id="btn-tree-open" class="sheet-action" ${ready&&range.ok?'':'disabled'}>${!ready?'Regeneration · '+formatRemaining(timeRemaining(last)):range.ok?'Buche untersuchen':'Nicht in Reichweite'}</button>
-      <div class="sheet-secondary">${!ready?'Die Buche regeneriert 60 Minuten nach vollständiger Sammlung.':range.ok?'Tippe Fundstellen einzeln an – die Items werden automatisch gespeichert.':range.reason}<br>Alle Tier- und Nestereignisse sind rein virtuell.</div>`;
+      <div class="sheet-secondary">${!ready?'Die Buche regeneriert 60 Minuten nach vollständiger Sammlung.':range.ok?'Sammle an den sichtbaren Baumbestandteilen. Die Items werden automatisch gespeichert.':range.reason}<br>Alle Tier- und Nestereignisse sind rein virtuell.</div>`;
     $('btn-tree-open').addEventListener('click',()=>{closeSheet();openTreeScene(node);});
     return;
   }
