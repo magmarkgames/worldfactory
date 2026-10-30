@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="Weltwerk v0.4.1 — grüne Spielwelt, blaue Gewässer, dunkle Straßen, 3D-Häuser und Sammeln.">
-  <title>Weltwerk · Exploration & Inselbau v0.4.1</title>
+  <meta name="description" content="WELTWERK v0.4.5 – Ruhigere Spielwelt, reduziertes HUD und klappbare Kartensteuerung.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.5</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -445,6 +445,63 @@
 @media(max-height:695px){.beech-v044 .tree-top{padding-top:calc(4px + env(safe-area-inset-top,0px));padding-bottom:3px;min-height:49px}.beech-v044 .tree-bottom{padding-top:8px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}.beech-v044 .beech-loot-card{min-height:62px}.beech-v044 .beech-loot-icon{height:30px}.beech-v044 .beech-item-svg{height:30px}}
 @media(prefers-reduced-motion:reduce){.beech-v044 .beech-pickup{animation:none!important}}
 
+
+/* WELTWERK v0.4.5 – World-first, simplified exploration HUD.
+   All positioning is in the real map, not a replacement fantasy landscape. */
+#screen-map{--ww-hud:#102b34;--ww-hud-ink:#f6fffb}
+#screen-map .map-soft-top{height:140px;z-index:3;background:linear-gradient(180deg,rgba(8,45,66,.28),transparent)}
+#screen-map .topbar{padding:calc(15px + env(safe-area-inset-top,0px)) 17px 0;align-items:center;gap:8px}
+#screen-map .brand{gap:9px;text-shadow:0 1px 2px rgba(12,51,58,.22)}
+#screen-map .brand-icon{width:42px;height:42px;border-radius:0;box-shadow:none;overflow:visible}
+#screen-map .brand-name{font-size:clamp(17px,5vw,21px);font-weight:850;letter-spacing:.3px}
+#screen-map .brand-sub{display:none}
+#screen-map .location-pill{min-height:41px;background:#10323dde;border:1px solid rgba(179,243,228,.42);padding:9px 12px;font-size:11px;letter-spacing:.75px;box-shadow:0 4px 12px rgba(21,48,55,.13)}
+#screen-map .top-metrics,#screen-map .camera-hint,#screen-map .backup-map-caption,#screen-map .ww-vector-status,#screen-map .map-safety{display:none!important}
+#screen-map .map-tools{z-index:605;top:clamp(126px,27%,232px);right:15px;display:flex;flex-direction:column;align-items:flex-end;gap:7px}
+#screen-map .map-tools-toggle{width:54px;height:54px;border:1.5px solid rgba(231,255,246,.38);border-radius:50%;display:grid;place-items:center;background:#10303be9;color:#fff;box-shadow:0 6px 16px #102d403b;transition:transform .16s,background .16s}
+#screen-map .map-tools-toggle:active{transform:scale(.94)}
+#screen-map .map-tools-toggle .tools-icon-close{display:none}
+#screen-map .map-tools.is-open .tools-icon-plus{display:none}
+#screen-map .map-tools.is-open .tools-icon-close{display:block}
+#screen-map .map-tools-panel{width:170px;max-height:calc(100dvh - var(--nav-h) - clamp(126px,27vh,232px) - 160px);overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:3px;padding:7px;border-radius:17px;background:#102d38f2;box-shadow:0 10px 30px #09252c63;border:1px solid #e4fff62e;scrollbar-width:thin}
+#screen-map .map-tools-panel[hidden]{display:none!important}
+#screen-map .map-tool{width:100%;height:40px;min-height:40px;padding:5px 10px;display:flex;gap:11px;align-items:center;justify-content:flex-start;background:transparent;color:#f0fcf7;border:0;border-radius:10px;box-shadow:none;backdrop-filter:none;text-align:left;font-size:12px;font-weight:640;letter-spacing:0}
+#screen-map .map-tool>svg,#screen-map .map-tool .tool-glyph{width:24px;min-width:24px;display:grid;place-items:center;text-align:center;font-size:23px;line-height:1;font-weight:500}
+#screen-map .map-tool[aria-pressed="true"]{color:#8ae9be}
+#screen-map .map-tool:hover,#screen-map .map-tool:focus-visible{background:#27505b}
+#screen-map .map-tools-panel .demo-only-tool.hidden{display:none!important}
+#screen-map .map-bottom-group{bottom:calc(12px + env(safe-area-inset-bottom,0px));left:0;right:0;align-items:center;gap:7px;padding:0 17px;z-index:600}
+#screen-map .nearby-card{pointer-events:auto;cursor:pointer;position:relative;width:min(100%,420px);max-width:420px;border-radius:18px;padding:11px 13px;min-height:58px;gap:11px;text-align:left;background:#112f38f0;color:#effff8;border:1px solid #e9fff53d;box-shadow:0 6px 20px #0c282a44;backdrop-filter:none}
+#screen-map .nearby-symbol{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;flex-shrink:0;background:#225a50;color:#92edc2;font-size:22px;box-shadow:none}
+#screen-map .nearby-glow{display:none}
+#screen-map .nearby-copy{flex:1;display:flex;min-width:0;gap:3px;align-items:flex-start}
+#screen-map .nearby-copy strong{color:#f3fff9;font-size:clamp(12px,3.5vw,15px);font-weight:800;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%}
+#screen-map .nearby-copy span{display:none;color:#b8d0ce;font-size:10px;line-height:1.2}
+#screen-map .nearby-card[aria-expanded="true"] .nearby-copy span{display:block}
+#screen-map .nearby-chevron{flex:0 0 auto;color:#d6f3e8;transition:transform .18s}
+#screen-map .nearby-card[aria-expanded="true"] .nearby-chevron{transform:rotate(90deg)}
+#screen-map .nearby-count{display:none}
+#screen-map .demo-controller{width:min(100%,420px);max-width:420px;padding:7px 10px;background:#122e38f0;border-color:#b2dacc33}
+#screen-map .demo-controller.hidden{display:none!important}
+#screen-map .controller-label{font-size:10px}
+#screen-map .controller-label span{font-size:9px}
+#screen-map .bottom-nav{backdrop-filter:none}
+#screen-map .maplibregl-ctrl-attrib{font-size:9px}
+#screen-map .ww-sky{background:linear-gradient(180deg,#2798eb 0%,#70c5fa 38%,#ceeced 73%,#e2f5dc 100%)}
+#screen-map .ww-sun{width:63px;height:63px;top:13%;right:15%;background:#ffefaf;box-shadow:none}
+#screen-map .ww-cloud{width:117px;height:29px;border-radius:0;background:#f1faf9ed;box-shadow:none;filter:none;clip-path:polygon(0 41%,16% 41%,16% 13%,52% 13%,52% 39%,76% 39%,76% 67%,100% 67%,100% 95%,0 95%)}
+#screen-map .ww-cloud-a{top:13%;left:7%;transform:scale(.86)}
+#screen-map .ww-cloud-b{top:21%;right:3%;transform:scale(.72)}
+#screen-map .ww-distant{top:36%;height:145px;opacity:.82;background:linear-gradient(180deg,#74b7dd 20%,#a6d9d2 80%);clip-path:polygon(0 91%,9% 72%,18% 94%,28% 46%,37% 90%,48% 65%,58% 96%,69% 50%,77% 90%,87% 69%,95% 95%,100% 82%,100% 100%,0 100%)}
+#screen-map .ww-horizon-mist{top:calc(36% - 13px);height:60px;background:linear-gradient(180deg,#e8f6e7b8,transparent)}
+#screen-map .ww-canvas-map{background:linear-gradient(180deg,#2798eb 0%,#70c5fa 35%,#a3d66f 100%)}
+#screen-map .backup-map-attribution{font-size:8px;opacity:.85}
+#screen-map .world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 4px #e3ffe7)}
+#screen-map .world-resource.in-range .world-resource-dot{box-shadow:0 0 0 3px #a3e8b57a}
+@media(max-height:700px){#screen-map .map-tools{top:125px}#screen-map .map-tools-panel{max-height:calc(100dvh - var(--nav-h) - 126px - 160px)}#screen-map .map-bottom-group{bottom:8px}}
+@media(max-width:360px){#screen-map .topbar{padding-left:11px;padding-right:11px}#screen-map .brand-icon{width:35px;height:35px}#screen-map .brand-name{font-size:17px}#screen-map .location-pill{padding:8px 9px}#screen-map .nearby-copy strong{font-size:12px}}
+@media(prefers-reduced-motion:reduce){#screen-map .map-tools-toggle,#screen-map .nearby-chevron{transition:none}}
+
 </style>
 </head>
 <body>
@@ -453,22 +510,35 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.1 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.5 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
     <div class="camera-hint">VEKTORWELT <span>· Straßen, Wasser und Wälder ohne Bildpixel</span></div>
-    <div class="map-tools">
-      <button id="btn-buildings" class="map-tool map-tool-labeled" title="Gebäude ein-/ausblenden" aria-label="3D-Gebäude ein- oder ausblenden" aria-pressed="true">🏠</button>
-      <button id="btn-tilt" class="map-tool map-tool-labeled" title="2D/3D-Ansicht wechseln" aria-label="2D/3D-Ansicht wechseln" aria-pressed="true">3D</button>
-      <button id="btn-rotate" class="map-tool" title="Kamera drehen" aria-label="Kamera um 45 Grad drehen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 8.5a8 8 0 1 1 0 7"/><path d="M4 3v6h6"/></svg></button>
-      <button id="btn-recenter" class="map-tool" title="Zum Standort springen" aria-label="Zu meinem Standort springen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg></button>
-      <button id="btn-zoom-in" class="map-tool" title="Vergrößern" aria-label="Karte vergrößern">+</button>
-      <button id="btn-zoom-out" class="map-tool" title="Verkleinern" aria-label="Karte verkleinern">−</button>
+    <div id="map-tools" class="map-tools">
+      <button id="btn-tools-toggle" class="map-tools-toggle" aria-label="Kartenwerkzeuge öffnen" title="Kartenwerkzeuge" aria-expanded="false" aria-controls="map-tools-panel">
+        <svg class="tools-icon-plus" viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <svg class="tools-icon-close" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
+      </button>
+      <div id="map-tools-panel" class="map-tools-panel" role="group" aria-label="Kartenwerkzeuge" hidden>
+        <button id="btn-buildings" class="map-tool map-tool-labeled" title="3D-Gebäude ein-/ausblenden" aria-label="3D-Gebäude ein- oder ausblenden" aria-pressed="true"><span class="tool-glyph">▣</span><span>Gebäude</span></button>
+        <button id="btn-tilt" class="map-tool map-tool-labeled" title="2D/3D-Ansicht wechseln" aria-label="2D/3D-Ansicht wechseln" aria-pressed="true"><span id="tool-tilt-icon" class="tool-glyph">◇</span><span id="tool-tilt-label">3D-Ansicht</span></button>
+        <button id="btn-rotate" class="map-tool" title="Kamera um 45 Grad drehen" aria-label="Kamera um 45 Grad drehen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 8.5a8 8 0 1 1 0 7"/><path d="M4 3v6h6"/></svg><span>Drehen</span></button>
+        <button id="btn-recenter" class="map-tool" title="Zu meinem Standort springen" aria-label="Zu meinem Standort springen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Zentrieren</span></button>
+        <button id="btn-zoom-in" class="map-tool" title="Vergrößern" aria-label="Karte vergrößern"><span class="tool-glyph">+</span><span>Zoom +</span></button>
+        <button id="btn-zoom-out" class="map-tool" title="Verkleinern" aria-label="Karte verkleinern"><span class="tool-glyph">−</span><span>Zoom −</span></button>
+        <button id="btn-demo-controls" class="map-tool demo-only-tool" title="Demo-Pfeiltasten ein-/ausblenden" aria-label="Demo-Pfeiltasten ein- oder ausblenden" aria-pressed="false"><span class="tool-glyph">✥</span><span>Demo-Pfeile</span></button>
+        <button id="btn-map-technical" class="map-tool" title="Kartenstatus und erneutes Laden" aria-label="Kartenstatus prüfen und Vektoransicht erneut laden"><span class="tool-glyph">ⓘ</span><span>Kartenstatus</span></button>
+      </div>
     </div>
     <div class="map-bottom-group">
-      <div class="nearby-card"><div class="nearby-symbol"><span class="nearby-glow"></span>✦</div><div class="nearby-copy"><strong id="nearby-title">Entdecke die Umgebung</strong><span id="nearby-subtitle">Fundstellen in deiner Nähe</span></div><span id="nearby-counter" class="nearby-count">—</span></div>
-      <div id="demo-controller" class="demo-controller hidden"><span class="controller-label">TESTMODUS <span>· Tippe die Karte zum Versetzen</span></span><div class="controller-actions"><button data-move="north" aria-label="Nach Norden bewegen">↑</button><button data-move="west" aria-label="Nach Westen bewegen">←</button><button data-move="south" aria-label="Nach Süden bewegen">↓</button><button data-move="east" aria-label="Nach Osten bewegen">→</button></div></div>
+      <button type="button" id="nearby-card" class="nearby-card" aria-expanded="false" aria-label="Fundstellen in der Nähe, Details anzeigen">
+        <span class="nearby-symbol" aria-hidden="true">✦</span>
+        <span class="nearby-copy"><strong id="nearby-title">Entdecke die Umgebung</strong><span id="nearby-subtitle">Fundstellen in deiner Nähe</span></span>
+        <svg class="nearby-chevron" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        <span id="nearby-counter" class="nearby-count" aria-hidden="true">—</span>
+      </button>
+      <div id="demo-controller" class="demo-controller hidden"><span class="controller-label">DEMO-MODUS <span>· Auf Karte tippen oder Pfeile verwenden</span></span><div class="controller-actions"><button data-move="north" aria-label="Nach Norden bewegen">↑</button><button data-move="west" aria-label="Nach Westen bewegen">←</button><button data-move="south" aria-label="Nach Süden bewegen">↓</button><button data-move="east" aria-label="Nach Osten bewegen">→</button></div></div>
       <p class="map-safety">Spielkarte · Virtuelle Fundstellen nur von sicheren Orten sammeln</p>
     </div>
   </main>
@@ -541,7 +611,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.1 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.5 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -562,8 +632,8 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.4'; // Buche: reduzierte Low-Poly-Sammelansicht; Mechanik unveraendert
-const START_ZOOM = 20.5; // maximal erlaubter Startzoom; manuell weiterhin verkleinerbar
+const VERSION = '0.4.5'; // Hauptbildschirm: klare Low-Poly-Welt, minimales HUD, ausklappbare Kartensteuerung
+const START_ZOOM = window.innerWidth<360?18.7:19.0; // Gut lesbarer 30-m-Kreis auch auf kleinen Handys; bis 20.5 zoombar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
 const REACH_METERS = 30;
@@ -1377,11 +1447,11 @@ const OSM_BUILDING_ENDPOINTS = [
 const BUILDING_SESSION_CACHE = new Map();
 const BUILDING_CACHE_TTL = 15 * 60 * 1000;
 const BUILDING_GRID_METERS = 260;
-const COLLECT_RING_METERS = 50;
+const COLLECT_RING_METERS = REACH_METERS; // Der sichtbare Ring entspricht exakt dem Sammelradius.
 const WORLD_PALETTE={
-  grass:[137,197,115], park:[115,184,100], forest:[87,153,87],
-  water:[86,169,222], road:[33,36,39], path:[57,62,64],
-  built:[151,157,158], roof:[117,127,130]
+  grass:[164,213,109], park:[121,190,93], forest:[80,149,85],
+  water:[72,172,233], road:[100,108,105], path:[153,143,118],
+  built:[171,170,151], roof:[132,143,137]
 };
 function buildingRegion(pos){
   const m=latLngToMeters(pos.lat,pos.lng);
@@ -1495,7 +1565,7 @@ class BackupMap {
     this._tileLoading=0;this._tileMaxConcurrent=5;
     this.vectorTiles=new Map();this._vectorActive=0;this._vectorQueued=0;this._vectorSeenReady=0;this._vectorLastFailure=0;this._vectorLastPlace='';this._vectorBuildingsKey='';this._vectorEnabled=true;this._vectorStatus='loading';
     this.el.innerHTML='';this.el.classList.add('backup-map','ww-canvas-map');
-    this.el.style.setProperty('--ww-horizon','32%');
+    this.el.style.setProperty('--ww-horizon','36%');
     this.el.innerHTML='<div class="ww-sky"><div class="ww-sun"></div><div class="ww-cloud ww-cloud-a"></div><div class="ww-cloud ww-cloud-b"></div><div class="ww-distant"></div></div>';
     this.canvas=document.createElement('canvas');this.canvas.className='ww-world-canvas';
     this.ctx=this.canvas.getContext('2d',{alpha:true,desynchronized:false});
@@ -1585,10 +1655,10 @@ class BackupMap {
     const r=this.el.getBoundingClientRect(),w=r.width,h=r.height;
     const z=Math.floor(this.zoom),scale=2**(this.zoom-z);
     const topDown=this.pitch<20;
-    const horizon=topDown?0:.32*h;
-    const playerY=topDown?h/2:.73*h;
+    const horizon=topDown?0:.36*h;
+    const playerY=topDown?h/2:.68*h;
     return {w,h,z,scale,center:world(this.center.lat,this.center.lng,z),horizon,
-      playerY,focal:Math.max(340,h*.73),topDown};
+      playerY,focal:Math.max(340,h*.82),topDown};
   }
   // Forward projection, matching the ground canvas inverse exactly.
   projectOffset(dx,dy,p){
@@ -1888,6 +1958,33 @@ class BackupMap {
     }
     return count>=2;
   }
+  drawGroundTexture(p){
+    // Sparse deterministic visual texture, not geolocated interactive objects.
+    // Draw beneath real streets/water/landcover; no terrain or POI is invented.
+    const pos=this.center;
+    if(!pos)return;
+    const m=latLngToMeters(pos.lat,pos.lng);
+    const grid=23;
+    const gx=Math.floor(m.x/grid),gy=Math.floor(m.y/grid);
+    const ctx=this.ctx,dpr=this._renderDpr;
+    ctx.save();ctx.setTransform(dpr,0,0,dpr,0,0);
+    for(let x=-7;x<=7;x++)for(let y=-7;y<=7;y++){
+      const ix=gx+x,iy=gy+y;
+      const seed=(Math.imul(ix+1024,73856093)^Math.imul(iy-451,19349663))>>>0;
+      if(seed%7!==0)continue;
+      const deltaX=(ix+.5)*grid,deltaY=(iy+.5)*grid;
+      const geoPos=metersToLatLng(deltaX,deltaY);
+      const q=this.pointOnGround(geoPos,p);
+      if(!q||q.x< -30||q.x>p.w+30||q.y<p.horizon+10||q.y>p.h+25)continue;
+      const f=Math.max(.28,Math.min(1.3,(q.y-p.horizon)/Math.max(1,p.playerY-p.horizon)));
+      const r=(5+seed%8)*f;
+      ctx.fillStyle=seed%3===0?'rgba(66,155,68,.18)':'rgba(215,237,126,.24)';
+      ctx.beginPath();ctx.moveTo(q.x-r,q.y+r*.28);ctx.lineTo(q.x-r*.55,q.y-r*.48);
+      ctx.lineTo(q.x+r*.23,q.y-r*.6);ctx.lineTo(q.x+r,q.y+r*.24);
+      ctx.closePath();ctx.fill();
+    }
+    ctx.restore();
+  }
   drawVectorGround(p){
     const ctx=this.ctx,dpr=this._renderDpr;
     const y0=p.topDown?0:Math.round(p.horizon+1);
@@ -1907,17 +2004,17 @@ class BackupMap {
         if(bb && (bb[2]<localX-radius || bb[0]>localX+radius || bb[3]<localY-radius || bb[1]>localY+radius))continue;
         const cl=String(f.props.class||'').toLowerCase(),sub=String(f.props.subclass||'').toLowerCase();
         let color=null,kind='fill',width=1;
-        if(name==='landcover' && f.type===3){color=cl==='wood'?'#57945a':cl==='grass'?'#7dbb70':cl==='farmland'?'#9fbe78':'#91bf7c';}
+        if(name==='landcover' && f.type===3){color=cl==='wood'?'#50975d':cl==='grass'?'#81c46a':cl==='farmland'?'#b5d583':'#92c97b';}
         else if(name==='landuse' && f.type===3){
-          color=/commercial|industrial|residential|retail|school|university|hospital|railway|garages|parking/.test(cl)?'#abb2b5':
+          color=/commercial|industrial|residential|retail|school|university|hospital|railway|garages|parking/.test(cl)?'#d0d2b6':
             /forest|wood|park|garden|grass|golf|orchard|meadow/.test(cl+' '+sub)?'#75af6f':'#94c37e';
         }
-        else if(name==='water' && f.type===3){color='#57aee1';}
-        else if(name==='building' && f.type===3){if(!this.showBuildings)continue;color='#a4adb2';}
-        else if(name==='waterway' && f.type===2){color='#57aee1';kind='line';width=cl==='river'?8:cl==='canal'?6:3;}
+        else if(name==='water' && f.type===3){color='#4ab5eb';}
+        else if(name==='building' && f.type===3){if(!this.showBuildings)continue;color='#b9c7bd';}
+        else if(name==='waterway' && f.type===2){color='#4ab5eb';kind='line';width=cl==='river'?8:cl==='canal'?6:3;}
         else if(name==='transportation'){
           if(/rail|aerialway|ferry/.test(cl))continue;
-          color=/path|track|footway|pedestrian|cycleway|steps/.test(cl)?'#556266':'#252d33';kind=f.type===3?'fill':'line';
+          color=/path|track|footway|pedestrian|cycleway|steps/.test(cl)?'#b7a98d':'#737d76';kind=f.type===3?'fill':'line';
           width=/motorway|trunk/.test(cl)?19:/primary|secondary/.test(cl)?16:/tertiary/.test(cl)?13:/service|minor/.test(cl)?8:/path|track/.test(cl)?3.5:10;
           width*=Math.max(.34,Math.min(1.25,2**((this.zoom-19.5)*.48)));
         }
@@ -2048,8 +2145,10 @@ class BackupMap {
     ctx.clearRect(0,0,w,h);
     const y0=p.topDown?0:Math.round(p.horizon+1);
     const bg=ctx.createLinearGradient(0,y0,0,h);
-    bg.addColorStop(0,'#a6d89a');bg.addColorStop(.45,'#91c783');bg.addColorStop(1,'#8ec681');
+    bg.addColorStop(0,'#b8dd91');bg.addColorStop(.45,'#a3d66f');bg.addColorStop(1,'#8ac95f');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
+    // Decorative patches add low-poly depth without replacing any real geometry.
+    this.drawGroundTexture(p);
     // Fetch real geometry, not 256px raster images. WebGL is never required.
     this.fetchVectorTiles(p);
     if(this._vectorSeenReady){
@@ -2066,7 +2165,7 @@ class BackupMap {
     if(!p.topDown){
       // Thin distant haze blurs the transition into the horizon naturally.
       const mist=ctx.createLinearGradient(0,p.horizon,0,p.horizon+110);
-      mist.addColorStop(0,'rgba(179,219,166,.48)');
+      mist.addColorStop(0,'rgba(203,231,170,.34)');
       mist.addColorStop(1,'rgba(226,244,224,0)');
       ctx.setTransform(dpr,0,0,dpr,0,0);
       ctx.fillStyle=mist;ctx.fillRect(0,p.horizon,w,110);
@@ -2097,17 +2196,9 @@ class BackupMap {
     ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);
     for(const pt of points.slice(1))ctx.lineTo(pt.x,pt.y);
     ctx.closePath();
-    const fill=ctx.createRadialGradient(center.x,center.y,4,center.x,center.y,70);
-    fill.addColorStop(0,'rgba(98,222,186,.08)');
-    fill.addColorStop(1,'rgba(98,222,186,.02)');
-    ctx.fillStyle=fill;ctx.fill();
-    ctx.lineWidth=2;ctx.strokeStyle='rgba(221,255,244,.95)';ctx.stroke();
-    ctx.setLineDash([7,6]);ctx.lineWidth=1.5;ctx.strokeStyle='rgba(77,205,164,.75)';ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle='rgba(17,39,48,.82)';ctx.strokeStyle='rgba(210,248,237,.85)';ctx.lineWidth=1.25;
-    const labelW=58,labelH=22,labelX=center.x-29,labelY=Math.max(p.topDown?8:p.horizon+6,center.y-58);
-    ctx.beginPath();ctx.roundRect(labelX,labelY,labelW,labelH,9);ctx.fill();ctx.stroke();
-    ctx.fillStyle='#dffcf0';ctx.font='800 11px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText('50 m',center.x,labelY+11.5);
+    ctx.fillStyle='rgba(169,243,193,.055)';ctx.fill();
+    ctx.lineWidth=3.6;ctx.strokeStyle='rgba(49,125,91,.20)';ctx.stroke();
+    ctx.lineWidth=1.65;ctx.strokeStyle='rgba(241,255,239,.92)';ctx.stroke();
     ctx.restore();
   }
   // Readable billboard illustrations are kept at a fixed pixel size.
@@ -2366,15 +2457,23 @@ function requestVectorStart(){
   if(!state.mapReady){setTimeout(requestVectorStart,100);return;}
   stage3DMap();
 }
+function updateTiltButton(is3d){
+  const label=document.getElementById('tool-tilt-label');
+  const icon=document.getElementById('tool-tilt-icon');
+  if(label)label.textContent=is3d?'3D-Ansicht':'2D-Ansicht';
+  if(icon)icon.textContent=is3d?'◇':'▦';
+  const b=document.getElementById('btn-tilt');
+  if(b)b.setAttribute('aria-pressed',String(is3d));
+}
 function setMapStatus(label){
   if(state.mapKind==='maplibre')vectorStatus('Bereit');
   else if(label==='2.5D')vectorStatus(vectorUpgrade.reason||'WebGL nicht verfügbar',true);
-  $('btn-tilt').textContent=state.map?.getPitch()>=25?'3D':'2D';
+  updateTiltButton(state.map?.getPitch()>=25);
 }
 const VECTOR_PALETTE=Object.freeze({
-  grass:'#8bc576',forest:'#57945a',park:'#75b36b',farmland:'#9dc783',
-  urban:'#969fa2',building:'#a2aaae',roof:'#7c898f',road:'#292d30',
-  path:'#50595b',water:'#55afe4',roadEdge:'#b9c4bd'
+  grass:'#a3d66f',forest:'#50975d',park:'#81c46a',farmland:'#b5d583',
+  urban:'#d0d2b6',building:'#b9c7bd',roof:'#8da6a2',road:'#737d76',
+  path:'#b7a98d',water:'#4ab5eb',roadEdge:'#dce0ba'
 });
 function applyVectorPalette(map){
   const c=VECTOR_PALETTE;
@@ -2488,7 +2587,7 @@ function stage3DMap(){
     const pos=getPosition()||state.demoPosition;
     next=new maplibregl.Map({
       container:el,style:'https://tiles.openfreemap.org/styles/bright',
-      center:[pos.lng,pos.lat],zoom:START_ZOOM,pitch:60,bearing:0,
+      center:[pos.lng,pos.lat],zoom:START_ZOOM,pitch:67,bearing:0,
       minZoom:MIN_ZOOM,maxZoom:MAX_ZOOM,maxPitch:70,
       antialias:true,renderWorldCopies:false,failIfMajorPerformanceCaveat:false,
       attributionControl:{compact:true}
@@ -2534,7 +2633,7 @@ function attachMapEvents(map){
   map.on('pitchend',()=>{
     if(state.map!==map)return;
     const is3d=map.getPitch()>=25;
-    $('btn-tilt').textContent=is3d?'3D':'2D';
+    updateTiltButton(is3d);
     $('btn-tilt').setAttribute('aria-pressed',String(is3d));
   });
   map.on('click',event=>{
@@ -2563,7 +2662,7 @@ function startBackupMap(reason){
   try{old?.remove();}catch(e){console.warn(e);}
   $('map').innerHTML='';
   try{
-    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:START_ZOOM,pitch:62,bearing:0});
+    const map=new BackupMap({container:'map',center:[state.demoPosition.lng,state.demoPosition.lat],zoom:START_ZOOM,pitch:67,bearing:0});
     state.map=map;state.mapKind='backup';
     attachMapEvents(map);
     map.on('load',()=>finalizeMap(map,'backup'));
@@ -2653,8 +2752,8 @@ function rangePolygon(pos,meters=COLLECT_RING_METERS){
 function addCollectionRangeLayer(){
   if(!state.map || state.map.getSource('collect-range'))return;
   state.map.addSource('collect-range',{type:'geojson',data:rangePolygon(null,0)});
-  state.map.addLayer({id:'collect-range-fill',type:'fill',source:'collect-range',paint:{'fill-color':'#63e2b8','fill-opacity':0.07}});
-  state.map.addLayer({id:'collect-range-line',type:'line',source:'collect-range',paint:{'line-color':'#d9fff3','line-width':2,'line-opacity':0.9,'line-dasharray':[2,2]}});
+  state.map.addLayer({id:'collect-range-fill',type:'fill',source:'collect-range',paint:{'fill-color':'#aaf1b4','fill-opacity':0.055}});
+  state.map.addLayer({id:'collect-range-line',type:'line',source:'collect-range',paint:{'line-color':'#f4fff1','line-width':2.1,'line-opacity':0.93}});
 }
 function makePlayerElement(){
   const elem=document.createElement('div');elem.className='world-player';
@@ -2725,7 +2824,8 @@ function updateModeUI() {
   const gps=state.mode==='gps';
   $('mode-label').textContent=gps?'GPS':'DEMO';
   $('status-badge').classList.toggle('is-gps',gps);
-  $('demo-controller').classList.toggle('hidden',gps);
+  if(gps)demoArrowsOpen=false;
+  updateDemoArrows();
   $('gps-message').textContent=gps
     ? (state.position?`GPS aktiv · Genauigkeit ungefähr ${Math.round(state.accuracy||0)} m`:'GPS-Standort wird gesucht. Bitte Standortfreigabe prüfen.')
     : 'Demo aktiv · Karte antippen oder Pfeiltasten verwenden. Eigener Testspielstand.';
@@ -3102,9 +3202,28 @@ function renderPanels() {
     return `<article class="lexicon-entry ${known?'':'locked'}"><div class="lexicon-icon">${known?item.icon:'❔'}</div><div><strong>${known?item.name:'Unbekanntes Material'}</strong><p>${known?item.note:'Noch nicht entdeckt. Sammle weitere Rohstoffe!'}</p></div><div class="lexicon-tag">${known?'✓':'🔒'}</div></article>`;
   }).join('');
 }
+let worldToolsOpen=false;
+let demoArrowsOpen=false;
+function setWorldTools(open){
+  worldToolsOpen=Boolean(open);
+  const panel=document.getElementById('map-tools-panel');
+  const toggle=document.getElementById('btn-tools-toggle');
+  if(!panel||!toggle)return;
+  panel.hidden=!worldToolsOpen;
+  toggle.setAttribute('aria-expanded',String(worldToolsOpen));
+  toggle.setAttribute('aria-label',worldToolsOpen?'Kartenwerkzeuge schließen':'Kartenwerkzeuge öffnen');
+  document.getElementById('map-tools')?.classList.toggle('is-open',worldToolsOpen);
+}
+function updateDemoArrows(){
+  const visible=state.mode==='demo'&&demoArrowsOpen;
+  document.getElementById('demo-controller')?.classList.toggle('hidden',!visible);
+  document.getElementById('btn-demo-controls')?.classList.toggle('hidden',state.mode!=='demo');
+  document.getElementById('btn-demo-controls')?.setAttribute('aria-pressed',String(visible));
+}
 function setTab(tab) {
   if(workshopUI.id&&tab!=='factory')wsClose();
   state.activeTab=tab;
+  if(tab!=='map')setWorldTools(false);
   for (const name of ['map','factory','inventory','collection','settings']) $('screen-'+name).classList.toggle('active',name===tab);
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('selected',el.dataset.tab===tab));
   if(tab==='map' && state.mapReady)setTimeout(()=>state.map.resize(),60);
@@ -3148,6 +3267,23 @@ function bind() {
   });
   document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
   $('status-badge').addEventListener('click',()=>setTab('settings'));
+  $('btn-tools-toggle').addEventListener('click',()=>setWorldTools(!worldToolsOpen));
+  $('btn-demo-controls').addEventListener('click',()=>{demoArrowsOpen=!demoArrowsOpen;updateDemoArrows();});
+  $('btn-map-technical').addEventListener('click',()=>{
+    const info=state.mapKind==='maplibre'?'3D-Vektorkarte aktiv':state.map?._vectorStatus==='ready'?'Canvas-Vektorkarte aktiv':'Kartenstatus: '+(state.map?._vectorStatus||'nicht bereit');
+    toast(info);
+    if(state.mapKind==='backup' && state.map?._vectorStatus==='offline')state.map.retryCanvasVectors?.();
+  });
+  $('nearby-card').addEventListener('click',()=>{
+    const card=$('nearby-card');
+    const expanded=card.getAttribute('aria-expanded')!=='true';
+    card.setAttribute('aria-expanded',String(expanded));
+    card.setAttribute('aria-label',expanded?'Fundstellen-Details ausblenden':'Fundstellen-Details anzeigen');
+  });
+  document.addEventListener('pointerdown',e=>{
+    if(worldToolsOpen && !e.target.closest('#map-tools'))setWorldTools(false);
+  });
+
   $('btn-recenter').addEventListener('click',recenter);
   $('btn-rotate').addEventListener('click',()=>{
     if(!state.mapReady)return;
@@ -3178,7 +3314,7 @@ function bind() {
     if(!state.mapReady)return;
     const is3d=state.map.getPitch()<25;
     state.map.easeTo({pitch:is3d?(state.mapKind==='maplibre'?70:62):0,duration:520});
-    $('btn-tilt').textContent=is3d?'3D':'2D';
+    updateTiltButton(is3d);
     $('btn-tilt').setAttribute('aria-pressed',String(is3d));
   });
   $('btn-zoom-in').addEventListener('click',()=>state.map?.zoomIn());
@@ -3195,7 +3331,7 @@ function bind() {
   $('btn-reset').addEventListener('click',resetProfile);
   document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>moveDemo(b.dataset.move)));
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){if(!$('tree-scene').classList.contains('hidden'))closeTreeScene();else closeSheet();}
+    if(e.key==='Escape'){if(worldToolsOpen)setWorldTools(false);else if(!$('tree-scene').classList.contains('hidden'))closeTreeScene();else closeSheet();}
     if(state.mode==='demo' && state.activeTab==='map' && $('modal-backdrop').classList.contains('hidden')) {
       const directions={ArrowUp:'north',ArrowDown:'south',ArrowLeft:'west',ArrowRight:'east'};
       if(directions[e.key]){e.preventDefault();moveDemo(directions[e.key]);}
