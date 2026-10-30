@@ -1,47 +1,30 @@
-WELTWERK v0.4.2 – Buche & Sammelpunkte
-=====================================
+WELTWERK v0.4.3 — BUCHEN-DESIGN
+===================================
 
 INSTALLATION
-------------
-1. Unter Mehr -> Export (JSON) zuerst den alten Spielstand sichern.
-2. Die index.html dieser ZIP im GitHub-Projekt statt der bisherigen index.html verwenden.
-3. Neu laden; eventuell Browsercache aktualisieren.
-4. Starte im Demo- oder GPS-Modus; Bäume auf der Karte sind jetzt Buchen.
+1. Alten Spielstand sichern: Mehr -> Export (JSON).
+2. Die index.html aus dieser ZIP entpacken.
+3. Bestehende index.html in deinem Projekt ersetzen und Seite neu laden.
+4. Beim Testen eine Buche im Demo-Modus sammeln.
 
-NEUES SAMMELSYSTEM
-------------------
-Normale Sammelpunkte (SP) pro Buche:
-- Mindestens 3 SP: 100 %
-- Mindestens 4 SP: 50 %
-- Mindestens 5 SP: 15 %
-- Mindestens 6 SP:  5 %
-Exakte Aufteilung: 3 SP 50 %, 4 SP 35 %, 5 SP 10 %, 6 SP 5 %.
+NEU
+- Größere Low-Poly-Buche mit vielen grünen Blattgruppen, Ästen und kräftigem Stamm.
+- Ruhiger Naturhintergrund; kompakte obere Statuszeile.
+- Kleinere, gold leuchtende Fundpunkte; bereits eingesammelte Punkte mit grünen Häkchen.
+- Seltene Ereignisse (virtueller Bienenstock / virtuelles Vogelnest) direkt am Baum sichtbar.
+- Eigene Auswahlansicht mit drei Extra-Sammelpunkten pro Ereignis.
+- Kompakte Fundkarten unten mit Itemnamen, Mengen und Seltenheitsfarben.
+- Kurze Fundanimation: Basic schnell, ungewöhnliche/seltene/epische Items mit Fundkarte.
+- CSS-Animationen können über die Geräteeinstellung "Bewegung reduzieren" deaktiviert werden.
 
-Jeder normale SP liefert genau 1 Item:
-- Holz 45 % (Basic)
-- Blatt 20 % (Basic)
-- Ast 15 % (Basic)
-- Moos 7 % (Ungewöhnlich)
-- Harz 6 % (Ungewöhnlich)
-- Pilz 4 % (Selten)
-- Buchecker 3 % (Selten)
+UNVERÄNDERT
+- Exakte Buche-Verteilung: 3 SP 50%, 4 SP 35%, 5 SP 10%, 6 SP 5%.
+  Damit mind. 5 SP 15%, mind. 6 SP 5%.
+- Itemverteilung: Holz 45%, Blatt 20%, Ast 15%, Moos 7%, Harz 6%, Pilz 4%, Buchecker 3%.
+- Seltene Ereignisse unabhängig jeweils 1% pro Buche; Bienenstock 3 SP
+  (Honig/Wachs je 50%), Vogelnest 3 SP (Ei/Ast je 50%).
+- Sofortige Inventargutschrift, begonnene Sammelrunde speichern und spaeter fortsetzen.
+- Fabrik-/GPS-/Inselmechanik, manueller Produktionsstart und 60-Sekunden-Saege.
 
-Sonderereignisse, unabhängig voneinander, je 1 % pro Buche:
-- Bienenstock, 3 extra SP: Honig 50 % / Wachs 50 % pro SP (Episch)
-- Vogelnest, 3 extra SP: Ei 50 % (Episch) / Ast 50 % (Basic) pro SP
-- Beide Ereignisse können zugleich vorkommen.
-
-Pro SP wird ein einziger Itemwurf durchgeführt. Die Funde werden erst beim Tippen
-enthüllt und sofort im gemeinsamen Rucksack gespeichert. Ein angefangener Baum
-wird beim Schließen und erneuten Öffnen nicht erneut ausgewürfelt. Nach kompletter
-Sammlung startet eine 60-minütige Regeneration.
-
-BEACHTEN
---------
-- GPS-Sammelradius bleibt 30 m.
-- Bestehendes Fabrik-, Insel- und Produktionssystem aus v0.4.1 bleibt enthalten.
-- Die bisherigen Baum-Items bleiben für die Kompatibilität in alten Spielständen;
-  neue Buchen liefern nur die oben aufgeführten Items.
-- Frühere, bereits begonnene Baum-Sammelrunden bleiben erhalten, bis sie beendet
-  und nach der Regeneration neu gewürfelt werden.
-- Nester und alle Sammelobjekte sind rein virtuelle Spielereignisse.
+Hinweis: Nur Designänderung und UI. Kein neues Collectible oder neues Rezept.
+Die Szenengrafik besteht aus eingebetteten SVG-Vektoren, ohne weitere Bilddateien.
