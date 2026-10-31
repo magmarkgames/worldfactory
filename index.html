@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.5 – Ruhigere Spielwelt, reduziertes HUD und klappbare Kartensteuerung.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.5</title>
+  <meta name="description" content="WELTWERK v0.4.11 – Feste Navigation, weicher Horizont und runde Wolken.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.11</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:78px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-size:14px}button,input{font:inherit}button{cursor:pointer;color:inherit}button:disabled{opacity:.48;cursor:not-allowed}button:focus-visible{outline:3px solid var(--mint)}.hidden{display:none!important}#app{width:100%;height:100%;height:100dvh;position:relative;overflow:hidden;background:var(--bg)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-size:14px}button,input{font:inherit}button{cursor:pointer;color:inherit}button:disabled{opacity:.48;cursor:not-allowed}button:focus-visible{outline:3px solid var(--mint)}.hidden{display:none!important}#app{width:100%;height:100%;height:100dvh;height:var(--ww-visible-height,100dvh);position:relative;overflow:hidden;background:var(--bg)}
 .screen{position:absolute;inset:0 0 calc(var(--nav-h) + env(safe-area-inset-bottom,0px));display:none;overflow:hidden}.screen.active{display:block}.screen-map{background:#c9d7cd}#map{position:absolute;inset:0;z-index:0;background:#dce9df}
 .map-soft-top{pointer-events:none;position:absolute;inset:0 0 auto;height:145px;background:linear-gradient(180deg,rgba(7,24,29,.46),rgba(7,24,29,.15) 45%,transparent);z-index:401}.topbar{z-index:600;pointer-events:none;display:flex;justify-content:space-between;align-items:center;gap:12px;position:absolute;top:0;left:0;right:0;padding:calc(14px + env(safe-area-inset-top,0px)) 17px 8px}.topbar>*{pointer-events:auto}.brand{display:flex;align-items:center;gap:10px;color:white;text-shadow:0 1px 8px #15272770}.brand-icon{width:46px;height:46px;border-radius:15px;overflow:hidden;box-shadow:0 4px 17px #09191a58}.brand-icon img{width:100%;height:100%;display:block}.brand-name{font-size:19px;font-weight:850;letter-spacing:.7px;line-height:1.12}.brand-period,.dot{color:var(--mint)}.brand-sub{font-size:9px;letter-spacing:2.3px;font-weight:800;color:#c4dfdb;margin-top:4px}.brand-sub span{color:var(--mint)}.location-pill{display:flex;align-items:center;gap:8px;background:#11252de8;border:1px solid #82dec166;border-radius:100px;padding:10px 12px;font-size:10px;font-weight:900;letter-spacing:1.2px;box-shadow:0 5px 20px #0b182c3a}.live-dot{background:#f2c675;width:7px;height:7px;border-radius:50%;box-shadow:0 0 0 3px #f2c67522}.location-pill.is-gps .live-dot{background:#71e5b4;box-shadow:0 0 0 3px #71e5b422}.top-metrics{position:absolute;left:17px;top:calc(79px + env(safe-area-inset-top,0px));display:flex;gap:8px;z-index:600;pointer-events:none}.metric{display:flex;gap:5px;align-items:center;padding:8px 10px;border-radius:12px;background:#10252ddd;color:#d5e5e7;font-size:10px;box-shadow:0 3px 12px #17251a16;backdrop-filter:blur(12px)}.metric strong{color:white;font-size:13px}.metric-icon{font-size:13px}
 .map-tools{position:absolute;right:15px;top:calc(145px + env(safe-area-inset-top,0px));z-index:600;display:flex;flex-direction:column;gap:8px}.map-tool{width:44px;height:44px;border:1px solid #d3e5de9a;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#142e36e8;color:#eaf8f4;font-size:26px;box-shadow:0 4px 15px #1b333531;backdrop-filter:blur(15px)}.map-tool:active{transform:scale(.95)}.map-bottom-group{position:absolute;bottom:37px;left:15px;right:15px;z-index:600;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:flex-start}.nearby-card{pointer-events:none;display:flex;align-items:center;background:#12242ceF;border:1px solid #ffffff1a;border-radius:17px;padding:10px 11px;gap:10px;max-width:min(365px,100%);width:100%;box-shadow:0 8px 28px #101f2990;backdrop-filter:blur(15px)}.nearby-symbol{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#264b48,#1a353c);display:grid;place-items:center;flex-shrink:0;color:var(--mint);font-size:20px;position:relative}.nearby-glow{position:absolute;inset:4px;border-radius:9px;background:#57dfa015;box-shadow:inset 0 0 12px #67f4b038}.nearby-copy{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.nearby-copy strong{font-size:13px}.nearby-copy span{font-size:11px;color:var(--muted)}.nearby-count{display:grid;place-items:center;border-radius:11px;background:#2b5048;color:var(--mint);min-width:34px;height:34px;font-weight:900;font-size:13px}.map-safety{margin:0 2px;color:#25454b;font-size:9px;font-weight:750;text-shadow:0 1px 3px #fff;background:#ffffffc9;border-radius:8px;padding:3px 6px;max-width:calc(100% - 15px)}
@@ -521,13 +521,15 @@
 #screen-map .controller-label span{font-size:9px}
 #screen-map .bottom-nav{backdrop-filter:none}
 #screen-map .maplibregl-ctrl-attrib{font-size:9px}
-#screen-map .ww-sky{background:linear-gradient(180deg,#2e96e4 0%,#6fc3f5 32%,#ccecf2 68%,#e3f4da 100%)}
+#screen-map .ww-sky{background:linear-gradient(180deg,#2e96e4 0%,#6fc3f5 24%,#a6d9e6 29%,#b8dd91 33%,#a3d66f 39%,#a3d66f 100%)}
 #screen-map .ww-sun{width:60px;height:60px;top:13%;right:15%;background:#f7e8a0;box-shadow:0 0 0 6px #fff7cc22}
-#screen-map .ww-cloud{width:117px;height:29px;border-radius:0;background:#f1faf9ed;box-shadow:none;filter:none;clip-path:polygon(0 41%,16% 41%,16% 13%,52% 13%,52% 39%,76% 39%,76% 67%,100% 67%,100% 95%,0 95%)}
+#screen-map .ww-cloud{width:112px;height:26px;border-radius:100px;background:#f6fdffed;box-shadow:none;filter:none;clip-path:none;opacity:.95}
+#screen-map .ww-cloud::before{content:"";position:absolute;left:17px;bottom:8px;width:49px;height:39px;background:inherit;border-radius:50%}
+#screen-map .ww-cloud::after{content:"";position:absolute;right:17px;bottom:7px;width:38px;height:31px;background:inherit;border-radius:50%}
 #screen-map .ww-cloud-a{top:13%;left:7%;transform:scale(.86)}
 #screen-map .ww-cloud-b{top:21%;right:3%;transform:scale(.72)}
 #screen-map .ww-distant{top:36%;height:145px;opacity:.82;background:linear-gradient(180deg,#74b7dd 20%,#a6d9d2 80%);clip-path:polygon(0 91%,9% 72%,18% 94%,28% 46%,37% 90%,48% 65%,58% 96%,69% 50%,77% 90%,87% 69%,95% 95%,100% 82%,100% 100%,0 100%)}
-#screen-map .ww-horizon-mist{top:calc(33% - 12px);height:56px;background:linear-gradient(180deg,#edf8e8a6,transparent)}
+#screen-map .ww-horizon-mist{display:none!important}
 #screen-map .ww-canvas-map{background:linear-gradient(180deg,#2798eb 0%,#70c5fa 35%,#a3d66f 100%)}
 #screen-map .backup-map-attribution{font-size:8px;opacity:.85}
 #screen-map .world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 4px #e3ffe7)}
@@ -541,6 +543,9 @@
 .beech-v044 .beech-branch-connectors{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 .beech-v044 .beech-build-label{display:inline-block;font-size:10px;font-weight:650;color:#467586;letter-spacing:.15px;vertical-align:middle;margin-left:4px}
 .beech-v044 .beech-part:active{filter:brightness(1.1)}
+/* v0.4.11: always-visible fixed bottom navigation in the app viewport. */
+#app>.bottom-nav{height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));min-height:var(--nav-h);bottom:0;align-items:stretch}
+#app>.bottom-nav .nav-item{height:100%;min-height:0}
 </style>
 </head>
 <body>
@@ -549,7 +554,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.10 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.11 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -650,7 +655,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.10 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.11 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -671,7 +676,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.8'; // Buche: Tippen, Konturumrandung, verbundenes Geäst und korrektes Updatepaket
+const VERSION = '0.4.11'; // Buche: Tippen, Konturumrandung, verbundenes Geäst und korrektes Updatepaket
 const START_ZOOM = window.innerWidth<360?18.35:18.65; // Etwas weitere Startansicht: mehr Welt sichtbar, 30-m-Kreis bleibt lesbar; bis 20.5 zoombar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -2065,7 +2070,7 @@ class BackupMap {
   }
   drawVectorGround(p){
     const ctx=this.ctx,dpr=this._renderDpr;
-    const y0=p.topDown?0:Math.round(p.horizon+1);
+    const y0=p.topDown?0:Math.max(0,Math.floor(p.horizon));
     ctx.save();ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.beginPath();ctx.rect(0,y0,p.w,p.h-y0);ctx.clip();
     const layers=['landcover','landuse','water','waterway','building','transportation'];
@@ -2240,7 +2245,7 @@ class BackupMap {
     ctx.imageSmoothingQuality="high";
     ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.clearRect(0,0,w,h);
-    const y0=p.topDown?0:Math.round(p.horizon+1);
+    const y0=p.topDown?0:Math.max(0,Math.floor(p.horizon));
     const bg=ctx.createLinearGradient(0,y0,0,h);
     bg.addColorStop(0,'#b8dd91');bg.addColorStop(.45,'#a3d66f');bg.addColorStop(1,'#8ac95f');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
@@ -2258,15 +2263,6 @@ class BackupMap {
       const farZ=Math.max(12,p.z-2);
       this.drawTileLevel(ctx,p,farZ,y0,h,()=>1);
       this.drawTileLevel(ctx,p,p.z,y0,h,()=>1);
-    }
-    if(!p.topDown){
-      // Thin distant haze blurs the transition into the horizon naturally.
-      const mist=ctx.createLinearGradient(0,p.horizon,0,p.horizon+110);
-      mist.addColorStop(0,'rgba(212,236,190,.22)');
-      mist.addColorStop(.45,'rgba(226,244,224,.05)');
-      mist.addColorStop(1,'rgba(226,244,224,0)');
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      ctx.fillStyle=mist;ctx.fillRect(0,p.horizon,w,110);
     }
     if(this.tiles.size>145){
       const old=[...this.tiles.entries()].sort((a,b)=>a[1].seen-b[1].seen);
@@ -3868,6 +3864,20 @@ function factoryInteraction(){
   },1000);
 }
 
+// Keep navigation within the actual visible viewport on mobile browsers/PWAs.
+// CSS dvh can exceed the unobscured viewport while the Android bars change.
+function wwSyncVisibleViewport(){
+  const vv=window.visualViewport;
+  const heights=[window.innerHeight,document.documentElement.clientHeight,vv?.height]
+    .filter(v=>Number.isFinite(v)&&v>100);
+  if(!heights.length)return;
+  const usable=Math.floor(Math.min(...heights));
+  document.documentElement.style.setProperty('--ww-visible-height',usable+'px');
+}
+wwSyncVisibleViewport();
+window.addEventListener('resize',wwSyncVisibleViewport,{passive:true});
+window.visualViewport?.addEventListener('resize',wwSyncVisibleViewport,{passive:true});
+window.visualViewport?.addEventListener('scroll',wwSyncVisibleViewport,{passive:true});
 function boot(){
   restore();bind();factoryInteraction();wsBind();factoryTickProfiles();renderPanels();initMap();
   if(!state.mode)showWelcome();
