@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.13 – Klare Kartenebenen für Boden, Natur, Stadt, Wasser und Straßen sowie verankerte Collectibles.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.13</title>
+  <meta name="description" content="WELTWERK v0.4.14 – Perspektivsicheres Rendering für Straßen und Flächen beim Drehen der Karte.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.14</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:82px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -556,7 +556,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.13 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.14 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -657,7 +657,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.13 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.14 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -1532,13 +1532,13 @@ const COLLECT_RING_METERS = REACH_METERS; // Der sichtbare Ring entspricht exakt
 // One shared palette and a deterministic ground-layer order for both renderers.
 const MAP_COLORS=Object.freeze({
   grass:'#9ed674',farmland:'#a8d27b',park:'#71b962',forest:'#4c9156',wetland:'#70aa98',
-  urban:'#818980',building:'#a2aaa2',roof:'#81938c',
+  urban:'#9ca795',building:'#a2aaa2',roof:'#81938c',
   water:'#45afe4',waterway:'#45afe4',road:'#4d5758',path:'#8c927e',roadEdge:'#9caa90'
 });
 const WORLD_PALETTE={
   grass:[158,214,116],park:[113,185,98],forest:[76,145,86],
   water:[69,175,228],road:[77,87,88],path:[140,146,126],
-  built:[129,137,128],roof:[129,147,140]
+  built:[156,167,149],roof:[129,147,140]
 };
 function buildingRegion(pos){
   const m=latLngToMeters(pos.lat,pos.lng);
@@ -1755,7 +1755,7 @@ class BackupMap {
     const denom=p.focal-yy;
     if(denom<2)return null; // behind camera/too close to project
     const s=p.focal/denom;
-    return {x:p.w/2+xx*s,y:p.horizon+(p.playerY-p.horizon)*s,scale:1};
+    return {x:p.w/2+xx*s,y:p.horizon+(p.playerY-p.horizon)*s,scale:s};
   }
   inverseOffset(x,y,p){
     let xx,yy;
@@ -2029,25 +2029,96 @@ class BackupMap {
     }
     return out;
   }
+  // Project & CLIP each entire polygon ring, never a truncated subset of
+  // vertices. Closing an un-clipped polygon containing points behind the
+  // camera previously produced huge triangular gray/green flashes on rotation.
   vectorPath(ctx,feature,tile,layer,p){
     const factor=TILE*2**(p.z-tile.z),extent=layer.extent;
-    const cenX=p.center.x,cenY=p.center.y;
-    let count=0;
+    const ca=Math.cos(this.bearing*Math.PI/180),sa=Math.sin(this.bearing*Math.PI/180);
+    const top=p.topDown?0:p.horizon+1;
+    const rect={left:-2,right:p.w+2,top:top,bottom:p.h+2};
+    const nearY=p.focal-35;
+    const clipPolygon=(input,axis,limit,less)=>{
+      if(!input.length)return [];
+      const result=[];
+      let prev=input[input.length-1];
+      let prevIn=less?prev[axis]<=limit:prev[axis]>=limit;
+      for(const cur of input){
+        const curIn=less?cur[axis]<=limit:cur[axis]>=limit;
+        if(curIn!==prevIn){
+          const diff=cur[axis]-prev[axis];
+          if(Math.abs(diff)>1e-8){
+            const t=(limit-prev[axis])/diff;
+            result.push({x:prev.x+(cur.x-prev.x)*t,y:prev.y+(cur.y-prev.y)*t});
+          }
+        }
+        if(curIn)result.push(cur);
+        prev=cur;prevIn=curIn;
+      }
+      return result;
+    };
+    // Liang–Barsky: clip a line segment without joining unrelated fragments.
+    const clipLine=(a,b)=>{
+      let t0=0,t1=1;const dx=b.x-a.x,dy=b.y-a.y;
+      for(const [q,v] of [[-dx,a.x-rect.left],[dx,rect.right-a.x],[-dy,a.y-rect.top],[dy,rect.bottom-a.y]]){
+        if(Math.abs(q)<1e-9){if(v<0)return null;continue;}
+        const r=v/q;
+        if(q<0){if(r>t1)return null;t0=Math.max(t0,r);}
+        else{if(r<t0)return null;t1=Math.min(t1,r);}
+      }
+      if(t1<t0)return null;
+      return [{x:a.x+dx*t0,y:a.y+dy*t0},{x:a.x+dx*t1,y:a.y+dy*t1}];
+    };
+    const toCamera=pt=>{
+      const wx=(tile.x+pt[0]/extent)*factor,wy=(tile.y+pt[1]/extent)*factor;
+      const dx=(wx-p.center.x)*p.scale,dy=(wy-p.center.y)*p.scale;
+      return {x:dx*ca-dy*sa,y:dx*sa+dy*ca};
+    };
+    const project=v=>{
+      if(p.topDown)return {x:p.w/2+v.x,y:p.h/2+v.y};
+      const scale=p.focal/(p.focal-v.y);
+      return {x:p.w/2+v.x*scale,y:p.horizon+(p.playerY-p.horizon)*scale};
+    };
+    let drawn=0;
     ctx.beginPath();
     for(const path of feature.paths){
-      let started=false;
-      for(const xy of path.points){
-        const wx=(tile.x+xy[0]/extent)*factor,wy=(tile.y+xy[1]/extent)*factor;
-        const dx=(wx-cenX)*p.scale,dy=(wy-cenY)*p.scale;
-        // Do not connect projected lines through the camera/horizon.
-        const q=this.projectOffset(dx,dy,p);
-        if(!q){started=false;continue;}
-        if(!started){ctx.moveTo(q.x,q.y);started=true;}else ctx.lineTo(q.x,q.y);
-        count++;
+      if(path.closed && feature.type===3){
+        // Clip *in camera coordinates* before perspective projection. Every
+        // polygon remains closed even when it crosses the camera's near plane.
+        let poly=path.points.map(toCamera);
+        if(!p.topDown)poly=clipPolygon(poly,'y',nearY,true);
+        if(poly.length<3)continue;
+        poly=poly.map(project).filter(v=>Number.isFinite(v.x)&&Number.isFinite(v.y));
+        if(poly.length<3)continue;
+        poly=clipPolygon(poly,'x',rect.left,false);
+        poly=clipPolygon(poly,'x',rect.right,true);
+        poly=clipPolygon(poly,'y',rect.top,false);
+        poly=clipPolygon(poly,'y',rect.bottom,true);
+        if(poly.length<3)continue;
+        ctx.moveTo(poly[0].x,poly[0].y);
+        for(let i=1;i<poly.length;i++)ctx.lineTo(poly[i].x,poly[i].y);
+        ctx.closePath();drawn++;
+      }else{
+        const points=path.points.map(toCamera);
+        for(let i=1;i<points.length;i++){
+          let a=points[i-1],b=points[i];
+          if(!p.topDown){
+            const ain=a.y<=nearY,bin=b.y<=nearY;
+            if(!ain&&!bin)continue;
+            if(ain!==bin){
+              const t=(nearY-a.y)/(b.y-a.y);
+              const c={x:a.x+(b.x-a.x)*t,y:nearY};
+              if(!ain)a=c;else b=c;
+            }
+          }
+          const seg=clipLine(project(a),project(b));
+          if(!seg)continue;
+          ctx.moveTo(seg[0].x,seg[0].y);
+          ctx.lineTo(seg[1].x,seg[1].y);drawn++;
+        }
       }
-      if(started&&path.closed)ctx.closePath();
     }
-    return count>=2;
+    return drawn>0;
   }
   drawGroundTexture(p){
     // Sparse deterministic visual texture, not geolocated interactive objects.
@@ -2331,7 +2402,7 @@ class BackupMap {
       const isPlayer=marker.element.classList.contains('world-player');
       if((!p.topDown && meters>235 && !isPlayer)||!projected||!Number.isFinite(projected.x)||!Number.isFinite(projected.y))continue;
       if(projected.x < -95 || projected.x>p.w+95 || projected.y<(p.topDown?-90:p.horizon+24) || projected.y>p.h+100)continue;
-      sprites.push({marker,x:projected.x,y:projected.y,isPlayer});
+      sprites.push({marker,x:projected.x,y:projected.y,isPlayer,scale:projected.scale});
     }
     // Houses and collectibles are depth-sorted in one renderer, so buildings
     // can appear in front of the player without the resource layer drifting.
@@ -2355,12 +2426,13 @@ class BackupMap {
       const rich=elem.classList.contains('rich');
       const isTree=elem.classList.contains('type-tree');
       const beechRing=isTree&&!depleted?(elem.classList.contains('beech-rarity-legendary')?'#e6b846':elem.classList.contains('beech-rarity-epic')?'#a96cdb':elem.classList.contains('beech-rarity-rare')?'#5598db':null):null;
-      const w=isPlayer?72:76,h=isPlayer?98:83;
+      const sizeScale=isPlayer?1:(p.topDown?1:bound(s.scale,.5,1.22));
+      const w=(isPlayer?72:76)*sizeScale,h=(isPlayer?98:83)*sizeScale;
       // The shadow/ring is the world contact point, exactly at the geo coordinate.
       ctx.save();
       ctx.globalAlpha=depleted?.53:1;
       ctx.fillStyle='rgba(25,65,53,.18)';
-      ctx.beginPath();ctx.ellipse(x,y-3,isPlayer?27:24,6,0,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.ellipse(x,y-3*sizeScale,(isPlayer?27:24)*sizeScale,6*sizeScale,0,0,Math.PI*2);ctx.fill();
       if(isPlayer || (inRange&&!isTree)){
         ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
         ctx.fillStyle='rgba(70,205,162,.35)';ctx.fill();
@@ -2377,7 +2449,7 @@ class BackupMap {
         // Canvas drawImage uses the very same screen foot x/y as the map.
         // SVG assets have ~16 transparent px below their ground-contact artwork.
         // Align their visible feet with the exact projected world coordinate.
-        ctx.drawImage(asset,x-w/2,y-h+10,w,h);
+        ctx.drawImage(asset,x-w/2,y-h+10*sizeScale,w,h);
       }else{
         ctx.font='34px system-ui';ctx.textAlign='center';
         ctx.fillText(isPlayer?'🧍':'🌳',x,y-15);
@@ -2391,9 +2463,9 @@ class BackupMap {
           ctx.beginPath();ctx.arc(x+w/2-6,y-h+1,11,0,Math.PI*2);ctx.fillStyle='#eab85f';ctx.fill();
           ctx.font='17px system-ui';ctx.textAlign='center';ctx.fillStyle='#543916';ctx.fillText('✦',x+w/2-6,y-h+6);
         }
-        if(beechRing){ctx.beginPath();ctx.ellipse(x,y-3,26,8,0,0,Math.PI*2);ctx.lineWidth=3;ctx.strokeStyle=beechRing;ctx.stroke();}
+        if(beechRing){ctx.beginPath();ctx.ellipse(x,y-3*sizeScale,26*sizeScale,8*sizeScale,0,0,Math.PI*2);ctx.lineWidth=3*sizeScale;ctx.strokeStyle=beechRing;ctx.stroke();}
         // Generous hit area around the sprite, independent of the hidden DOM.
-        this._hitTargets.push({element:elem,x,y,left:x-w*.5-6,right:x+w*.5+6,top:y-h-13,bottom:y+10});
+        this._hitTargets.push({element:elem,x,y,left:x-Math.max(23,w*.5+6),right:x+Math.max(23,w*.5+6),top:y-Math.max(54,h+13),bottom:y+11});
       }
       ctx.restore();
     }
