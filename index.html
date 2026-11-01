@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
   <meta name="description" content="WELTWERK v0.4.14 – Perspektivsicheres Rendering für Straßen und Flächen beim Drehen der Karte.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.15</title>
+  <title>WELTWERK · Exploration & Inselbau v0.4.16</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:82px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -556,7 +556,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.15 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.16 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -657,7 +657,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.15 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.16 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -2190,12 +2190,13 @@ class BackupMap {
           else if(pass==='building'&&f.type===3)color=colors.building;
           else if(pass==='transportation'){
             if(/rail|aerialway|ferry/.test(cl))continue;
+            if(f.type===3)continue; // polygonal road areas create fat horizon bars in perspective
             const path=/path|track|footway|pedestrian|cycleway|steps/.test(cl);
             color=path?colors.path:colors.road;
-            kind=f.type===3?'fill':'line';
-            width=/motorway|trunk/.test(cl)?19:/primary|secondary/.test(cl)?16:
-                  /tertiary/.test(cl)?13:/service|minor/.test(cl)?8:path?3.5:10;
-            width*=Math.max(.34,Math.min(1.25,2**((this.zoom-19.5)*.48)));
+            kind='line';
+            width=/motorway|trunk/.test(cl)?15:/primary|secondary/.test(cl)?12:
+                  /tertiary/.test(cl)?9:/service|minor/.test(cl)?6:path?2.8:7.2;
+            width*=Math.max(.42,Math.min(1.08,2**((this.zoom-19.5)*.36)));
           }
           if(!color)continue;
           let depthScale=1;
@@ -2204,8 +2205,8 @@ class BackupMap {
             const cx=(bb[0]+bb[2])*.5,cy=(bb[1]+bb[3])*.5;
             const wx=(tile.x+cx/extent)*factor,wy=(tile.y+cy/extent)*factor;
             const q=this.projectOffset((wx-p.center.x)*p.scale,(wy-p.center.y)*p.scale,p);
-            if(!q || (pass==='transportation'&&q.y<p.horizon+26))continue;
-            depthScale=Math.max(.12,Math.min(1.04,(q.y-p.horizon)/Math.max(1,p.playerY-p.horizon)));
+            if(!q)continue;
+            depthScale=Math.max(.14,Math.min(1.0,(q.y-p.horizon)/Math.max(1,p.playerY-p.horizon)));
           }
           if(!this.vectorPath(ctx,f,tile,layer,p))continue;
           if(kind==='fill'){
@@ -2215,9 +2216,9 @@ class BackupMap {
           }else{
             ctx.lineCap='round';ctx.lineJoin='round';
             if(pass==='transportation'&&!p.topDown){
-              const roadScale=.62+.32*depthScale;
-              ctx.lineWidth=Math.max(.7,width*roadScale);
-              ctx.globalAlpha=.68+.18*depthScale;
+              const roadScale=.2+.78*depthScale;
+              ctx.lineWidth=Math.max(.45,Math.min(width*.96,width*roadScale));
+              ctx.globalAlpha=.56+.22*depthScale;
             }else{ctx.lineWidth=width;ctx.globalAlpha=1;}
             ctx.strokeStyle=color;ctx.stroke();ctx.globalAlpha=1;
           }
@@ -2699,10 +2700,10 @@ function applyVectorPalette(map){
     'line-color':c.waterway,'line-width':['interpolate',['linear'],['zoom'],12,.8,17,2.5,19.5,4]
   },{layout:{'line-cap':'round'}});
   mk('ww-roads','line','transportation',{
-    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,.55,16,2.2,19.5,7.2]
+    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,.42,16,1.55,19.5,4.8]
   },{filter:['in',['get','class'],['literal',['motorway','trunk','primary','secondary','tertiary','minor','service','busway']]],layout:{'line-cap':'round','line-join':'round'}});
   mk('ww-paths','line','transportation',{
-    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.25,16,.9,19.5,2.3]
+    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.18,16,.62,19.5,1.5]
   },{filter:['in',['get','class'],['literal',['path','track','footway','pedestrian','cycleway']]],layout:{'line-cap':'round','line-join':'round'}});
   mk('ww-building-footprints','fill','building',{'fill-color':c.building,'fill-opacity':.98},{minzoom:14});
   mk('ww-buildings-3d','fill-extrusion','building',{
