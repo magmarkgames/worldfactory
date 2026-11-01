@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.12 – Stabilere Navigation, weicher Kartenhorizont und rundere Wolken.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.12</title>
+  <meta name="description" content="WELTWERK v0.4.13 – Klare Kartenebenen für Boden, Natur, Stadt, Wasser und Straßen sowie verankerte Collectibles.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.13</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:82px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -41,9 +41,9 @@
 .camera-hint{position:absolute;top:calc(133px + env(safe-area-inset-top,0px));left:16px;z-index:8;border:1px solid #d0e7d599;background:#193d3bc9;color:#c9f5df;border-radius:15px;padding:8px 10px;font-size:9px;letter-spacing:1.2px;font-weight:900;pointer-events:none}
 .camera-hint span{font-weight:500;letter-spacing:0;color:#e2f6ee}
 .world-resource{position:relative;width:80px;height:99px;border:0;padding:0;margin:0;background:transparent;cursor:pointer;filter:drop-shadow(0 5px 3px #183b3266);transition:filter .18s,opacity .18s;touch-action:manipulation}
-.world-resource-art{width:80px;height:89px;position:absolute;left:0;bottom:6px;object-fit:contain;transform-origin:bottom center;transition:none;pointer-events:none;user-select:none;backface-visibility:hidden}
+.world-resource-art{width:80px;height:89px;position:absolute;left:0;bottom:-10px;object-fit:contain;object-position:center bottom;transform-origin:bottom center;transition:none;pointer-events:none;user-select:none;backface-visibility:hidden}
 .world-resource:active .world-resource-art{transform:none}
-.world-resource-shadow{position:absolute;left:14px;bottom:3px;width:52px;height:13px;background:#244b4194;filter:blur(8px);border-radius:50%}
+.world-resource-shadow{position:absolute;left:14px;bottom:1px;width:52px;height:12px;background:#244b4175;filter:blur(4px);border-radius:50%}
 .world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 5px #e2fff9) drop-shadow(0 0 14px #7ef0be)}
 .world-resource.in-range .world-resource-dot{position:absolute;bottom:-4px;left:33px;border-radius:50%;background:#73e7ad;border:2px solid white;width:14px;height:14px;box-shadow:0 0 0 5px #8cdbac7d}
 .world-resource.depleted{opacity:.5;filter:grayscale(.72)}
@@ -556,7 +556,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.12 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.13 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -657,7 +657,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.12 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Wasser wird blau, Vegetation grün, bebaute Flächen grau und Straßen dunkel dargestellt; Gebäudegrundrisse und Rohstoffe werden auf derselben Canvas-Karte gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.13 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -678,7 +678,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.11'; // Buche: Tippen, Konturumrandung, verbundenes Geäst und korrektes Updatepaket
+const VERSION = '0.4.13'; // geordnete Kartenebenen, Wasser und feste Bodenkontakte
 const START_ZOOM = window.innerWidth<360?18.35:18.65; // Etwas weitere Startansicht: mehr Welt sichtbar, 30-m-Kreis bleibt lesbar; bis 20.5 zoombar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
@@ -1529,10 +1529,16 @@ const BUILDING_SESSION_CACHE = new Map();
 const BUILDING_CACHE_TTL = 15 * 60 * 1000;
 const BUILDING_GRID_METERS = 260;
 const COLLECT_RING_METERS = REACH_METERS; // Der sichtbare Ring entspricht exakt dem Sammelradius.
+// One shared palette and a deterministic ground-layer order for both renderers.
+const MAP_COLORS=Object.freeze({
+  grass:'#9ed674',farmland:'#a8d27b',park:'#71b962',forest:'#4c9156',wetland:'#70aa98',
+  urban:'#818980',building:'#a2aaa2',roof:'#81938c',
+  water:'#45afe4',waterway:'#45afe4',road:'#4d5758',path:'#8c927e',roadEdge:'#9caa90'
+});
 const WORLD_PALETTE={
-  grass:[164,213,109], park:[121,190,93], forest:[80,149,85],
-  water:[72,172,233], road:[100,108,105], path:[153,143,118],
-  built:[171,170,151], roof:[132,143,137]
+  grass:[158,214,116],park:[113,185,98],forest:[76,145,86],
+  water:[69,175,228],road:[77,87,88],path:[140,146,126],
+  built:[129,137,128],roof:[129,147,140]
 };
 function buildingRegion(pos){
   const m=latLngToMeters(pos.lat,pos.lng);
@@ -2071,67 +2077,81 @@ class BackupMap {
     ctx.restore();
   }
   drawVectorGround(p){
-    const ctx=this.ctx,dpr=this._renderDpr;
+    const ctx=this.ctx,dpr=this._renderDpr,colors=MAP_COLORS;
     const y0=p.topDown?0:Math.max(0,Math.floor(p.horizon));
     ctx.save();ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.beginPath();ctx.rect(0,y0,p.w,p.h-y0);ctx.clip();
-    const layers=['landcover','landuse','water','waterway','building','transportation'];
-    for(const name of layers){for(const {tile,layer} of this.vectorFeatures(name)){
-      for(const f of layer.features){
-        // Cull distant vector geometry before projection; this keeps rotation
-        // responsive even in dense cities with thousands of building footprints.
+    // Do not mix landuse/landcover in source-file order. Every frame is painted
+    // in exactly this hierarchy, so camera bearing cannot change which color wins:
+    // light-green land -> vegetation -> urban -> water -> roads -> footprints.
+    const passes=[
+      ['landuse','land'],['landcover','vegetation'],['landuse','vegetation'],
+      ['landuse','urban'],['water','water'],['waterway','waterway'],
+      ['transportation','transportation'],['building','building']
+    ];
+    const urbanRE=/residential|commercial|industrial|retail|garages|railway|school|hospital|university|construction|parking|pedestrian|square/;
+    const natureRE=/wood|forest|park|garden|grass|meadow|orchard|scrub|allotments|nature|recreation|green/;
+    for(const [layerName,pass] of passes){
+      if(pass==='building'&&!this.showBuildings)continue;
+      for(const {tile,layer} of this.vectorFeatures(layerName)){
         const center14=world(this.center.lat,this.center.lng,tile.z);
         const localX=(center14.x/TILE-tile.x)*layer.extent;
         const localY=(center14.y/TILE-tile.y)*layer.extent;
         const metersPerTile=40075017*Math.max(.15,Math.cos(this.center.lat*Math.PI/180))/(2**tile.z);
         const radius=900/metersPerTile*layer.extent;
-        const bb=f.bbox;
-        if(bb && (bb[2]<localX-radius || bb[0]>localX+radius || bb[3]<localY-radius || bb[1]>localY+radius))continue;
-        const cl=String(f.props.class||'').toLowerCase(),sub=String(f.props.subclass||'').toLowerCase();
-        let color=null,kind='fill',width=1;
-        if(name==='landcover' && f.type===3){color=cl==='wood'?'#50975d':cl==='grass'?'#81c46a':cl==='farmland'?'#b5d583':'#92c97b';}
-        else if(name==='landuse' && f.type===3){
-          color=/commercial|industrial|residential|retail|school|university|hospital|railway|garages|parking/.test(cl)?'#d0d2b6':
-            /forest|wood|park|garden|grass|golf|orchard|meadow/.test(cl+' '+sub)?'#75af6f':'#94c37e';
-        }
-        else if(name==='water' && f.type===3){color='#4ab5eb';}
-        else if(name==='building' && f.type===3){if(!this.showBuildings)continue;color='#b9c7bd';}
-        else if(name==='waterway' && f.type===2){color='#4ab5eb';kind='line';width=cl==='river'?8:cl==='canal'?6:3;}
-        else if(name==='transportation'){
-          if(/rail|aerialway|ferry/.test(cl))continue;
-          color=/path|track|footway|pedestrian|cycleway|steps/.test(cl)?'#b7a98d':'#737d76';kind=f.type===3?'fill':'line';
-          width=/motorway|trunk/.test(cl)?19:/primary|secondary/.test(cl)?16:/tertiary/.test(cl)?13:/service|minor/.test(cl)?8:/path|track/.test(cl)?3.5:10;
-          width*=Math.max(.34,Math.min(1.25,2**((this.zoom-19.5)*.48)));
-        }
-        if(!color)continue;
-        let depthScale=1;
-        if(!p.topDown && name==='transportation' && bb){
-          const factor=TILE*2**(p.z-tile.z), extent=layer.extent;
-          const cx=(bb[0]+bb[2])*.5, cy=(bb[1]+bb[3])*.5;
-          const wx=(tile.x+cx/extent)*factor, wy=(tile.y+cy/extent)*factor;
-          const dx=(wx-p.center.x)*p.scale, dy=(wy-p.center.y)*p.scale;
-          const q=this.projectOffset(dx,dy,p);
-          if(!q || q.y<p.horizon+26)continue;
-          depthScale=Math.max(.12,Math.min(1.04,(q.y-p.horizon)/Math.max(1,p.playerY-p.horizon)));
-        }
-        // Skip oversized geometry long before canvas rasterization.
-        if(!this.vectorPath(ctx,f,tile,layer,p))continue;
-        if(kind==='fill'){
-          ctx.fillStyle=color;ctx.fill('evenodd');
-          // Matching outline hides sub-pixel seams between neighboring polygons.
-          if(name!=='transportation'){ctx.strokeStyle=color;ctx.lineWidth=.55;ctx.stroke();}
-        }else{
-          ctx.lineCap='round';ctx.lineJoin='round';
-          if(name==='transportation' && !p.topDown){
-            const isPath=/path|track|footway|pedestrian|cycleway|steps/.test(cl);
-            const alpha=isPath?(.26+.22*depthScale):(.32+.26*depthScale);
-            ctx.strokeStyle=isPath?`rgba(183,169,141,${alpha.toFixed(3)})`:`rgba(115,125,118,${alpha.toFixed(3)})`;
-            ctx.lineWidth=Math.max(.5,width*depthScale*depthScale);
-          }else{ctx.strokeStyle=color;ctx.lineWidth=width;}
-          ctx.stroke();
+        for(const f of layer.features){
+          const bb=f.bbox;
+          if(bb && (bb[2]<localX-radius||bb[0]>localX+radius||bb[3]<localY-radius||bb[1]>localY+radius))continue;
+          const cl=String(f.props.class||'').toLowerCase(),sub=String(f.props.subclass||'').toLowerCase();
+          const label=cl+' '+sub;
+          let color=null,kind='fill',width=1;
+          if(pass==='land' && f.type===3 && !urbanRE.test(label) && !natureRE.test(label))
+            color=/farmland|farm|agriculture|crop/.test(label)?colors.farmland:colors.grass;
+          else if(pass==='vegetation'&&f.type===3 &&
+            (layerName==='landcover'||natureRE.test(label))){
+            if(layerName==='landuse' && urbanRE.test(label))continue;
+            color=/wood|forest|scrub/.test(label)?colors.forest:
+                  /wetland|marsh/.test(label)?colors.wetland:colors.park;
+          }
+          else if(pass==='urban'&&f.type===3&&urbanRE.test(label))color=colors.urban;
+          else if(pass==='water'&&f.type===3)color=colors.water;
+          else if(pass==='waterway'&&f.type===2){color=colors.waterway;kind='line';width=cl==='river'?7:cl==='canal'?5:3;}
+          else if(pass==='building'&&f.type===3)color=colors.building;
+          else if(pass==='transportation'){
+            if(/rail|aerialway|ferry/.test(cl))continue;
+            const path=/path|track|footway|pedestrian|cycleway|steps/.test(cl);
+            color=path?colors.path:colors.road;
+            kind=f.type===3?'fill':'line';
+            width=/motorway|trunk/.test(cl)?19:/primary|secondary/.test(cl)?16:
+                  /tertiary/.test(cl)?13:/service|minor/.test(cl)?8:path?3.5:10;
+            width*=Math.max(.34,Math.min(1.25,2**((this.zoom-19.5)*.48)));
+          }
+          if(!color)continue;
+          let depthScale=1;
+          if(!p.topDown && kind==='line' && bb){
+            const factor=TILE*2**(p.z-tile.z), extent=layer.extent;
+            const cx=(bb[0]+bb[2])*.5,cy=(bb[1]+bb[3])*.5;
+            const wx=(tile.x+cx/extent)*factor,wy=(tile.y+cy/extent)*factor;
+            const q=this.projectOffset((wx-p.center.x)*p.scale,(wy-p.center.y)*p.scale,p);
+            if(!q || (pass==='transportation'&&q.y<p.horizon+26))continue;
+            depthScale=Math.max(.12,Math.min(1.04,(q.y-p.horizon)/Math.max(1,p.playerY-p.horizon)));
+          }
+          if(!this.vectorPath(ctx,f,tile,layer,p))continue;
+          if(kind==='fill'){
+            ctx.fillStyle=color;ctx.fill('evenodd');
+            // Thin same-color edges close fractional tile seams without gray flicker.
+            ctx.strokeStyle=color;ctx.lineWidth=.38;ctx.stroke();
+          }else{
+            ctx.lineCap='round';ctx.lineJoin='round';
+            if(pass==='transportation'&&!p.topDown){
+              ctx.lineWidth=Math.max(.5,width*depthScale*depthScale);
+              ctx.globalAlpha=.52+.35*depthScale;
+            }else{ctx.lineWidth=width;ctx.globalAlpha=1;}
+            ctx.strokeStyle=color;ctx.stroke();ctx.globalAlpha=1;
+          }
         }
       }
-    }}
+    }
     ctx.restore();
   }
   refreshVectorBuildings(){
@@ -2249,7 +2269,7 @@ class BackupMap {
     ctx.clearRect(0,0,w,h);
     const y0=p.topDown?0:Math.max(0,Math.floor(p.horizon));
     const bg=ctx.createLinearGradient(0,y0,0,h);
-    bg.addColorStop(0,'#b8dd91');bg.addColorStop(.45,'#a3d66f');bg.addColorStop(1,'#8ac95f');
+    bg.addColorStop(0,'#b5dd94');bg.addColorStop(.45,MAP_COLORS.grass);bg.addColorStop(1,'#94cb6b');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
     // Decorative patches add low-poly depth without replacing any real geometry.
     this.drawGroundTexture(p);
@@ -2339,7 +2359,7 @@ class BackupMap {
       // The shadow/ring is the world contact point, exactly at the geo coordinate.
       ctx.save();
       ctx.globalAlpha=depleted?.53:1;
-      ctx.fillStyle='rgba(25,65,53,.22)';
+      ctx.fillStyle='rgba(25,65,53,.18)';
       ctx.beginPath();ctx.ellipse(x,y-3,isPlayer?27:24,6,0,0,Math.PI*2);ctx.fill();
       if(isPlayer || (inRange&&!isTree)){
         ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
@@ -2355,7 +2375,9 @@ class BackupMap {
       }
       if(asset && asset.complete && asset.naturalWidth){
         // Canvas drawImage uses the very same screen foot x/y as the map.
-        ctx.drawImage(asset,x-w/2,y-h-4,w,h);
+        // SVG assets have ~16 transparent px below their ground-contact artwork.
+        // Align their visible feet with the exact projected world coordinate.
+        ctx.drawImage(asset,x-w/2,y-h+10,w,h);
       }else{
         ctx.font='34px system-ui';ctx.textAlign='center';
         ctx.fillText(isPlayer?'🧍':'🌳',x,y-15);
@@ -2569,79 +2591,62 @@ function setMapStatus(label){
   else if(label==='2.5D')vectorStatus(vectorUpgrade.reason||'WebGL nicht verfügbar',true);
   updateTiltButton(state.map?.getPitch()>=25);
 }
-const VECTOR_PALETTE=Object.freeze({
-  grass:'#a3d66f',forest:'#50975d',park:'#81c46a',farmland:'#b5d583',
-  urban:'#cfd1bb',building:'#a9b3ae',roof:'#7f948d',road:'#70786e',
-  path:'#baa98a',water:'#52b8ee',roadEdge:'#dfe3bf'
-});
+const VECTOR_PALETTE=MAP_COLORS;
 function applyVectorPalette(map){
   const c=VECTOR_PALETTE;
-  for(const layer of map.getStyle().layers||[]){
-    const id=String(layer.id||'').toLowerCase();
-    const sourceLayer=String(layer['source-layer']||'').toLowerCase();
-    try{
-      if(layer.type==='background'){
-        map.setPaintProperty(layer.id,'background-color',c.grass);
-      }else if(layer.type==='fill'){
-        let color=c.grass;
-        if(/water|ocean|river|lake|reservoir/.test(id+' '+sourceLayer))color=c.water;
-        else if(/building/.test(sourceLayer+' '+id))color=c.building;
-        else if(/landuse/.test(sourceLayer))color=['match',['get','class'],
-          ['residential','commercial','industrial','retail','garages','railway','school','hospital','university','construction'],c.urban,
-          ['park','forest','wood','grass','farmland','allotments','orchard'],c.park,c.grass];
-        else if(/landcover/.test(sourceLayer))color=['match',['get','class'],'wood',c.forest,'grass',c.park,'wetland','#79b5a3',c.grass];
-        else if(/park|wood|forest|grass|green|meadow/.test(id))color=c.park;
-        map.setPaintProperty(layer.id,'fill-color',color);
-        map.setPaintProperty(layer.id,'fill-opacity',1);
-      }else if(layer.type==='line'){
-        if(/water|river|stream/.test(id+' '+sourceLayer))map.setPaintProperty(layer.id,'line-color',c.water);
-        else if(/road|street|transport|highway|bridge|tunnel|path|track/.test(id+' '+sourceLayer))map.setPaintProperty(layer.id,'line-color',c.road);
-      }else if(layer.type==='fill-extrusion'){
-        map.setPaintProperty(layer.id,'fill-extrusion-color',c.building);
-        map.setPaintProperty(layer.id,'fill-extrusion-opacity',.78);
-      }else if(layer.type==='symbol'){
-        map.setLayoutProperty(layer.id,'visibility','none');
-      }
-    }catch(err){console.info('Palette nicht für Ebene',layer.id,err.message);}
-  }
-  // A single vector source for new semantic overlays; existing tiles may be
-  // shared by MapLibre's tile cache. Fail open: base map stays visible.
+  const baseLayers=(map.getStyle().layers||[]).map(l=>({id:l.id,type:l.type}));
+  // A single semantic source for each terrain class. All custom layers have
+  // explicit order; default OpenFreeMap fills cannot compete underneath them.
+  const existing=(name)=>!!map.getLayer(name);
   try{if(!map.getSource('ww-vector'))map.addSource('ww-vector',{type:'vector',url:MAP_TILES});}
-  catch(e){console.warn('Weitere Spielebenen nicht verfügbar',e);return;}
+  catch(e){console.warn('Spielkartendaten nicht verfügbar',e);return;}
   const mk=(id,type,sourceLayer,paint,extra={})=>{
-    try{if(!map.getLayer(id))map.addLayer({id,type,source:'ww-vector','source-layer':sourceLayer,paint,...extra});}
-    catch(e){console.info('Spielebene nicht verfügbar:',id,e.message);}
+    try{if(!existing(id))map.addLayer({id,type,source:'ww-vector','source-layer':sourceLayer,paint,...extra});}
+    catch(e){console.warn('Spielebene nicht verfügbar:',id,e.message);}
   };
-  mk('ww-landuse','fill','landuse',{
-    'fill-color':['match',['get','class'],
-      ['residential','commercial','industrial','retail','garages','railway','school','hospital','university','construction'],c.urban,
-      ['forest','wood'],c.forest,['park','grass','meadow','orchard','farmland'],c.park,c.grass],
-    'fill-opacity':.95
-  });
-  mk('ww-landcover','fill','landcover',{
-    'fill-color':['match',['get','class'],'wood',c.forest,'grass',c.park,'wetland','#79b5a3',c.grass],
+  const urban=['residential','commercial','industrial','retail','garages','railway','school','hospital','university','construction','parking'];
+  const nature=['forest','wood','park','grass','meadow','orchard','garden','scrub','allotments'];
+  // Order is intentionally identical to the Canvas renderer.
+  mk('ww-land-base','fill','landuse',{
+    'fill-color':['match',['get','class'],['farmland','farm','agriculture'],c.farmland,c.grass],
+    'fill-opacity':1
+  },{filter:['!', ['in',['get','class'], ['literal',[...urban,...nature]]]]});
+  mk('ww-land-nature','fill','landcover',{
+    'fill-color':['match',['get','class'],['wood','forest','scrub'],c.forest,'wetland',c.wetland,c.park],
     'fill-opacity':1
   });
+  mk('ww-landuse-nature','fill','landuse',{
+    'fill-color':['match',['get','class'],['forest','wood','scrub'],c.forest,c.park],
+    'fill-opacity':1
+  },{filter:['in',['get','class'],['literal',nature]]});
+  mk('ww-land-urban','fill','landuse',{'fill-color':c.urban,'fill-opacity':1},
+     {filter:['in',['get','class'],['literal',urban]]});
   mk('ww-water','fill','water',{'fill-color':c.water,'fill-opacity':1});
-  mk('ww-waterway','line','waterway',{'line-color':c.water,'line-width':['interpolate',['linear'],['zoom'],12,1,17,3,19.5,5]},
-    {layout:{'line-cap':'round'}});
-  mk('ww-road-borders','line','transportation',{
-    'line-color':c.roadEdge,'line-width':['interpolate',['linear'],['zoom'],12,2,16,6,19.5,18],
-    'line-opacity':.4
-  },{filter:['in',['get','class'],['literal',['motorway','trunk','primary','secondary','tertiary','minor','service','busway']]],layout:{'line-cap':'round','line-join':'round'}});
+  mk('ww-waterway','line','waterway',{
+    'line-color':c.waterway,'line-width':['interpolate',['linear'],['zoom'],12,.8,17,2.5,19.5,4]
+  },{layout:{'line-cap':'round'}});
   mk('ww-roads','line','transportation',{
-    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,1,16,4,19.5,15]
+    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,.6,16,2.6,19.5,9]
   },{filter:['in',['get','class'],['literal',['motorway','trunk','primary','secondary','tertiary','minor','service','busway']]],layout:{'line-cap':'round','line-join':'round'}});
   mk('ww-paths','line','transportation',{
-    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.4,16,1.5,19.5,4]
-  },{filter:['in',['get','class'],['literal',['path','track']]],layout:{'line-cap':'round','line-join':'round'}});
-  mk('ww-building-footprints','fill','building',{'fill-color':c.building,'fill-opacity':.82},{minzoom:14});
+    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.3,16,1.1,19.5,3]
+  },{filter:['in',['get','class'],['literal',['path','track','footway','pedestrian','cycleway']]],layout:{'line-cap':'round','line-join':'round'}});
+  mk('ww-building-footprints','fill','building',{'fill-color':c.building,'fill-opacity':.98},{minzoom:14});
   mk('ww-buildings-3d','fill-extrusion','building',{
     'fill-extrusion-color':c.building,
     'fill-extrusion-height':['interpolate',['linear'],['zoom'],15,0,16,['max',3,['*',0.55,['coalesce',['to-number',['get','render_height']],8]]]],
     'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],0],
-    'fill-extrusion-opacity':.72
+    'fill-extrusion-opacity':.82
   },{minzoom:15,filter:['!=',['get','hide_3d'],true]});
+  // Only deactivate overlapping base style after the replacements exist.
+  if(existing('ww-land-base')&&existing('ww-land-urban')&&existing('ww-water')&&existing('ww-roads')){
+    for(const l of baseLayers){
+      try{
+        if(l.type==='background')map.setPaintProperty(l.id,'background-color',c.grass);
+        else if(['fill','line','fill-extrusion','symbol'].includes(l.type))map.setLayoutProperty(l.id,'visibility','none');
+      }catch(e){console.info('Kartenebene:',l.id,e.message);}
+    }
+  }
 }
 function setVectorBuildingsVisible(map,visible){
   for(const name of ['ww-building-footprints','ww-buildings-3d']){

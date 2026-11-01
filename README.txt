@@ -1,16 +1,17 @@
-WELTWERK v0.4.8 - Buche Klicksammlung
+WELTWERK v0.4.13 – Kartenebenen und Bodenkontakt
 
-WICHTIG: Die Startdatei muss genau 'index.html' heissen.
-Die ZIP enthaelt index.html direkt im Hauptverzeichnis. Ersetze deine
-bestehende index.html im GitHub-/Hosting-Projekt, nicht nur eine Datei mit
-zusaetzlicher Versionsnummer daneben ablegen.
+Installation: Die Datei index.html aus diesem ZIP ersetzt die bestehende index.html
+im bisherigen WELTWERK-Projekt. Vorher den Spielstand unter „Mehr“ als JSON exportieren.
 
-Vorher: Mehr > Export (JSON) als Spielstand-Sicherung.
-Nachher: Seite neu laden, ggf. Tab schliessen und komplett neu oeffnen.
-Im Buchen-Sammelbildschirm steht klein rechts neben dem Titel 'v0.4.8'.
-Fehlt diese Anzeige, wird weiterhin eine aeltere index.html geladen.
+Aenderungen:
+- Verbindliche Zeichenreihenfolge fuer Grundboden, Vegetation, Siedlungsflaechen,
+  Wasser, Strassen und Gebaeude in der Canvas-Karte.
+- Ein einheitliches Farbkonzept und getrennte Overlay-Schichten auch fuer die
+  optionale MapLibre-Vektorkarte. Doppelte Basisflaechen werden dort ausgeblendet.
+- 2D-Baum-, Stein- und Schrott-Sprites bekommen einen korrigierten Bodenanker.
+- Schatten liegen dichter unter dem sichtbaren Sprite-Fuss.
+- GPS, Sammelradius, Dropchancen, Buchen-Minigame, Inventar und Fabrik bleiben erhalten.
 
-Aenderungen: Alle sammelbaren Baumbestandteile sind direkt antippbar;
-helle Umrisse und kleine Blattsymbole; Aeste werden durch sichtbare
-Verbindungsstuecke an den Stamm angebunden; Positionskorrekturen gelten
-auch fuer bereits begonnene Buchen; keine neuen Dropchancen.
+Geprueft: JavaScript-Syntax, 3 Handybreiten im Demo-Modus, Kameradrehung,
+Kartenschicht-Reihenfolge in MapLibre-Mock. Online-Vektordaten und die tatsaechliche
+Performance auf einem Android-Geraet konnten nicht vollstaendig getestet werden.
