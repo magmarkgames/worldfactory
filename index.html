@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.28 – Große Buchen, Stein & Buche, sanfter Horizontnebel.">
+  <meta name="description" content="WELTWERK v0.4.29 – Überarbeitete Buche: angedockte Fundstücke, organische Touch-Hüllen, Auto-Abschluss.">
   <title>WELTWERK · Exploration & Inselbau v0.4.28</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
@@ -182,8 +182,8 @@
 .tree-actions .tree-collect-all{background:#80e5ba;border-color:#80e5ba;color:#123b31}
 .tree-actions button:disabled{opacity:.45}
 .tree-complete{z-index:8;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#11312cb8;backdrop-filter:blur(4px);padding:22px}
-.tree-complete-card{width:min(100%,330px);border-radius:24px;background:#12312e;box-shadow:0 12px 45px #061f21ae;border:1px solid #83d5ad78;padding:25px 20px;text-align:center}
-.tree-complete-card h3{font-size:23px;margin:5px 0 8px}.tree-complete-card p{font-size:12px;color:#b2d5c7;line-height:1.45}
+.tree-complete-card{width:min(100%,342px);border-radius:24px;background:#171422;box-shadow:0 12px 45px #061f21ae;border:1px solid #6e628878;padding:18px 18px 16px;text-align:center}
+.tree-complete-card h3{font-size:23px;margin:5px 0 8px}.tree-complete-card p{font-size:12px;color:#c9bfd6;line-height:1.45}.tree-complete-loot{justify-content:center;flex-wrap:wrap;min-height:0;padding-top:8px}
 .tree-complete-icon{font-size:48px}.tree-complete .tree-loot{justify-content:center;flex-wrap:wrap;margin:16px 0}
 .tree-complete .tree-return{border:0;background:#8ae8ba;color:#12362b;padding:13px 18px;border-radius:12px;font-weight:900;width:100%}
 .tree-fly-label{position:absolute;z-index:10;pointer-events:none;color:#145338;font-size:15px;font-weight:900;text-shadow:0 1px 4px #fff;animation:tree-loot-fly .7s ease-out forwards;white-space:nowrap}
@@ -581,17 +581,20 @@
 .beech-v044 .tree-svg{width:100%;height:100%;filter:drop-shadow(0 9px 6px #05030a55)}
 .beech-v044 .tree-svg>ellipse{opacity:.12}
 .beech-v044 .beech-branch-connectors{filter:drop-shadow(0 1px 2px #0005)}
-.beech-v044 .beech-part,.beech-v044 .beech-part.part-crown,.beech-v044 .beech-part.part-branch,.beech-v044 .beech-part.part-nest,.beech-v044 .beech-part.part-nut,.beech-v044 .beech-part.part-moss,.beech-v044 .beech-part.part-resin,.beech-v044 .beech-part.part-mushroom{width:clamp(43px,12.7vw,57px);height:clamp(43px,12.7vw,57px);filter:drop-shadow(0 2px 3px #1118);z-index:7;touch-action:manipulation}
+.beech-v044 .beech-part,.beech-v044 .beech-part.part-crown,.beech-v044 .beech-part.part-branch,.beech-v044 .beech-part.part-nest,.beech-v044 .beech-part.part-nut,.beech-v044 .beech-part.part-moss,.beech-v044 .beech-part.part-resin,.beech-v044 .beech-part.part-mushroom{width:clamp(43px,12.7vw,57px);height:clamp(43px,12.7vw,57px);filter:drop-shadow(0 2px 3px #1118);z-index:7;touch-action:manipulation;overflow:visible}
 .beech-v044 .beech-part.part-crown{width:clamp(60px,17vw,78px);height:clamp(60px,17vw,78px);z-index:5}
 .beech-v044 .beech-part.part-branch{width:clamp(56px,15vw,68px);height:clamp(48px,13vw,58px);z-index:7}
-.beech-v044 .beech-part::before,.beech-v044 .beech-part.part-crown::before,.beech-v044 .beech-part.part-branch::before,.beech-v044 .beech-part.part-nut::before,.beech-v044 .beech-part.part-moss::before,.beech-v044 .beech-part.part-resin::before,.beech-v044 .beech-part.part-mushroom::before,.beech-v044 .beech-part.part-nest::before{inset:6px;border:1.5px solid #e6f0cdb0;background:#eaffdf0d;border-radius:13px;box-shadow:0 0 0 2px #d5e6bb20,0 0 13px #bbd68a44;transition:border-color .12s}
-.beech-v044 .beech-part.part-branch::before{inset:8px 10px;border-radius:18px}
-.beech-v044 .beech-part.part-crown::before{inset:7px 11px;border-radius:35%}
-.beech-v044 .beech-part.part-nest::before{border-color:#c795ebcc;box-shadow:0 0 13px #a66bdf66}
-.beech-v044 .beech-part.slot-nest-bee::before{border-color:#f3ca64;box-shadow:0 0 16px #edba5077}
+.beech-v044 .beech-part::before,.beech-v044 .beech-part.part-crown::before,.beech-v044 .beech-part.part-branch::before,.beech-v044 .beech-part.part-nut::before,.beech-v044 .beech-part.part-moss::before,.beech-v044 .beech-part.part-resin::before,.beech-v044 .beech-part.part-mushroom::before,.beech-v044 .beech-part.part-nest::before{content:'';position:absolute;left:50%;top:50%;width:76%;height:76%;transform:translate(-50%,-50%);border:1.5px solid #e6f0cda8;background:radial-gradient(circle at 50% 40%,#f4ffd440 0%,#deffb21c 55%,#deffb209 100%);border-radius:14px;box-shadow:0 0 0 2px #d5e6bb18,0 0 18px #bbd68a38;transition:border-color .12s,box-shadow .12s,transform .12s}
+.beech-v044 .beech-part.part-branch::before{width:86%;height:52%;border-radius:999px;transform:translate(-50%,-50%) rotate(-18deg)}
+.beech-v044 .beech-part.part-crown::before{width:80%;height:80%;border-radius:38%}
+.beech-v044 .beech-part.part-nest::before{border-color:#c795ebcc;box-shadow:0 0 18px #a66bdf66;background:radial-gradient(circle at 50% 40%,#f2dcff40 0%,#d7a9ff18 60%,#d7a9ff08 100%)}
+.beech-v044 .beech-part.slot-nest-bee::before{border-color:#f3ca64;box-shadow:0 0 18px #edba5077;background:radial-gradient(circle at 50% 40%,#ffe7a940 0%,#efc85e18 60%,#efc85e08 100%)}
 .beech-v044 .beech-part svg{width:100%;height:100%;filter:none;overflow:visible}
 .beech-v044 .beech-part:active{filter:brightness(1.24) drop-shadow(0 3px 6px #c5a7f455)}
+.beech-v044 .beech-part:active::before,.beech-v044 .beech-part.gesture-active::before{transform:translate(-50%,-50%) scale(.96);box-shadow:0 0 0 2px #edf8d632,0 0 22px #d7ef9f66}
 .beech-v044 .beech-part-hint{white-space:nowrap;width:max-content;max-width:calc(100% - 12px);font-size:clamp(9px,2.6vw,11px);left:50%;bottom:12px;background:#292536dc;color:#c9bfd6;border:1px solid #484056;box-shadow:0 2px 12px #07061052;border-radius:11px;font-size:11px;padding:8px 13px}
+.beech-v044 .beech-part.part-resin,.beech-v044 .beech-part.part-mushroom,.beech-v044 .beech-part.part-moss,.beech-v044 .beech-part.part-nut{z-index:8}
+.beech-v044 .beech-part.part-resin::before,.beech-v044 .beech-part.part-mushroom::before,.beech-v044 .beech-part.part-moss::before,.beech-v044 .beech-part.part-nut::before{width:74%;height:74%;border-radius:18px}
 .beech-v044 .tree-bottom{background:#1a1725;color:#eeeaf4;border-top:1px solid #494056;border-radius:19px 19px 0 0;padding:13px 16px calc(15px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 20px #0b081333}
 .beech-v044 .beech-bottom-head strong{color:#eee8f7;font-size:13px}
 .beech-v044 .beech-bottom-head span{color:#a69cb6}
@@ -790,7 +793,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.21 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen werden als Bodenflächen mit fester Weltbreite dargestellt. Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.29 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen werden als Bodenflächen mit fester Weltbreite dargestellt. Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -811,7 +814,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.27'; // Stein: verbesserte Touch-Erkennung und gut erreichbare Fundpunkte
+const VERSION = '0.4.29'; // Buche: fest angedockte Fundstücke, organische Touch-Hüllen, Auto-Abschluss
 const MAX_ZOOM = 20.5;
 const START_ZOOM = MAX_ZOOM; // Alle Bildschirmgrößen starten mit dem maximalen Nahzoom
 const MIN_ZOOM = 19.0; // Nur 1,5 Zoomstufen heraus – ungefähr halber bisher nutzbarer Bereich
@@ -928,18 +931,18 @@ function rollHarvest(node, rand = Math.random) {
 // Zwei garantierte Punkte + acht unabhängig erscheinende. Mengen werden
 // NUR nach erfolgreichem Spawn einmal nach den Gewichten ausgewürfelt.
 const BEECH_GUARANTEED=Object.freeze([
- {id:'branch-left-high',item:'wood',chance:1,x:31,y:41,gesture:'tap',name:'Ast links oben',drops:[[1,.75],[2,.25]]},
- {id:'crown-center',item:'leaf',chance:1,x:53,y:18,gesture:'tap',name:'Baumkrone Mitte',drops:[[1,.50],[2,.30],[3,.20]]}
+ {id:'branch-left-high',item:'wood',chance:1,x:31,y:47,gesture:'tap',name:'Ast links oben',drops:[[1,.75],[2,.25]]},
+ {id:'crown-center',item:'leaf',chance:1,x:66,y:24,gesture:'tap',name:'Baumkrone Mitte',drops:[[1,.50],[2,.30],[3,.20]]}
 ]);
 const BEECH_PARTS=Object.freeze([
- {id:'branch-right-low',item:'wood',chance:.50,x:70,y:68,gesture:'tap',name:'Ast rechts unten',drops:[[1,.75],[2,.25]]},
- {id:'crown-left',item:'leaf',chance:.40,x:28,y:25,gesture:'tap',name:'Baumkrone links',drops:[[1,.50],[2,.30],[3,.20]]},
- {id:'beechnut-ground',item:'beechnut',chance:.35,x:25,y:84,gesture:'tap',name:'Buchecker',drops:[[1,.50],[2,.30],[3,.20]]},
- {id:'moss-trunk',item:'moss',chance:.25,x:44,y:76,gesture:'tap',name:'Moos',drops:[[1,.50],[2,.30],[3,.20]]},
- {id:'resin-trunk',item:'resin',chance:.08,x:53,y:56,gesture:'tap',name:'Harz',drops:[[1,.75],[2,.25]]},
- {id:'mushroom-root',item:'mushroom',chance:.05,x:70,y:88,gesture:'tap',name:'Pilz',drops:[[1,1]]},
- {id:'nest-bird',item:null,chance:.02,x:76,y:27,gesture:'tap',name:'Vogelnest',nestType:'bird'},
- {id:'nest-bee',item:null,chance:.01,x:82,y:48,gesture:'tap',name:'Bienenstock',nestType:'bee'}
+ {id:'branch-right-low',item:'wood',chance:.50,x:68,y:63,gesture:'tap',name:'Ast rechts unten',drops:[[1,.75],[2,.25]]},
+ {id:'crown-left',item:'leaf',chance:.40,x:33,y:28,gesture:'tap',name:'Baumkrone links',drops:[[1,.50],[2,.30],[3,.20]]},
+ {id:'beechnut-ground',item:'beechnut',chance:.35,x:28,y:81,gesture:'tap',name:'Buchecker',drops:[[1,.50],[2,.30],[3,.20]]},
+ {id:'moss-trunk',item:'moss',chance:.25,x:43,y:73,gesture:'tap',name:'Moos',drops:[[1,.50],[2,.30],[3,.20]]},
+ {id:'resin-trunk',item:'resin',chance:.08,x:55,y:58,gesture:'tap',name:'Harz',drops:[[1,.75],[2,.25]]},
+ {id:'mushroom-root',item:'mushroom',chance:.05,x:62,y:83,gesture:'tap',name:'Pilz',drops:[[1,1]]},
+ {id:'nest-bird',item:null,chance:.02,x:77,y:25,gesture:'tap',name:'Vogelnest',nestType:'bird'},
+ {id:'nest-bee',item:null,chance:.01,x:78,y:49,gesture:'tap',name:'Bienenstock',nestType:'bee'}
 ]);
 function beechWeightedCount(def,rand){
  const options=def.drops||[[1,1]];
@@ -1093,6 +1096,10 @@ function treeSlotVisible(slot,session){
   return true;
 }
 function treeRemaining(session){return session.slots.filter(s=>!s.collected).length;}
+let treeAutoCloseTimer=0;
+function clearTreeAutoClose(){if(treeAutoCloseTimer){clearTimeout(treeAutoCloseTimer);treeAutoCloseTimer=0;}}
+function scheduleTreeAutoClose(nodeId){clearTreeAutoClose();treeAutoCloseTimer=setTimeout(()=>{const current=state.treeNode;const session=current?activeProfile().treeSessions[current.id]:null;if(current&&current.id===nodeId&&session?.completeAt)closeTreeScene();},1000);}
+
 function treeSlotIcon(slot){
   if(slot.zone==='nest')return slot.nestType==='bee'?'🐝':'🪺';
   if(slot.zone==='trunk'||slot.zone==='branch'||slot.zone==='nestItem')return '✦';
@@ -3601,6 +3608,7 @@ function getTreeSession(node){
   return session;
 }
 function openTreeScene(node){
+  clearTreeAutoClose();
   if(!getRange(node).ok){
     state.selectedNode=node;state.sheetMode='resource';renderResourceSheet();
     $('modal-backdrop').classList.remove('hidden');$('modal-backdrop').setAttribute('aria-hidden','false');return;
@@ -3616,25 +3624,29 @@ function openTreeScene(node){
   renderTreeScene();
 }
 function closeTreeScene(){
+  clearTreeAutoClose();
   $('tree-scene').classList.add('hidden');$('tree-scene').setAttribute('aria-hidden','true');
   state.treeNode=null;state.treeMessage='';renderWorld();
 }
-function treeArtwork(){return `<svg class="tree-svg" viewBox="0 0 420 500" preserveAspectRatio="none" role="img" aria-label="Schlichte Low-Poly-Buche mit Stamm und mittlerer Krone">
-  <ellipse cx="215" cy="482" rx="102" ry="10" fill="#749b58" opacity=".30"/>
-  <!-- Fester Stamm und mittlere Krone; abbaubare Äste sind verbundene Holzpunkte -->
-  <path d="M194 455 L198 269 L171 212 L183 204 L216 265 L247 208 L259 214 L228 283 L231 451 L249 482 L217 476 L204 489 L186 479 L170 484Z" fill="#8b7154"/>
-  <path d="M212 263 L217 451 L237 478 L221 475 L209 489 L198 476 L206 343Z" fill="#ae8c67"/>
-  <path d="M197 349 L207 329 L205 470 L190 478Z" fill="#6c5746"/>
-  <!-- One permanent central canopy, intentionally only a few colored facets -->
-  <path d="M115 170 L131 111 L181 69 L236 55 L292 93 L321 162 L298 227 L243 255 L169 242 L117 209Z" fill="#79a954"/>
-  <polygon points="131,111 181,69 211,155 115,170" fill="#96c56b"/>
-  <polygon points="181,69 236,55 253,144 211,155" fill="#a6cf78"/>
-  <polygon points="236,55 292,93 253,144" fill="#8bbb60"/>
-  <polygon points="292,93 321,162 253,144" fill="#72a251"/>
-  <polygon points="115,170 211,155 169,242 117,209" fill="#659750"/>
-  <polygon points="211,155 253,144 243,255 169,242" fill="#78ab59"/>
-  <polygon points="253,144 321,162 298,227 243,255" fill="#619447"/>
-  <path d="M192 459 l-28 25 22 -5 M231 457 l22 24 -22 -5" stroke="#83694e" stroke-width="11" fill="none"/>
+function treeArtwork(){return `<svg class="tree-svg" viewBox="0 0 420 500" preserveAspectRatio="none" role="img" aria-label="Low-Poly-Buche mit fest verbundenen Sammelteilen">
+  <ellipse cx="211" cy="470" rx="103" ry="14" fill="#0e0d18" opacity=".26"/>
+  <path d="M198 452 L203 264 L184 209 L197 202 L215 250 L234 205 L247 212 L225 268 L230 452 L248 481 L223 475 L210 489 L195 476 L174 482Z" fill="#8d7458"/>
+  <path d="M208 263 L214 452 L233 478 L221 475 L210 487 L198 476 L203 334Z" fill="#b0906e"/>
+  <path d="M192 347 L203 328 L202 469 L189 477Z" fill="#6d5847"/>
+  <path d="M126 161 L148 112 L196 80 L241 74 L286 92 L317 138 L310 202 L257 242 L173 243 L128 208Z" fill="#78a854"/>
+  <polygon points="148,112 196,80 205,153 126,161" fill="#9dc96f"/>
+  <polygon points="196,80 241,74 257,148 205,153" fill="#a8cf7a"/>
+  <polygon points="241,74 286,92 257,148" fill="#8fbd64"/>
+  <polygon points="286,92 317,138 257,148" fill="#76a653"/>
+  <polygon points="126,161 205,153 173,243 128,208" fill="#67984f"/>
+  <polygon points="205,153 257,148 257,242 173,243" fill="#77aa59"/>
+  <polygon points="257,148 317,138 310,202 257,242" fill="#5f9448"/>
+  <path d="M103 214 L124 176 L160 160 L184 182 L177 220 L140 239 L113 231Z" fill="#78a854"/>
+  <polygon points="124,176 160,160 151,205 103,214" fill="#a3cb73"/>
+  <polygon points="160,160 184,182 177,220 151,205" fill="#89b861"/>
+  <path d="M248 175 L275 143 L312 137 L339 160 L336 197 L302 216 L262 208Z" fill="#79aa55"/>
+  <polygon points="275,143 312,137 301,181 248,175" fill="#a6cf78"/>
+  <polygon points="312,137 339,160 336,197 301,181" fill="#8dbc62"/>
 </svg>`;}
 function beechPartDefinition(slot){
  return [...BEECH_GUARANTEED,...BEECH_PARTS].find(p=>p.id===slot.id)||{gesture:'tap',name:MATERIALS[slot.item]?.name||'Fundstück'};
@@ -3644,9 +3656,9 @@ function beechPartArtwork(slot){
  const svg=(shapes)=>`<svg viewBox="0 0 100 86" aria-hidden="true" focusable="false">${shapes}</svg>`;
  if(id.includes('branch')){
    const flip=id==='branch-right-low'?'translate(100 0) scale(-1 1)':'';
-   return svg(`<g transform="${flip}"><path d="M11 71 L75 22 L81 30 L21 79Z" fill="#936b46"/><path d="M15 71 L75 22 L82 25 L20 75Z" fill="#bf9463"/><path d="M48 46 L43 18 L53 15 L62 37Z" fill="#aa8155"/><path d="M27 61 L18 36 L27 32 L39 52Z" fill="#926b49"/><circle cx="79" cy="25" r="6" fill="#d8b183"/></g>`);
+   return svg(`<g transform="${flip}"><path d="M11 69 C33 61 46 49 69 28" fill="none" stroke="#8f6645" stroke-width="10" stroke-linecap="round"/><path d="M11 69 C33 61 46 49 69 28" fill="none" stroke="#c89b67" stroke-width="4" stroke-linecap="round"/><path d="M44 47 L57 34" fill="none" stroke="#c89b67" stroke-width="4" stroke-linecap="round"/><path d="M45 50 L59 39" fill="none" stroke="#8f6645" stroke-width="7" stroke-linecap="round" opacity=".65"/></g>`);
  }
- if(id.includes('crown'))return svg('<path d="M8 44 L23 23 L52 12 L82 22 L95 47 L78 73 L36 75Z" fill="#71a551"/><polygon points="23,23 52,12 51,47 8,44" fill="#a1c66e"/><polygon points="52,12 82,22 95,47 51,47" fill="#91bd62"/><polygon points="8,44 51,47 36,75" fill="#5f954c"/><polygon points="51,47 95,47 78,73 36,75" fill="#74a656"/><path d="M41 60 Q34 44 55 31 Q65 45 52 60Z" fill="#e0efbd"/><path d="M45 60 L57 40" stroke="#65924a" stroke-width="2" stroke-linecap="round"/>');
+ if(id.includes('crown'))return svg('<path d="M10 43 L24 21 L51 11 L79 20 L92 44 L79 67 L39 72 L16 60Z" fill="#6fa651"/><polygon points="24,21 51,11 50,44 10,43" fill="#9ec86f"/><polygon points="51,11 79,20 92,44 50,44" fill="#8bbb60"/><polygon points="10,43 50,44 39,72 16,60" fill="#5e944a"/><polygon points="50,44 92,44 79,67 39,72" fill="#76ab57"/>');
  if(id==='nest-bee')return svg('<path d="M5 65 L76 26 L82 33 L13 75Z" fill="#a67c50"/><path d="M12 65 L77 26 L82 29 L13 69Z" fill="#d4a66e"/><path d="M64 38 L64 49" stroke="#74512e" stroke-width="3"/><path d="M49 51 Q64 39 78 51 L85 72 Q76 85 64 83 Q50 80 47 69Z" fill="#d7a13b"/><path d="M50 60 Q63 66 80 60 M50 69 Q65 74 82 68 M54 78 Q66 81 79 76" stroke="#f0c66c" stroke-width="4" fill="none"/><circle cx="65" cy="69" r="4" fill="#77501d"/>');
  if(id==='nest-bird')return svg('<path d="M6 69 L73 29 L80 35 L15 77Z" fill="#99704b"/><path d="M36 49 Q60 27 92 47 Q81 70 63 69 Q42 68 36 49Z" fill="#a57744"/><path d="M42 51 Q63 61 85 49 M46 58 Q65 64 81 56" stroke="#ceac6b" stroke-width="3" fill="none"/><ellipse cx="59" cy="43" rx="8" ry="11" fill="#ece8d7"/><ellipse cx="73" cy="44" rx="8" ry="11" fill="#e1e6d8"/>');
  if(slot.zone==='nest')return beechNestArtwork(slot.nestType);
@@ -3654,15 +3666,13 @@ function beechPartArtwork(slot){
  return art;
 }
 function beechPartConnectors(session){
- // Die Holzstellen hängen tatsächlich am Stamm: keine schwebenden Holz-Icons.
  const live=id=>session.slots.some(slot=>slot.id===id && !slot.collected);
  const paths=[];
- if(live('branch-left-high'))paths.push('M203 282 Q166 268 130 205');
- if(live('branch-right-low'))paths.push('M218 349 Q255 347 294 341');
- if(live('nest-bee'))paths.push('M235 275 Q294 254 344 240');
- if(live('nest-bird'))paths.push('M250 165 Q286 151 312 133');
- return `<svg class="beech-branch-connectors" viewBox="0 0 420 500" preserveAspectRatio="none" aria-hidden="true">${paths.map(d=>`<path d="${d}" fill="none" stroke="#6f4b33" stroke-width="15" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#c09560" stroke-width="5" stroke-linecap="round"/>`).join('')}</svg>`;
+ if(live('nest-bee'))paths.push('M236 278 Q286 256 320 248');
+ if(live('nest-bird'))paths.push('M246 182 Q286 175 318 173');
+ return `<svg class="beech-branch-connectors" viewBox="0 0 420 500" preserveAspectRatio="none" aria-hidden="true">${paths.map(d=>`<path d="${d}" fill="none" stroke="#7d5a3e" stroke-width="12" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#c79a65" stroke-width="4" stroke-linecap="round"/>`).join('')}</svg>`;
 }
+
 function beechPhysicalPart(slot,canCollect){
  const def=beechPartDefinition(slot);
  const type=slot.zone==='nest'?'nest':slot.id.includes('crown')?'crown':slot.id.includes('branch')?'branch':slot.id.includes('beechnut')?'nut':slot.id.includes('moss')?'moss':slot.id.includes('resin')?'resin':slot.id.includes('mushroom')?'mushroom':'wood';
@@ -3671,7 +3681,7 @@ function beechPhysicalPart(slot,canCollect){
  return `<button type="button" class="beech-part part-${type} ${extraClass}" data-tree-slot="${slot.id}" style="left:${x}%;top:${y}%" ${canCollect?'':'disabled'} aria-label="${def.name} antippen" title="${def.name}">${beechPartArtwork(slot)}</button>`;
 }
 function beechInteractionMessage(){
- return 'Tippe auf die leuchtenden Fundstücke';
+ return 'Tippe auf die Fundstücke am Baum';
 }
 function showBeechInteractionHint(message){
  const el=document.querySelector('#tree-scene .beech-part-hint');
@@ -3769,7 +3779,7 @@ function renderTreeScene(){
  const earned=Object.values(session.earned||{}).reduce((a,b)=>a+b,0);
  $('tree-scene').innerHTML=`<div class="tree-scene-inner beech-v044">
    <header class="tree-top"><button class="tree-back" id="tree-back" aria-label="Zur Karte zurück">←</button>
-   <div class="tree-heading"><h2>Buche <small class="beech-build-label">v0.4.25</small></h2></div><span class="tree-step">${harvestedNormal} / ${regular.length}</span></header>
+   <div class="tree-heading"><h2>Buche <small class="beech-build-label">v0.4.29</small></h2></div><span class="tree-step">${harvestedNormal} / ${regular.length}</span></header>
    <div class="tree-stage"><div class="tree-visual">${treeArtwork()}${isPhysical?beechPartConnectors(session):''}${hotspots}</div>${isPhysical?'<div class="beech-part-hint" aria-live="polite">Tippe auf die leuchtenden Fundstücke</div>':''}${nestPanel}</div>
    <div class="tree-bottom"><div class="beech-bottom-head"><strong>Gefundene Items</strong><span>${earned} gesammelt${extraSlots.length?` · ${doneExtra}/${extraSlots.length} Extra-SP`:''}</span></div>
    <div class="beech-loot-cards" aria-live="polite">${beechLootCards(session)}</div>
@@ -3777,12 +3787,13 @@ function renderTreeScene(){
    ${session.completeAt?'<button class="beech-done-btn" id="tree-return">Fertig · Zur Karte</button>':''}</div>
   </div>`;
  $('tree-back').addEventListener('click',closeTreeScene);
- $('tree-return')?.addEventListener('click',closeTreeScene);
- $('tree-nest-close')?.addEventListener('click',closeTreeNest);
+  $('tree-nest-close')?.addEventListener('click',closeTreeNest);
  $('tree-nest-return')?.addEventListener('click',closeTreeNest);
  $('tree-scene').querySelectorAll('[data-tree-slot]:not(.beech-part)').forEach(btn=>btn.addEventListener('click',()=>collectTreeSlot(node.id,btn.dataset.treeSlot)));
  if(isPhysical)bindBeechPartGestures(node.id);
+ if(session.completeAt)scheduleTreeAutoClose(node.id); else clearTreeAutoClose();
 }
+
 
 function awardTreeItem(session,slot,profile){
   if(!slot.item || !slot.count)return;
@@ -3834,7 +3845,7 @@ function collectTreeSlot(nodeId,slotId){
   const completed=finishTreeIfDone(node,session,profile);
   save();renderPanels();renderWorld();renderTreeScene();
   if(!completed)showTreePickup(slot);
-  if(completed)toast('Buche vollständig untersucht!');
+  if(completed){state.treeMessage='Alles eingesammelt';toast('Buche vollständig untersucht!');}
   try{navigator.vibrate?.(20);}catch{}
 }
 function collectAllTree(nodeId){
