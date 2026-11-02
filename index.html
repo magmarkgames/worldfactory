@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.21 – Niedrige 3D-Miniaturgebaeude mit fester Welthoehe und performantem Rendering.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.20</title>
+  <meta name="description" content="WELTWERK v0.4.22 – 1-Sekunden-Zoom, weniger Nebel, skalierbare Collectibles und stärkere Bodenringe.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.22</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:82px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -533,9 +533,9 @@
 /* v0.4.21: atmosphärischer Fernnebel ohne harte Horizontlinie. */
 #screen-map .ww-canvas-map:not(.ww-topdown) .ww-horizon-mist{
  display:block!important;position:absolute;z-index:3;left:0;right:0;
- top:calc(33% - 54px);height:clamp(142px,24vh,205px);
+ top:calc(33% - 16px);height:clamp(55px,8.5vh,88px);
  pointer-events:none;
- background:linear-gradient(180deg,rgba(175,218,214,0) 0%,rgba(181,223,211,.70) 18%,rgba(182,222,196,.95) 34%,rgba(183,220,180,.75) 58%,rgba(172,217,156,0) 100%);
+ background:linear-gradient(180deg,rgba(174,218,210,0) 0%,rgba(180,219,196,.26) 27%,rgba(183,220,180,.35) 48%,rgba(172,217,156,.12) 73%,rgba(172,217,156,0) 100%);
 }
 #screen-map .ww-canvas-map.ww-topdown .ww-horizon-mist{display:none!important}
 #screen-map .world-resource.in-range img.world-resource-art{filter:drop-shadow(1px 0 1px #eafff3) drop-shadow(-1px 0 1px #eafff3) drop-shadow(0 0 5px #8bffca)}
@@ -545,7 +545,11 @@
 #screen-map .ww-canvas-map{background:linear-gradient(180deg,#2798eb 0%,#70c5fa 35%,#a3d66f 100%)}
 #screen-map .backup-map-attribution{font-size:8px;opacity:.85}
 #screen-map .world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 4px #e3ffe7)}
-#screen-map .world-resource.in-range .world-resource-dot{box-shadow:0 0 0 3px #a3e8b57a}
+#screen-map .world-resource-dot{display:none!important}
+#screen-map .world-resource.in-range::after{content:'';position:absolute;left:50%;bottom:-3px;width:53px;height:17px;border:4px solid #d5fff0;border-radius:50%;transform:translateX(-50%) scale(var(--ww-item-scale,1));transform-origin:center center;background:#78efbd24;box-shadow:0 0 0 3px #5be1a48a,0 0 13px 5px #7dffd477;pointer-events:none}
+#map-3d .world-resource-art{transform:scale(var(--ww-item-scale,1))!important;transform-origin:center 90%}
+#map-3d .world-resource-shadow{transform:scale(var(--ww-item-scale,1));transform-origin:center center}
+#screen-map .world-resource.in-range .world-resource-art{filter:drop-shadow(1px 0 1px #eafff3) drop-shadow(-1px 0 1px #eafff3) drop-shadow(0 0 9px #7bffd3)}
 @media(max-height:700px){#screen-map .map-tools{top:125px}#screen-map .map-tools-panel{max-height:calc(100dvh - var(--nav-h) - 126px - 160px)}#screen-map .map-bottom-group{bottom:8px}}
 @media(max-width:360px){#screen-map .topbar{padding-left:11px;padding-right:11px}#screen-map .brand-icon{width:35px;height:35px}#screen-map .brand-name{font-size:17px}#screen-map .location-pill{padding:8px 9px}#screen-map .nearby-copy strong{font-size:12px}}
 @media(prefers-reduced-motion:reduce){#screen-map .map-tools-toggle,#screen-map .nearby-chevron{transition:none}}
@@ -688,8 +692,8 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.21'; // Pinch-Übersicht, 20-m-Sammelradius, dichte Fundstellen, weiche Ferne
-const START_ZOOM = window.innerWidth<360?18.35:18.65; // Etwas weitere Startansicht: mehr Welt sichtbar, 20-m-Kreis bleibt lesbar; bis 20.5 zoombar
+const VERSION = '0.4.22'; // Distanz- und zoomabhängige Fundstücke, dezenter Nebel, 1-s-Pinch-Rückkehr
+const START_ZOOM = window.innerWidth<360?18.25:18.55; // Ruhige Standardansicht mit ausreichend Überblick; manuelle Zoom-Buttons bleiben erhalten
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
 const REACH_METERS = 20;
@@ -1546,8 +1550,8 @@ const MAP_BUILDING_MAX_SOURCE = 1440; // balanced across map sectors so no direc
 const MAP_BUILDING_MAX_DISTANCE = 530; // scenery radius; perspective makes distant buildings naturally small
 // One shared palette and a deterministic ground-layer order for both renderers.
 const MAP_COLORS=Object.freeze({
-  grass:'#9ed674',farmland:'#a8d27b',park:'#71b962',forest:'#4c9156',wetland:'#70aa98',
-  urban:'#8eb870',building:'#9aa79a',roof:'#7f8f82',
+  grass:'#9ed674',farmland:'#b2d987',park:'#70bf68',forest:'#4b985c',wetland:'#73b8a2',
+  urban:'#93c57b',building:'#9aa79a',roof:'#7f8f82',
   water:'#45afe4',waterway:'#45afe4',road:'#4d5758',path:'#8c927e',roadEdge:'#9caa90'
 });
 const WORLD_PALETTE={
@@ -1670,9 +1674,9 @@ function wwRoadRibbon(feature,tile,layer){
   const sub=String(feature.props.subclass||'').toLowerCase();
   const label=cls+' '+sub;
   const isPath=/path|track|footway|pedestrian|cycleway|steps/.test(label);
-  const widthMeters=isPath?.85:/motorway|trunk/.test(label)?2.7:
-    /primary|secondary/.test(label)?2.35:/tertiary/.test(label)?1.95:
-    /service|minor|residential/.test(label)?1.4:1.6;
+  const widthMeters=isPath?1.00:/motorway|trunk/.test(label)?3.25:
+    /primary|secondary/.test(label)?2.8:/tertiary/.test(label)?2.3:
+    /service|minor|residential/.test(label)?1.65:1.9;
   // Mercator x/y tiles have identical local units; use the latitude at the
   // tile centre for a consistent metres-to-world conversion.
   const latitude=wwTilePointToLngLat(tile.x,tile.y,tile.z,layer.extent,[layer.extent/2,layer.extent/2]).lat;
@@ -1750,7 +1754,7 @@ class BackupMap {
     this.attribution.innerHTML='Karte © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>';
     this.el.append(this.canvas,this.fog,this.markerLayer,this.caption,this.attribution);
     // A two-finger peek temporarily changes zoom; after the final finger is
-    // lifted, the camera glides back to its original zoom after 2 seconds.
+    // lifted, the camera glides back to its original zoom after 1 second.
     this._mapTouches=new Map();this._pinch=null;this._pinchReturning=null;
     this._pinchTimer=null;this._pinchRestoreZoom=null;this._pinchWasUsed=false;
     const cancelPinchReturn=()=>{
@@ -1764,7 +1768,7 @@ class BackupMap {
         this._pinchTimer=null;
         if(this._mapTouches.size)return;
         const target=this._pinchRestoreZoom;this._pinchRestoreZoom=null;
-        const from=this.zoom,start=performance.now(),duration=580;
+        const from=this.zoom,start=performance.now(),duration=440;
         const tick=(now)=>{
           if(this._mapTouches.size){this._pinchReturning=null;return;}
           const t=Math.min(1,(now-start)/duration),ease=1-(1-t)**3;
@@ -1774,7 +1778,7 @@ class BackupMap {
           else this._pinchReturning=null;
         };
         this._pinchReturning=requestAnimationFrame(tick);
-      },2000);
+      },1000);
     };
     this.el.addEventListener('pointerdown',e=>{
       if(e.target.closest('button,a,.backup-marker,.world-resource'))return;
@@ -2546,7 +2550,7 @@ class BackupMap {
     ctx.clearRect(0,0,w,h);
     const y0=p.topDown?0:Math.max(0,Math.floor(p.horizon));
     const bg=ctx.createLinearGradient(0,y0,0,h);
-    bg.addColorStop(0,'#b5dd94');bg.addColorStop(.45,MAP_COLORS.grass);bg.addColorStop(1,'#94cb6b');
+    bg.addColorStop(0,'#c3e2a5');bg.addColorStop(.45,MAP_COLORS.grass);bg.addColorStop(1,'#91cb6f');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
     // Decorative patches add low-poly depth without replacing any real geometry.
     this.drawGroundTexture(p);
@@ -2594,9 +2598,9 @@ class BackupMap {
     ctx.lineWidth=1.65;ctx.strokeStyle='rgba(241,255,239,.92)';ctx.stroke();
     ctx.restore();
   }
-  // Readable billboard illustrations are kept at a fixed pixel size.
-  // Both scenery and sprites are painted into the *same* high-DPI canvas, using
-  // identical geographical coordinates and the exact same camera parameters.
+  // Sprites use the same camera zoom and inverse-perspective scale as ground geometry.
+  // Unlike fixed-pixel billboards, zooming out physically shrinks the whole field.
+  // Markers remain canvas-rendered at geographical locations with accurate ground anchors.
   drawSprites(p){
     const ctx=this.ctx,dpr=this._renderDpr;
     const sprites=[];
@@ -2633,7 +2637,7 @@ class BackupMap {
     sprites.sort((a,b)=>Number(a.kind!=='building')-Number(b.kind!=='building') || a.y-b.y || Number(a.isPlayer)-Number(b.isPlayer));
     ctx.setTransform(dpr,0,0,dpr,0,0);
     for(const s of sprites)if(s.kind==='building')this.drawBuilding(ctx,s,p);
-    this.drawCollectRing(p);
+    // Kein großer, schwebender Sammelradius: erreichbare Fundstücke haben Bodenringe.
     for(const s of sprites){
       if(s.kind==='building')continue;
       const {marker,x,y,isPlayer}=s, elem=marker.element;
@@ -2643,24 +2647,28 @@ class BackupMap {
       const rich=elem.classList.contains('rich');
       const isTree=elem.classList.contains('type-tree');
       const beechRing=isTree&&!depleted?(elem.classList.contains('beech-rarity-legendary')?'#e6b846':elem.classList.contains('beech-rarity-epic')?'#a96cdb':elem.classList.contains('beech-rarity-rare')?'#5598db':null):null;
-      const sizeScale=isPlayer?1:(p.topDown?1:bound(s.scale,.5,1.22));
+      const worldZoom=Math.pow(2,this.zoom-START_ZOOM);
+      // Map is perspective-projected just like road ribbons; sprite world-size is stable.
+      const sizeScale=isPlayer?1:bound(worldZoom*(p.topDown?1:s.scale),.15,1.75);
       const w=(isPlayer?72:76)*sizeScale,h=(isPlayer?98:83)*sizeScale;
       // The shadow/ring is the world contact point, exactly at the geo coordinate.
       ctx.save();
       ctx.globalAlpha=depleted?.53:1;
       ctx.fillStyle='rgba(25,65,53,.18)';
       ctx.beginPath();ctx.ellipse(x,y-3*sizeScale,(isPlayer?27:24)*sizeScale,6*sizeScale,0,0,Math.PI*2);ctx.fill();
-      if(isPlayer || inRange){
-        ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
+      if(isPlayer){
+        ctx.beginPath();ctx.ellipse(x,y-2,29,7,0,0,Math.PI*2);
         ctx.fillStyle='rgba(70,205,162,.35)';ctx.fill();
-        ctx.lineWidth=2.5;ctx.strokeStyle='#dcfff2';ctx.stroke();
-      }
-      if(inRange && !isPlayer){
-        const pulse=0.72+0.28*Math.sin(performance.now()/260);
-        ctx.beginPath();ctx.ellipse(x,y-6,28,12,0,0,Math.PI*2);
-        ctx.fillStyle='rgba(115,231,173,.16)';ctx.fill();
-        ctx.lineWidth=2.2;ctx.strokeStyle=`rgba(124,245,197,${0.55+0.22*pulse})`;ctx.stroke();
-        ctx.beginPath();ctx.arc(x,y-h+10,10+2*pulse,0,Math.PI*2);ctx.fillStyle='rgba(123,244,196,.16)';ctx.fill();
+        ctx.lineWidth=2.4;ctx.strokeStyle='#dcfff2';ctx.stroke();
+      }else if(inRange){
+        // One thick glow directly on the ground, no floating circle above the item.
+        const pulse=.86+.14*Math.sin(performance.now()/320);
+        ctx.beginPath();ctx.ellipse(x,y-3*sizeScale,Math.max(7,27*sizeScale),Math.max(3,9*sizeScale),0,0,Math.PI*2);
+        ctx.fillStyle='rgba(107,233,171,.17)';ctx.fill();
+        ctx.shadowColor='rgba(103,255,196,.8)';ctx.shadowBlur=12;
+        ctx.lineWidth=bound(3.8*sizeScale,1.5,5.5);
+        ctx.strokeStyle=`rgba(214,255,237,${pulse})`;ctx.stroke();
+        ctx.shadowBlur=0;
       }
       if(asset && asset.complete && asset.naturalWidth){
         if(inRange&&!isPlayer){ctx.shadowColor='#d5ffe8';ctx.shadowBlur=9*sizeScale;}
@@ -2682,7 +2690,7 @@ class BackupMap {
           ctx.beginPath();ctx.arc(x+w/2-6,y-h+1,11,0,Math.PI*2);ctx.fillStyle='#eab85f';ctx.fill();
           ctx.font='17px system-ui';ctx.textAlign='center';ctx.fillStyle='#543916';ctx.fillText('✦',x+w/2-6,y-h+6);
         }
-        if(beechRing){ctx.beginPath();ctx.ellipse(x,y-3*sizeScale,26*sizeScale,8*sizeScale,0,0,Math.PI*2);ctx.lineWidth=3*sizeScale;ctx.strokeStyle=beechRing;ctx.stroke();}
+        if(beechRing){ctx.beginPath();ctx.ellipse(x,y-3*sizeScale,Math.max(7,28*sizeScale),Math.max(3,10*sizeScale),0,0,Math.PI*2);ctx.lineWidth=bound(3.4*sizeScale,1.3,5.5);ctx.strokeStyle=beechRing;ctx.stroke();}
         // Generous hit area around the sprite, independent of the hidden DOM.
         this._hitTargets.push({element:elem,x,y,left:x-Math.max(23,w*.5+6),right:x+Math.max(23,w*.5+6),top:y-Math.max(54,h+13),bottom:y+11});
       }
@@ -2917,10 +2925,10 @@ function applyVectorPalette(map){
     'line-color':c.waterway,'line-width':['interpolate',['linear'],['zoom'],12,.8,17,2.5,19.5,4]
   },{layout:{'line-cap':'round'}});
   mk('ww-roads','line','transportation',{
-    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,.4,16,1.5,19.5,5.2]
+    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,.48,16,1.85,19.5,6.1]
   },{filter:['in',['get','class'],['literal',['motorway','trunk','primary','secondary','tertiary','minor','service','busway']]],layout:{'line-cap':'round','line-join':'round'}});
   mk('ww-paths','line','transportation',{
-    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.18,16,.62,19.5,1.5]
+    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.2,16,.76,19.5,1.8]
   },{filter:['in',['get','class'],['literal',['path','track','footway','pedestrian','cycleway']]],layout:{'line-cap':'round','line-join':'round'}});
   mk('ww-buildings-3d','fill-extrusion','building',{
     'fill-extrusion-color':c.building,
@@ -2954,8 +2962,8 @@ function attachVectorPointerRotation(map){
     clearTimeout(timer);timer=setTimeout(()=>{
       if(touches.size)return;
       const target=restoreZoom;restoreZoom=null;
-      map.easeTo({zoom:target,duration:580,essential:true});
-    },2000);
+      map.easeTo({zoom:target,duration:440,essential:true});
+    },1000);
   };
   canvas.addEventListener('pointerdown',e=>{
     if(e.pointerType==='mouse'&&e.button!==0)return;
@@ -3030,6 +3038,7 @@ function stage3DMap(){
         $('map').style.display='none';el.classList.add('ww-vector-active');
         attachMapEvents(next);addAccuracyLayer();addCollectionRangeLayer();
         next.on('move',()=>updateVectorCaption(next));
+        next.on('zoom',refreshVectorCollectibleScale);
         next.on('pitchend',()=>setVectorBuildingsVisible(next,next.getPitch()>22 && $('btn-buildings').getAttribute('aria-pressed')!=='false'));
         const active=getPosition();if(active)next.jumpTo({center:[active.lng,active.lat]});
         updatePositionOnMap(true);renderWorld();setMapStatus('Vektor');updateVectorCaption(next);
@@ -3163,8 +3172,8 @@ function rangePolygon(pos,meters=COLLECT_RING_METERS){
 function addCollectionRangeLayer(){
   if(!state.map || state.map.getSource('collect-range'))return;
   state.map.addSource('collect-range',{type:'geojson',data:rangePolygon(null,0)});
-  state.map.addLayer({id:'collect-range-fill',type:'fill',source:'collect-range',paint:{'fill-color':'#aaf1b4','fill-opacity':0.055}});
-  state.map.addLayer({id:'collect-range-line',type:'line',source:'collect-range',paint:{'line-color':'#f4fff1','line-width':2.1,'line-opacity':0.93}});
+  state.map.addLayer({id:'collect-range-fill',type:'fill',source:'collect-range',paint:{'fill-color':'#aaf1b4','fill-opacity':0}});
+  state.map.addLayer({id:'collect-range-line',type:'line',source:'collect-range',paint:{'line-color':'#f4fff1','line-width':0,'line-opacity':0}});
 }
 function makePlayerElement(){
   const elem=document.createElement('div');elem.className='world-player';
@@ -3178,6 +3187,13 @@ function makeResourceElement(node){
   element.addEventListener('click',e=>{e.stopPropagation();openResource(node);});
   element.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
   return element;
+}
+function refreshVectorCollectibleScale(){
+  if(state.mapKind!=='maplibre'||!state.map)return;
+  const factor=bound(Math.pow(2,state.map.getZoom()-START_ZOOM),.22,1.8);
+  for(const marker of state.markers.values()){
+    marker.getElement()?.style.setProperty('--ww-item-scale',factor.toFixed(4));
+  }
 }
 function updateNodeElement(element,node){
   const ready=isReady(activeProfile().harvested[node.id]);
@@ -3223,6 +3239,7 @@ function renderWorld(){
     }
     updateNodeElement(marker.getElement(),node);
   }
+  refreshVectorCollectibleScale();
   updateNearby();
 }
 function updateNearby() {
@@ -3231,7 +3248,7 @@ function updateNearby() {
   const available=nodes.filter(node=>isReady(activeProfile().harvested[node.id])).length;
   $('nearby-counter').textContent=state.mode==='gps'&&!pos?'—':String(available);
   $('nearby-title').textContent=state.mode==='gps'&&!pos?'GPS wird gesucht …':`${available} Fundstellen in Reichweite`;
-  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'20 m Sammelradius · Zwei Finger für die Fernsicht';
+  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'20 m Sammelradius · Fernsicht per Pinch (1 s Rückkehr)';
 }
 function updateModeUI() {
   const gps=state.mode==='gps';
