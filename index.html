@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.20 – Niedrige 3D-Miniaturgebaeude mit fester Welthoehe und performantem Rendering.">
+  <meta name="description" content="WELTWERK v0.4.21 – Niedrige 3D-Miniaturgebaeude mit fester Welthoehe und performantem Rendering.">
   <title>WELTWERK · Exploration & Inselbau v0.4.20</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
@@ -530,6 +530,16 @@
 #screen-map .ww-cloud-b{top:21%;right:4%;transform:scale(.76)}
 #screen-map .ww-distant{display:none!important}
 #screen-map .ww-horizon-mist{display:none!important}
+/* v0.4.21: atmosphärischer Fernnebel ohne harte Horizontlinie. */
+#screen-map .ww-canvas-map:not(.ww-topdown) .ww-horizon-mist{
+ display:block!important;position:absolute;z-index:3;left:0;right:0;
+ top:calc(33% - 54px);height:clamp(142px,24vh,205px);
+ pointer-events:none;
+ background:linear-gradient(180deg,rgba(175,218,214,0) 0%,rgba(181,223,211,.70) 18%,rgba(182,222,196,.95) 34%,rgba(183,220,180,.75) 58%,rgba(172,217,156,0) 100%);
+}
+#screen-map .ww-canvas-map.ww-topdown .ww-horizon-mist{display:none!important}
+#screen-map .world-resource.in-range img.world-resource-art{filter:drop-shadow(1px 0 1px #eafff3) drop-shadow(-1px 0 1px #eafff3) drop-shadow(0 0 5px #8bffca)}
+
 #screen-map .ww-ground{background-color:#b2d783;background-image:linear-gradient(180deg,#c7e3a8 0%,#b4d98b 9%,#a7d26f 22%,#a7d26f 100%),repeating-linear-gradient(90deg,transparent 0 220px,rgba(245,240,211,.18) 220px 232px,transparent 232px 420px),repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 2px,transparent 2px 180px);box-shadow:none!important}
 #screen-map .ww-ground::before{content:"";position:absolute;left:0;right:0;top:-28px;height:34px;background:linear-gradient(180deg,rgba(199,227,168,.96),rgba(182,217,140,.84) 52%,rgba(167,210,111,0));pointer-events:none}
 #screen-map .ww-canvas-map{background:linear-gradient(180deg,#2798eb 0%,#70c5fa 35%,#a3d66f 100%)}
@@ -556,7 +566,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.20 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.21 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -657,7 +667,7 @@
     <div class="page-head"><div class="eyebrow">SPIEL & DATEN</div><h1>Einstellungen<span class="dot">.</span></h1><p>Testmodus, GPS und deine lokalen Speicherstände.</p></div>
     <section class="setting-panel"><div class="panel-heading">Standort & Spielmodus</div><p>Im Demo-Modus bewegst du dich frei per Tippen auf die Karte. Im GPS-Modus folgt dein Marker dem echten Standort.</p><div class="two-buttons"><button id="btn-set-gps" class="solid-btn">◎ Echtes GPS</button><button id="btn-set-demo" class="outline-btn">◈ Demo-Modus</button></div><div id="gps-message" class="setting-hint">GPS funktioniert auf HTTPS-Seiten und mit Standortfreigabe.</div></section>
     <section class="setting-panel"><div class="panel-heading">Lokaler Spielstand</div><p>Demo- und GPS-Modus haben getrennte Inventare. Es werden keine Standortverläufe gespeichert.</p><div class="two-buttons"><button id="btn-export" class="outline-btn">↓ Export (JSON)</button><button id="btn-import" class="outline-btn">↑ Import (JSON)</button></div><input type="file" id="file-import" accept="application/json,.json" hidden><button id="btn-reset" class="danger-link">Aktuellen Spielstand zurücksetzen</button></section>
-    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.20 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen werden als Bodenflächen mit fester Weltbreite dargestellt. Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
+    <section class="setting-panel"><div class="panel-heading">Über diesen Prototyp</div><p>Weltwerk v0.4.21 – Rohstoffe erscheinen an generierten festen Koordinaten. Die Positionen sind <strong>nicht auf sichere Zugänglichkeit überprüft</strong>. Bitte niemals Privatgrundstücke oder gefährliche Orte betreten.</p><p>Straßen werden als Bodenflächen mit fester Weltbreite dargestellt. Kartenebenen werden fest sortiert: Grundgrün, Naturflächen, Stadtflächen, Wasser, Straßen und Gebäude; Rohstoffe und Spieler werden anschließend gezeichnet; Himmel und Objekte sind stilisiert. Die Vektorkarte verwendet 3D-Häuser aus demselben Datensatz. Die Ersatzkarte verwendet bei Verfügbarkeit OpenStreetMap-Umrisse über Overpass. Dafür wird die ungefähre Kartenregion an Overpass übertragen. In der GPS-Ansicht wird die echte GPS-Region abgefragt. Bei Vektorproblemen die Kartenstatus-Anzeige antippen; auf der Ersatzkarte Häuser über 🏠 neu laden. Im Demo-Modus gibt es bei Ausfällen beispielhafte Häuser. Die Karte liegt als perspektivische Bodenfläche. Bei fehlendem Netz bleibt eine einfache grüne Spieloberfläche. Neu: manuelle Produktionsaufträge mit Anhalten und Abbrechen, besser sichtbare Inventar-Waren und flache Bauansicht. Noch keine Einwohner, Handel oder Multiplayer.</p><p class="muted">Kartendaten: © OpenStreetMap-Mitwirkende · Darstellung: WELTWERK Low Poly World</p></section>
   </main>
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -678,13 +688,13 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.20'; // Detaillierte OSM-Gebaeude plus Vektor-Fallback, Road-Mesh unveraendert
-const START_ZOOM = window.innerWidth<360?18.35:18.65; // Etwas weitere Startansicht: mehr Welt sichtbar, 30-m-Kreis bleibt lesbar; bis 20.5 zoombar
+const VERSION = '0.4.21'; // Pinch-Übersicht, 20-m-Sammelradius, dichte Fundstellen, weiche Ferne
+const START_ZOOM = window.innerWidth<360?18.35:18.65; // Etwas weitere Startansicht: mehr Welt sichtbar, 20-m-Kreis bleibt lesbar; bis 20.5 zoombar
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
-const REACH_METERS = 30;
-const GRID_METERS = 195;
-const RESOURCE_RADIUS = 720;
+const REACH_METERS = 20;
+const GRID_METERS = 37; // Dichte Grundzellen: im Mittel ~2-3 nahe Fundstellen
+const RESOURCE_RADIUS = 185; // Nahbereich laden statt tausende Marker auf 720 m
 const MATERIALS = Object.freeze({
   wood:   { name: 'Holz', icon: '🪵', rarity: 'common', note: 'Das Grundmaterial für Bretter und einfache Bauteile.' },
   stone:  { name: 'Stein', icon: '🪨', rarity: 'common', note: 'Robustes Material für spätere Bauprojekte.' },
@@ -748,16 +758,16 @@ function generateResources(lat, lng, radius = RESOURCE_RADIUS) {
   const maxY=Math.floor((center.y+radius)/GRID_METERS)+1;
   const result=[];
   for(let ix=minX;ix<=maxX;ix++)for(let iy=minY;iy<=maxY;iy++){
-    if(randomCell(ix,iy,1)>.80)continue;
+    if(randomCell(ix,iy,1)>.94)continue;
     const coords=[];
-    const originals=[{id:`${ix}:${iy}`,x:.20+randomCell(ix,iy,2)*.60,y:.20+randomCell(ix,iy,3)*.60}];
+    const originals=[{id:`g21:${ix}:${iy}`,x:.12+randomCell(ix,iy,2)*.76,y:.12+randomCell(ix,iy,3)*.76}];
     for(let k=1;k<=2;k++){
-      if(randomCell(ix,iy,27+k)> (k===1?.85:.65))continue;
+      if(randomCell(ix,iy,27+k)> (k===1?.12:.03))continue;
       let found=null;
       for(let trial=0;trial<10;trial++){
         const x=.11+randomCell(ix,iy,k*100+trial*2)*.78;
         const y=.11+randomCell(ix,iy,k*100+trial*2+1)*.78;
-        if(originals.every(c=>Math.hypot((c.x-x)*GRID_METERS,(c.y-y)*GRID_METERS)>=18)){found={id:`${ix}:${iy}:${k}`,x,y};break;}
+        if(originals.every(c=>Math.hypot((c.x-x)*GRID_METERS,(c.y-y)*GRID_METERS)>=11)){found={id:`g21:${ix}:${iy}:${k}`,x,y};break;}
       }
       if(found)originals.push(found);
     }
@@ -1739,14 +1749,58 @@ class BackupMap {
     this.attribution=document.createElement('div');this.attribution.className='backup-map-attribution';
     this.attribution.innerHTML='Karte © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>';
     this.el.append(this.canvas,this.fog,this.markerLayer,this.caption,this.attribution);
+    // A two-finger peek temporarily changes zoom; after the final finger is
+    // lifted, the camera glides back to its original zoom after 2 seconds.
+    this._mapTouches=new Map();this._pinch=null;this._pinchReturning=null;
+    this._pinchTimer=null;this._pinchRestoreZoom=null;this._pinchWasUsed=false;
+    const cancelPinchReturn=()=>{
+      clearTimeout(this._pinchTimer);this._pinchTimer=null;
+      if(this._pinchReturning!==null){cancelAnimationFrame(this._pinchReturning);this._pinchReturning=null;}
+    };
+    const schedulePinchReturn=()=>{
+      if(this._pinchRestoreZoom===null)return;
+      cancelPinchReturn();
+      this._pinchTimer=setTimeout(()=>{
+        this._pinchTimer=null;
+        if(this._mapTouches.size)return;
+        const target=this._pinchRestoreZoom;this._pinchRestoreZoom=null;
+        const from=this.zoom,start=performance.now(),duration=580;
+        const tick=(now)=>{
+          if(this._mapTouches.size){this._pinchReturning=null;return;}
+          const t=Math.min(1,(now-start)/duration),ease=1-(1-t)**3;
+          this.zoom=bound(from+(target-from)*ease,MIN_ZOOM,MAX_ZOOM);
+          this.scheduleRedraw();
+          if(t<1)this._pinchReturning=requestAnimationFrame(tick);
+          else this._pinchReturning=null;
+        };
+        this._pinchReturning=requestAnimationFrame(tick);
+      },2000);
+    };
     this.el.addEventListener('pointerdown',e=>{
-      // Buttons and collectible markers must receive their native click events.
       if(e.target.closest('button,a,.backup-marker,.world-resource'))return;
-      if(this._pointer)return;
-      this._pointer={id:e.pointerId,x:e.clientX,y:e.clientY,bearing:this.bearing,moved:false};
+      cancelPinchReturn();
+      this._mapTouches.set(e.pointerId,{x:e.clientX,y:e.clientY});
       try{this.el.setPointerCapture(e.pointerId);}catch(_){}
+      if(this._mapTouches.size>=2){
+        const [a,b]=[...this._mapTouches.values()];
+        const dist=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
+        if(this._pinchRestoreZoom===null)this._pinchRestoreZoom=this.zoom;
+        this._pinch={startDistance:dist,startZoom:this.zoom};
+        this._pinchWasUsed=true;this._pointer=null;
+      }else if(!this._pinchWasUsed){
+        this._pointer={id:e.pointerId,x:e.clientX,y:e.clientY,bearing:this.bearing,moved:false};
+      }
     });
     this.el.addEventListener('pointermove',e=>{
+      if(this._mapTouches.has(e.pointerId))this._mapTouches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(this._mapTouches.size>=2&&this._pinch){
+        const [a,b]=[...this._mapTouches.values()];
+        const dist=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
+        this.zoom=bound(this._pinch.startZoom+1.8*Math.log2(dist/this._pinch.startDistance),MIN_ZOOM,MAX_ZOOM);
+        this.scheduleRedraw();
+        if(e.cancelable)e.preventDefault();
+        return;
+      }
       const start=this._pointer;
       if(!start || e.pointerId!==start.id)return;
       const dx=e.clientX-start.x,dy=e.clientY-start.y;
@@ -1757,19 +1811,25 @@ class BackupMap {
       if(e.cancelable)e.preventDefault();
     },{passive:false});
     const finish=e=>{
+      const wasPinching=this._pinchWasUsed;
+      this._mapTouches.delete(e.pointerId);
+      try{this.el.releasePointerCapture(e.pointerId);}catch(_){}
+      if(wasPinching){
+        this._pointer=null;this._pinch=null;
+        if(!this._mapTouches.size){this._pinchWasUsed=false;schedulePinchReturn();}
+        return;
+      }
       if(!this._pointer || e.pointerId!==this._pointer.id)return;
       const start=this._pointer;this._pointer=null;
-      try{this.el.releasePointerCapture(e.pointerId);}catch(_){}
-      if(start.moved)return;
-      // Sprite hit testing happens against the positions from THIS SAME frame.
-      // Therefore it cannot drift independently from the street canvas.
+      if(e.type==='pointercancel'||start.moved)return;
       const sprite=this.hitSprite(e.clientX,e.clientY);
-      if(sprite){sprite.element.click();return;}
+      if(sprite){sprite.element.click();if(this._pinchRestoreZoom!==null)schedulePinchReturn();return;}
       const loc=this.screenToLngLat(e.clientX,e.clientY);
       if(loc)this._emit('click',{lngLat:loc});
+      if(this._pinchRestoreZoom!==null)schedulePinchReturn();
     };
     this.el.addEventListener('pointerup',finish);
-    this.el.addEventListener('pointercancel',e=>{if(this._pointer?.id===e.pointerId)this._pointer=null;});
+    this.el.addEventListener('pointercancel',finish);
     this.el.addEventListener('wheel',e=>{
       e.preventDefault();this.zoom=bound(this.zoom+(e.deltaY<0?.25:-.25),MIN_ZOOM,MAX_ZOOM);this.scheduleRedraw();
     },{passive:false});
@@ -2546,7 +2606,8 @@ class BackupMap {
       const projected=this.projectOffset((coord.x-p.center.x)*p.scale,(coord.y-p.center.y)*p.scale,p);
       const meters=distanceMeters(this.center.lat,this.center.lng,marker.pos.lat,marker.pos.lng);
       const isPlayer=marker.element.classList.contains('world-player');
-      if((!p.topDown && meters>235 && !isPlayer)||!projected||!Number.isFinite(projected.x)||!Number.isFinite(projected.y))continue;
+      const viewRadius=this.zoom<START_ZOOM-.2?180:72; // Übersicht zeigt weitere Funde nur beim Herauszoomen
+      if((!p.topDown && meters>viewRadius && !isPlayer)||!projected||!Number.isFinite(projected.x)||!Number.isFinite(projected.y))continue;
       if(projected.x < -95 || projected.x>p.w+95 || projected.y<(p.topDown?-90:p.horizon+24) || projected.y>p.h+100)continue;
       sprites.push({marker,x:projected.x,y:projected.y,isPlayer,scale:projected.scale});
     }
@@ -2589,12 +2650,12 @@ class BackupMap {
       ctx.globalAlpha=depleted?.53:1;
       ctx.fillStyle='rgba(25,65,53,.18)';
       ctx.beginPath();ctx.ellipse(x,y-3*sizeScale,(isPlayer?27:24)*sizeScale,6*sizeScale,0,0,Math.PI*2);ctx.fill();
-      if(isPlayer || (inRange&&!isTree)){
+      if(isPlayer || inRange){
         ctx.beginPath();ctx.ellipse(x,y-2,isPlayer?29:20,7,0,0,Math.PI*2);
         ctx.fillStyle='rgba(70,205,162,.35)';ctx.fill();
         ctx.lineWidth=2.5;ctx.strokeStyle='#dcfff2';ctx.stroke();
       }
-      if(inRange && !isPlayer && !isTree){
+      if(inRange && !isPlayer){
         const pulse=0.72+0.28*Math.sin(performance.now()/260);
         ctx.beginPath();ctx.ellipse(x,y-6,28,12,0,0,Math.PI*2);
         ctx.fillStyle='rgba(115,231,173,.16)';ctx.fill();
@@ -2602,10 +2663,12 @@ class BackupMap {
         ctx.beginPath();ctx.arc(x,y-h+10,10+2*pulse,0,Math.PI*2);ctx.fillStyle='rgba(123,244,196,.16)';ctx.fill();
       }
       if(asset && asset.complete && asset.naturalWidth){
+        if(inRange&&!isPlayer){ctx.shadowColor='#d5ffe8';ctx.shadowBlur=9*sizeScale;}
         // Canvas drawImage uses the very same screen foot x/y as the map.
         // SVG assets have ~16 transparent px below their ground-contact artwork.
         // Align their visible feet with the exact projected world coordinate.
         ctx.drawImage(asset,x-w/2,y-h+10*sizeScale,w,h);
+        ctx.shadowBlur=0;
       }else{
         ctx.font='34px system-ui';ctx.textAlign='center';
         ctx.fillText(isPlayer?'🧍':'🌳',x,y-15);
@@ -2656,7 +2719,7 @@ class BackupMap {
     this.caption.textContent=`RICHTUNG ${Math.round(this.bearing)}° · ZOOM ${this.zoom.toFixed(1)} · SPIELKARTE · ${tileState} · ${buildingsLabel}`;
     this.drawSprites(p);
   }
-  remove(){for(const t of this.vectorTiles.values())t.controller?.abort();if(this._raf)cancelAnimationFrame(this._raf);clearTimeout(this._tileRefresh);this._buildingAbort?.abort();this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
+  remove(){clearTimeout(this._pinchTimer);if(this._pinchReturning!==null)cancelAnimationFrame(this._pinchReturning);for(const t of this.vectorTiles.values())t.controller?.abort();if(this._raf)cancelAnimationFrame(this._raf);clearTimeout(this._tileRefresh);this._buildingAbort?.abort();this.el.innerHTML='';this.handlers={};this.markers.clear();this.tiles.clear();}
 }
 class BackupMarker {
   constructor({element}){this.element=element;this.pos={lat:0,lng:0};this.map=null;}
@@ -2883,16 +2946,33 @@ function setVectorBuildingsVisible(map,visible){
 function attachVectorPointerRotation(map){
   map.dragPan.disable();map.dragRotate.disable();
   map.touchPitch?.disable();map.touchZoomRotate?.disable();
-  const canvas=map.getCanvas();let start=null;
-  canvas.addEventListener('pointerdown',e=>{if(e.button===0&&!start)start={id:e.pointerId,x:e.clientX,bearing:map.getBearing(),moved:false};});
+  const canvas=map.getCanvas();let start=null,pinch=null,restoreZoom=null,timer=null;
+  const touches=new Map();
+  const clearReturn=()=>{clearTimeout(timer);timer=null;map.stop();};
+  const maybeReturn=()=>{
+    if(restoreZoom===null || touches.size)return;
+    clearTimeout(timer);timer=setTimeout(()=>{
+      if(touches.size)return;
+      const target=restoreZoom;restoreZoom=null;
+      map.easeTo({zoom:target,duration:580,essential:true});
+    },2000);
+  };
+  canvas.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    clearReturn();touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(touches.size>=2){const [a,b]=[...touches.values()];if(restoreZoom===null)restoreZoom=map.getZoom();pinch={startDist:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),zoom:map.getZoom()};start=null;}
+    else if(!pinch)start={id:e.pointerId,x:e.clientX,bearing:map.getBearing(),moved:false};
+  });
   canvas.addEventListener('pointermove',e=>{
+    if(touches.has(e.pointerId))touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pinch&&touches.size>=2){const [a,b]=[...touches.values()];map.setZoom(bound(pinch.zoom+1.8*Math.log2(Math.max(1,Math.hypot(a.x-b.x,a.y-b.y))/pinch.startDist),MIN_ZOOM,MAX_ZOOM));if(e.cancelable)e.preventDefault();return;}
     if(!start||start.id!==e.pointerId)return;
     const dx=e.clientX-start.x;
     if(Math.abs(dx)<6&&!start.moved)return;
     start.moved=true;map.setBearing(start.bearing+dx*.38);
     if(e.cancelable)e.preventDefault();
   },{passive:false});
-  const finish=e=>{if(start?.id===e.pointerId){if(start.moved)window.__wwLastRotateAt=Date.now();start=null;}};
+  const finish=e=>{touches.delete(e.pointerId);if(start?.id===e.pointerId){if(start.moved)window.__wwLastRotateAt=Date.now();start=null;}if(pinch){if(!touches.size){pinch=null;maybeReturn();}}else if(!touches.size)maybeReturn();};
   canvas.addEventListener('pointerup',finish);canvas.addEventListener('pointercancel',finish);
 }
 function updateVectorCaption(map){
@@ -3147,11 +3227,11 @@ function renderWorld(){
 }
 function updateNearby() {
   const pos=getPosition();
-  const nodes=pos?state.resources.filter(node=>distanceMeters(pos.lat,pos.lng,node.lat,node.lng)<310):[];
+  const nodes=pos?state.resources.filter(node=>getRange(node).ok):[];
   const available=nodes.filter(node=>isReady(activeProfile().harvested[node.id])).length;
   $('nearby-counter').textContent=state.mode==='gps'&&!pos?'—':String(available);
-  $('nearby-title').textContent=state.mode==='gps'&&!pos?'GPS wird gesucht …':`${available} Fundstellen in der Nähe`;
-  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'Im Umkreis von 310 m · 30 m Sammelradius';
+  $('nearby-title').textContent=state.mode==='gps'&&!pos?'GPS wird gesucht …':`${available} Fundstellen in Reichweite`;
+  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'20 m Sammelradius · Zwei Finger für die Fernsicht';
 }
 function updateModeUI() {
   const gps=state.mode==='gps';
