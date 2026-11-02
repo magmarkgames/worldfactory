@@ -374,7 +374,7 @@
 
 
 .beech-v044 .beech-empty-loot{font-size:12px;color:#728b7d;padding:14px 4px;display:block}
-/* v0.4.26: Rare trees AND rare rocks show map rarity circles. */
+/* v0.4.27: Rare trees AND rare rocks show map rarity circles. */
 .world-resource.type-tree .world-resource-dot,.world-resource.type-tree .world-resource-star,.world-resource.type-rock .world-resource-dot,.world-resource.type-rock .world-resource-star{display:none!important}
 .world-resource.type-tree::after,.world-resource.type-rock::after{content:none}
 .world-resource.type-tree:not(.depleted).beech-rarity-rare::after,
@@ -621,7 +621,7 @@
 @media(max-height:710px){.beech-v044 .tree-visual{width:min(70vw,285px)}.beech-v044 .beech-part-hint{bottom:5px}.beech-v044 .beech-loot-card{min-height:64px}}
 @media(prefers-reduced-motion:reduce){.beech-v044 .beech-part,.beech-v044 .beech-part::before{transition:none!important}}
 
-/* Stein v0.4.26: matches the miniature dark beech encounter. */
+/* Stein v0.4.27: matches the miniature dark beech encounter. */
 .rock-v0426 .tree-stage{background:radial-gradient(ellipse 55% 50% at 50% 51%,#343346 0%,#24202f 58%,#191723 100%)}
 .rock-v0426 .tree-visual{width:min(86vw,360px);aspect-ratio:420 / 500;max-width:360px;max-height:min(calc(100dvh - 210px),530px);position:relative}
 .rock-v0426 .rock-model{width:100%;height:100%;display:block;filter:drop-shadow(0 9px 10px #05031088)}
@@ -637,6 +637,12 @@
 .rock-v0426 .rock-part.rock-stone-core{width:clamp(53px,15vw,68px);height:clamp(53px,15vw,68px)}
 .rock-v0426 .beech-part-hint{color:#d6cedd;background:#30293edc;border:1px solid #554b69}
 @media(max-height:710px){.rock-v0426 .tree-visual{width:min(70vw,285px)}}
+
+/* Stein v0.4.27: touch-resilient tap targets. The illustration may never intercept a mineral. */
+.rock-v0426 .rock-model{pointer-events:none!important}
+.rock-v0426 .rock-part{z-index:15;min-width:54px;min-height:54px;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.rock-v0426 .rock-part-art,.rock-v0426 .rock-part-art *{pointer-events:none!important}
+.rock-v0426 .rock-part.rock-tapping{filter:brightness(1.3) drop-shadow(0 2px 6px #cad7fc44)}
 </style>
 </head>
 <body>
@@ -645,7 +651,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.26 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.27 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -767,7 +773,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.26'; // Stein: 10 einzeln abbaubare Fundpunkte · neue Erz-/Mineralchancen
+const VERSION = '0.4.27'; // Stein: verbesserte Touch-Erkennung und gut erreichbare Fundpunkte
 const MAX_ZOOM = 20.5;
 const START_ZOOM = MAX_ZOOM; // Alle Bildschirmgrößen starten mit dem maximalen Nahzoom
 const MIN_ZOOM = 19.0; // Nur 1,5 Zoomstufen heraus – ungefähr halber bisher nutzbarer Bereich
@@ -987,7 +993,7 @@ function migrateBeechSession(session,node,previousHarvest=0){
  }
  return updated;
 }
-// WELTWERK v0.4.26 — independent rock spawn and drop rolls.
+// WELTWERK v0.4.27 — independent rock spawn and drop rolls.
 // 10 possible visible areas; the core stone is the only guaranteed area.
 const ROCK_GUARANTEED=Object.freeze([
  {id:'stone-core',name:'Stein',item:'stone',chance:1,x:51,y:52,drops:[[1,.75],[2,.25]]}
@@ -3882,7 +3888,7 @@ function renderRockScene(){
  const earned=Object.values(session.earned||{}).reduce((a,b)=>a+b,0);
  $('tree-scene').innerHTML=`<div class="tree-scene-inner beech-v044 rock-v0426">
   <header class="tree-top"><button class="tree-back" id="rock-back" aria-label="Zur Karte zurück">←</button>
-  <div class="tree-heading"><h2>Stein <small class="beech-build-label">v0.4.26</small></h2></div><span class="tree-step">${count} / ${session.slots.length}</span></header>
+  <div class="tree-heading"><h2>Stein <small class="beech-build-label">v0.4.27</small></h2></div><span class="tree-step">${count} / ${session.slots.length}</span></header>
   <div class="tree-stage"><div class="tree-visual">${rockArtwork()}${visible}</div><div class="beech-part-hint">${session.completeAt?'Alle Fundstellen eingesammelt':'Tippe auf die Mineralien im Stein'}</div></div>
   <div class="tree-bottom"><div class="beech-bottom-head"><strong>Gefundene Items</strong><span>${earned} gesammelt</span></div>
    <div class="beech-loot-cards" aria-live="polite">${beechLootCards(session)}</div>
@@ -3890,13 +3896,46 @@ function renderRockScene(){
    ${session.completeAt?'<button class="beech-done-btn" id="rock-return">Fertig · Zur Karte</button>':''}</div></div>`;
  $('rock-back').addEventListener('click',closeRockScene);
  $('rock-return')?.addEventListener('click',closeRockScene);
- $('tree-scene').querySelectorAll('[data-rock-slot]').forEach(button=>button.addEventListener('click',()=>collectRockSlot(node.id,button.dataset.rockSlot)));
+ bindRockTouchTargets(node.id);
+}
+// Direct pointer-up collection on mobile: some browsers suppress the synthesized click
+// after touch/scroll handling. Keyboard and ordinary click remain supported.
+function bindRockTouchTargets(nodeId){
+ $('tree-scene').querySelectorAll('[data-rock-slot]').forEach(button=>{
+   let down=null;
+   const collect=()=>{
+     if(button.dataset.busy==='1')return;
+     button.dataset.busy='1';
+     collectRockSlot(nodeId,button.dataset.rockSlot);
+   };
+   button.addEventListener('pointerdown',event=>{
+     if(event.pointerType==='mouse' && event.button!==0)return;
+     down={id:event.pointerId,x:event.clientX,y:event.clientY};
+     button.classList.add('rock-tapping');
+   });
+   button.addEventListener('pointercancel',()=>{down=null;button.classList.remove('rock-tapping');});
+   button.addEventListener('pointerup',event=>{
+     button.classList.remove('rock-tapping');
+     if(!down || down.id!==event.pointerId)return;
+     const moved=Math.hypot(event.clientX-down.x,event.clientY-down.y);
+     down=null;
+     if(moved<=18)collect();
+   });
+   button.addEventListener('click',event=>{event.preventDefault();collect();});
+ });
 }
 function collectRockSlot(nodeId,slotId){
  const node=state.rockNode;
  if(!node||node.id!==nodeId)return;
  const profile=activeProfile(),session=profile.rockSessions[nodeId];
- if(!session||session.completeAt||!getRange(node).ok)return;
+ if(!session||session.completeAt)return;
+ const reach=getRange(node);
+ if(!reach.ok){
+   const hint=$('tree-scene').querySelector('.beech-part-hint');
+   if(hint)hint.textContent=reach.reason||'Sammeln derzeit nicht möglich';
+   toast(reach.reason||'Bitte näher an das Steinvorkommen gehen.',true);
+   return;
+ }
  const slot=session.slots.find(s=>s.id===slotId);
  if(!slot||slot.collected)return;
  awardTreeItem(session,slot,profile);slot.collected=true;
