@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.23 – Radiuskreis zurück, kräftigere Weltfarben, näherer Startzoom und kleinere Collectibles.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.23</title>
+  <meta name="description" content="WELTWERK v0.4.24 – Fester Nahzoom, kurzes Herauszoomen, ruhigeres Sammeln und breitere Straßen.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.24</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:82px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -585,7 +585,7 @@
         <button id="btn-tilt" class="map-tool map-tool-labeled" title="2D/3D-Ansicht wechseln" aria-label="2D/3D-Ansicht wechseln" aria-pressed="true"><span id="tool-tilt-icon" class="tool-glyph">◇</span><span id="tool-tilt-label">3D-Ansicht</span></button>
         <button id="btn-rotate" class="map-tool" title="Kamera um 45 Grad drehen" aria-label="Kamera um 45 Grad drehen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 8.5a8 8 0 1 1 0 7"/><path d="M4 3v6h6"/></svg><span>Drehen</span></button>
         <button id="btn-recenter" class="map-tool" title="Zu meinem Standort springen" aria-label="Zu meinem Standort springen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span>Zentrieren</span></button>
-        <button id="btn-zoom-in" class="map-tool" title="Vergrößern" aria-label="Karte vergrößern"><span class="tool-glyph">+</span><span>Zoom +</span></button>
+        <button id="btn-zoom-in" class="map-tool" title="Reinzoomen ist deaktiviert" aria-label="Reinzoomen ist deaktiviert" disabled hidden style="display:none"><span class="tool-glyph">+</span><span>Zoom +</span></button>
         <button id="btn-zoom-out" class="map-tool" title="Verkleinern" aria-label="Karte verkleinern"><span class="tool-glyph">−</span><span>Zoom −</span></button>
         <button id="btn-demo-controls" class="map-tool demo-only-tool" title="Demo-Pfeiltasten ein-/ausblenden" aria-label="Demo-Pfeiltasten ein- oder ausblenden" aria-pressed="false"><span class="tool-glyph">✥</span><span>Demo-Pfeile</span></button>
         <button id="btn-map-technical" class="map-tool" title="Kartenstatus und erneutes Laden" aria-label="Kartenstatus prüfen und Vektoransicht erneut laden"><span class="tool-glyph">ⓘ</span><span>Kartenstatus</span></button>
@@ -692,9 +692,10 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.23'; // Radiuskreis zurück, kräftigere Farben, näherer Startzoom und kleinere Collectibles
-const START_ZOOM = window.innerWidth<360?19.05:19.28; // Naher Ausgangszoom; Pinch dient primär zum kurzen Herauszoomen
-const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
+const VERSION = '0.4.24'; // Maximaler Startzoom, reduzierter Pinch-Bereich, etwas weniger Fundstellen, breitere Straßen
+const MAX_ZOOM = 20.5;
+const START_ZOOM = MAX_ZOOM; // Alle Bildschirmgrößen starten mit dem maximalen Nahzoom
+const MIN_ZOOM = 19.0; // Nur 1,5 Zoomstufen heraus – ungefähr halber bisher nutzbarer Bereich
 const REGEN_MS = 60 * 60 * 1000;
 const REACH_METERS = 20;
 const GRID_METERS = 37; // Dichte Grundzellen: im Mittel ~2-3 nahe Fundstellen
@@ -762,7 +763,7 @@ function generateResources(lat, lng, radius = RESOURCE_RADIUS) {
   const maxY=Math.floor((center.y+radius)/GRID_METERS)+1;
   const result=[];
   for(let ix=minX;ix<=maxX;ix++)for(let iy=minY;iy<=maxY;iy++){
-    if(randomCell(ix,iy,1)>.94)continue;
+    if(randomCell(ix,iy,1)>.86)continue; // leicht geringere Dichte, IDs und Positionen bestehender Zellen bleiben stabil
     const coords=[];
     const originals=[{id:`g21:${ix}:${iy}`,x:.12+randomCell(ix,iy,2)*.76,y:.12+randomCell(ix,iy,3)*.76}];
     for(let k=1;k<=2;k++){
@@ -1674,9 +1675,9 @@ function wwRoadRibbon(feature,tile,layer){
   const sub=String(feature.props.subclass||'').toLowerCase();
   const label=cls+' '+sub;
   const isPath=/path|track|footway|pedestrian|cycleway|steps/.test(label);
-  const widthMeters=isPath?1.15:/motorway|trunk/.test(label)?3.7:
-    /primary|secondary/.test(label)?3.15:/tertiary/.test(label)?2.55:
-    /service|minor|residential/.test(label)?1.95:2.15;
+  const widthMeters=isPath?1.28:/motorway|trunk/.test(label)?4.1:
+    /primary|secondary/.test(label)?3.48:/tertiary/.test(label)?2.85:
+    /service|minor|residential/.test(label)?2.15:2.38;
   // Mercator x/y tiles have identical local units; use the latitude at the
   // tile centre for a consistent metres-to-world conversion.
   const latitude=wwTilePointToLngLat(tile.x,tile.y,tile.z,layer.extent,[layer.extent/2,layer.extent/2]).lat;
@@ -1780,6 +1781,7 @@ class BackupMap {
         this._pinchReturning=requestAnimationFrame(tick);
       },1000);
     };
+    this._schedulePinchReturn=schedulePinchReturn;
     this.el.addEventListener('pointerdown',e=>{
       if(e.target.closest('button,a,.backup-marker,.world-resource'))return;
       cancelPinchReturn();
@@ -1800,7 +1802,7 @@ class BackupMap {
       if(this._mapTouches.size>=2&&this._pinch){
         const [a,b]=[...this._mapTouches.values()];
         const dist=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
-        this.zoom=bound(this._pinch.startZoom+1.8*Math.log2(dist/this._pinch.startDistance),MIN_ZOOM,MAX_ZOOM);
+        this.zoom=Math.min(this.zoom, bound(this._pinch.startZoom+1.8*Math.log2(dist/this._pinch.startDistance),MIN_ZOOM,MAX_ZOOM));
         this.scheduleRedraw();
         if(e.cancelable)e.preventDefault();
         return;
@@ -1835,7 +1837,12 @@ class BackupMap {
     this.el.addEventListener('pointerup',finish);
     this.el.addEventListener('pointercancel',finish);
     this.el.addEventListener('wheel',e=>{
-      e.preventDefault();this.zoom=bound(this.zoom+(e.deltaY<0?.25:-.25),MIN_ZOOM,MAX_ZOOM);this.scheduleRedraw();
+      e.preventDefault();
+      if(e.deltaY>=0){
+        if(this._pinchRestoreZoom===null)this._pinchRestoreZoom=START_ZOOM;
+        this.zoom=bound(this.zoom-.25,MIN_ZOOM,MAX_ZOOM);this.scheduleRedraw();
+        this._schedulePinchReturn?.();
+      }
     },{passive:false});
     this.updatePitch();this.redraw();setTimeout(()=>this._emit('load'),10);
   }
@@ -1851,8 +1858,14 @@ class BackupMap {
     if(this._raf)return;
     this._raf=requestAnimationFrame(()=>{this._raf=0;this.redraw();});
   }
-  zoomIn(){this.easeTo({zoom:this.zoom+.35});}
-  zoomOut(){this.easeTo({zoom:this.zoom-.35});}
+  zoomIn(){/* Reinzoomen bewusst deaktiviert; der automatische Rücklauf stellt den Startzoom wieder her. */}
+  zoomOut(){
+    // Auch der Minus-Button nutzt die temporäre Übersicht. Ohne Plus-Button
+    // könnte man sonst auf einem herausgezoomten Level hängen bleiben.
+    if(this._pinchRestoreZoom===null)this._pinchRestoreZoom=START_ZOOM;
+    this.easeTo({zoom:this.zoom-.35});
+    this._schedulePinchReturn?.();
+  }
   easeTo(options={}){
     if(options.center){
       const nextCenter=mapPoint(options.center);
@@ -2926,10 +2939,10 @@ function applyVectorPalette(map){
     'line-color':c.waterway,'line-width':['interpolate',['linear'],['zoom'],12,.8,17,2.5,19.5,4]
   },{layout:{'line-cap':'round'}});
   mk('ww-roads','line','transportation',{
-    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,.48,16,1.85,19.5,6.1]
+    'line-color':c.road,'line-width':['interpolate',['linear'],['zoom'],12,.54,16,2.06,19.5,6.8]
   },{filter:['in',['get','class'],['literal',['motorway','trunk','primary','secondary','tertiary','minor','service','busway']]],layout:{'line-cap':'round','line-join':'round'}});
   mk('ww-paths','line','transportation',{
-    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.2,16,.76,19.5,1.8]
+    'line-color':c.path,'line-width':['interpolate',['linear'],['zoom'],12,.22,16,.85,19.5,2.02]
   },{filter:['in',['get','class'],['literal',['path','track','footway','pedestrian','cycleway']]],layout:{'line-cap':'round','line-join':'round'}});
   mk('ww-buildings-3d','fill-extrusion','building',{
     'fill-extrusion-color':c.building,
@@ -2955,6 +2968,7 @@ function setVectorBuildingsVisible(map,visible){
 function attachVectorPointerRotation(map){
   map.dragPan.disable();map.dragRotate.disable();
   map.touchPitch?.disable();map.touchZoomRotate?.disable();
+  map.scrollZoom?.disable();map.doubleClickZoom?.disable();map.keyboard?.disable();
   const canvas=map.getCanvas();let start=null,pinch=null,restoreZoom=null,timer=null;
   const touches=new Map();
   const clearReturn=()=>{clearTimeout(timer);timer=null;map.stop();};
@@ -2966,6 +2980,12 @@ function attachVectorPointerRotation(map){
       map.easeTo({zoom:target,duration:440,essential:true});
     },1000);
   };
+  map.__wwZoomOutTemporary=()=>{
+    if(restoreZoom===null)restoreZoom=START_ZOOM;
+    clearReturn();
+    map.easeTo({zoom:bound(map.getZoom()-.35,MIN_ZOOM,MAX_ZOOM),duration:180,essential:true});
+    maybeReturn();
+  };
   canvas.addEventListener('pointerdown',e=>{
     if(e.pointerType==='mouse'&&e.button!==0)return;
     clearReturn();touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
@@ -2974,7 +2994,7 @@ function attachVectorPointerRotation(map){
   });
   canvas.addEventListener('pointermove',e=>{
     if(touches.has(e.pointerId))touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    if(pinch&&touches.size>=2){const [a,b]=[...touches.values()];map.setZoom(bound(pinch.zoom+1.8*Math.log2(Math.max(1,Math.hypot(a.x-b.x,a.y-b.y))/pinch.startDist),MIN_ZOOM,MAX_ZOOM));if(e.cancelable)e.preventDefault();return;}
+    if(pinch&&touches.size>=2){const [a,b]=[...touches.values()];map.setZoom(Math.min(map.getZoom(),bound(pinch.zoom+1.8*Math.log2(Math.max(1,Math.hypot(a.x-b.x,a.y-b.y))/pinch.startDist),MIN_ZOOM,MAX_ZOOM)));if(e.cancelable)e.preventDefault();return;}
     if(!start||start.id!==e.pointerId)return;
     const dx=e.clientX-start.x;
     if(Math.abs(dx)<6&&!start.moved)return;
@@ -3804,8 +3824,8 @@ function bind() {
     updateTiltButton(is3d);
     $('btn-tilt').setAttribute('aria-pressed',String(is3d));
   });
-  $('btn-zoom-in').addEventListener('click',()=>state.map?.zoomIn());
-  $('btn-zoom-out').addEventListener('click',()=>state.map?.zoomOut());
+  $('btn-zoom-in').disabled=true; // Der Pinch-Zoom ist jetzt nur noch zum Herauszoomen vorgesehen
+  $('btn-zoom-out').addEventListener('click',()=>{if(state.mapKind==='maplibre')state.map?.__wwZoomOutTemporary?.();else state.map?.zoomOut();});
   $('btn-sheet-close').addEventListener('click',closeSheet);
   $('modal-backdrop').addEventListener('click',e=>{if(e.target===$('modal-backdrop'))closeSheet();});
   $('welcome-demo').addEventListener('click',()=>setMode('demo'));
