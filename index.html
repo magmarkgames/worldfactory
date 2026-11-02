@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.22 – 1-Sekunden-Zoom, weniger Nebel, skalierbare Collectibles und stärkere Bodenringe.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.22</title>
+  <meta name="description" content="WELTWERK v0.4.23 – Radiuskreis zurück, kräftigere Weltfarben, näherer Startzoom und kleinere Collectibles.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.23</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:82px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -41,9 +41,9 @@
 .camera-hint{position:absolute;top:calc(133px + env(safe-area-inset-top,0px));left:16px;z-index:8;border:1px solid #d0e7d599;background:#193d3bc9;color:#c9f5df;border-radius:15px;padding:8px 10px;font-size:9px;letter-spacing:1.2px;font-weight:900;pointer-events:none}
 .camera-hint span{font-weight:500;letter-spacing:0;color:#e2f6ee}
 .world-resource{position:relative;width:80px;height:99px;border:0;padding:0;margin:0;background:transparent;cursor:pointer;filter:drop-shadow(0 5px 3px #183b3266);transition:filter .18s,opacity .18s;touch-action:manipulation}
-.world-resource-art{width:80px;height:89px;position:absolute;left:0;bottom:-10px;object-fit:contain;object-position:center bottom;transform-origin:bottom center;transition:none;pointer-events:none;user-select:none;backface-visibility:hidden}
+.world-resource-art{width:74px;height:82px;position:absolute;left:0;bottom:-8px;object-fit:contain;object-position:center bottom;transform-origin:bottom center;transition:none;pointer-events:none;user-select:none;backface-visibility:hidden}
 .world-resource:active .world-resource-art{transform:none}
-.world-resource-shadow{position:absolute;left:14px;bottom:1px;width:52px;height:12px;background:#244b4175;filter:blur(4px);border-radius:50%}
+.world-resource-shadow{position:absolute;left:13px;bottom:1px;width:48px;height:11px;background:#244b4175;filter:blur(4px);border-radius:50%}
 .world-resource.in-range .world-resource-art{filter:drop-shadow(0 0 5px #e2fff9) drop-shadow(0 0 14px #7ef0be)}
 .world-resource.in-range .world-resource-dot{position:absolute;bottom:-4px;left:33px;border-radius:50%;background:#73e7ad;border:2px solid white;width:14px;height:14px;box-shadow:0 0 0 5px #8cdbac7d}
 .world-resource.depleted{opacity:.5;filter:grayscale(.72)}
@@ -55,7 +55,7 @@
 .world-player .player-aura{position:absolute;left:15px;bottom:0;width:54px;height:18px;background:#38c79c88;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 8px #33d5a22e;transform:scaleY(.55)}
 .world-player .player-you{position:absolute;left:50%;top:0;transform:translateX(-50%);background:#0f3d44e8;border:1px solid #8debc9;border-radius:7px;color:#effff6;font-size:9px;font-weight:900;padding:3px 8px;letter-spacing:.8px}
 @media(max-height:700px){.camera-hint{top:111px}.map-tools{top:137px}}
-@media(max-width:390px){.camera-hint span{display:none}.world-resource{width:70px;height:90px}.world-resource-art{width:70px;height:82px}.world-player{width:74px;height:102px}.world-player img{width:62px;height:94px}}
+@media(max-width:390px){.camera-hint span{display:none}.world-resource{width:66px;height:84px}.world-resource-art{width:64px;height:76px}.world-player{width:74px;height:102px}.world-player img{width:62px;height:94px}}
 
 /* v0.2.1 - rendered map fallback if MapLibre/WebGL or external vector styles fail */
 
@@ -692,8 +692,8 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.22'; // Distanz- und zoomabhängige Fundstücke, dezenter Nebel, 1-s-Pinch-Rückkehr
-const START_ZOOM = window.innerWidth<360?18.25:18.55; // Ruhige Standardansicht mit ausreichend Überblick; manuelle Zoom-Buttons bleiben erhalten
+const VERSION = '0.4.23'; // Radiuskreis zurück, kräftigere Farben, näherer Startzoom und kleinere Collectibles
+const START_ZOOM = window.innerWidth<360?19.05:19.28; // Naher Ausgangszoom; Pinch dient primär zum kurzen Herauszoomen
 const MIN_ZOOM = 16.4, MAX_ZOOM = 20.5;
 const REGEN_MS = 60 * 60 * 1000;
 const REACH_METERS = 20;
@@ -1550,14 +1550,14 @@ const MAP_BUILDING_MAX_SOURCE = 1440; // balanced across map sectors so no direc
 const MAP_BUILDING_MAX_DISTANCE = 530; // scenery radius; perspective makes distant buildings naturally small
 // One shared palette and a deterministic ground-layer order for both renderers.
 const MAP_COLORS=Object.freeze({
-  grass:'#9ed674',farmland:'#b2d987',park:'#70bf68',forest:'#4b985c',wetland:'#73b8a2',
-  urban:'#93c57b',building:'#9aa79a',roof:'#7f8f82',
-  water:'#45afe4',waterway:'#45afe4',road:'#4d5758',path:'#8c927e',roadEdge:'#9caa90'
+  grass:'#89c965',farmland:'#acd57a',park:'#5bb85a',forest:'#3f8f52',wetland:'#5fae96',
+  urban:'#7fbd67',building:'#aeb6aa',roof:'#929b92',
+  water:'#36a9e1',waterway:'#36a9e1',road:'#4d5758',path:'#8f957d',roadEdge:'#9cad91'
 });
 const WORLD_PALETTE={
-  grass:[158,214,116],park:[113,185,98],forest:[76,145,86],
-  water:[69,175,228],road:[77,87,88],path:[140,146,126],
-  built:[142,184,112],roof:[127,143,130]
+  grass:[137,201,101],park:[91,184,90],forest:[63,143,82],
+  water:[54,169,225],road:[77,87,88],path:[143,149,125],
+  built:[127,189,103],roof:[146,155,146]
 };
 function buildingRegion(pos){
   const m=latLngToMeters(pos.lat,pos.lng);
@@ -1674,9 +1674,9 @@ function wwRoadRibbon(feature,tile,layer){
   const sub=String(feature.props.subclass||'').toLowerCase();
   const label=cls+' '+sub;
   const isPath=/path|track|footway|pedestrian|cycleway|steps/.test(label);
-  const widthMeters=isPath?1.00:/motorway|trunk/.test(label)?3.25:
-    /primary|secondary/.test(label)?2.8:/tertiary/.test(label)?2.3:
-    /service|minor|residential/.test(label)?1.65:1.9;
+  const widthMeters=isPath?1.15:/motorway|trunk/.test(label)?3.7:
+    /primary|secondary/.test(label)?3.15:/tertiary/.test(label)?2.55:
+    /service|minor|residential/.test(label)?1.95:2.15;
   // Mercator x/y tiles have identical local units; use the latitude at the
   // tile centre for a consistent metres-to-world conversion.
   const latitude=wwTilePointToLngLat(tile.x,tile.y,tile.z,layer.extent,[layer.extent/2,layer.extent/2]).lat;
@@ -2550,7 +2550,7 @@ class BackupMap {
     ctx.clearRect(0,0,w,h);
     const y0=p.topDown?0:Math.max(0,Math.floor(p.horizon));
     const bg=ctx.createLinearGradient(0,y0,0,h);
-    bg.addColorStop(0,'#c3e2a5');bg.addColorStop(.45,MAP_COLORS.grass);bg.addColorStop(1,'#91cb6f');
+    bg.addColorStop(0,'#b9dea0');bg.addColorStop(.42,MAP_COLORS.grass);bg.addColorStop(1,'#78bf57');
     ctx.fillStyle=bg;ctx.fillRect(0,y0,w,h-y0);
     // Decorative patches add low-poly depth without replacing any real geometry.
     this.drawGroundTexture(p);
@@ -2637,7 +2637,8 @@ class BackupMap {
     sprites.sort((a,b)=>Number(a.kind!=='building')-Number(b.kind!=='building') || a.y-b.y || Number(a.isPlayer)-Number(b.isPlayer));
     ctx.setTransform(dpr,0,0,dpr,0,0);
     for(const s of sprites)if(s.kind==='building')this.drawBuilding(ctx,s,p);
-    // Kein großer, schwebender Sammelradius: erreichbare Fundstücke haben Bodenringe.
+    // Sichtbarer 20-m-Radiuskreis auf dem Boden, plus Bodenringe an erreichbaren Fundstücken.
+    this.drawCollectRing(p);
     for(const s of sprites){
       if(s.kind==='building')continue;
       const {marker,x,y,isPlayer}=s, elem=marker.element;
@@ -2647,10 +2648,10 @@ class BackupMap {
       const rich=elem.classList.contains('rich');
       const isTree=elem.classList.contains('type-tree');
       const beechRing=isTree&&!depleted?(elem.classList.contains('beech-rarity-legendary')?'#e6b846':elem.classList.contains('beech-rarity-epic')?'#a96cdb':elem.classList.contains('beech-rarity-rare')?'#5598db':null):null;
-      const worldZoom=Math.pow(2,this.zoom-START_ZOOM);
+      const worldZoom=Math.pow(2,(this.zoom-START_ZOOM)*0.82);
       // Map is perspective-projected just like road ribbons; sprite world-size is stable.
-      const sizeScale=isPlayer?1:bound(worldZoom*(p.topDown?1:s.scale),.15,1.75);
-      const w=(isPlayer?72:76)*sizeScale,h=(isPlayer?98:83)*sizeScale;
+      const sizeScale=isPlayer?1:bound(worldZoom*(p.topDown?1:s.scale)*0.84,.14,1.38);
+      const w=(isPlayer?72:68)*sizeScale,h=(isPlayer?98:74)*sizeScale;
       // The shadow/ring is the world contact point, exactly at the geo coordinate.
       ctx.save();
       ctx.globalAlpha=depleted?.53:1;
@@ -3172,8 +3173,8 @@ function rangePolygon(pos,meters=COLLECT_RING_METERS){
 function addCollectionRangeLayer(){
   if(!state.map || state.map.getSource('collect-range'))return;
   state.map.addSource('collect-range',{type:'geojson',data:rangePolygon(null,0)});
-  state.map.addLayer({id:'collect-range-fill',type:'fill',source:'collect-range',paint:{'fill-color':'#aaf1b4','fill-opacity':0}});
-  state.map.addLayer({id:'collect-range-line',type:'line',source:'collect-range',paint:{'line-color':'#f4fff1','line-width':0,'line-opacity':0}});
+  state.map.addLayer({id:'collect-range-fill',type:'fill',source:'collect-range',paint:{'fill-color':'#aaf1b4','fill-opacity':0.055}});
+  state.map.addLayer({id:'collect-range-line',type:'line',source:'collect-range',paint:{'line-color':'#f4fff1','line-width':2.1,'line-opacity':0.92}});
 }
 function makePlayerElement(){
   const elem=document.createElement('div');elem.className='world-player';
@@ -3190,7 +3191,7 @@ function makeResourceElement(node){
 }
 function refreshVectorCollectibleScale(){
   if(state.mapKind!=='maplibre'||!state.map)return;
-  const factor=bound(Math.pow(2,state.map.getZoom()-START_ZOOM),.22,1.8);
+  const factor=bound(Math.pow(2,(state.map.getZoom()-START_ZOOM)*0.82)*0.88,.2,1.38);
   for(const marker of state.markers.values()){
     marker.getElement()?.style.setProperty('--ww-item-scale',factor.toFixed(4));
   }
