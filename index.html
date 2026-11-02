@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0c1721">
-  <meta name="description" content="WELTWERK v0.4.24 – Fester Nahzoom, kurzes Herauszoomen, ruhigeres Sammeln und breitere Straßen.">
-  <title>WELTWERK · Exploration & Inselbau v0.4.24</title>
+  <meta name="description" content="WELTWERK v0.4.28 – Große Buchen, Stein & Buche, sanfter Horizontnebel.">
+  <title>WELTWERK · Exploration & Inselbau v0.4.28</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=">
 <style>
 :root{color-scheme:dark;--bg:#0d1721;--bg2:#142530;--panel:#172934;--panel2:#1b333c;--line:#2a4650;--text:#eef9f7;--muted:#9cb2b9;--mint:#80e5ba;--mint-strong:#52cda3;--gold:#f3c878;--radius:19px;--nav-h:82px;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -643,6 +643,50 @@
 .rock-v0426 .rock-part{z-index:15;min-width:54px;min-height:54px;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .rock-v0426 .rock-part-art,.rock-v0426 .rock-part-art *{pointer-events:none!important}
 .rock-v0426 .rock-part.rock-tapping{filter:brightness(1.3) drop-shadow(0 2px 6px #cad7fc44)}
+
+/* WELTWERK v0.4.28 — scale and atmospheric distance */
+/* Only beeches grow on the world map. Rocks preserve their existing footprint. */
+#map-3d .world-resource.type-tree{
+  width:calc(190px * var(--ww-item-scale,1));
+  height:calc(215px * var(--ww-item-scale,1));
+  min-width:0;min-height:0;
+}
+#map-3d .world-resource.type-tree .world-resource-art{
+  position:absolute;left:0;bottom:0;width:100%;height:100%;
+  transform:none!important;object-fit:contain;object-position:center bottom;
+}
+#map-3d .world-resource.type-tree .world-resource-shadow{left:24%;bottom:1%;width:52%;height:7%}
+#map-3d .world-resource.type-tree.in-range::after,
+#map-3d .world-resource.type-tree.beech-rarity-rare::after,
+#map-3d .world-resource.type-tree.beech-rarity-epic::after,
+#map-3d .world-resource.type-tree.beech-rarity-legendary::after{
+ left:25%;bottom:1%;width:50%;height:10px;transform:none;
+}
+/* Fade the distant terrain into the sky, without obscuring the near field. */
+#screen-map .ww-canvas-map:not(.ww-topdown) .ww-horizon-mist{
+ top:calc(33% - 54px);height:clamp(190px,28vh,310px);
+ background:linear-gradient(180deg,
+   rgba(143,205,231,0) 0%,
+   rgba(153,212,231,.60) 12%,
+   rgba(162,215,226,.96) 27%,
+   rgba(170,216,206,.84) 44%,
+   rgba(174,218,181,.44) 70%,
+   rgba(159,209,140,0) 100%);
+}
+/* Same atmospheric overlay on the optional WebGL vector map. */
+#map-3d.ww-vector-active:not(.ww-topdown)::after{
+ content:"";position:absolute;left:0;right:0;top:calc(33% - 54px);
+ height:clamp(190px,28vh,310px);z-index:3;pointer-events:none;
+ background:linear-gradient(180deg,
+   rgba(143,205,231,0) 0%,
+   rgba(153,212,231,.60) 12%,
+   rgba(162,215,226,.96) 27%,
+   rgba(170,216,206,.84) 44%,
+   rgba(174,218,181,.44) 70%,
+   rgba(159,210,143,0) 100%);
+}
+#screen-map .map-bottom-group{bottom:calc(9px + env(safe-area-inset-bottom,0px))}
+
 </style>
 </head>
 <body>
@@ -673,12 +717,6 @@
       </div>
     </div>
     <div class="map-bottom-group">
-      <button type="button" id="nearby-card" class="nearby-card" aria-expanded="false" aria-label="Fundstellen in der Nähe, Details anzeigen">
-        <span class="nearby-symbol" aria-hidden="true">✦</span>
-        <span class="nearby-copy"><strong id="nearby-title">Entdecke die Umgebung</strong><span id="nearby-subtitle">Fundstellen in deiner Nähe</span></span>
-        <svg class="nearby-chevron" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-        <span id="nearby-counter" class="nearby-count" aria-hidden="true">—</span>
-      </button>
       <div id="demo-controller" class="demo-controller hidden"><span class="controller-label">DEMO-MODUS <span>· Auf Karte tippen oder Pfeile verwenden</span></span><div class="controller-actions"><button data-move="north" aria-label="Nach Norden bewegen">↑</button><button data-move="west" aria-label="Nach Westen bewegen">←</button><button data-move="south" aria-label="Nach Süden bewegen">↓</button><button data-move="east" aria-label="Nach Osten bewegen">→</button></div></div>
       <p class="map-safety">Spielkarte · Virtuelle Fundstellen nur von sicheren Orten sammeln</p>
     </div>
@@ -868,7 +906,10 @@ function generateResources(lat, lng, radius = RESOURCE_RADIUS) {
       const coord=metersToLatLng((ix+point.x)*GRID_METERS,(iy+point.y)*GRID_METERS);
       if(distanceMeters(lat,lng,coord.lat,coord.lng)>radius)continue;
       const roll=randomCell(ix,iy,n?4+n*11:4);
-      result.push({id:point.id,...coord,type:roll<.43?'tree':roll<.77?'rock':'scrap',rich:roll>=.43 && randomCell(ix,iy,n?5+n*11:5)<.10});
+      // Existing trees and rocks keep their types. Only former scrap nodes are redistributed.
+      // The second deterministic roll changes no resource IDs or coordinates.
+      const type=roll<.43?'tree':roll<.77?'rock':randomCell(ix,iy,n?47+n*11:47)<.56?'tree':'rock';
+      result.push({id:point.id,...coord,type,rich:false});
     }
   }
   return result;
@@ -2863,7 +2904,10 @@ class BackupMap {
       const worldZoom=Math.pow(2,(this.zoom-START_ZOOM)*0.82);
       // Map is perspective-projected just like road ribbons; sprite world-size is stable.
       const sizeScale=isPlayer?1:bound(worldZoom*(p.topDown?1:s.scale)*0.84,.14,1.38);
-      const w=(isPlayer?72:68)*sizeScale,h=(isPlayer?98:74)*sizeScale;
+      // Relative world scale: a nearby beech stands clearly taller than the avatar.
+      // Rocks intentionally retain the smaller original silhouette.
+      const w=(isPlayer?72:isTree?195:68)*sizeScale;
+      const h=(isPlayer?98:isTree?214:74)*sizeScale;
       // The shadow/ring is the world contact point, exactly at the geo coordinate.
       ctx.save();
       ctx.globalAlpha=depleted?.53:1;
@@ -2888,7 +2932,7 @@ class BackupMap {
         // Canvas drawImage uses the very same screen foot x/y as the map.
         // SVG assets have ~16 transparent px below their ground-contact artwork.
         // Align their visible feet with the exact projected world coordinate.
-        ctx.drawImage(asset,x-w/2,y-h+10*sizeScale,w,h);
+        ctx.drawImage(asset,x-w/2,y-h+(isTree?13:10)*sizeScale,w,h);
         ctx.shadowBlur=0;
       }else{
         ctx.font='34px system-ui';ctx.textAlign='center';
@@ -3444,7 +3488,7 @@ function updatePositionOnMap(follow=false){
 function renderWorld(){
   if(!state.mapReady)return;
   const pos=getPosition();
-  if(!pos){for(const marker of state.markers.values())marker.remove();state.markers.clear();state.resources=[];updateNearby();return;}
+  if(!pos){for(const marker of state.markers.values())marker.remove();state.markers.clear();state.resources=[];return;}
   state.resources=generateResources(pos.lat,pos.lng,RESOURCE_RADIUS);
   const visible=new Set(state.resources.map(n=>n.id));
   for(const [id,marker] of state.markers){
@@ -3460,15 +3504,6 @@ function renderWorld(){
     updateNodeElement(marker.getElement(),node);
   }
   refreshVectorCollectibleScale();
-  updateNearby();
-}
-function updateNearby() {
-  const pos=getPosition();
-  const nodes=pos?state.resources.filter(node=>getRange(node).ok):[];
-  const available=nodes.filter(node=>isReady(activeProfile().harvested[node.id])).length;
-  $('nearby-counter').textContent=state.mode==='gps'&&!pos?'—':String(available);
-  $('nearby-title').textContent=state.mode==='gps'&&!pos?'GPS wird gesucht …':`${available} Fundstellen in Reichweite`;
-  $('nearby-subtitle').textContent=state.mode==='gps'&&!pos?'Standortzugriff prüfen':'20 m Sammelradius · Fernsicht per Pinch (1 s Rückkehr)';
 }
 function updateModeUI() {
   const gps=state.mode==='gps';
@@ -4123,12 +4158,6 @@ function bind() {
     const houses=state.mapKind==='backup'?` · Häuser: ${state.map._visibleBuildingsLast||0} sichtbar, ${state.map._osmBuildings?.length||0} OSM-Umrisse (${state.map.buildingStatus})`:'';
     toast(info+houses);
     if(state.mapKind==='backup' && state.map?._vectorStatus==='offline')state.map.retryCanvasVectors?.();
-  });
-  $('nearby-card').addEventListener('click',()=>{
-    const card=$('nearby-card');
-    const expanded=card.getAttribute('aria-expanded')!=='true';
-    card.setAttribute('aria-expanded',String(expanded));
-    card.setAttribute('aria-label',expanded?'Fundstellen-Details ausblenden':'Fundstellen-Details anzeigen');
   });
   document.addEventListener('pointerdown',e=>{
     if(worldToolsOpen && !e.target.closest('#map-tools'))setWorldTools(false);
