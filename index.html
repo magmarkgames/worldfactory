@@ -374,12 +374,15 @@
 
 
 .beech-v044 .beech-empty-loot{font-size:12px;color:#728b7d;padding:14px 4px;display:block}
-/* v0.4.6: ONLY genuinely rare beeches get a colored circle on the map. */
-.world-resource.type-tree .world-resource-dot,.world-resource.type-tree .world-resource-star{display:none!important}
-.world-resource.type-tree::after{content:none}
+/* v0.4.26: Rare trees AND rare rocks show map rarity circles. */
+.world-resource.type-tree .world-resource-dot,.world-resource.type-tree .world-resource-star,.world-resource.type-rock .world-resource-dot,.world-resource.type-rock .world-resource-star{display:none!important}
+.world-resource.type-tree::after,.world-resource.type-rock::after{content:none}
 .world-resource.type-tree:not(.depleted).beech-rarity-rare::after,
+.world-resource.type-rock:not(.depleted).beech-rarity-rare::after,
 .world-resource.type-tree:not(.depleted).beech-rarity-epic::after,
-.world-resource.type-tree:not(.depleted).beech-rarity-legendary::after{content:"";position:absolute;bottom:0;left:10%;width:80%;height:14px;border-radius:50%;border:3px solid var(--beech-ring);box-shadow:0 0 0 1px #ffffff77;pointer-events:none}
+.world-resource.type-rock:not(.depleted).beech-rarity-epic::after,
+.world-resource.type-tree:not(.depleted).beech-rarity-legendary::after,
+.world-resource.type-rock:not(.depleted).beech-rarity-legendary::after{content:"";position:absolute;bottom:0;left:10%;width:80%;height:14px;border-radius:50%;border:3px solid var(--beech-ring);box-shadow:0 0 0 1px #ffffff77;pointer-events:none}
 .world-resource.beech-rarity-rare{--beech-ring:#5598db}
 .world-resource.beech-rarity-epic{--beech-ring:#a96cdb}
 .world-resource.beech-rarity-legendary{--beech-ring:#e6b846}
@@ -617,6 +620,23 @@
 .beech-v044 .beech-pickup-dot{background:#b8aaa8}
 @media(max-height:710px){.beech-v044 .tree-visual{width:min(70vw,285px)}.beech-v044 .beech-part-hint{bottom:5px}.beech-v044 .beech-loot-card{min-height:64px}}
 @media(prefers-reduced-motion:reduce){.beech-v044 .beech-part,.beech-v044 .beech-part::before{transition:none!important}}
+
+/* Stein v0.4.26: matches the miniature dark beech encounter. */
+.rock-v0426 .tree-stage{background:radial-gradient(ellipse 55% 50% at 50% 51%,#343346 0%,#24202f 58%,#191723 100%)}
+.rock-v0426 .tree-visual{width:min(86vw,360px);aspect-ratio:420 / 500;max-width:360px;max-height:min(calc(100dvh - 210px),530px);position:relative}
+.rock-v0426 .rock-model{width:100%;height:100%;display:block;filter:drop-shadow(0 9px 10px #05031088)}
+.rock-v0426 .rock-part{position:absolute;z-index:5;transform:translate(-50%,-50%);width:clamp(46px,12vw,58px);height:clamp(46px,12vw,58px);border:0;background:transparent;padding:3px;cursor:pointer;touch-action:manipulation;display:grid;place-items:center;transition:transform .14s,filter .14s;filter:drop-shadow(0 2px 3px #0c0c1c80)}
+.rock-v0426 .rock-part::before{content:'';position:absolute;inset:5px;border:1.5px solid #e0eaffb0;border-radius:15px;background:#e2eaff10;box-shadow:0 0 12px #cee3ff22;transform:rotate(-7deg);pointer-events:none}
+.rock-v0426 .rock-part.rarity-rare::before{border-color:#77b7fc;box-shadow:0 0 14px #568ad780}
+.rock-v0426 .rock-part.rarity-epic::before{border-color:#cc96fc;box-shadow:0 0 17px #a05ce090}
+.rock-v0426 .rock-part.rarity-legendary::before{border-color:#f0ca6b;box-shadow:0 0 21px #dfbb5099}
+.rock-v0426 .rock-part-art{position:relative;z-index:1;display:block;width:100%;height:100%}
+.rock-v0426 .rock-part-art svg{display:block;width:100%;height:100%;overflow:visible}
+.rock-v0426 .rock-part:active{transform:translate(-50%,-50%) scale(.88);filter:brightness(1.2)}
+.rock-v0426 .rock-part:focus-visible{outline:2px dashed #d3bff7;border-radius:13px}
+.rock-v0426 .rock-part.rock-stone-core{width:clamp(53px,15vw,68px);height:clamp(53px,15vw,68px)}
+.rock-v0426 .beech-part-hint{color:#d6cedd;background:#30293edc;border:1px solid #554b69}
+@media(max-height:710px){.rock-v0426 .tree-visual{width:min(70vw,285px)}}
 </style>
 </head>
 <body>
@@ -625,7 +645,7 @@
     <div id="map" role="application" aria-label="Interaktive Karte mit Rohstoffvorkommen"></div>
     <div class="map-soft-top" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.21 · 3D</span></div></div></div>
+      <div class="brand"><div class="brand-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzgwZjFjMyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJkOWZhNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjIyIiBmaWxsPSIjMTUyZDM4Ii8+PHBhdGggZD0iTTM5IDEyIDYxIDI1djI3TDM5IDY2IDE3IDUyVjI1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2EpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJtMTcgMjUgMjIgMTMgMjItMTNNMzkgMzh2MjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkZThjMSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PGNpcmNsZSBjeD0iMzkiIGN5PSIzOCIgcj0iNyIgZmlsbD0iI2Y3ZGU4ZiIvPjwvc3ZnPgo=" alt=""></div><div><div class="brand-name">WELTWERK<span class="brand-period">.</span></div><div class="brand-sub">EXPLORATION <span>V0.4.26 · 3D</span></div></div></div>
       <button id="status-badge" class="location-pill" aria-label="Standortmodus wechseln"><span class="live-dot"></span><span id="mode-label">DEMO</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 10 5 5 5-5"/></svg></button>
     </header>
     <div class="top-metrics"><span class="metric"><span class="metric-icon">🎒</span><strong id="top-items">0</strong><span>Materialien</span></span><span class="metric"><span class="metric-icon">✦</span><strong id="top-discoveries">0</strong><span id="top-discoveries-max">/ 17 entdeckt</span></span></div>
@@ -747,7 +767,7 @@
 "use strict";
 // Weltwerk — deterministic prototype world and loot logic.
 // This file deliberately has no browser dependencies so it can be tested with Node.
-const VERSION = '0.4.25'; // Kompakte dunkle Sammelansicht · 10 Baumpunkte · neue Dropchancen · Ast -> Holz
+const VERSION = '0.4.26'; // Stein: 10 einzeln abbaubare Fundpunkte · neue Erz-/Mineralchancen
 const MAX_ZOOM = 20.5;
 const START_ZOOM = MAX_ZOOM; // Alle Bildschirmgrößen starten mit dem maximalen Nahzoom
 const MIN_ZOOM = 19.0; // Nur 1,5 Zoomstufen heraus – ungefähr halber bisher nutzbarer Bereich
@@ -760,9 +780,16 @@ const MATERIALS = Object.freeze({
   stone:  { name: 'Stein', icon: '🪨', rarity: 'common', note: 'Robustes Material für spätere Bauprojekte.' },
   scrap:  { name: 'Altmetall', icon: '🔩', rarity: 'common', note: 'Alte Metallteile, die später verarbeitet werden können.' },
   resin:  { name: 'Harz', icon: '🏵️', rarity: 'rare', note: 'Seltener Fund von Bäumen – später für spezielle Teile.' },
-  iron:   { name: 'Eisenerz', icon: '⛏️', rarity: 'uncommon', note: 'Wichtig für die künftige Metallverarbeitung.' },
-  copper: { name: 'Kupferdraht', icon: '🔌', rarity: 'uncommon', note: 'Später für Elektronik und Erkundungstechnik.' },
-  moss: {name:'Moos',icon:'🌱',rarity:'common',note:'Ein Fund an einem Baumstamm.'},
+  iron:   { name: 'Eisenerz', icon: '⛓️', rarity: 'rare', note: 'Seltenes Erz aus Steinvorkommen.' },
+  copper: { name: 'Kupferdraht', icon: '🔌', rarity: 'uncommon', note: 'Ein Fund an Schrottfundstellen; später für Elektronik.' },
+  copper_ore: { name: 'Kupfererz', icon: '🟧', rarity: 'rare', note: 'Seltenes Erz aus Steinvorkommen; später für Elektronik.' },
+  moss: {name:'Moos',icon:'🌱',rarity:'common',note:'Ein natürlicher Fund an Bäumen oder Steinvorkommen.'},
+  sand: {name:'Sand',icon:'⏳',rarity:'common',note:'Lose Sandablagerung am Steinvorkommen.'},
+  clay: {name:'Lehm',icon:'🟫',rarity:'common',note:'Brauner Tonboden an Steinvorkommen.'},
+  limestone: {name:'Kalkstein',icon:'⬜',rarity:'common',note:'Helles Gestein am Steinvorkommen.'},
+  coal: {name:'Kohle',icon:'⬛',rarity:'common',note:'Dunkle Kohle im Steinvorkommen.'},
+  gold_ore: {name:'Golderz',icon:'🟨',rarity:'epic',note:'Episches Erz aus Steinvorkommen.'},
+  crystal: {name:'Kristall',icon:'💎',rarity:'legendary',note:'Legendärer Fund aus Steinvorkommen.'},
   beechnut: {name:'Nuss',icon:'🌰',rarity:'common',note:'Ein Samen der Buche.'},
   leaf: {name:'Blatt',icon:'🍃',rarity:'common',note:'Ein Blatt aus der Baumkrone.'},
   mushroom: {name:'Pilz',icon:'🍄',rarity:'rare',note:'Ein Pilz, der gelegentlich an Baumstämmen wächst.'},
@@ -785,7 +812,7 @@ const ANIMALS = Object.freeze({
 });
 const TYPES = Object.freeze({
   tree: { name: 'Buche', icon: '🌳', material: 'wood', bonus: 'resin', bonusProbability: 0.06, color: '#63c58f', desc: 'Untersuche echte Baumbestandteile: Holz und Blatt sind garantiert, seltene Funde sind möglich.' },
-  rock: { name: 'Steinvorkommen', icon: '🪨', material: 'stone', bonus: 'iron', bonusProbability: 0.15, color: '#94adca', desc: 'Ein Steinvorkommen mit einer kleinen Chance auf Eisenerz.' },
+  rock: { name: 'Steinvorkommen', icon: '🪨', material: 'stone', bonus: 'iron', bonusProbability: 0.07, color: '#94adca', desc: 'Zehn mögliche, einzeln antippbare Fundstellen mit Stein, Mineralien und seltenen Erzen.' },
   scrap: { name: 'Schrottfundstelle', icon: '🔩', material: 'scrap', bonus: 'copper', bonusProbability: 0.15, color: '#e7b375', desc: 'Zurückgelassene Metallteile. Manchmal findet sich Kupferdraht.' },
 });
 function hash32(x, y, salt = 0) {
@@ -959,6 +986,51 @@ function migrateBeechSession(session,node,previousHarvest=0){
    updated.nestOpenType=session.nestOpenType||null;
  }
  return updated;
+}
+// WELTWERK v0.4.26 — independent rock spawn and drop rolls.
+// 10 possible visible areas; the core stone is the only guaranteed area.
+const ROCK_GUARANTEED=Object.freeze([
+ {id:'stone-core',name:'Stein',item:'stone',chance:1,x:51,y:52,drops:[[1,.75],[2,.25]]}
+]);
+const ROCK_PARTS=Object.freeze([
+ {id:'sand-base',name:'Sand',item:'sand',chance:.50,x:40,y:79,drops:[[1,1]]},
+ {id:'moss-top',name:'Moos',item:'moss',chance:.40,x:34,y:40,drops:[[1,1]]},
+ {id:'clay-base',name:'Lehm',item:'clay',chance:.20,x:72,y:73,drops:[[1,1]]},
+ {id:'limestone-left',name:'Kalkstein',item:'limestone',chance:.15,x:25,y:54,drops:[[1,1]]},
+ {id:'coal-right',name:'Kohle',item:'coal',chance:.10,x:70,y:42,drops:[[1,1]]},
+ {id:'iron-left',name:'Eisenerz',item:'iron',chance:.07,x:54,y:71,drops:[[1,1]]},
+ {id:'copper-right',name:'Kupfererz',item:'copper_ore',chance:.05,x:76,y:57,drops:[[1,1]]},
+ {id:'gold-lower',name:'Golderz',item:'gold_ore',chance:.02,x:29,y:69,drops:[[1,1]]},
+ {id:'crystal-top',name:'Kristall',item:'crystal',chance:.01,x:52,y:33,drops:[[1,1]]}
+]);
+const ROCK_ALL=Object.freeze([...ROCK_GUARANTEED,...ROCK_PARTS]);
+const ROCK_BY_ID=Object.freeze(Object.fromEntries(ROCK_ALL.map(d=>[d.id,d])));
+const rockRarityCache=new Map();
+function rockRandom(node,previousHarvest=0){
+ let key=`weltwerk-rock-v0426:${node.id}:${previousHarvest}`,state=2166136261;
+ for(let i=0;i<key.length;i++){state^=key.charCodeAt(i);state=Math.imul(state,16777619);}
+ return ()=>{state+=0x6D2B79F5;let t=state;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};
+}
+function rockRarityForSlots(slots){
+ if(slots.some(s=>s.item==='crystal'))return 'legendary';
+ if(slots.some(s=>s.item==='gold_ore'))return 'epic';
+ if(slots.some(s=>s.item==='iron'||s.item==='copper_ore'))return 'rare';
+ return 'common';
+}
+function createRockSession(node,random=null,now=Date.now(),previousHarvest=0){
+ if(node.type!=='rock')throw Error('Not a rock');
+ const rand=random||rockRandom(node,previousHarvest);
+ // All spawn decisions first, and only then quantity rolls.
+ const selected=ROCK_PARTS.filter(d=>rand()<d.chance);
+ const slots=[...ROCK_GUARANTEED,...selected].map(d=>({id:d.id,item:d.item,count:beechWeightedCount(d,rand),collected:false}));
+ return {schema:1,startedAt:now,slots,earned:{},rarity:rockRarityForSlots(slots),completeAt:0};
+}
+function rockMapRarity(node){
+ const profile=activeProfile(),prev=profile.harvested[node.id]||0,session=profile.rockSessions[node.id];
+ if(session&&!(session.completeAt&&isReady(prev)))return rockRarityForSlots(session.slots);
+ const key=node.id+':'+prev;if(rockRarityCache.has(key))return rockRarityCache.get(key);
+ const rand=rockRandom(node,prev),selected=ROCK_PARTS.filter(d=>rand()<d.chance),rarity=rockRarityForSlots(selected);
+ if(rockRarityCache.size>400)rockRarityCache.clear();rockRarityCache.set(key,rarity);return rarity;
 }
 function activeNestType(session){
   return session.nestOpenType || (session.nestOpen?session.slots.find(s=>s.zone==='nest'&&s.id==='nest')?.nestType:null);
@@ -1540,7 +1612,7 @@ function factoryTickProfile(profile,now=Date.now()){
 }
 
 function freshProfile() {
-  return {inventory:Object.fromEntries(Object.keys(MATERIALS).map(k=>[k,0])), discovered:[], harvested:{}, treeSessions:{}, encounters:[], factory:freshFactory(), stats:{harvests:0, collected:0, rare:0}};
+  return {inventory:Object.fromEntries(Object.keys(MATERIALS).map(k=>[k,0])), discovered:[], harvested:{}, treeSessions:{}, rockSessions:{}, encounters:[], factory:freshFactory(), stats:{harvests:0, collected:0, rare:0}};
 }
 function cleanProfile(candidate) {
   const p=freshProfile();
@@ -1559,7 +1631,7 @@ function cleanProfile(candidate) {
   // Preserve in-progress tree scenes and their exact pending rewards. Never reroll on reopen.
   if(candidate.treeSessions && typeof candidate.treeSessions==='object'){
     for(const [key,raw] of Object.entries(candidate.treeSessions).slice(0,200)){
-      if(!/^-?\d+:-?\d+(?::\d{1,2})?$/.test(key)||!raw||typeof raw!=='object')continue;
+      if(!/^(?:g21:)?-?\d+:-?\d+(?::\d{1,2})?$/.test(key)||!raw||typeof raw!=='object')continue;
       if(!Number.isFinite(raw.startedAt)||raw.startedAt<=0||raw.startedAt>Date.now()+60000)continue;
       if(raw.completeAt && Date.now()-raw.completeAt>REGEN_MS)continue;
       if(!Array.isArray(raw.slots)||raw.slots.length>45)continue;
@@ -1587,10 +1659,33 @@ function cleanProfile(candidate) {
       }
     }
   }
+  // Persist rock encounters separately; never reroll a partly collected rock on refresh.
+  if(candidate.rockSessions && typeof candidate.rockSessions==='object'){
+    for(const [key,raw] of Object.entries(candidate.rockSessions).slice(0,200)){
+      if(!/^(?:g21:)?-?\d+:-?\d+(?::\d{1,2})?$/.test(key)||!raw||typeof raw!=='object'||raw.schema!==1)continue;
+      if(!Number.isFinite(raw.startedAt)||raw.startedAt<=0||raw.startedAt>Date.now()+60000)continue;
+      if(raw.completeAt && Date.now()-raw.completeAt>REGEN_MS)continue;
+      if(!Array.isArray(raw.slots)||raw.slots.length<1||raw.slots.length>10)continue;
+      const slots=[];
+      for(const slot of raw.slots){
+        if(!slot||typeof slot.id!=='string'||!ROCK_ALL.some(def=>def.id===slot.id)||slots.some(x=>x.id===slot.id))continue;
+        if(typeof slot.item!=='string'||!(slot.item in MATERIALS))continue;
+        if(!Number.isInteger(slot.count)||slot.count<1||slot.count>3)continue;
+        slots.push({id:slot.id,item:slot.item,count:slot.count,collected:slot.collected===true});
+      }
+      if(!slots.some(x=>x.id==='stone-core'))continue;
+      const earned={};
+      for(const [id,count] of Object.entries(raw.earned||{})){
+        if((id in MATERIALS)&&Number.isSafeInteger(count)&&count>=0&&count<=40)earned[id]=count;
+      }
+      p.rockSessions[key]={schema:1,startedAt:raw.startedAt,completeAt:Number.isFinite(raw.completeAt)?raw.completeAt:0,
+        rarity:rockRarityForSlots(slots),slots,earned};
+    }
+  }
   if(candidate.harvested && typeof candidate.harvested==='object') {
     for (const [key,value] of Object.entries(candidate.harvested)) {
       const t=Number(value);
-      if (/^-?\d+:-?\d+(?::\d{1,2})?$/.test(key) && Number.isFinite(t) && t>0 && t<=Date.now()+60000 && Date.now()-t<REGEN_MS*24*30) p.harvested[key]=t; // Hold the cycle seed across reloads after the 60m cooldown.
+      if (/^(?:g21:)?-?\d+:-?\d+(?::\d{1,2})?$/.test(key) && Number.isFinite(t) && t>0 && t<=Date.now()+60000 && Date.now()-t<REGEN_MS*24*30) p.harvested[key]=t; // Hold the cycle seed across reloads after the 60m cooldown.
     }
   }
   for (const key of Object.keys(p.stats)) {
@@ -2758,7 +2853,7 @@ class BackupMap {
       const depleted=elem.classList.contains('depleted');
       const rich=elem.classList.contains('rich');
       const isTree=elem.classList.contains('type-tree');
-      const beechRing=isTree&&!depleted?(elem.classList.contains('beech-rarity-legendary')?'#e6b846':elem.classList.contains('beech-rarity-epic')?'#a96cdb':elem.classList.contains('beech-rarity-rare')?'#5598db':null):null;
+      const beechRing=(isTree||elem.classList.contains('type-rock'))&&!depleted?(elem.classList.contains('beech-rarity-legendary')?'#e6b846':elem.classList.contains('beech-rarity-epic')?'#a96cdb':elem.classList.contains('beech-rarity-rare')?'#5598db':null):null;
       const worldZoom=Math.pow(2,(this.zoom-START_ZOOM)*0.82);
       // Map is perspective-projected just like road ribbons; sprite world-size is stable.
       const sizeScale=isPlayer?1:bound(worldZoom*(p.topDown?1:s.scale)*0.84,.14,1.38);
@@ -2862,7 +2957,7 @@ const state = {
   mode:null, demo: freshProfile(), gps:freshProfile(),
   demoPosition:{...START}, position:null, accuracy:null, timestamp:0, speed:0,
   map:null, mapKind:null, markers:new Map(), playerMarker:null, accuracySource:false, followPlayer:true, mapLoadingError:false, mapErrors:0, mapTimer:null,
-  resources:[], activeTab:'map', selectedNode:null, sheetMode:null, lastGps:null, treeNode:null, treeMessage:'',
+  resources:[], activeTab:'map', selectedNode:null, sheetMode:null, lastGps:null, treeNode:null, rockNode:null, treeMessage:'',
   watchId:null, mapReady:false,
 };
 
@@ -3317,8 +3412,8 @@ function refreshVectorCollectibleScale(){
 function updateNodeElement(element,node){
   const ready=isReady(activeProfile().harvested[node.id]);
   const range=getRange(node);
-  const rarity=node.type==='tree'&&ready?beechMapRarity(node):'common';
-  element.className=['world-resource',`type-${node.type}`,node.type!=='tree'&&node.rich?'rich':'',rarity!=='common'?`beech-rarity-${rarity}`:'',range.ok?'in-range':'',ready?'':'depleted'].filter(Boolean).join(' ');
+  const rarity=ready?(node.type==='tree'?beechMapRarity(node):node.type==='rock'?rockMapRarity(node):'common'):'common';
+  element.className=['world-resource',`type-${node.type}`,node.type==='scrap'&&node.rich?'rich':'',rarity!=='common'?`beech-rarity-${rarity}`:'',range.ok?'in-range':'',ready?'':'depleted'].filter(Boolean).join(' ');
   element.setAttribute('aria-label',`${TYPES[node.type].name}${rarity!=='common'?' · '+({rare:'selten',epic:'episch',legendary:'legendär'}[rarity]):''} auf der Karte öffnen`);
 }
 function updatePositionOnMap(follow=false){
@@ -3588,7 +3683,7 @@ function beechItemIcon(id){
  wax:`<rect x="17" y="24" width="38" height="29" rx="3" fill="#e5c47d"/><path d="M17 24 L31 13 H60 L55 24Z" fill="#f1dfac"/>`,
  egg:`<path d="M36 10 C19 11 15 42 24 50 C29 57 43 57 48 50 C58 37 47 11 36 10Z" fill="#e9e5d3"/><path d="M28 23 C20 38 26 46 32 50" fill="none" stroke="#fcf7e8" stroke-width="4"/>`
  };
- return `<svg class="beech-item-svg" viewBox="0 0 72 64" aria-hidden="true">${art[id]||`<circle cx="36" cy="32" r="19" fill="#9bb6a0"/>`}</svg>`;
+ return `<svg class="beech-item-svg" viewBox="0 0 72 64" aria-hidden="true">${art[id]||({sand:'⏳',clay:'🟫',limestone:'⬜',coal:'⬛',iron:'⛓️',copper_ore:'🟧',gold_ore:'🟨',crystal:'💎',stone:'🪨'}[id]?`<text x="36" y="44" font-size="37" text-anchor="middle">${{sand:'⏳',clay:'🟫',limestone:'⬜',coal:'⬛',iron:'⛓️',copper_ore:'🟧',gold_ore:'🟨',crystal:'💎',stone:'🪨'}[id]}</text>`:`<circle cx="36" cy="32" r="19" fill="#9bb6a0"/>`)}</svg>`;
 }
 function beechLootCards(session){
  const items=Object.entries(session.earned||{}).filter(([,qty])=>qty>0);
@@ -3717,8 +3812,105 @@ function collectAllTree(nodeId){
   if(complete)toast('Alles eingesammelt! ✦');
 }
 
+// ---- Compact rock collection (same visual rhythm as the beech scene) ----
+function getRockSession(node){
+ const profile=activeProfile();let session=profile.rockSessions[node.id];
+ if(session?.completeAt && isReady(profile.harvested[node.id])){
+   delete profile.rockSessions[node.id];session=null;
+ }
+ if(!session){session=createRockSession(node,null,Date.now(),profile.harvested[node.id]||0);profile.rockSessions[node.id]=session;save();}
+ return session;
+}
+function openRockScene(node){
+ const profile=activeProfile();
+ if(!getRange(node).ok||!isReady(profile.harvested[node.id])){
+   state.selectedNode=node;state.sheetMode='resource';renderResourceSheet();
+   $('modal-backdrop').classList.remove('hidden');$('modal-backdrop').setAttribute('aria-hidden','false');return;
+ }
+ getRockSession(node);state.rockNode={...node};
+ $('tree-scene').classList.remove('hidden');$('tree-scene').setAttribute('aria-hidden','false');
+ renderRockScene();
+}
+function closeRockScene(){
+ $('tree-scene').classList.add('hidden');$('tree-scene').setAttribute('aria-hidden','true');
+ state.rockNode=null;renderWorld();
+}
+function rockArtwork(){return `<svg class="rock-model" viewBox="0 0 420 500" role="img" aria-label="Kleiner facettierter Felsen mit einzelnen Mineralfundstellen">
+ <ellipse cx="211" cy="419" rx="156" ry="21" fill="#05030e" opacity=".38"/>
+ <path d="M57 342 L71 244 L135 173 L197 144 L282 166 L347 224 L366 322 L329 389 L224 420 L115 405Z" fill="#738496" stroke="#343a53" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M71 244 L135 173 L197 144 L192 266 L128 319 L57 342Z" fill="#b2bbc6"/>
+ <path d="M197 144 L282 166 L347 224 L267 273 L192 266Z" fill="#9ba8ba"/>
+ <path d="M57 342 L128 319 L192 266 L225 348 L224 420 L115 405Z" fill="#69798d"/>
+ <path d="M192 266 L267 273 L347 224 L366 322 L329 389 L225 348Z" fill="#627186"/>
+ <path d="M225 348 L329 389 L224 420Z" fill="#566579"/>
+ <path d="M128 319 L192 266 L173 353 L115 405 L57 342Z" fill="#8594a4"/>
+ <path d="M135 173 L197 144 L282 166 L234 191 L177 193Z" fill="#ced4da" opacity=".55"/>
+ <path d="M111 234 L151 207 L145 241 L114 265Z" fill="#d0d6da" opacity=".40"/>
+ <path d="M294 291 L332 261 L339 305 L312 329Z" fill="#b5c0cd" opacity=".22"/>
+ <path d="M119 358 L157 343 L176 378 L144 395Z" fill="#a3afba" opacity=".23"/>
+ <path d="M221 379 L240 368 L250 393 L224 405Z" fill="#bcc6cb" opacity=".15"/>
+ <path d="M77 403 L97 397 L108 403 L93 410Z M321 402 L342 393 L356 406 L334 411Z" fill="#657180"/>
+ </svg>`;}
+function rockPartArtwork(id){
+ const gem=(fill,light,dark)=>`<polygon points="17,36 34,14 61,18 72,40 48,65 22,59" fill="${fill}"/><polygon points="34,14 61,18 47,36 17,36" fill="${light}"/><polygon points="47,36 72,40 48,65" fill="${dark}"/><polygon points="17,36 47,36 48,65 22,59" fill="${fill}"/>`;
+ const item=ROCK_BY_ID[id]?.item;
+ let shapes='';
+ switch(item){
+  case 'stone':shapes=gem('#75889d','#bdc7d3','#59677e');break;
+  case 'sand':shapes='<path d="M8 59 L27 39 L39 43 L50 32 L73 57 L72 66 L10 66Z" fill="#c7a76f"/><path d="M8 59 L27 39 L39 43 L32 57Z" fill="#ead4a0"/><path d="M50 32 L73 57 L55 58Z" fill="#b58b54"/><circle cx="22" cy="61" r="2" fill="#f7e4bc"/><circle cx="49" cy="53" r="2" fill="#f7e4bc"/>';break;
+  case 'moss':shapes='<path d="M13 62 L12 40 L22 27 L32 39 L42 20 L54 37 L66 31 L72 61Z" fill="#4c895e"/><path d="M13 62 L22 27 L31 40 L30 62" fill="#8bbd78"/><path d="M42 20 L54 37 L46 63 L32 62" fill="#74ad6a"/><path d="M54 37 L66 31 L72 61 L46 63" fill="#376e53"/>';break;
+  case 'clay':shapes=gem('#986647','#cf9b72','#734c3c');break;
+  case 'limestone':shapes=gem('#ddd8c6','#fff5e6','#bab8af');break;
+  case 'coal':shapes=gem('#333742','#73788a','#1b1d29');break;
+  case 'iron':shapes=gem('#995c48','#dca078','#5d5360')+'<path d="M31 30 L44 25 L53 37 L40 50 L30 45Z" fill="#d3a482"/>';break;
+  case 'copper_ore':shapes=gem('#b66a3e','#ecad6a','#796358')+'<path d="M37 24 L55 30 L48 47 L28 44Z" fill="#70a38b" opacity=".75"/>';break;
+  case 'gold_ore':shapes=gem('#bb8e36','#ffe47e','#775b38')+'<path d="M35 25 L49 20 L61 34 L48 48 L32 43Z" fill="#ffd75b"/>';break;
+  case 'crystal':shapes='<path d="M35 9 L58 23 L65 51 L40 68 L18 49 L24 24Z" fill="#797ce7"/><path d="M35 9 L58 23 L42 35 L24 24Z" fill="#dad6ff"/><path d="M42 35 L65 51 L40 68Z" fill="#5c68c9"/><path d="M24 24 L42 35 L40 68 L18 49Z" fill="#abaaff"/>';break;
+ }
+ return `<svg viewBox="0 0 84 80" aria-hidden="true" focusable="false">${shapes}</svg>`;
+}
+function rockPartHTML(slot){
+ const d=ROCK_BY_ID[slot.id];if(!d)return '';
+ const rarity=dropRarity(slot.item);
+ return `<button type="button" class="rock-part rarity-${rarity} rock-${d.id}" data-rock-slot="${d.id}" style="left:${d.x}%;top:${d.y}%" aria-label="${d.name} einsammeln" title="${d.name}"><span class="rock-part-art">${rockPartArtwork(d.id)}</span></button>`;
+}
+function renderRockScene(){
+ const node=state.rockNode;if(!node)return;
+ const profile=activeProfile(),session=profile.rockSessions[node.id];if(!session)return;
+ const range=getRange(node),count=session.slots.filter(x=>x.collected).length;
+ const visible=session.slots.filter(x=>!x.collected).map(rockPartHTML).join('');
+ const earned=Object.values(session.earned||{}).reduce((a,b)=>a+b,0);
+ $('tree-scene').innerHTML=`<div class="tree-scene-inner beech-v044 rock-v0426">
+  <header class="tree-top"><button class="tree-back" id="rock-back" aria-label="Zur Karte zurück">←</button>
+  <div class="tree-heading"><h2>Stein <small class="beech-build-label">v0.4.26</small></h2></div><span class="tree-step">${count} / ${session.slots.length}</span></header>
+  <div class="tree-stage"><div class="tree-visual">${rockArtwork()}${visible}</div><div class="beech-part-hint">${session.completeAt?'Alle Fundstellen eingesammelt':'Tippe auf die Mineralien im Stein'}</div></div>
+  <div class="tree-bottom"><div class="beech-bottom-head"><strong>Gefundene Items</strong><span>${earned} gesammelt</span></div>
+   <div class="beech-loot-cards" aria-live="polite">${beechLootCards(session)}</div>
+   ${!range.ok?`<div class="beech-small-hint">${range.reason}</div>`:''}
+   ${session.completeAt?'<button class="beech-done-btn" id="rock-return">Fertig · Zur Karte</button>':''}</div></div>`;
+ $('rock-back').addEventListener('click',closeRockScene);
+ $('rock-return')?.addEventListener('click',closeRockScene);
+ $('tree-scene').querySelectorAll('[data-rock-slot]').forEach(button=>button.addEventListener('click',()=>collectRockSlot(node.id,button.dataset.rockSlot)));
+}
+function collectRockSlot(nodeId,slotId){
+ const node=state.rockNode;
+ if(!node||node.id!==nodeId)return;
+ const profile=activeProfile(),session=profile.rockSessions[nodeId];
+ if(!session||session.completeAt||!getRange(node).ok)return;
+ const slot=session.slots.find(s=>s.id===slotId);
+ if(!slot||slot.collected)return;
+ awardTreeItem(session,slot,profile);slot.collected=true;
+ if(session.slots.every(s=>s.collected)){
+  session.completeAt=Date.now();profile.harvested[nodeId]=session.completeAt;profile.stats.harvests++;
+ }
+ save();renderPanels();renderWorld();renderRockScene();
+ if(session.completeAt)toast('Stein vollständig untersucht!');else showTreePickup(slot);
+ try{navigator.vibrate?.(20);}catch{}
+}
+
 function openResource(node) {
   if(node.type==='tree' && isReady(activeProfile().harvested[node.id])){openTreeScene(node);return;}
+  if(node.type==='rock' && isReady(activeProfile().harvested[node.id])){openRockScene(node);return;}
   state.selectedNode=node;state.sheetMode='resource';renderResourceSheet();
   $('modal-backdrop').classList.remove('hidden');$('modal-backdrop').setAttribute('aria-hidden','false');
 }
@@ -3743,6 +3935,19 @@ function renderResourceSheet() {
       <button id="btn-tree-open" class="sheet-action" ${ready&&range.ok?'':'disabled'}>${!ready?'Regeneration · '+formatRemaining(timeRemaining(last)):range.ok?'Buche untersuchen':'Nicht in Reichweite'}</button>
       <div class="sheet-secondary">${!ready?'Die Buche regeneriert 60 Minuten nach vollständiger Sammlung.':range.ok?'Sammle an den sichtbaren Baumbestandteilen. Die Items werden automatisch gespeichert.':range.reason}<br>Alle Tier- und Nestereignisse sind rein virtuell.</div>`;
     $('btn-tree-open').addEventListener('click',()=>{closeSheet();openTreeScene(node);});
+    return;
+  }
+  if(node.type==='rock'){
+    $('sheet-content').innerHTML=`
+      <div class="sheet-header"><div class="sheet-icon">🪨</div><div><div class="sheet-badge">WORLD TAPPABLE · STEIN</div><h2 id="sheet-title">Stein untersuchen</h2></div></div>
+      <p class="sheet-desc">Klopfe einzelne Fundstücke aus dem kleinen Steinvorkommen. Stein ist garantiert, neun weitere Stellen können zufällig erscheinen.</p>
+      <span class="distance-pill ${range.ok?'':'outside'}">◎ ${dist}</span>
+      <div class="sheet-block"><div class="sheet-block-heading">MÖGLICHE FUNDSTELLEN</div>
+      ${ROCK_ALL.map(d=>`<div class="possible-drop"><span>${MATERIALS[d.item].icon}</span><span class="drop-name">${d.name}</span><strong>${Math.round(d.chance*100)} %</strong></div>`).join('')}
+      <p class="beech-sheet-note">Blau = selten · Violett = episch · Gold = legendär. Die Fundstellen und Mengen werden pro Vorkommen einmal ausgewürfelt.</p></div>
+      <button id="btn-rock-open" class="sheet-action" ${ready&&range.ok?'':'disabled'}>${!ready?'Regeneration · '+formatRemaining(timeRemaining(last)):range.ok?'Stein untersuchen':'Nicht in Reichweite'}</button>
+      <div class="sheet-secondary">${!ready?'Das Vorkommen regeneriert 60 Minuten nach vollständigem Sammeln.':range.ok?'Alle gewonnenen Materialien werden sofort im Rucksack gespeichert.':range.reason}</div>`;
+    $('btn-rock-open').addEventListener('click',()=>{closeSheet();openRockScene(node);});
     return;
   }
   $('sheet-content').innerHTML=`
@@ -3937,7 +4142,7 @@ function bind() {
   $('btn-reset').addEventListener('click',resetProfile);
   document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>moveDemo(b.dataset.move)));
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){if(worldToolsOpen)setWorldTools(false);else if(!$('tree-scene').classList.contains('hidden'))closeTreeScene();else closeSheet();}
+    if(e.key==='Escape'){if(worldToolsOpen)setWorldTools(false);else if(!$('tree-scene').classList.contains('hidden')){if(state.rockNode)closeRockScene();else closeTreeScene();}else closeSheet();}
     if(state.mode==='demo' && state.activeTab==='map' && $('modal-backdrop').classList.contains('hidden')) {
       const directions={ArrowUp:'north',ArrowDown:'south',ArrowLeft:'west',ArrowRight:'east'};
       if(directions[e.key]){e.preventDefault();moveDemo(directions[e.key]);}
